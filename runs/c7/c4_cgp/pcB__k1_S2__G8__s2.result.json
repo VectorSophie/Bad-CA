@@ -1,0 +1,144 @@
+{
+ "method": "C4 CGP (1+4)-ES, hard-rollout fitness",
+ "target": "pcB",
+ "struct": "k1_S2",
+ "G_max": 8,
+ "seed": 2,
+ "budget_cpu_s": 300.0,
+ "search_cpu_s": 175.9,
+ "evals": 240821,
+ "active_gates": 3,
+ "gates": [
+  [
+   4,
+   4,
+   9
+  ],
+  [
+   9,
+   3,
+   1
+  ],
+  [
+   13,
+   11,
+   9
+  ]
+ ],
+ "outputs": [
+  12,
+  10
+ ],
+ "rule_bits": 61,
+ "eval": {
+  "T": 6,
+  "mean_err": 0.0,
+  "mean_hold": 0.5444444444444445,
+  "mean_ratio_to_hold": 0.0,
+  "change_iou": 1.0,
+  "pred_changes": 210,
+  "true_changes": 210,
+  "mean_tol_space": 0.0,
+  "mean_tol_time": 0.0,
+  "horizon": 6,
+  "exact": true,
+  "final_err": 0.0,
+  "final_hold": 0.5277777777777778,
+  "err_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "hold_curve": [
+   0.58333,
+   0.55556,
+   0.54861,
+   0.50694,
+   0.52778
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c4_cgp/pcB__k1_S2__G8__s2.best.cab",
+  "file_bytes": 29,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": true,
+  "python_decode_s": 0.0008,
+  "node_decode_ms": 6.71,
+  "updates": 1440
+ },
+ "hold_err": 0.5444444444444444,
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 2,
+   "err": 0.5069444444444444,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 3,
+   "err": 0.10555555555555556,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 6,
+   "err": 0.10555555555555556,
+   "active": 1
+  },
+  {
+   "cpu_s": 175.3,
+   "evals": 240064,
+   "err": 0.10277777777777777,
+   "active": 2
+  },
+  {
+   "cpu_s": 175.3,
+   "evals": 240092,
+   "err": 0.1,
+   "active": 2
+  },
+  {
+   "cpu_s": 175.4,
+   "evals": 240160,
+   "err": 0.09305555555555556,
+   "active": 2
+  },
+  {
+   "cpu_s": 175.8,
+   "evals": 240758,
+   "err": 0.06805555555555555,
+   "active": 3
+  },
+  {
+   "cpu_s": 175.9,
+   "evals": 240818,
+   "err": 0.0,
+   "active": 3
+  }
+ ],
+ "baselines_bytes": {
+  "changelist": 96,
+  "xor_rle": 124,
+  "frame_rle": 92,
+  "zlib": 90,
+  "bz2": 148,
+  "lzma": 92,
+  "best": 90,
+  "best_method": "zlib"
+ },
+ "media": {
+  "gif": "runs/c7/c4_cgp/pcB__k1_S2__G8__s2.best.gif",
+  "sheet": "runs/c7/c4_cgp/pcB__k1_S2__G8__s2.best.png"
+ }
+}

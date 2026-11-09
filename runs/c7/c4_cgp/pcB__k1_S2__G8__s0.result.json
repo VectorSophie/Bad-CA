@@ -1,0 +1,116 @@
+{
+ "method": "C4 CGP (1+4)-ES, hard-rollout fitness",
+ "target": "pcB",
+ "struct": "k1_S2",
+ "G_max": 8,
+ "seed": 0,
+ "budget_cpu_s": 300.0,
+ "search_cpu_s": 300.0,
+ "evals": 406977,
+ "active_gates": 1,
+ "gates": [
+  [
+   9,
+   1,
+   1
+  ]
+ ],
+ "outputs": [
+  10,
+  1
+ ],
+ "rule_bits": 35,
+ "eval": {
+  "T": 6,
+  "mean_err": 0.10555555555555554,
+  "mean_hold": 0.5444444444444445,
+  "mean_ratio_to_hold": 0.1938775510204081,
+  "change_iou": 0.3523809523809524,
+  "pred_changes": 74,
+  "true_changes": 210,
+  "mean_tol_space": 0.0,
+  "mean_tol_time": 0.06944444444444445,
+  "horizon": 6,
+  "exact": false,
+  "final_err": 0.1111111111111111,
+  "final_hold": 0.5277777777777778,
+  "err_curve": [
+   0.06944,
+   0.04167,
+   0.11806,
+   0.1875,
+   0.11111
+  ],
+  "hold_curve": [
+   0.58333,
+   0.55556,
+   0.54861,
+   0.50694,
+   0.52778
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c4_cgp/pcB__k1_S2__G8__s0.best.cab",
+  "file_bytes": 25,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.0007,
+  "node_decode_ms": 2.71,
+  "updates": 1440
+ },
+ "hold_err": 0.5444444444444444,
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 8,
+   "err": 0.7027777777777777,
+   "active": 0
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 20,
+   "err": 0.5416666666666666,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 24,
+   "err": 0.19305555555555556,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 27,
+   "err": 0.10555555555555556,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 44,
+   "err": 0.10555555555555556,
+   "active": 1
+  }
+ ],
+ "baselines_bytes": {
+  "changelist": 96,
+  "xor_rle": 124,
+  "frame_rle": 92,
+  "zlib": 90,
+  "bz2": 148,
+  "lzma": 92,
+  "best": 90,
+  "best_method": "zlib"
+ },
+ "media": {
+  "gif": "runs/c7/c4_cgp/pcB__k1_S2__G8__s0.best.gif",
+  "sheet": "runs/c7/c4_cgp/pcB__k1_S2__G8__s0.best.png"
+ }
+}

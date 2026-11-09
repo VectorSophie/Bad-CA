@@ -1,0 +1,119 @@
+{
+ "method": "C4 CGP (1+4)-ES, hard-rollout fitness",
+ "target": "ba32_3000_5",
+ "struct": "k1_S2",
+ "G_max": 16,
+ "seed": 1,
+ "budget_cpu_s": 300.0,
+ "search_cpu_s": 300.0,
+ "evals": 299373,
+ "active_gates": 0,
+ "gates": [],
+ "outputs": [
+  4,
+  6
+ ],
+ "rule_bits": 21,
+ "eval": {
+  "T": 5,
+  "mean_err": 0.0087890625,
+  "mean_hold": 0.0087890625,
+  "mean_ratio_to_hold": 1.0,
+  "change_iou": 0.0,
+  "pred_changes": 0,
+  "true_changes": 13,
+  "mean_tol_space": 0.0,
+  "mean_tol_time": 0.004557291666666666,
+  "horizon": 5,
+  "exact": false,
+  "final_err": 0.016927083333333332,
+  "final_hold": 0.016927083333333332,
+  "err_curve": [
+   0.0013,
+   0.00521,
+   0.01172,
+   0.01693
+  ],
+  "hold_curve": [
+   0.0013,
+   0.00521,
+   0.01172,
+   0.01693
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c4_cgp/ba32_3000_5__k1_S2__G16__s1.best.cab",
+  "file_bytes": 58,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.0009,
+  "node_decode_ms": 2.93,
+  "updates": 6144
+ },
+ "hold_err": 0.0087890625,
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 7,
+   "err": 0.2669270833333333,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 8,
+   "err": 0.2584635416666667,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 9,
+   "err": 0.2584635416666667,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 43,
+   "err": 0.2584635416666667,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 48,
+   "err": 0.2509765625,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 60,
+   "err": 0.169921875,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 67,
+   "err": 0.0087890625,
+   "active": 0
+  }
+ ],
+ "baselines_bytes": {
+  "changelist": 80,
+  "xor_rle": 88,
+  "frame_rle": 261,
+  "zlib": 80,
+  "bz2": 115,
+  "lzma": 83,
+  "best": 80,
+  "best_method": "changelist"
+ },
+ "media": {
+  "gif": "runs/c7/c4_cgp/ba32_3000_5__k1_S2__G16__s1.best.gif",
+  "sheet": "runs/c7/c4_cgp/ba32_3000_5__k1_S2__G16__s1.best.png"
+ }
+}

@@ -1,0 +1,115 @@
+{
+ "method": "C4 CGP (1+4)-ES, hard-rollout fitness",
+ "target": "pcA",
+ "struct": "k1_S1",
+ "G_max": 8,
+ "seed": 2,
+ "budget_cpu_s": 120.0,
+ "search_cpu_s": 2.7,
+ "evals": 5417,
+ "active_gates": 2,
+ "gates": [
+  [
+   9,
+   9,
+   1
+  ],
+  [
+   9,
+   10,
+   3
+  ]
+ ],
+ "outputs": [
+  11,
+  4
+ ],
+ "rule_bits": 45,
+ "eval": {
+  "T": 6,
+  "mean_err": 0.0,
+  "mean_hold": 0.4847222222222222,
+  "mean_ratio_to_hold": 0.0,
+  "change_iou": 1.0,
+  "pred_changes": 339,
+  "true_changes": 339,
+  "mean_tol_space": 0.0,
+  "mean_tol_time": 0.0,
+  "horizon": 6,
+  "exact": true,
+  "final_err": 0.0,
+  "final_hold": 0.4930555555555556,
+  "err_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "hold_curve": [
+   0.4375,
+   0.52083,
+   0.52083,
+   0.45139,
+   0.49306
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c4_cgp/pcA__k1_S1__G8__s2.best.cab",
+  "file_bytes": 27,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": true,
+  "python_decode_s": 0.0006,
+  "node_decode_ms": 5.09,
+  "updates": 720
+ },
+ "hold_err": 0.4847222222222222,
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 14,
+   "err": 0.38472222222222224,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 34,
+   "err": 0.28055555555555556,
+   "active": 2
+  },
+  {
+   "cpu_s": 2.7,
+   "evals": 5282,
+   "err": 0.26944444444444443,
+   "active": 2
+  },
+  {
+   "cpu_s": 2.7,
+   "evals": 5416,
+   "err": 0.0,
+   "active": 2
+  }
+ ],
+ "baselines_bytes": {
+  "changelist": 129,
+  "xor_rle": 177,
+  "frame_rle": 176,
+  "zlib": 117,
+  "bz2": 191,
+  "lzma": 116,
+  "best": 116,
+  "best_method": "lzma"
+ },
+ "media": {
+  "gif": "runs/c7/c4_cgp/pcA__k1_S1__G8__s2.best.gif",
+  "sheet": "runs/c7/c4_cgp/pcA__k1_S1__G8__s2.best.png"
+ }
+}

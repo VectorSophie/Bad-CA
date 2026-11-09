@@ -1,0 +1,144 @@
+{
+ "method": "C2 Life-like exhaustive",
+ "target": "life_b3s23",
+ "shape": [
+  12,
+  24,
+  24
+ ],
+ "S": 1,
+ "rules_searched": 262144,
+ "search_cpu_s": 10.3,
+ "best_rule": "B3/S23",
+ "best_rule_id": 6152,
+ "rule_bits": 18,
+ "n_conditions": 3,
+ "n_rules_better_than_hold": 38561,
+ "n_rules_exact": 4,
+ "top10": [
+  {
+   "rule": "B3/S23",
+   "mean_err": 0.0
+  },
+  {
+   "rule": "B38/S23",
+   "mean_err": 0.0
+  },
+  {
+   "rule": "B3/S238",
+   "mean_err": 0.0
+  },
+  {
+   "rule": "B38/S238",
+   "mean_err": 0.0
+  },
+  {
+   "rule": "B3/S237",
+   "mean_err": 0.11127
+  },
+  {
+   "rule": "B3/S2378",
+   "mean_err": 0.11127
+  },
+  {
+   "rule": "B38/S237",
+   "mean_err": 0.11206
+  },
+  {
+   "rule": "B38/S2378",
+   "mean_err": 0.11206
+  },
+  {
+   "rule": "B37/S23",
+   "mean_err": 0.14062
+  },
+  {
+   "rule": "B378/S23",
+   "mean_err": 0.14062
+  }
+ ],
+ "error_quantiles": {
+  "0.0": 0.0,
+  "0.01": 0.24653,
+  "0.1": 0.384,
+  "0.5": 0.50063
+ },
+ "eval": {
+  "T": 12,
+  "mean_err": 0.0,
+  "mean_hold": 0.4065656565656566,
+  "mean_ratio_to_hold": 0.0,
+  "change_iou": 1.0,
+  "pred_changes": 1388,
+  "true_changes": 1388,
+  "mean_tol_space": 0.0,
+  "mean_tol_time": 0.0,
+  "horizon": 12,
+  "exact": true,
+  "final_err": 0.0,
+  "final_hold": 0.4131944444444444,
+  "err_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "hold_curve": [
+   0.33854,
+   0.42708,
+   0.4375,
+   0.42188,
+   0.43403,
+   0.39583,
+   0.40799,
+   0.38715,
+   0.39062,
+   0.4184,
+   0.41319
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c2_lifelike/life_b3s23__S1.best.cab",
+  "file_bytes": 141,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": true,
+  "python_decode_s": 0.0012,
+  "node_decode_ms": 3.46,
+  "updates": 6336
+ },
+ "baselines_bytes": {
+  "changelist": 710,
+  "xor_rle": 1005,
+  "frame_rle": 975,
+  "zlib": 741,
+  "bz2": 939,
+  "lzma": 749,
+  "best": 710,
+  "best_method": "changelist"
+ },
+ "media": {
+  "gif": "runs/c7/c2_lifelike/life_b3s23__S1.best.gif",
+  "sheet": "runs/c7/c2_lifelike/life_b3s23__S1.best.png"
+ }
+}

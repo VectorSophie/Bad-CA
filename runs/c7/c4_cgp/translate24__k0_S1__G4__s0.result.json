@@ -1,0 +1,139 @@
+{
+ "method": "C4 CGP (1+4)-ES, hard-rollout fitness",
+ "target": "translate24",
+ "struct": "k0_S1",
+ "G_max": 4,
+ "seed": 0,
+ "budget_cpu_s": 60.0,
+ "search_cpu_s": 0.1,
+ "evals": 85,
+ "active_gates": 1,
+ "gates": [
+  [
+   10,
+   8,
+   3
+  ]
+ ],
+ "outputs": [
+  9
+ ],
+ "rule_bits": 25,
+ "eval": {
+  "T": 12,
+  "mean_err": 0.0,
+  "mean_hold": 0.09659090909090909,
+  "mean_ratio_to_hold": 0.0,
+  "change_iou": 1.0,
+  "pred_changes": 132,
+  "true_changes": 132,
+  "mean_tol_space": 0.0,
+  "mean_tol_time": 0.0,
+  "horizon": 12,
+  "exact": true,
+  "final_err": 0.0,
+  "final_hold": 0.125,
+  "err_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "hold_curve": [
+   0.02083,
+   0.04167,
+   0.0625,
+   0.08333,
+   0.10417,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c4_cgp/translate24__k0_S1__G4__s0.best.cab",
+  "file_bytes": 20,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": true,
+  "python_decode_s": 0.0008,
+  "node_decode_ms": 4.29,
+  "updates": 6336
+ },
+ "hold_err": 0.09659090909090909,
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 10,
+   "err": 0.08238636363636363,
+   "active": 0
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 15,
+   "err": 0.06912878787878787,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 27,
+   "err": 0.0625,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 59,
+   "err": 0.043876262626262624,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 75,
+   "err": 0.034722222222222224,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 83,
+   "err": 0.0,
+   "active": 1
+  }
+ ],
+ "baselines_bytes": {
+  "changelist": 151,
+  "xor_rle": 212,
+  "frame_rle": 162,
+  "zlib": 55,
+  "bz2": 104,
+  "lzma": 59,
+  "best": 55,
+  "best_method": "zlib"
+ },
+ "media": {
+  "gif": "runs/c7/c4_cgp/translate24__k0_S1__G4__s0.best.gif",
+  "sheet": "runs/c7/c4_cgp/translate24__k0_S1__G4__s0.best.png"
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "method": "C4 CGP (1+4)-ES, hard-rollout fitness",
+ "target": "ba32_3000_5",
+ "struct": "k1_S2",
+ "G_max": 16,
+ "seed": 2,
+ "budget_cpu_s": 300.0,
+ "search_cpu_s": 300.0,
+ "evals": 300897,
+ "active_gates": 0,
+ "gates": [],
+ "outputs": [
+  4,
+  7
+ ],
+ "rule_bits": 21,
+ "eval": {
+  "T": 5,
+  "mean_err": 0.0087890625,
+  "mean_hold": 0.0087890625,
+  "mean_ratio_to_hold": 1.0,
+  "change_iou": 0.0,
+  "pred_changes": 0,
+  "true_changes": 13,
+  "mean_tol_space": 0.0,
+  "mean_tol_time": 0.004557291666666666,
+  "horizon": 5,
+  "exact": false,
+  "final_err": 0.016927083333333332,
+  "final_hold": 0.016927083333333332,
+  "err_curve": [
+   0.0013,
+   0.00521,
+   0.01172,
+   0.01693
+  ],
+  "hold_curve": [
+   0.0013,
+   0.00521,
+   0.01172,
+   0.01693
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c4_cgp/ba32_3000_5__k1_S2__G16__s2.best.cab",
+  "file_bytes": 58,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.0008,
+  "node_decode_ms": 6.2,
+  "updates": 6144
+ },
+ "hold_err": 0.0087890625,
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 2,
+   "err": 0.7490234375,
+   "active": 6
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 4,
+   "err": 0.7490234375,
+   "active": 5
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 11,
+   "err": 0.2119140625,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 16,
+   "err": 0.17643229166666666,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 17,
+   "err": 0.1533203125,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 22,
+   "err": 0.10611979166666667,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 57,
+   "err": 0.011393229166666666,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 93,
+   "err": 0.0087890625,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 101,
+   "err": 0.0087890625,
+   "active": 0
+  }
+ ],
+ "baselines_bytes": {
+  "changelist": 80,
+  "xor_rle": 88,
+  "frame_rle": 261,
+  "zlib": 80,
+  "bz2": 115,
+  "lzma": 83,
+  "best": 80,
+  "best_method": "changelist"
+ },
+ "media": {
+  "gif": "runs/c7/c4_cgp/ba32_3000_5__k1_S2__G16__s2.best.gif",
+  "sheet": "runs/c7/c4_cgp/ba32_3000_5__k1_S2__G16__s2.best.png"
+ }
+}

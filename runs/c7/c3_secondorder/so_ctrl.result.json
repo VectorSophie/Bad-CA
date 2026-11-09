@@ -1,0 +1,189 @@
+{
+ "method": "C3 second-order CA + decision tree (CART, DAgger)",
+ "target": "so_ctrl",
+ "shape": [
+  10,
+  16,
+  16
+ ],
+ "S": 1,
+ "structure": "F_shared k=1, hidden'=visible centre",
+ "search_cpu_s": 0.1,
+ "best_depth": 3,
+ "best_dagger_round": 0,
+ "internal_nodes": 3,
+ "leaves": 4,
+ "rule_native_bits": 26,
+ "circuit_gates": 3,
+ "rule_text": "if nowW:\n  -> 1\nelse:\n  if nowC:\n    if prevC:\n      -> 0\n    else:\n      -> 1\n  else:\n    -> 0\n",
+ "eval": {
+  "T": 10,
+  "mean_err": 0.0,
+  "mean_hold": 0.4461805555555556,
+  "mean_ratio_to_hold": 0.0,
+  "change_iou": 1.0,
+  "pred_changes": 578,
+  "true_changes": 578,
+  "mean_tol_space": 0.0,
+  "mean_tol_time": 0.0,
+  "horizon": 10,
+  "exact": true,
+  "final_err": 0.0,
+  "final_hold": 0.4296875,
+  "err_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "hold_curve": [
+   0.21875,
+   0.54688,
+   0.49609,
+   0.49609,
+   0.46875,
+   0.45312,
+   0.47656,
+   0.42969,
+   0.42969
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c3_secondorder/so_ctrl.best.cab",
+  "file_bytes": 44,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": true,
+  "python_decode_s": 0.0114,
+  "node_decode_ms": 4.18,
+  "updates": 2304
+ },
+ "baselines_bytes": {
+  "changelist": 319,
+  "xor_rle": 483,
+  "frame_rle": 386,
+  "zlib": 311,
+  "bz2": 391,
+  "lzma": 314,
+  "best": 311,
+  "best_method": "zlib"
+ },
+ "all_fits": [
+  {
+   "depth": 1,
+   "dagger_round": 0,
+   "internal_nodes": 1,
+   "leaves": 2,
+   "mean_err": 0.18229166666666666,
+   "ratio": 0.40856031128404663,
+   "change_iou": 0.2594296228150874,
+   "horizon": 1,
+   "exact": false,
+   "tol_space": 0.0030381944444444445
+  },
+  {
+   "depth": 1,
+   "dagger_round": 1,
+   "internal_nodes": 1,
+   "leaves": 2,
+   "mean_err": 0.18229166666666666,
+   "ratio": 0.40856031128404663,
+   "change_iou": 0.2594296228150874,
+   "horizon": 1,
+   "exact": false,
+   "tol_space": 0.0030381944444444445
+  },
+  {
+   "depth": 2,
+   "dagger_round": 0,
+   "internal_nodes": 1,
+   "leaves": 2,
+   "mean_err": 0.18229166666666666,
+   "ratio": 0.40856031128404663,
+   "change_iou": 0.2594296228150874,
+   "horizon": 1,
+   "exact": false,
+   "tol_space": 0.0030381944444444445
+  },
+  {
+   "depth": 2,
+   "dagger_round": 1,
+   "internal_nodes": 2,
+   "leaves": 3,
+   "mean_err": 0.3932291666666667,
+   "ratio": 0.8813229571984436,
+   "change_iou": 0.2491349480968858,
+   "horizon": 6,
+   "exact": false,
+   "tol_space": 0.1362847222222222
+  },
+  {
+   "depth": 3,
+   "dagger_round": 0,
+   "internal_nodes": 3,
+   "leaves": 4,
+   "mean_err": 0.0,
+   "ratio": 0.0,
+   "change_iou": 1.0,
+   "horizon": 10,
+   "exact": true,
+   "tol_space": 0.0
+  },
+  {
+   "depth": 3,
+   "dagger_round": 1,
+   "internal_nodes": 3,
+   "leaves": 4,
+   "mean_err": 0.0,
+   "ratio": 0.0,
+   "change_iou": 1.0,
+   "horizon": 10,
+   "exact": true,
+   "tol_space": 0.0
+  },
+  {
+   "depth": 4,
+   "dagger_round": 0,
+   "internal_nodes": 3,
+   "leaves": 4,
+   "mean_err": 0.0,
+   "ratio": 0.0,
+   "change_iou": 1.0,
+   "horizon": 10,
+   "exact": true,
+   "tol_space": 0.0
+  },
+  {
+   "depth": 4,
+   "dagger_round": 1,
+   "internal_nodes": 3,
+   "leaves": 4,
+   "mean_err": 0.0,
+   "ratio": 0.0,
+   "change_iou": 1.0,
+   "horizon": 10,
+   "exact": true,
+   "tol_space": 0.0
+  }
+ ],
+ "media": {
+  "gif": "runs/c7/c3_secondorder/so_ctrl.best.gif",
+  "sheet": "runs/c7/c3_secondorder/so_ctrl.best.png"
+ }
+}

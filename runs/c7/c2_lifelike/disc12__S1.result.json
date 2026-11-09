@@ -1,0 +1,129 @@
+{
+ "method": "C2 Life-like exhaustive",
+ "target": "disc12",
+ "shape": [
+  7,
+  12,
+  12
+ ],
+ "S": 1,
+ "rules_searched": 262144,
+ "search_cpu_s": 2.2,
+ "best_rule": "B3/S34578",
+ "best_rule_id": 225288,
+ "rule_bits": 18,
+ "n_conditions": 6,
+ "n_rules_better_than_hold": 2904,
+ "n_rules_exact": 0,
+ "top10": [
+  {
+   "rule": "B3/S34578",
+   "mean_err": 0.15741
+  },
+  {
+   "rule": "B36/S34578",
+   "mean_err": 0.15741
+  },
+  {
+   "rule": "B37/S34578",
+   "mean_err": 0.15741
+  },
+  {
+   "rule": "B367/S34578",
+   "mean_err": 0.15741
+  },
+  {
+   "rule": "B38/S34578",
+   "mean_err": 0.15741
+  },
+  {
+   "rule": "B368/S34578",
+   "mean_err": 0.15741
+  },
+  {
+   "rule": "B378/S34578",
+   "mean_err": 0.15741
+  },
+  {
+   "rule": "B3678/S34578",
+   "mean_err": 0.15741
+  },
+  {
+   "rule": "B3/S034578",
+   "mean_err": 0.15741
+  },
+  {
+   "rule": "B36/S034578",
+   "mean_err": 0.15741
+  }
+ ],
+ "error_quantiles": {
+  "0.0": 0.15741,
+  "0.01": 0.21296,
+  "0.1": 0.26852,
+  "0.5": 0.43056
+ },
+ "eval": {
+  "T": 7,
+  "mean_err": 0.1574074074074074,
+  "mean_hold": 0.21759259259259256,
+  "mean_ratio_to_hold": 0.7234042553191491,
+  "change_iou": 0.08695652173913043,
+  "pred_changes": 64,
+  "true_changes": 136,
+  "mean_tol_space": 0.032407407407407406,
+  "mean_tol_time": 0.08333333333333333,
+  "horizon": 6,
+  "exact": false,
+  "final_err": 0.1111111111111111,
+  "final_hold": 0.0,
+  "err_curve": [
+   0.11111,
+   0.19444,
+   0.33333,
+   0.05556,
+   0.13889,
+   0.11111
+  ],
+  "hold_curve": [
+   0.13889,
+   0.27778,
+   0.47222,
+   0.27778,
+   0.13889,
+   0.0
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.08333,
+   0.0,
+   0.0,
+   0.11111
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c2_lifelike/disc12__S1.best.cab",
+  "file_bytes": 66,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.0005,
+  "node_decode_ms": 2.13,
+  "updates": 864
+ },
+ "baselines_bytes": {
+  "changelist": 81,
+  "xor_rle": 110,
+  "frame_rle": 80,
+  "zlib": 55,
+  "bz2": 101,
+  "lzma": 65,
+  "best": 55,
+  "best_method": "zlib"
+ },
+ "media": {
+  "gif": "runs/c7/c2_lifelike/disc12__S1.best.gif",
+  "sheet": "runs/c7/c2_lifelike/disc12__S1.best.png"
+ }
+}

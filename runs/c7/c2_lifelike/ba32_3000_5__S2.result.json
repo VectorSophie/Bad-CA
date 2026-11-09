@@ -1,0 +1,123 @@
+{
+ "method": "C2 Life-like exhaustive",
+ "target": "ba32_3000_5",
+ "shape": [
+  5,
+  24,
+  32
+ ],
+ "S": 2,
+ "rules_searched": 262144,
+ "search_cpu_s": 9.6,
+ "best_rule": "B012346/S",
+ "best_rule_id": 95,
+ "rule_bits": 18,
+ "n_conditions": 6,
+ "n_rules_better_than_hold": 0,
+ "n_rules_exact": 0,
+ "top10": [
+  {
+   "rule": "B012346/S",
+   "mean_err": 0.00879
+  },
+  {
+   "rule": "B0123456/S",
+   "mean_err": 0.00879
+  },
+  {
+   "rule": "B0123467/S",
+   "mean_err": 0.00879
+  },
+  {
+   "rule": "B01234567/S",
+   "mean_err": 0.00879
+  },
+  {
+   "rule": "B0123468/S",
+   "mean_err": 0.00879
+  },
+  {
+   "rule": "B01234568/S",
+   "mean_err": 0.00879
+  },
+  {
+   "rule": "B01234678/S",
+   "mean_err": 0.00879
+  },
+  {
+   "rule": "B012345678/S",
+   "mean_err": 0.00879
+  },
+  {
+   "rule": "B012346/S0",
+   "mean_err": 0.00879
+  },
+  {
+   "rule": "B0123456/S0",
+   "mean_err": 0.00879
+  }
+ ],
+ "error_quantiles": {
+  "0.0": 0.00879,
+  "0.01": 0.05273,
+  "0.1": 0.20117,
+  "0.5": 0.3724
+ },
+ "eval": {
+  "T": 5,
+  "mean_err": 0.0087890625,
+  "mean_hold": 0.0087890625,
+  "mean_ratio_to_hold": 1.0,
+  "change_iou": 0.0,
+  "pred_changes": 1,
+  "true_changes": 13,
+  "mean_tol_space": 0.0,
+  "mean_tol_time": 0.005208333333333334,
+  "horizon": 1,
+  "exact": false,
+  "final_err": 0.015625,
+  "final_hold": 0.016927083333333332,
+  "err_curve": [
+   0.0026,
+   0.00651,
+   0.01042,
+   0.01562
+  ],
+  "hold_curve": [
+   0.0013,
+   0.00521,
+   0.01172,
+   0.01693
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c2_lifelike/ba32_3000_5__S2.best.cab",
+  "file_bytes": 127,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.0009,
+  "node_decode_ms": 6.36,
+  "updates": 6144
+ },
+ "baselines_bytes": {
+  "changelist": 80,
+  "xor_rle": 88,
+  "frame_rle": 261,
+  "zlib": 80,
+  "bz2": 115,
+  "lzma": 83,
+  "best": 80,
+  "best_method": "changelist"
+ },
+ "media": {
+  "gif": "runs/c7/c2_lifelike/ba32_3000_5__S2.best.gif",
+  "sheet": "runs/c7/c2_lifelike/ba32_3000_5__S2.best.png"
+ }
+}

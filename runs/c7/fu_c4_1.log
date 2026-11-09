@@ -1,0 +1,1 @@
+{"target": "ba48_1800_60", "struct": "k1_S2", "G": 16, "seed": 1, "evals": 50429, "err": 0.13626020087884494, "hold": 0.1581626647834275, "exact": false, "change_iou": 0.006946167204167701, "horizon": 1, "active": 2, "bytes": 122, "node": true}

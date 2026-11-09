@@ -1,0 +1,144 @@
+{
+ "method": "C2 Life-like exhaustive",
+ "target": "bar12",
+ "shape": [
+  12,
+  12,
+  12
+ ],
+ "S": 1,
+ "rules_searched": 262144,
+ "search_cpu_s": 3.7,
+ "best_rule": "B/S5",
+ "best_rule_id": 16384,
+ "rule_bits": 18,
+ "n_conditions": 1,
+ "n_rules_better_than_hold": 16543,
+ "n_rules_exact": 0,
+ "top10": [
+  {
+   "rule": "B/S5",
+   "mean_err": 0.14394
+  },
+  {
+   "rule": "B4/S5",
+   "mean_err": 0.14394
+  },
+  {
+   "rule": "B5/S5",
+   "mean_err": 0.14394
+  },
+  {
+   "rule": "B45/S5",
+   "mean_err": 0.14394
+  },
+  {
+   "rule": "B6/S5",
+   "mean_err": 0.14394
+  },
+  {
+   "rule": "B46/S5",
+   "mean_err": 0.14394
+  },
+  {
+   "rule": "B56/S5",
+   "mean_err": 0.14394
+  },
+  {
+   "rule": "B456/S5",
+   "mean_err": 0.14394
+  },
+  {
+   "rule": "B7/S5",
+   "mean_err": 0.14394
+  },
+  {
+   "rule": "B47/S5",
+   "mean_err": 0.14394
+  }
+ ],
+ "error_quantiles": {
+  "0.0": 0.14394,
+  "0.01": 0.14394,
+  "0.1": 0.2197,
+  "0.5": 0.48737
+ },
+ "eval": {
+  "T": 12,
+  "mean_err": 0.14393939393939395,
+  "mean_hold": 0.18939393939393942,
+  "mean_ratio_to_hold": 0.7599999999999999,
+  "change_iou": 0.03896103896103896,
+  "pred_changes": 20,
+  "true_changes": 140,
+  "mean_tol_space": 0.0,
+  "mean_tol_time": 0.12626262626262627,
+  "horizon": 11,
+  "exact": false,
+  "final_err": 0.16666666666666666,
+  "final_hold": 0.08333333333333333,
+  "err_curve": [
+   0.08333,
+   0.11111,
+   0.125,
+   0.13889,
+   0.16667,
+   0.13889,
+   0.16667,
+   0.16667,
+   0.15278,
+   0.16667,
+   0.16667
+  ],
+  "hold_curve": [
+   0.08333,
+   0.16667,
+   0.20833,
+   0.22222,
+   0.25,
+   0.22222,
+   0.25,
+   0.22222,
+   0.20833,
+   0.16667,
+   0.08333
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c2_lifelike/bar12__S1.best.cab",
+  "file_bytes": 61,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.0008,
+  "node_decode_ms": 2.54,
+  "updates": 1584
+ },
+ "baselines_bytes": {
+  "changelist": 112,
+  "xor_rle": 157,
+  "frame_rle": 145,
+  "zlib": 136,
+  "bz2": 152,
+  "lzma": 141,
+  "best": 112,
+  "best_method": "changelist"
+ },
+ "media": {
+  "gif": "runs/c7/c2_lifelike/bar12__S1.best.gif",
+  "sheet": "runs/c7/c2_lifelike/bar12__S1.best.png"
+ }
+}

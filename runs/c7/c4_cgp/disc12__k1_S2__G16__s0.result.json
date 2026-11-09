@@ -1,0 +1,320 @@
+{
+ "method": "C4 CGP (1+4)-ES, hard-rollout fitness",
+ "target": "disc12",
+ "struct": "k1_S2",
+ "G_max": 16,
+ "seed": 0,
+ "budget_cpu_s": 300.0,
+ "search_cpu_s": 300.0,
+ "evals": 312757,
+ "active_gates": 10,
+ "gates": [
+  [
+   2,
+   5,
+   1
+  ],
+  [
+   8,
+   2,
+   6
+  ],
+  [
+   2,
+   7,
+   0
+  ],
+  [
+   11,
+   4,
+   0
+  ],
+  [
+   14,
+   3,
+   12
+  ],
+  [
+   14,
+   10,
+   14
+  ],
+  [
+   9,
+   8,
+   11
+  ],
+  [
+   8,
+   15,
+   16
+  ],
+  [
+   4,
+   13,
+   17
+  ],
+  [
+   14,
+   18,
+   9
+  ]
+ ],
+ "outputs": [
+  19,
+  4
+ ],
+ "rule_bits": 155,
+ "eval": {
+  "T": 7,
+  "mean_err": 0.12152777777777775,
+  "mean_hold": 0.21759259259259256,
+  "mean_ratio_to_hold": 0.5585106382978723,
+  "change_iou": 0.1619718309859155,
+  "pred_changes": 29,
+  "true_changes": 136,
+  "mean_tol_space": 0.01736111111111111,
+  "mean_tol_time": 0.061342592592592594,
+  "horizon": 6,
+  "exact": false,
+  "final_err": 0.2013888888888889,
+  "final_hold": 0.0,
+  "err_curve": [
+   0.04167,
+   0.07639,
+   0.27083,
+   0.07639,
+   0.0625,
+   0.20139
+  ],
+  "hold_curve": [
+   0.13889,
+   0.27778,
+   0.47222,
+   0.27778,
+   0.13889,
+   0.0
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.04167,
+   0.0,
+   0.0,
+   0.0625
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c4_cgp/disc12__k1_S2__G16__s0.best.cab",
+  "file_bytes": 30,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.001,
+  "node_decode_ms": 5.65,
+  "updates": 1728
+ },
+ "hold_err": 0.2175925925925926,
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 2,
+   "err": 0.3159722222222222,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 4,
+   "err": 0.3159722222222222,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 5,
+   "err": 0.3159722222222222,
+   "active": 0
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 7,
+   "err": 0.30092592592592593,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 8,
+   "err": 0.28703703703703703,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 23,
+   "err": 0.28703703703703703,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 43,
+   "err": 0.2175925925925926,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.3,
+   "evals": 345,
+   "err": 0.2175925925925926,
+   "active": 0
+  },
+  {
+   "cpu_s": 5.6,
+   "evals": 5539,
+   "err": 0.21296296296296297,
+   "active": 2
+  },
+  {
+   "cpu_s": 5.6,
+   "evals": 5563,
+   "err": 0.21296296296296297,
+   "active": 1
+  },
+  {
+   "cpu_s": 6.2,
+   "evals": 6087,
+   "err": 0.2025462962962963,
+   "active": 2
+  },
+  {
+   "cpu_s": 6.5,
+   "evals": 6457,
+   "err": 0.19907407407407407,
+   "active": 4
+  },
+  {
+   "cpu_s": 6.6,
+   "evals": 6519,
+   "err": 0.18981481481481483,
+   "active": 4
+  },
+  {
+   "cpu_s": 6.6,
+   "evals": 6613,
+   "err": 0.18981481481481483,
+   "active": 3
+  },
+  {
+   "cpu_s": 24.6,
+   "evals": 25344,
+   "err": 0.1875,
+   "active": 5
+  },
+  {
+   "cpu_s": 24.6,
+   "evals": 25401,
+   "err": 0.1840277777777778,
+   "active": 5
+  },
+  {
+   "cpu_s": 34.6,
+   "evals": 35739,
+   "err": 0.17476851851851852,
+   "active": 7
+  },
+  {
+   "cpu_s": 34.6,
+   "evals": 35763,
+   "err": 0.16898148148148148,
+   "active": 7
+  },
+  {
+   "cpu_s": 34.7,
+   "evals": 35900,
+   "err": 0.16782407407407407,
+   "active": 7
+  },
+  {
+   "cpu_s": 35.1,
+   "evals": 36254,
+   "err": 0.16782407407407407,
+   "active": 6
+  },
+  {
+   "cpu_s": 37.8,
+   "evals": 39055,
+   "err": 0.15625,
+   "active": 6
+  },
+  {
+   "cpu_s": 37.8,
+   "evals": 39099,
+   "err": 0.14583333333333334,
+   "active": 6
+  },
+  {
+   "cpu_s": 38.2,
+   "evals": 39544,
+   "err": 0.1388888888888889,
+   "active": 6
+  },
+  {
+   "cpu_s": 39.2,
+   "evals": 40519,
+   "err": 0.13425925925925927,
+   "active": 6
+  },
+  {
+   "cpu_s": 40.7,
+   "evals": 42150,
+   "err": 0.12962962962962962,
+   "active": 8
+  },
+  {
+   "cpu_s": 40.8,
+   "evals": 42285,
+   "err": 0.12962962962962962,
+   "active": 7
+  },
+  {
+   "cpu_s": 135.0,
+   "evals": 140500,
+   "err": 0.1284722222222222,
+   "active": 8
+  },
+  {
+   "cpu_s": 136.3,
+   "evals": 141818,
+   "err": 0.125,
+   "active": 8
+  },
+  {
+   "cpu_s": 143.6,
+   "evals": 149496,
+   "err": 0.12384259259259259,
+   "active": 9
+  },
+  {
+   "cpu_s": 202.3,
+   "evals": 210779,
+   "err": 0.12268518518518519,
+   "active": 10
+  },
+  {
+   "cpu_s": 202.4,
+   "evals": 210875,
+   "err": 0.12152777777777778,
+   "active": 10
+  }
+ ],
+ "baselines_bytes": {
+  "changelist": 81,
+  "xor_rle": 110,
+  "frame_rle": 80,
+  "zlib": 55,
+  "bz2": 101,
+  "lzma": 65,
+  "best": 55,
+  "best_method": "zlib"
+ },
+ "media": {
+  "gif": "runs/c7/c4_cgp/disc12__k1_S2__G16__s0.best.gif",
+  "sheet": "runs/c7/c4_cgp/disc12__k1_S2__G16__s0.best.png"
+ }
+}

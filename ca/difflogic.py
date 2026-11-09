@@ -100,13 +100,15 @@ def _state(s, mode):
     raise ValueError(mode)
 
 
-def soft_rollout(logits, wiring, taps, vis0, channels, T, S, hard=False, gate_ste=False, state="soft", full=False, gens=False):
+def soft_rollout(logits, wiring, taps, vis0, channels, T, S, hard=False, gate_ste=False, state="soft", full=False, gens=False, remat=False):
     """Returns visible at frames 1..T-1, or with full=True the whole state (T-1, C, H, W), or with
     gens=True every generation's whole state (T-1, S, C, H, W)."""
     s0 = jnp.zeros((channels,) + vis0.shape).at[0].set(vis0)
     def gen(s, _):
         s = _state(jnp.moveaxis(net(logits, wiring, ca_inputs(s, taps), hard, gate_ste), -1, 0), state)
         return s, s
+    if remat:  # gradient checkpointing: store only states, recompute each generation's activations in backward
+        gen = jax.checkpoint(gen)
     def frame(s, _):
         s, ss = jax.lax.scan(gen, s, None, length=S)
         return s, (ss if gens else (s if full else s[0]))

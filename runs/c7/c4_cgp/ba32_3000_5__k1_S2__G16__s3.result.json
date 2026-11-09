@@ -1,0 +1,147 @@
+{
+ "method": "C4 CGP (1+4)-ES, hard-rollout fitness",
+ "target": "ba32_3000_5",
+ "struct": "k1_S2",
+ "G_max": 16,
+ "seed": 3,
+ "budget_cpu_s": 300.0,
+ "search_cpu_s": 300.0,
+ "evals": 314501,
+ "active_gates": 3,
+ "gates": [
+  [
+   2,
+   9,
+   5
+  ],
+  [
+   7,
+   10,
+   7
+  ],
+  [
+   2,
+   4,
+   11
+  ]
+ ],
+ "outputs": [
+  12,
+  4
+ ],
+ "rule_bits": 61,
+ "eval": {
+  "T": 5,
+  "mean_err": 0.008138020833333332,
+  "mean_hold": 0.0087890625,
+  "mean_ratio_to_hold": 0.9259259259259258,
+  "change_iou": 0.0,
+  "pred_changes": 2,
+  "true_changes": 13,
+  "mean_tol_space": 0.0,
+  "mean_tol_time": 0.005208333333333334,
+  "horizon": 1,
+  "exact": false,
+  "final_err": 0.014322916666666666,
+  "final_hold": 0.016927083333333332,
+  "err_curve": [
+   0.00391,
+   0.00521,
+   0.00911,
+   0.01432
+  ],
+  "hold_curve": [
+   0.0013,
+   0.00521,
+   0.01172,
+   0.01693
+  ],
+  "tol_space_curve": [
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "export": {
+  "file": "runs/c7/c4_cgp/ba32_3000_5__k1_S2__G16__s3.best.cab",
+  "file_bytes": 63,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.0009,
+  "node_decode_ms": 8.96,
+  "updates": 6144
+ },
+ "hold_err": 0.0087890625,
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 3,
+   "err": 0.19954427083333334,
+   "active": 0
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 12,
+   "err": 0.1826171875,
+   "active": 0
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 18,
+   "err": 0.1044921875,
+   "active": 0
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 43,
+   "err": 0.0087890625,
+   "active": 0
+  },
+  {
+   "cpu_s": 98.7,
+   "evals": 98491,
+   "err": 0.008463541666666666,
+   "active": 6
+  },
+  {
+   "cpu_s": 99.0,
+   "evals": 98900,
+   "err": 0.008463541666666666,
+   "active": 5
+  },
+  {
+   "cpu_s": 99.2,
+   "evals": 99049,
+   "err": 0.008463541666666666,
+   "active": 4
+  },
+  {
+   "cpu_s": 100.2,
+   "evals": 100192,
+   "err": 0.008138020833333334,
+   "active": 4
+  },
+  {
+   "cpu_s": 100.8,
+   "evals": 100816,
+   "err": 0.008138020833333334,
+   "active": 3
+  }
+ ],
+ "baselines_bytes": {
+  "changelist": 80,
+  "xor_rle": 88,
+  "frame_rle": 261,
+  "zlib": 80,
+  "bz2": 115,
+  "lzma": 83,
+  "best": 80,
+  "best_method": "changelist"
+ },
+ "media": {
+  "gif": "runs/c7/c4_cgp/ba32_3000_5__k1_S2__G16__s3.best.gif",
+  "sheet": "runs/c7/c4_cgp/ba32_3000_5__k1_S2__G16__s3.best.png"
+ }
+}
