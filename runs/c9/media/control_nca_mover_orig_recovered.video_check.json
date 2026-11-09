@@ -1,0 +1,46 @@
+[
+ {
+  "path": "/home/jackb/workspace/CA-universal/runs/frozen/d38ebf2e42bc/experiments/../runs/c9/media/control_nca_mover_orig_recovered_1x.mp4",
+  "decoded_frames": 30,
+  "expected_frames": 30,
+  "fps": 30.0,
+  "expected_fps": 30,
+  "duration_s": 1.0,
+  "expected_duration_s": 1.0,
+  "codec": "h264",
+  "size": [
+   1472,
+   228
+  ],
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/runs/frozen/d38ebf2e42bc/experiments/../runs/c9/media/control_nca_mover_orig_recovered_1x.gif",
+  "decoded_frames": 30,
+  "expected_frames": 30,
+  "frame_ms": 30,
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/runs/frozen/d38ebf2e42bc/experiments/../runs/c9/media/control_nca_mover_orig_recovered_0.25x.mp4",
+  "decoded_frames": 30,
+  "expected_frames": 30,
+  "fps": 7.5,
+  "expected_fps": 7.5,
+  "duration_s": 4.0,
+  "expected_duration_s": 4.0,
+  "codec": "h264",
+  "size": [
+   1472,
+   228
+  ],
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/runs/frozen/d38ebf2e42bc/experiments/../runs/c9/media/control_nca_mover_orig_recovered_0.25x.gif",
+  "decoded_frames": 30,
+  "expected_frames": 30,
+  "frame_ms": 130,
+  "ok": true
+ }
+]

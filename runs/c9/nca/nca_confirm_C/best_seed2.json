@@ -1,0 +1,1 @@
+{"err": 0.02864092906465788, "it": 17049, "t": 780.3, "task": "confirm", "regime": "C", "seed": 2, "C": 16, "Fh": 64, "S": 4, "lr": 0.002, "init": "numpy default_rng(seed)"}

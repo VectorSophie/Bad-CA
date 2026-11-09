@@ -1,0 +1,218 @@
+[
+ {
+  "name": "main_1_orig_c8_cgp_nca_autonomousC",
+  "ok": true,
+  "footer": [
+   "ba48_4500_60 frames 4540-4555: ALL panels autonomous from clip frame 4500 (stage C), no injection, no reset",
+   "CGP: C: lag4 F1 0.00 (P 1.00) err/hold 0.91 | NCA: C: lag4 F1 0.91 (P 0.95) err/hold 0.19",
+   "NCA: hidden: 15 cont. ch, S=4, hidden init 0; CGP: hidden: k=1 bit, S=2, hidden init 0"
+  ]
+ },
+ {
+  "name": "main_2_NCA_orig_tf_autonomous",
+  "ok": true,
+  "footer": [
+   "NCA 16x64 C-tr s2 (10320p) | hidden: 15 cont. ch, S=4, hidden init 0",
+   "A: visible reset to the TRUE previous frame every frame (hidden carried): NOT autonomous",
+   "A tfF1 0.05 err/hold 0.36 | C: lag4 F1 0.91 (P 0.95) err/hold 0.19"
+  ]
+ },
+ {
+  "name": "main_3_NCA_rep_orig_C_diff",
+  "ok": true,
+  "footer": [
+   "stage C (autonomous from frame 4500); rep seed of NCA ('C=16 Fh=64', 'C')",
+   "C: lag4 F1 0.91 (P 0.95) err/hold 0.19 | B: lag4 F1 0.13 (P 0.23) err/hold 1.21 | pass C: 1.0"
+  ]
+ },
+ {
+  "name": "main_3_NCA_best_orig_C_diff",
+  "ok": true,
+  "footer": [
+   "stage C (autonomous from frame 4500); best seed of NCA ('C=16 Fh=64', 'C')",
+   "C: lag4 F1 0.97 (P 0.98) err/hold 0.14 | B: lag4 F1 0.11 (P 0.18) err/hold 1.30 | pass C: 1.0"
+  ]
+ },
+ {
+  "name": "main_3_NCA_worst_orig_C_diff",
+  "ok": true,
+  "footer": [
+   "stage C (autonomous from frame 4500); worst seed of NCA ('C=16 Fh=64', 'C')",
+   "C: lag4 F1 0.75 (P 0.96) err/hold 0.32 | B: lag4 F1 0.13 (P 0.22) err/hold 1.27 | pass C: 1.0"
+  ]
+ },
+ {
+  "name": "main_2_CGP_orig_tf_autonomous",
+  "ok": true,
+  "footer": [
+   "CGP G=128 C-tr s1 (14g) | hidden: k=1 bit, S=2, hidden init 0",
+   "A: visible reset to the TRUE previous frame every frame (hidden carried): NOT autonomous",
+   "A tfF1 0.37 err/hold 0.50 | C: lag4 F1 0.00 (P 1.00) err/hold 0.91"
+  ]
+ },
+ {
+  "name": "main_3_CGP_rep_orig_C_diff",
+  "ok": true,
+  "footer": [
+   "stage C (autonomous from frame 4500); rep seed of CGP ('G=128', 'C')",
+   "C: lag4 F1 0.00 (P 1.00) err/hold 0.91 | B: lag4 F1 0.13 (P 0.21) err/hold 1.40 | pass C: False"
+  ]
+ },
+ {
+  "name": "main_3_CGP_best_orig_C_diff",
+  "ok": true,
+  "footer": [
+   "stage C (autonomous from frame 4500); best seed of CGP ('G=128', 'C')",
+   "C: lag4 F1 0.00 (P 1.00) err/hold 1.00 | B: lag4 F1 0.12 (P 0.22) err/hold 1.36 | pass C: False"
+  ]
+ },
+ {
+  "name": "main_3_CGP_worst_orig_C_diff",
+  "ok": true,
+  "footer": [
+   "stage C (autonomous from frame 4500); worst seed of CGP ('G=128', 'C')",
+   "C: lag4 F1 0.00 (P 1.00) err/hold 0.87 | B: lag4 F1 0.11 (P 0.25) err/hold 1.41 | pass C: False"
+  ]
+ },
+ {
+  "name": "main_selection",
+  "CGP": {
+   "group": [
+    "G=128",
+    "C"
+   ],
+   "rep": "cgp_main_C_G128_s1",
+   "best": "cgp_main_C_G128_s2",
+   "worst": "cgp_main_C_G128_s0"
+  },
+  "NCA": {
+   "group": [
+    "C=16 Fh=64",
+    "C"
+   ],
+   "rep": "nca_main_C_s2",
+   "best": "nca_main_C_s0",
+   "worst": "nca_main_C_s1"
+  }
+ },
+ {
+  "name": "confirm_1_orig_c8_cgp_nca_autonomousC",
+  "ok": true,
+  "footer": [
+   "ba48_1800_60 frames 1844-1859: ALL panels autonomous from clip frame 1800 (stage C), no injection, no reset",
+   "CGP: C: lag4 F1 0.00 (P 1.00) err/hold 1.00 | NCA: C: lag4 F1 0.95 (P 0.98) err/hold 0.23",
+   "NCA: hidden: 15 cont. ch, S=4, hidden init 0; CGP: hidden: k=1 bit, S=2, hidden init 0"
+  ]
+ },
+ {
+  "name": "confirm_2_NCA_orig_tf_autonomous",
+  "ok": true,
+  "footer": [
+   "NCA 16x64 C-tr s1 (10320p) | hidden: 15 cont. ch, S=4, hidden init 0",
+   "A: visible reset to the TRUE previous frame every frame (hidden carried): NOT autonomous",
+   "A tfF1 0.10 err/hold 0.51 | C: lag4 F1 0.95 (P 0.98) err/hold 0.23"
+  ]
+ },
+ {
+  "name": "confirm_3_NCA_rep_orig_C_diff",
+  "ok": true,
+  "footer": [
+   "stage C (autonomous from frame 1800); rep seed of NCA ('C=16 Fh=64', 'C')",
+   "C: lag4 F1 0.95 (P 0.98) err/hold 0.23 | B: lag4 F1 0.29 (P 0.34) err/hold 1.41 | pass C: 1.0"
+  ]
+ },
+ {
+  "name": "confirm_3_NCA_best_orig_C_diff",
+  "ok": true,
+  "footer": [
+   "stage C (autonomous from frame 1800); best seed of NCA ('C=16 Fh=64', 'C')",
+   "C: lag4 F1 0.95 (P 0.99) err/hold 0.22 | B: lag4 F1 0.26 (P 0.33) err/hold 1.46 | pass C: 1.0"
+  ]
+ },
+ {
+  "name": "confirm_3_NCA_worst_orig_C_diff",
+  "ok": true,
+  "footer": [
+   "stage C (autonomous from frame 1800); worst seed of NCA ('C=16 Fh=64', 'C')",
+   "C: lag4 F1 0.92 (P 0.99) err/hold 0.24 | B: lag4 F1 0.23 (P 0.37) err/hold 1.36 | pass C: 1.0"
+  ]
+ },
+ {
+  "name": "confirm_2_CGP_orig_tf_autonomous",
+  "ok": true,
+  "footer": [
+   "CGP G=128 C-tr s2 (19g) | hidden: k=1 bit, S=2, hidden init 0",
+   "A: visible reset to the TRUE previous frame every frame (hidden carried): NOT autonomous",
+   "A tfF1 0.44 err/hold 0.46 | C: lag4 F1 0.00 (P 1.00) err/hold 1.00"
+  ]
+ },
+ {
+  "name": "confirm_3_CGP_rep_orig_C_diff",
+  "ok": true,
+  "footer": [
+   "stage C (autonomous from frame 1800); rep seed of CGP ('G=128', 'C')",
+   "C: lag4 F1 0.00 (P 1.00) err/hold 1.00 | B: lag4 F1 0.14 (P 0.45) err/hold 1.04 | pass C: False"
+  ]
+ },
+ {
+  "name": "confirm_3_CGP_best_orig_C_diff",
+  "ok": true,
+  "footer": [
+   "stage C (autonomous from frame 1800); best seed of CGP ('G=128', 'C')",
+   "C: lag4 F1 0.04 (P 0.53) err/hold 0.89 | B: lag4 F1 0.21 (P 0.53) err/hold 1.00 | pass C: False"
+  ]
+ },
+ {
+  "name": "confirm_3_CGP_worst_orig_C_diff",
+  "ok": true,
+  "footer": [
+   "stage C (autonomous from frame 1800); worst seed of CGP ('G=128', 'C')",
+   "C: lag4 F1 0.00 (P 1.00) err/hold 0.99 | B: lag4 F1 0.13 (P 0.53) err/hold 1.00 | pass C: False"
+  ]
+ },
+ {
+  "name": "confirm_selection",
+  "CGP": {
+   "group": [
+    "G=128",
+    "C"
+   ],
+   "rep": "cgp_confirm_C_G128_s2",
+   "best": "cgp_confirm_C_G128_s1",
+   "worst": "cgp_confirm_C_G128_s0"
+  },
+  "NCA": {
+   "group": [
+    "C=16 Fh=64",
+    "C"
+   ],
+   "rep": "nca_confirm_C_s1",
+   "best": "nca_confirm_C_s0",
+   "worst": "nca_confirm_C_s2"
+  }
+ },
+ {
+  "name": "main_4_reduction_teacher_vs_distilled",
+  "ok": true,
+  "footer": [
+   "stage C from frame 4500; distilled model trained on the teacher's own replay (not the original)",
+   "teacher C: lag4 F1 0.91 (P 0.95) err/hold 0.19 | distilled C: lag4 F1 0.81 (P 0.90) err/hold 0.32 | distilled pass C 1.0"
+  ]
+ },
+ {
+  "name": "confirm_4_reduction_teacher_vs_distilled",
+  "ok": true,
+  "footer": [
+   "stage C from frame 1800; distilled model trained on the teacher's own replay (not the original)",
+   "teacher C: lag4 F1 0.95 (P 0.98) err/hold 0.23 | distilled C: lag4 F1 0.69 (P 0.90) err/hold 0.53 | distilled pass C 1.0"
+  ]
+ },
+ {
+  "name": "control_nca_mover_orig_recovered",
+  "ok": true,
+  "footer": [
+   "NCA positive control: trained from random init on these frames only; exact: True",
+   "CGP controls: runs/c8/media/control_* (reused)"
+  ]
+ }
+]

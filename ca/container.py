@@ -109,3 +109,13 @@ def baselines(frames):
         assert m2 == m and (f == frames).all(), m
         out[m] = data
     return out
+
+
+def decode_rule(data):
+    """bytes of a CA container file -> (method, W, H, T, first frame, rule dict from ca.costs decoders)."""
+    b = _bits(data); r = costs.BitR(b)
+    m = _NAME[r.gamma()]; W, H, T = r.gamma(), r.gamma(), r.gamma()
+    assert m in ("ca_circuit", "ca_lut_exc"), m
+    f0 = costs._runs_r(r, H * W).reshape(H, W) if r.bits(1) else np.array([r.bits(1) for _ in range(H * W)], np.uint8).reshape(H, W)
+    rest = b[r.i:]
+    return m, W, H, T, f0, (costs.rule_circuit_decode(rest) if m == "ca_circuit" else costs.rule_lut_exceptions_decode(rest))

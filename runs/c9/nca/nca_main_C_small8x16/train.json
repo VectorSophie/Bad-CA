@@ -1,0 +1,33 @@
+{
+ "task": "main",
+ "regime": "C",
+ "teacher": "/home/jackb/workspace/CA-universal/runs/c9/exports/teacher_main.nca.json",
+ "T": 56,
+ "C": 8,
+ "Fh": 16,
+ "S": 4,
+ "n_params": 1304,
+ "seeds": 3,
+ "budget_s": 600.0,
+ "compile_s": 1.4,
+ "train_s": 600.0,
+ "iters": 17406,
+ "device": "cuda:0",
+ "best": [
+  {
+   "err": 0.014362373737373738,
+   "it": 13925,
+   "t": 480.1
+  },
+  {
+   "err": 0.018423821548821547,
+   "it": 13925,
+   "t": 480.1
+  },
+  {
+   "err": 0.016645622895622894,
+   "it": 16540,
+   "t": 570.2
+  }
+ ]
+}

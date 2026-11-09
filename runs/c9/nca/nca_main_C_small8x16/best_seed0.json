@@ -1,0 +1,1 @@
+{"err": 0.014362373737373738, "it": 13925, "t": 480.1, "task": "main", "regime": "C", "seed": 0, "C": 8, "Fh": 16, "S": 4, "lr": 0.002, "init": "numpy default_rng(seed)", "teacher": "/home/jackb/workspace/CA-universal/runs/c9/exports/teacher_main.nca.json"}

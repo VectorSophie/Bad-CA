@@ -31,6 +31,8 @@ def target(name):
         f0 = (np.random.default_rng(11).random((16, 16)) < 0.3).astype(np.uint8)
         tree = (3, (4, 0, (13, 1, 0)), (12, 1, (4, 0, 1)))
         return so_rollout(tree, f0[None], 10)[0].astype(np.uint8)
+    if "@" in name:  # Campaign 09 window: 'clip@a-b' = frames a..b-1 of clip (first frame = true frame a)
+        base, ab = name.split("@"); a, b = map(int, ab.split("-")); return target(base)[a:b]
     return t5(name).astype(np.uint8)
 
 

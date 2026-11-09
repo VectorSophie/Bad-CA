@@ -1,0 +1,1 @@
+{"err": 0.04146068738229755, "it": 15390, "t": 570.5, "task": "confirm", "regime": "C", "seed": 1, "C": 8, "Fh": 16, "S": 4, "lr": 0.002, "init": "numpy default_rng(seed)", "teacher": "/home/jackb/workspace/CA-universal/runs/c9/exports/teacher_confirm.nca.json"}
