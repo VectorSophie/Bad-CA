@@ -1,0 +1,712 @@
+[
+ {
+  "name": "main_ba48_4500_60_1_orig_c7_c8",
+  "checks": [
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_1_orig_c7_c8_1x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 30.0,
+    "expected_fps": 30,
+    "duration_s": 2.0,
+    "expected_duration_s": 2.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_1_orig_c7_c8_1x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 30,
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_1_orig_c7_c8_0.25x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 7.5,
+    "expected_fps": 7.5,
+    "duration_s": 8.0,
+    "expected_duration_s": 8.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_1_orig_c7_c8_0.25x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 130,
+    "ok": true
+   }
+  ],
+  "footer": [
+   "clip ba48_4500_60 48x36 thr128 boundary 0 hidden init 0 | mot objective (lam 2) | representative seed of arm B",
+   "F1tol early/mid/late 0.28/0.16/0.17   err/hold 0.65/0.52/0.69   level: partial",
+   "replays decoded from exported files; red = missed white (FN), blue = extra white (FP)"
+  ]
+ },
+ {
+  "name": "main_ba48_4500_60_2_representative_orig_c8_diff",
+  "checks": [
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_representative_orig_c8_diff_1x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 30.0,
+    "expected_fps": 30,
+    "duration_s": 2.0,
+    "expected_duration_s": 2.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_representative_orig_c8_diff_1x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 30,
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_representative_orig_c8_diff_0.25x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 7.5,
+    "expected_fps": 7.5,
+    "duration_s": 8.0,
+    "expected_duration_s": 8.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_representative_orig_c8_diff_0.25x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 130,
+    "ok": true
+   }
+  ],
+  "footer": [
+   "clip ba48_4500_60 48x36 thr128 boundary 0 hidden init 0 | mot objective (lam 2) | representative seed of arm B",
+   "F1tol early/mid/late 0.28/0.16/0.17   err/hold 0.65/0.52/0.69   level: partial",
+   "replays decoded from exported files; red = missed white (FN), blue = extra white (FP)"
+  ]
+ },
+ {
+  "name": "main_ba48_4500_60_2_best_orig_c8_diff",
+  "checks": [
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_best_orig_c8_diff_1x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 30.0,
+    "expected_fps": 30,
+    "duration_s": 2.0,
+    "expected_duration_s": 2.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_best_orig_c8_diff_1x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 30,
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_best_orig_c8_diff_0.25x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 7.5,
+    "expected_fps": 7.5,
+    "duration_s": 8.0,
+    "expected_duration_s": 8.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_best_orig_c8_diff_0.25x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 130,
+    "ok": true
+   }
+  ],
+  "footer": [
+   "clip ba48_4500_60 48x36 thr128 boundary 0 hidden init 0 | mot objective (lam 2) | best seed of arm B",
+   "F1tol early/mid/late 0.36/0.15/0.30   err/hold 0.75/0.73/0.82   level: fail",
+   "replays decoded from exported files; red = missed white (FN), blue = extra white (FP)"
+  ]
+ },
+ {
+  "name": "main_ba48_4500_60_2_worst_orig_c8_diff",
+  "checks": [
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_worst_orig_c8_diff_1x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 30.0,
+    "expected_fps": 30,
+    "duration_s": 2.0,
+    "expected_duration_s": 2.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_worst_orig_c8_diff_1x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 30,
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_worst_orig_c8_diff_0.25x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 7.5,
+    "expected_fps": 7.5,
+    "duration_s": 8.0,
+    "expected_duration_s": 8.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_worst_orig_c8_diff_0.25x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 130,
+    "ok": true
+   }
+  ],
+  "footer": [
+   "clip ba48_4500_60 48x36 thr128 boundary 0 hidden init 0 | mot objective (lam 2) | worst seed of arm B",
+   "F1tol early/mid/late 0.40/0.07/0.00   err/hold 0.55/0.61/0.75   level: partial",
+   "replays decoded from exported files; red = missed white (FN), blue = extra white (FP)"
+  ]
+ },
+ {
+  "name": "main_ba48_4500_60_selection",
+  "arm": "B",
+  "representative": "runs/c8/main/ba48_4500_60__k1_S2__mot2__G32__s4.result.json",
+  "best": "runs/c8/main/ba48_4500_60__k1_S2__mot2__G32__s0.result.json",
+  "worst": "runs/c8/main/ba48_4500_60__k1_S2__mot2__G32__s2.result.json",
+  "arm_seed_levels": {
+   "B": [
+    "fail",
+    "partial",
+    "partial",
+    "fail",
+    "partial"
+   ],
+   "A": [
+    "partial",
+    "fail",
+    "partial",
+    "fail",
+    "partial"
+   ],
+   "D": [
+    "partial",
+    "fail",
+    "fail",
+    "partial",
+    "fail"
+   ],
+   "C": [
+    "fail",
+    "fail",
+    "fail",
+    "fail",
+    "fail"
+   ]
+  }
+ },
+ {
+  "name": "second_ba48_1800_60_1_orig_c7_c8",
+  "checks": [
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_1_orig_c7_c8_1x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 30.0,
+    "expected_fps": 30,
+    "duration_s": 2.0,
+    "expected_duration_s": 2.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_1_orig_c7_c8_1x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 30,
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_1_orig_c7_c8_0.25x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 7.5,
+    "expected_fps": 7.5,
+    "duration_s": 8.0,
+    "expected_duration_s": 8.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_1_orig_c7_c8_0.25x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 130,
+    "ok": true
+   }
+  ],
+  "footer": [
+   "clip ba48_1800_60 48x36 thr128 boundary 0 hidden init 0 | mot objective (lam 2) | representative seed of arm B",
+   "F1tol early/mid/late 0.28/0.21/0.20   err/hold 0.91/0.81/0.84   level: partial",
+   "replays decoded from exported files; red = missed white (FN), blue = extra white (FP)"
+  ]
+ },
+ {
+  "name": "second_ba48_1800_60_2_representative_orig_c8_diff",
+  "checks": [
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_2_representative_orig_c8_diff_1x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 30.0,
+    "expected_fps": 30,
+    "duration_s": 2.0,
+    "expected_duration_s": 2.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_2_representative_orig_c8_diff_1x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 30,
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_2_representative_orig_c8_diff_0.25x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 7.5,
+    "expected_fps": 7.5,
+    "duration_s": 8.0,
+    "expected_duration_s": 8.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_2_representative_orig_c8_diff_0.25x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 130,
+    "ok": true
+   }
+  ],
+  "footer": [
+   "clip ba48_1800_60 48x36 thr128 boundary 0 hidden init 0 | mot objective (lam 2) | representative seed of arm B",
+   "F1tol early/mid/late 0.28/0.21/0.20   err/hold 0.91/0.81/0.84   level: partial",
+   "replays decoded from exported files; red = missed white (FN), blue = extra white (FP)"
+  ]
+ },
+ {
+  "name": "second_ba48_1800_60_2_best_orig_c8_diff",
+  "checks": [
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_2_best_orig_c8_diff_1x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 30.0,
+    "expected_fps": 30,
+    "duration_s": 2.0,
+    "expected_duration_s": 2.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_2_best_orig_c8_diff_1x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 30,
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_2_best_orig_c8_diff_0.25x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 7.5,
+    "expected_fps": 7.5,
+    "duration_s": 8.0,
+    "expected_duration_s": 8.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_2_best_orig_c8_diff_0.25x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 130,
+    "ok": true
+   }
+  ],
+  "footer": [
+   "clip ba48_1800_60 48x36 thr128 boundary 0 hidden init 0 | mot objective (lam 2) | best seed of arm B",
+   "F1tol early/mid/late 0.25/0.18/0.20   err/hold 1.20/0.99/0.88   level: fail",
+   "replays decoded from exported files; red = missed white (FN), blue = extra white (FP)"
+  ]
+ },
+ {
+  "name": "second_ba48_1800_60_2_worst_orig_c8_diff",
+  "checks": [
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_2_worst_orig_c8_diff_1x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 30.0,
+    "expected_fps": 30,
+    "duration_s": 2.0,
+    "expected_duration_s": 2.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_2_worst_orig_c8_diff_1x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 30,
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_2_worst_orig_c8_diff_0.25x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 7.5,
+    "expected_fps": 7.5,
+    "duration_s": 8.0,
+    "expected_duration_s": 8.0,
+    "codec": "h264",
+    "size": [
+     896,
+     318
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/second_ba48_1800_60_2_worst_orig_c8_diff_0.25x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 130,
+    "ok": true
+   }
+  ],
+  "footer": [
+   "clip ba48_1800_60 48x36 thr128 boundary 0 hidden init 0 | mot objective (lam 2) | worst seed of arm B",
+   "F1tol early/mid/late 0.29/0.22/0.18   err/hold 0.81/0.86/0.96   level: partial",
+   "replays decoded from exported files; red = missed white (FN), blue = extra white (FP)"
+  ]
+ },
+ {
+  "name": "second_ba48_1800_60_selection",
+  "arm": "B",
+  "representative": "runs/c8/second/ba48_1800_60__k1_S2__mot2__G32__s2.result.json",
+  "best": "runs/c8/second/ba48_1800_60__k1_S2__mot2__G32__s0.result.json",
+  "worst": "runs/c8/second/ba48_1800_60__k1_S2__mot2__G32__s1.result.json",
+  "arm_seed_levels": {
+   "B": [
+    "fail",
+    "partial",
+    "partial"
+   ],
+   "A": [
+    "fail",
+    "fail",
+    "fail"
+   ],
+   "D": [
+    "fail",
+    "fail",
+    "fail"
+   ],
+   "C": [
+    "fail",
+    "fail",
+    "fail"
+   ]
+  }
+ },
+ {
+  "name": "control_pcmove_k1_S2_3_orig_recovered",
+  "checks": [
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pcmove_k1_S2_3_orig_recovered_1x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 30.0,
+    "expected_fps": 30,
+    "duration_s": 2.0,
+    "expected_duration_s": 2.0,
+    "codec": "h264",
+    "size": [
+     1436,
+     228
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pcmove_k1_S2_3_orig_recovered_1x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 30,
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pcmove_k1_S2_3_orig_recovered_0.25x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 7.5,
+    "expected_fps": 7.5,
+    "duration_s": 8.0,
+    "expected_duration_s": 8.0,
+    "codec": "h264",
+    "size": [
+     1436,
+     228
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pcmove_k1_S2_3_orig_recovered_0.25x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 130,
+    "ok": true
+   }
+  ],
+  "footer": [
+   "positive control pcmove_k1_S2: CGP saw only these frames | exact: True | 3/3 mot seeds exact",
+   "F1tol early/mid/late 1.00/1.00/1.00   err/hold 0.00/0.00/0.00   level: success"
+  ]
+ },
+ {
+  "name": "control_pcmove_k1s_S4_3_orig_recovered",
+  "checks": [
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pcmove_k1s_S4_3_orig_recovered_1x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 30.0,
+    "expected_fps": 30,
+    "duration_s": 2.0,
+    "expected_duration_s": 2.0,
+    "codec": "h264",
+    "size": [
+     2516,
+     228
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pcmove_k1s_S4_3_orig_recovered_1x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 30,
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pcmove_k1s_S4_3_orig_recovered_0.25x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 7.5,
+    "expected_fps": 7.5,
+    "duration_s": 8.0,
+    "expected_duration_s": 8.0,
+    "codec": "h264",
+    "size": [
+     2516,
+     228
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pcmove_k1s_S4_3_orig_recovered_0.25x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 130,
+    "ok": true
+   }
+  ],
+  "footer": [
+   "positive control pcmove_k1s_S4: CGP saw only these frames | exact: True | 3/3 mot seeds exact",
+   "F1tol early/mid/late 1.00/1.00/1.00   err/hold 0.00/0.00/0.00   level: success"
+  ]
+ },
+ {
+  "name": "control_pccycle_k1_S2_3_orig_recovered",
+  "checks": [
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pccycle_k1_S2_3_orig_recovered_1x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 30.0,
+    "expected_fps": 30,
+    "duration_s": 2.0,
+    "expected_duration_s": 2.0,
+    "codec": "h264",
+    "size": [
+     464,
+     228
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pccycle_k1_S2_3_orig_recovered_1x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 30,
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pccycle_k1_S2_3_orig_recovered_0.25x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 7.5,
+    "expected_fps": 7.5,
+    "duration_s": 8.0,
+    "expected_duration_s": 8.0,
+    "codec": "h264",
+    "size": [
+     464,
+     228
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pccycle_k1_S2_3_orig_recovered_0.25x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 130,
+    "ok": true
+   }
+  ],
+  "footer": [
+   "positive control pccycle_k1_S2: CGP saw only these frames | exact: True | 2/3 mot seeds exact",
+   "F1tol early/mid/late 1.00/1.00/1.00   err/hold 0.00/0.00/0.00   level: success"
+  ]
+ },
+ {
+  "name": "control_pccycle_k1s_S4_3_orig_recovered",
+  "checks": [
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pccycle_k1s_S4_3_orig_recovered_1x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 30.0,
+    "expected_fps": 30,
+    "duration_s": 2.0,
+    "expected_duration_s": 2.0,
+    "codec": "h264",
+    "size": [
+     464,
+     228
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pccycle_k1s_S4_3_orig_recovered_1x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 30,
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pccycle_k1s_S4_3_orig_recovered_0.25x.mp4",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "fps": 7.5,
+    "expected_fps": 7.5,
+    "duration_s": 8.0,
+    "expected_duration_s": 8.0,
+    "codec": "h264",
+    "size": [
+     464,
+     228
+    ],
+    "ok": true
+   },
+   {
+    "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/control_pccycle_k1s_S4_3_orig_recovered_0.25x.gif",
+    "decoded_frames": 60,
+    "expected_frames": 60,
+    "frame_ms": 130,
+    "ok": true
+   }
+  ],
+  "footer": [
+   "positive control pccycle_k1s_S4: CGP saw only these frames | exact: True | 2/3 mot seeds exact",
+   "F1tol early/mid/late 1.00/1.00/1.00   err/hold 0.00/0.00/0.00   level: success"
+  ]
+ }
+]

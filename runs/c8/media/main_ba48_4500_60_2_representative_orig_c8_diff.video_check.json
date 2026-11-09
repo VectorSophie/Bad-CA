@@ -1,0 +1,46 @@
+[
+ {
+  "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_representative_orig_c8_diff_1x.mp4",
+  "decoded_frames": 60,
+  "expected_frames": 60,
+  "fps": 30.0,
+  "expected_fps": 30,
+  "duration_s": 2.0,
+  "expected_duration_s": 2.0,
+  "codec": "h264",
+  "size": [
+   896,
+   318
+  ],
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_representative_orig_c8_diff_1x.gif",
+  "decoded_frames": 60,
+  "expected_frames": 60,
+  "frame_ms": 30,
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_representative_orig_c8_diff_0.25x.mp4",
+  "decoded_frames": 60,
+  "expected_frames": 60,
+  "fps": 7.5,
+  "expected_fps": 7.5,
+  "duration_s": 8.0,
+  "expected_duration_s": 8.0,
+  "codec": "h264",
+  "size": [
+   896,
+   318
+  ],
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c8/media/main_ba48_4500_60_2_representative_orig_c8_diff_0.25x.gif",
+  "decoded_frames": 60,
+  "expected_frames": 60,
+  "frame_ms": 130,
+  "ok": true
+ }
+]

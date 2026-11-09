@@ -1,0 +1,179 @@
+{
+ "campaign": 8,
+ "target": "pccycle_k1_S2",
+ "struct": "k1_S2",
+ "k": 1,
+ "S": 2,
+ "family": "F_priv",
+ "objective": "pix",
+ "lam": 0.0,
+ "G_max": 32,
+ "seed": 0,
+ "budget_cpu_s": 180.0,
+ "search_cpu_s": 92.9,
+ "evals": 23481,
+ "evals_per_cpu_s": 252.68,
+ "active_gates": 2,
+ "gates": [
+  [
+   13,
+   2,
+   3
+  ],
+  [
+   13,
+   10,
+   8
+  ]
+ ],
+ "outputs": [
+  11,
+  8
+ ],
+ "rule_bits": 47,
+ "final_fit": 0.0,
+ "report": {
+  "early": {
+   "err": 0.0,
+   "hold": 0.5946180555555556,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 2833,
+   "true_changes": 2833,
+   "change_mass_ratio": 1.0
+  },
+  "mid": {
+   "err": 0.0,
+   "hold": 0.5760416666666667,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 2543,
+   "true_changes": 2543,
+   "change_mass_ratio": 1.0
+  },
+  "late": {
+   "err": 0.0,
+   "hold": 0.5752923976608187,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 2403,
+   "true_changes": 2403,
+   "change_mass_ratio": 1.0
+  },
+  "all": {
+   "err": 0.0,
+   "hold": 0.5820974576271186,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 7779,
+   "true_changes": 7779,
+   "change_mass_ratio": 1.0
+  },
+  "late_period": 4,
+  "late_frozen": false,
+  "late_flicker": false,
+  "exact": true,
+  "J": 0.0
+ },
+ "export": {
+  "file": "runs/c8/controls/pccycle_k1_S2__k1_S2__pix0__G32__s0.best.cab",
+  "file_bytes": 82,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": true,
+  "python_decode_s": 0.0142,
+  "node_decode_ms": 12.21,
+  "updates": 67968
+ },
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 4,
+   "fit": 0.749234934086629,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 5,
+   "fit": 0.5269244350282486,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 6,
+   "fit": 0.5245115348399246,
+   "active": 5
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 7,
+   "fit": 0.4896421845574388,
+   "active": 5
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 11,
+   "fit": 0.479019538606403,
+   "active": 5
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 14,
+   "fit": 0.3314795197740113,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 29,
+   "fit": 0.328566384180791,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.2,
+   "evals": 36,
+   "fit": 0.3097045668549906,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.2,
+   "evals": 42,
+   "fit": 0.2055379001883239,
+   "active": 1
+  },
+  {
+   "cpu_s": 92.9,
+   "evals": 23478,
+   "fit": 0.0,
+   "active": 2
+  }
+ ],
+ "baselines_bytes": null
+}

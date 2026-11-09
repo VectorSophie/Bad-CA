@@ -1,0 +1,158 @@
+{
+ "campaign": 8,
+ "target": "ba48_1800_60",
+ "struct": "k1s_S4",
+ "k": 1,
+ "S": 4,
+ "family": "F_shared",
+ "objective": "pix",
+ "lam": 0.0,
+ "G_max": 32,
+ "seed": 1,
+ "budget_cpu_s": 600.0,
+ "search_cpu_s": 600.0,
+ "evals": 70341,
+ "evals_per_cpu_s": 117.23,
+ "active_gates": 2,
+ "gates": [
+  [
+   14,
+   4,
+   0
+  ],
+  [
+   1,
+   2,
+   18
+  ]
+ ],
+ "outputs": [
+  16,
+  19
+ ],
+ "rule_bits": 55,
+ "final_fit": 0.1433321563088512,
+ "report": {
+  "early": {
+   "err": 0.14910300925925926,
+   "hold": 0.15755208333333331,
+   "prec_tol": 0.2,
+   "rec_tol": 0.05569007263922518,
+   "f1_tol": 0.08712121212121213,
+   "prec": 0.07931034482758621,
+   "rec": 0.018563357546408393,
+   "f1": 0.030085022890778287,
+   "change_iou": 0.015272244355909695,
+   "f1_tol_on": 0.071836146315094,
+   "f1_tol_off": 0.09971179646867857,
+   "pred_changes": 290,
+   "true_changes": 1239,
+   "change_mass_ratio": 0.23405972558514931
+  },
+  "mid": {
+   "err": 0.12690972222222222,
+   "hold": 0.1427083333333333,
+   "prec_tol": 1.0,
+   "rec_tol": 0.0,
+   "f1_tol": 0.0,
+   "prec": 1.0,
+   "rec": 0.0,
+   "f1": 0.0,
+   "change_iou": 0.0,
+   "f1_tol_on": 0.0,
+   "f1_tol_off": 0.0,
+   "pred_changes": 0,
+   "true_changes": 1262,
+   "change_mass_ratio": 0.0
+  },
+  "late": {
+   "err": 0.15454434697855754,
+   "hold": 0.17507309941520469,
+   "prec_tol": 1.0,
+   "rec_tol": 0.0,
+   "f1_tol": 0.0,
+   "prec": 1.0,
+   "rec": 0.0,
+   "f1": 0.0,
+   "change_iou": 0.0,
+   "f1_tol_on": 0.0,
+   "f1_tol_off": 0.0,
+   "pred_changes": 0,
+   "true_changes": 1323,
+   "change_mass_ratio": 0.0
+  },
+  "all": {
+   "err": 0.14333215630885124,
+   "hold": 0.15816266478342747,
+   "prec_tol": 0.2,
+   "rec_tol": 0.018043933054393304,
+   "f1_tol": 0.03310146318061885,
+   "prec": 0.07931034482758621,
+   "rec": 0.006014644351464435,
+   "f1": 0.01118133203694701,
+   "change_iou": 0.005622097286726962,
+   "f1_tol_on": 0.024810704283787993,
+   "f1_tol_off": 0.04143608380826519,
+   "pred_changes": 290,
+   "true_changes": 3824,
+   "change_mass_ratio": 0.075836820083682
+  },
+  "late_period": 1,
+  "late_frozen": true,
+  "late_flicker": false,
+  "exact": false,
+  "J": 1.8770959447048972
+ },
+ "export": {
+  "file": "runs/c8/second/ba48_1800_60__k1s_S4__pix0__G32__s1.best.cab",
+  "file_bytes": 123,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.0451,
+  "node_decode_ms": 53.17,
+  "updates": 407808
+ },
+ "trace": [
+  {
+   "cpu_s": 0.1,
+   "evals": 8,
+   "fit": 0.1581626647834275,
+   "active": 1
+  },
+  {
+   "cpu_s": 2.0,
+   "evals": 246,
+   "fit": 0.1581626647834275,
+   "active": 0
+  },
+  {
+   "cpu_s": 3.0,
+   "evals": 372,
+   "fit": 0.15793706842435656,
+   "active": 0
+  },
+  {
+   "cpu_s": 46.5,
+   "evals": 5774,
+   "fit": 0.15372920590081607,
+   "active": 2
+  },
+  {
+   "cpu_s": 47.1,
+   "evals": 5847,
+   "fit": 0.1433321563088512,
+   "active": 2
+  }
+ ],
+ "baselines_bytes": {
+  "changelist": 3282,
+  "xor_rle": 4224,
+  "frame_rle": 6877,
+  "zlib": 3398,
+  "bz2": 3451,
+  "lzma": 3031,
+  "best": 3031,
+  "best_method": "lzma"
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "campaign": 8,
+ "target": "pccycle_k1s_S4",
+ "struct": "k1s_S4",
+ "k": 1,
+ "S": 4,
+ "family": "F_shared",
+ "objective": "mot",
+ "lam": 1.0,
+ "G_max": 32,
+ "seed": 2,
+ "budget_cpu_s": 180.0,
+ "search_cpu_s": 180.0,
+ "evals": 20601,
+ "evals_per_cpu_s": 114.44,
+ "active_gates": 1,
+ "gates": [
+  [
+   6,
+   11,
+   15
+  ]
+ ],
+ "outputs": [
+  18,
+  2
+ ],
+ "rule_bits": 41,
+ "final_fit": 0.2685284777738775,
+ "report": {
+  "early": {
+   "err": 0.04088541666666667,
+   "hold": 0.17925347222222218,
+   "prec_tol": 0.954227590591227,
+   "rec_tol": 0.9631901840490797,
+   "f1_tol": 0.9586879403771988,
+   "prec": 0.9081373172282263,
+   "rec": 0.9225056506296416,
+   "f1": 0.9152650969085376,
+   "change_iou": 0.8437684583579445,
+   "f1_tol_on": 0.9552107850736494,
+   "f1_tol_off": 0.9621502742557123,
+   "pred_changes": 3146,
+   "true_changes": 3097,
+   "change_mass_ratio": 1.015821762996448
+  },
+  "mid": {
+   "err": 0.04157986111111111,
+   "hold": 0.17925347222222218,
+   "prec_tol": 0.9551669316375199,
+   "rec_tol": 0.9610054785691267,
+   "f1_tol": 0.9580773101233907,
+   "prec": 0.9077901430842608,
+   "rec": 0.9200773445053174,
+   "f1": 0.9138924455825864,
+   "change_iou": 0.8414382552313587,
+   "f1_tol_on": 0.9535218815431467,
+   "f1_tol_off": 0.9626023110664135,
+   "pred_changes": 3145,
+   "true_changes": 3103,
+   "change_mass_ratio": 1.013535288430551
+  },
+  "late": {
+   "err": 0.04111842105263158,
+   "hold": 0.1865862573099415,
+   "prec_tol": 0.9537223340040242,
+   "rec_tol": 0.962457337883959,
+   "f1_tol": 0.9580699264611019,
+   "prec": 0.9074446680080482,
+   "rec": 0.9235494880546075,
+   "f1": 0.9154262516914748,
+   "change_iou": 0.8440424204616345,
+   "f1_tol_on": 0.9559779582517818,
+   "f1_tol_off": 0.9601978089906933,
+   "pred_changes": 2982,
+   "true_changes": 2930,
+   "change_mass_ratio": 1.0177474402730375
+  },
+  "all": {
+   "err": 0.041195856873822975,
+   "hold": 0.18161487758945383,
+   "prec_tol": 0.9543836945972177,
+   "rec_tol": 0.9622124863088719,
+   "f1_tol": 0.958282101174689,
+   "prec": 0.9077968295050146,
+   "rec": 0.9220153340635269,
+   "f1": 0.9148508395370322,
+   "change_iou": 0.843064596895343,
+   "f1_tol_on": 0.9548891835023171,
+   "f1_tol_off": 0.9616836854982581,
+   "pred_changes": 9273,
+   "true_changes": 9130,
+   "change_mass_ratio": 1.0156626506024096
+  },
+  "late_period": 8,
+  "late_frozen": false,
+  "late_flicker": false,
+  "exact": false,
+  "J": 0.2685284777738775
+ },
+ "export": {
+  "file": "runs/c8/controls/pccycle_k1s_S4__k1s_S4__mot1__G32__s2.best.cab",
+  "file_bytes": 81,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.0418,
+  "node_decode_ms": 23.38,
+  "updates": 135936
+ },
+ "trace": [
+  {
+   "cpu_s": 1.0,
+   "evals": 123,
+   "fit": 2.0,
+   "active": 0
+  },
+  {
+   "cpu_s": 4.8,
+   "evals": 540,
+   "fit": 1.8783595287141466,
+   "active": 1
+  },
+  {
+   "cpu_s": 4.9,
+   "evals": 552,
+   "fit": 1.813329586559873,
+   "active": 1
+  },
+  {
+   "cpu_s": 5.1,
+   "evals": 581,
+   "fit": 0.2685284777738775,
+   "active": 1
+  }
+ ],
+ "baselines_bytes": null
+}

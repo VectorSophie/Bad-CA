@@ -1,0 +1,170 @@
+{
+ "campaign": 8,
+ "target": "ba48_4500_60",
+ "struct": "k1_S2",
+ "k": 1,
+ "S": 2,
+ "family": "F_priv",
+ "objective": "mot",
+ "lam": 1.0,
+ "G_max": 32,
+ "seed": 101,
+ "budget_cpu_s": 300.0,
+ "search_cpu_s": 300.0,
+ "evals": 48637,
+ "evals_per_cpu_s": 162.12,
+ "active_gates": 2,
+ "gates": [
+  [
+   11,
+   9,
+   3
+  ],
+  [
+   7,
+   10,
+   4
+  ]
+ ],
+ "outputs": [
+  11,
+  7
+ ],
+ "rule_bits": 47,
+ "final_fit": 1.5100195167907293,
+ "report": {
+  "early": {
+   "err": 0.0705150462962963,
+   "hold": 0.11105324074074072,
+   "prec_tol": 0.3037383177570093,
+   "rec_tol": 0.1430817610062893,
+   "f1_tol": 0.19452757588713124,
+   "prec": 0.08411214953271028,
+   "rec": 0.02830188679245283,
+   "f1": 0.042352941176470586,
+   "change_iou": 0.021634615384615384,
+   "f1_tol_on": 0.15040518638573744,
+   "f1_tol_off": 0.2532588454376164,
+   "pred_changes": 214,
+   "true_changes": 636,
+   "change_mass_ratio": 0.33647798742138363
+  },
+  "mid": {
+   "err": 0.11799768518518519,
+   "hold": 0.23090277777777776,
+   "prec_tol": 0.25,
+   "rec_tol": 0.007168458781362007,
+   "f1_tol": 0.013937282229965157,
+   "prec": 0.25,
+   "rec": 0.0035842293906810036,
+   "f1": 0.00706713780918728,
+   "change_iou": 0.0035460992907801418,
+   "f1_tol_on": 0.02666666666666667,
+   "f1_tol_off": 0.0,
+   "pred_changes": 4,
+   "true_changes": 279,
+   "change_mass_ratio": 0.014336917562724014
+  },
+  "late": {
+   "err": 0.1275584795321637,
+   "hold": 0.21527777777777776,
+   "prec_tol": 1.0,
+   "rec_tol": 0.0,
+   "f1_tol": 0.0,
+   "prec": 1.0,
+   "rec": 0.0,
+   "f1": 0.0,
+   "change_iou": 0.0,
+   "f1_tol_on": 0.0,
+   "f1_tol_off": 0.0,
+   "pred_changes": 0,
+   "true_changes": 1167,
+   "change_mass_ratio": 0.0
+  },
+  "all": {
+   "err": 0.10498077526679221,
+   "hold": 0.18524403640929063,
+   "prec_tol": 0.30275229357798167,
+   "rec_tol": 0.0446685878962536,
+   "f1_tol": 0.07785091891480538,
+   "prec": 0.0871559633027523,
+   "rec": 0.009125840537944284,
+   "f1": 0.01652173913043478,
+   "change_iou": 0.008329679964927663,
+   "f1_tol_on": 0.06496519721577726,
+   "f1_tol_off": 0.09308692676249145,
+   "pred_changes": 218,
+   "true_changes": 2082,
+   "change_mass_ratio": 0.10470701248799232
+  },
+  "late_period": 1,
+  "late_frozen": true,
+  "late_flicker": false,
+  "exact": false,
+  "J": 1.5100195167907293
+ },
+ "export": {
+  "file": "runs/c8/lampilot/ba48_4500_60__k1_S2__mot1__G32__s101.best.cab",
+  "file_bytes": 82,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.0163,
+  "node_decode_ms": 23.05,
+  "updates": 203904
+ },
+ "trace": [
+  {
+   "cpu_s": 0.4,
+   "evals": 69,
+   "fit": 2.0,
+   "active": 0
+  },
+  {
+   "cpu_s": 2.2,
+   "evals": 379,
+   "fit": 1.6791267702755643,
+   "active": 5
+  },
+  {
+   "cpu_s": 69.3,
+   "evals": 10375,
+   "fit": 1.5100195167907293,
+   "active": 6
+  },
+  {
+   "cpu_s": 70.7,
+   "evals": 10573,
+   "fit": 1.5100195167907293,
+   "active": 5
+  },
+  {
+   "cpu_s": 72.1,
+   "evals": 10788,
+   "fit": 1.5100195167907293,
+   "active": 4
+  },
+  {
+   "cpu_s": 73.0,
+   "evals": 10932,
+   "fit": 1.5100195167907293,
+   "active": 3
+  },
+  {
+   "cpu_s": 299.6,
+   "evals": 48564,
+   "fit": 1.5100195167907293,
+   "active": 2
+  }
+ ],
+ "baselines_bytes": {
+  "changelist": 2136,
+  "xor_rle": 2692,
+  "frame_rle": 4815,
+  "zlib": 2056,
+  "bz2": 2023,
+  "lzma": 1675,
+  "best": 1675,
+  "best_method": "lzma"
+ }
+}

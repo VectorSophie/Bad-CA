@@ -1,0 +1,221 @@
+{
+ "campaign": 8,
+ "target": "pcmove_k1_S2",
+ "struct": "k1_S2",
+ "k": 1,
+ "S": 2,
+ "family": "F_priv",
+ "objective": "mot",
+ "lam": 1.0,
+ "G_max": 32,
+ "seed": 2,
+ "budget_cpu_s": 180.0,
+ "search_cpu_s": 1.0,
+ "evals": 141,
+ "evals_per_cpu_s": 146.08,
+ "active_gates": 2,
+ "gates": [
+  [
+   3,
+   9,
+   7
+  ],
+  [
+   3,
+   3,
+   0
+  ]
+ ],
+ "outputs": [
+  10,
+  11
+ ],
+ "rule_bits": 47,
+ "final_fit": 0.0,
+ "report": {
+  "early": {
+   "err": 0.0,
+   "hold": 0.08012820512820515,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 600,
+   "true_changes": 600,
+   "change_mass_ratio": 1.0
+  },
+  "mid": {
+   "err": 0.0,
+   "hold": 0.09294871794871798,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 600,
+   "true_changes": 600,
+   "change_mass_ratio": 1.0
+  },
+  "late": {
+   "err": 0.0,
+   "hold": 0.09294871794871797,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 570,
+   "true_changes": 570,
+   "change_mass_ratio": 1.0
+  },
+  "all": {
+   "err": 0.0,
+   "hold": 0.08860278139939158,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 1770,
+   "true_changes": 1770,
+   "change_mass_ratio": 1.0
+  },
+  "late_period": null,
+  "late_frozen": false,
+  "late_flicker": false,
+  "exact": true,
+  "J": 0.0
+ },
+ "export": {
+  "file": "runs/c8/controls/pcmove_k1_S2__k1_S2__mot1__G32__s2.best.cab",
+  "file_bytes": 48,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": true,
+  "python_decode_s": 0.0175,
+  "node_decode_ms": 20.27,
+  "updates": 220896
+ },
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 3,
+   "fit": 1.5111266511266512,
+   "active": 5
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 10,
+   "fit": 1.5111266511266512,
+   "active": 4
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 12,
+   "fit": 1.5111266511266512,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 17,
+   "fit": 1.5111266511266512,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 20,
+   "fit": 1.5091203999415537,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 21,
+   "fit": 1.5085824175824174,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 22,
+   "fit": 1.5018858166922684,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.2,
+   "evals": 30,
+   "fit": 1.4919826898296928,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.3,
+   "evals": 51,
+   "fit": 1.457486430284126,
+   "active": 5
+  },
+  {
+   "cpu_s": 0.3,
+   "evals": 53,
+   "fit": 1.1186422376398408,
+   "active": 5
+  },
+  {
+   "cpu_s": 0.4,
+   "evals": 54,
+   "fit": 1.1186422376398408,
+   "active": 4
+  },
+  {
+   "cpu_s": 0.5,
+   "evals": 79,
+   "fit": 1.0600075068046668,
+   "active": 4
+  },
+  {
+   "cpu_s": 0.6,
+   "evals": 83,
+   "fit": 0.7795846227565004,
+   "active": 7
+  },
+  {
+   "cpu_s": 0.6,
+   "evals": 86,
+   "fit": 0.7795846227565004,
+   "active": 4
+  },
+  {
+   "cpu_s": 0.8,
+   "evals": 116,
+   "fit": 0.7795846227565004,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.9,
+   "evals": 138,
+   "fit": 0.7795846227565004,
+   "active": 2
+  },
+  {
+   "cpu_s": 1.0,
+   "evals": 139,
+   "fit": 0.0,
+   "active": 2
+  }
+ ],
+ "baselines_bytes": null
+}

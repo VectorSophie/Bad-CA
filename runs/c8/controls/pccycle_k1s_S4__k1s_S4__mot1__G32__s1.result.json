@@ -1,0 +1,138 @@
+{
+ "campaign": 8,
+ "target": "pccycle_k1s_S4",
+ "struct": "k1s_S4",
+ "k": 1,
+ "S": 4,
+ "family": "F_shared",
+ "objective": "mot",
+ "lam": 1.0,
+ "G_max": 32,
+ "seed": 1,
+ "budget_cpu_s": 180.0,
+ "search_cpu_s": 2.5,
+ "evals": 285,
+ "evals_per_cpu_s": 115.08,
+ "active_gates": 1,
+ "gates": [
+  [
+   6,
+   4,
+   2
+  ]
+ ],
+ "outputs": [
+  18,
+  16
+ ],
+ "rule_bits": 41,
+ "final_fit": 0.0,
+ "report": {
+  "early": {
+   "err": 0.0,
+   "hold": 0.17925347222222218,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 3097,
+   "true_changes": 3097,
+   "change_mass_ratio": 1.0
+  },
+  "mid": {
+   "err": 0.0,
+   "hold": 0.17925347222222218,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 3103,
+   "true_changes": 3103,
+   "change_mass_ratio": 1.0
+  },
+  "late": {
+   "err": 0.0,
+   "hold": 0.1865862573099415,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 2930,
+   "true_changes": 2930,
+   "change_mass_ratio": 1.0
+  },
+  "all": {
+   "err": 0.0,
+   "hold": 0.18161487758945383,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 9130,
+   "true_changes": 9130,
+   "change_mass_ratio": 1.0
+  },
+  "late_period": 8,
+  "late_frozen": false,
+  "late_flicker": false,
+  "exact": true,
+  "J": 0.0
+ },
+ "export": {
+  "file": "runs/c8/controls/pccycle_k1s_S4__k1s_S4__mot1__G32__s1.best.cab",
+  "file_bytes": 81,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": true,
+  "python_decode_s": 0.0396,
+  "node_decode_ms": 24.33,
+  "updates": 135936
+ },
+ "trace": [
+  {
+   "cpu_s": 0.1,
+   "evals": 8,
+   "fit": 2.0,
+   "active": 1
+  },
+  {
+   "cpu_s": 2.1,
+   "evals": 242,
+   "fit": 1.799649007119636,
+   "active": 1
+  },
+  {
+   "cpu_s": 2.4,
+   "evals": 276,
+   "fit": 1.7896331070653044,
+   "active": 1
+  },
+  {
+   "cpu_s": 2.4,
+   "evals": 282,
+   "fit": 0.0,
+   "active": 1
+  }
+ ],
+ "baselines_bytes": null
+}

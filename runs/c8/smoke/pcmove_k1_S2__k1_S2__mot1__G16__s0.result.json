@@ -1,0 +1,156 @@
+{
+ "campaign": 8,
+ "target": "pcmove_k1_S2",
+ "struct": "k1_S2",
+ "k": 1,
+ "S": 2,
+ "family": "F_priv",
+ "objective": "mot",
+ "lam": 1.0,
+ "G_max": 16,
+ "seed": 0,
+ "budget_cpu_s": 40.0,
+ "search_cpu_s": 1.5,
+ "evals": 265,
+ "evals_per_cpu_s": 177.18,
+ "active_gates": 0,
+ "gates": [],
+ "outputs": [
+  9,
+  3
+ ],
+ "rule_bits": 21,
+ "final_fit": 0.0,
+ "report": {
+  "early": {
+   "err": 0.0,
+   "hold": 0.08012820512820515,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 600,
+   "true_changes": 600,
+   "change_mass_ratio": 1.0
+  },
+  "mid": {
+   "err": 0.0,
+   "hold": 0.09294871794871798,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 600,
+   "true_changes": 600,
+   "change_mass_ratio": 1.0
+  },
+  "late": {
+   "err": 0.0,
+   "hold": 0.09294871794871797,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 570,
+   "true_changes": 570,
+   "change_mass_ratio": 1.0
+  },
+  "all": {
+   "err": 0.0,
+   "hold": 0.08860278139939158,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 1770,
+   "true_changes": 1770,
+   "change_mass_ratio": 1.0
+  },
+  "late_period": null,
+  "late_frozen": false,
+  "late_flicker": false,
+  "exact": true,
+  "J": 0.0
+ },
+ "export": {
+  "file": "runs/c8/smoke/pcmove_k1_S2__k1_S2__mot1__G16__s0.best.cab",
+  "file_bytes": 45,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": true,
+  "python_decode_s": 0.0174,
+  "node_decode_ms": 17.08,
+  "updates": 220896
+ },
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 2,
+   "fit": 1.5059100731856347,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 4,
+   "fit": 1.5059100731856347,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 21,
+   "fit": 1.5059100731856347,
+   "active": 0
+  },
+  {
+   "cpu_s": 0.2,
+   "evals": 42,
+   "fit": 1.5016305696559504,
+   "active": 0
+  },
+  {
+   "cpu_s": 0.4,
+   "evals": 74,
+   "fit": 1.5008582560000752,
+   "active": 0
+  },
+  {
+   "cpu_s": 1.1,
+   "evals": 194,
+   "fit": 1.400882173926109,
+   "active": 0
+  },
+  {
+   "cpu_s": 1.2,
+   "evals": 207,
+   "fit": 1.391008369786432,
+   "active": 0
+  },
+  {
+   "cpu_s": 1.5,
+   "evals": 265,
+   "fit": 0.0,
+   "active": 0
+  }
+ ],
+ "baselines_bytes": null
+}

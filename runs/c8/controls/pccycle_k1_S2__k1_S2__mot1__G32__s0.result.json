@@ -1,0 +1,208 @@
+{
+ "campaign": 8,
+ "target": "pccycle_k1_S2",
+ "struct": "k1_S2",
+ "k": 1,
+ "S": 2,
+ "family": "F_priv",
+ "objective": "mot",
+ "lam": 1.0,
+ "G_max": 32,
+ "seed": 0,
+ "budget_cpu_s": 180.0,
+ "search_cpu_s": 180.0,
+ "evals": 34685,
+ "evals_per_cpu_s": 192.69,
+ "active_gates": 3,
+ "gates": [
+  [
+   14,
+   0,
+   6
+  ],
+  [
+   11,
+   5,
+   2
+  ],
+  [
+   13,
+   11,
+   10
+  ]
+ ],
+ "outputs": [
+  12,
+  12
+ ],
+ "rule_bits": 61,
+ "final_fit": 0.3586995186757959,
+ "report": {
+  "early": {
+   "err": 0.1618923611111111,
+   "hold": 0.5946180555555556,
+   "prec_tol": 0.9544315333789019,
+   "rec_tol": 0.9936463113307448,
+   "f1_tol": 0.9736442259072484,
+   "prec": 0.41717931191615404,
+   "rec": 0.6463113307447935,
+   "f1": 0.5070617557463307,
+   "change_iou": 0.3396401409757002,
+   "f1_tol_on": 0.9756486294260502,
+   "f1_tol_off": 0.9713167909454371,
+   "pred_changes": 4389,
+   "true_changes": 2833,
+   "change_mass_ratio": 1.549241087186728
+  },
+  "mid": {
+   "err": 0.2150173611111111,
+   "hold": 0.5760416666666667,
+   "prec_tol": 0.9786128323006196,
+   "rec_tol": 1.0,
+   "f1_tol": 0.9891908273562986,
+   "prec": 0.2608434939036578,
+   "rec": 0.5131734172237514,
+   "f1": 0.3458786111847336,
+   "change_iou": 0.20910110559205256,
+   "f1_tol_on": 0.9882495948136142,
+   "f1_tol_off": 0.9901269393511989,
+   "pred_changes": 5003,
+   "true_changes": 2543,
+   "change_mass_ratio": 1.9673613841918993
+  },
+  "late": {
+   "err": 0.21966374269005845,
+   "hold": 0.5752923976608187,
+   "prec_tol": 0.977116704805492,
+   "rec_tol": 1.0,
+   "f1_tol": 0.9884259259259259,
+   "prec": 0.24984397753276472,
+   "rec": 0.4997919267582189,
+   "f1": 0.3331484049930652,
+   "change_iou": 0.19986686636711598,
+   "f1_tol_on": 0.9880025257840455,
+   "f1_tol_off": 0.9888491479065854,
+   "pred_changes": 4807,
+   "true_changes": 2403,
+   "change_mass_ratio": 2.000416146483562
+  },
+  "all": {
+   "err": 0.19850517890772126,
+   "hold": 0.5820974576271186,
+   "prec_tol": 0.9706317346291993,
+   "rec_tol": 0.997686077902044,
+   "f1_tol": 0.983972976563298,
+   "prec": 0.3054440453553067,
+   "rec": 0.5575266743797404,
+   "f1": 0.3946673946673947,
+   "change_iou": 0.24584774105776316,
+   "f1_tol_on": 0.9839858583790525,
+   "f1_tol_off": 0.9839502263618433,
+   "pred_changes": 14199,
+   "true_changes": 7779,
+   "change_mass_ratio": 1.8252988816043194
+  },
+  "late_period": 2,
+  "late_frozen": false,
+  "late_flicker": false,
+  "exact": false,
+  "J": 0.3586995186757959
+ },
+ "export": {
+  "file": "runs/c8/controls/pccycle_k1_S2__k1_S2__mot1__G32__s0.best.cab",
+  "file_bytes": 84,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.0136,
+  "node_decode_ms": 15.18,
+  "updates": 67968
+ },
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 2,
+   "fit": 2.1999502491174963,
+   "active": 12
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 4,
+   "fit": 2.1999502491174963,
+   "active": 10
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 5,
+   "fit": 1.5064802929676109,
+   "active": 10
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 15,
+   "fit": 1.5064802929676109,
+   "active": 7
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 18,
+   "fit": 1.5064802929676109,
+   "active": 6
+  },
+  {
+   "cpu_s": 0.2,
+   "evals": 34,
+   "fit": 1.5064802929676109,
+   "active": 5
+  },
+  {
+   "cpu_s": 0.2,
+   "evals": 35,
+   "fit": 1.5064802929676109,
+   "active": 3
+  },
+  {
+   "cpu_s": 0.2,
+   "evals": 36,
+   "fit": 1.5064802929676109,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.3,
+   "evals": 39,
+   "fit": 1.2800957136348055,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.3,
+   "evals": 43,
+   "fit": 1.2800957136348055,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.6,
+   "evals": 101,
+   "fit": 0.9169252095151971,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.7,
+   "evals": 135,
+   "fit": 0.3943630799903899,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.9,
+   "evals": 166,
+   "fit": 0.3621364300182197,
+   "active": 2
+  },
+  {
+   "cpu_s": 56.8,
+   "evals": 11326,
+   "fit": 0.3586995186757959,
+   "active": 3
+  }
+ ],
+ "baselines_bytes": null
+}

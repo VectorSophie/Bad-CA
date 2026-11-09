@@ -1,0 +1,236 @@
+{
+ "campaign": 8,
+ "target": "pccycle_k1_S2",
+ "struct": "k1_S2",
+ "k": 1,
+ "S": 2,
+ "family": "F_priv",
+ "objective": "mot",
+ "lam": 1.0,
+ "G_max": 32,
+ "seed": 2,
+ "budget_cpu_s": 180.0,
+ "search_cpu_s": 10.5,
+ "evals": 2089,
+ "evals_per_cpu_s": 199.04,
+ "active_gates": 5,
+ "gates": [
+  [
+   4,
+   3,
+   2
+  ],
+  [
+   10,
+   6,
+   8
+  ],
+  [
+   2,
+   4,
+   7
+  ],
+  [
+   7,
+   10,
+   11
+  ],
+  [
+   10,
+   12,
+   13
+  ]
+ ],
+ "outputs": [
+  14,
+  13
+ ],
+ "rule_bits": 85,
+ "final_fit": 0.0,
+ "report": {
+  "early": {
+   "err": 0.0,
+   "hold": 0.5946180555555556,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 2833,
+   "true_changes": 2833,
+   "change_mass_ratio": 1.0
+  },
+  "mid": {
+   "err": 0.0,
+   "hold": 0.5760416666666667,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 2543,
+   "true_changes": 2543,
+   "change_mass_ratio": 1.0
+  },
+  "late": {
+   "err": 0.0,
+   "hold": 0.5752923976608187,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 2403,
+   "true_changes": 2403,
+   "change_mass_ratio": 1.0
+  },
+  "all": {
+   "err": 0.0,
+   "hold": 0.5820974576271186,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 7779,
+   "true_changes": 7779,
+   "change_mass_ratio": 1.0
+  },
+  "late_period": 4,
+  "late_frozen": false,
+  "late_flicker": false,
+  "exact": true,
+  "J": 0.0
+ },
+ "export": {
+  "file": "runs/c8/controls/pccycle_k1_S2__k1_S2__mot1__G32__s2.best.cab",
+  "file_bytes": 87,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": true,
+  "python_decode_s": 0.0137,
+  "node_decode_ms": 12.29,
+  "updates": 67968
+ },
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 5,
+   "fit": 1.2800957136348055,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 13,
+   "fit": 1.1377383427255274,
+   "active": 1
+  },
+  {
+   "cpu_s": 0.4,
+   "evals": 83,
+   "fit": 1.0920932269470527,
+   "active": 1
+  },
+  {
+   "cpu_s": 5.6,
+   "evals": 1158,
+   "fit": 1.0774669409975857,
+   "active": 2
+  },
+  {
+   "cpu_s": 5.8,
+   "evals": 1208,
+   "fit": 1.0521993722128324,
+   "active": 2
+  },
+  {
+   "cpu_s": 6.0,
+   "evals": 1245,
+   "fit": 1.0030669113475712,
+   "active": 2
+  },
+  {
+   "cpu_s": 6.1,
+   "evals": 1257,
+   "fit": 1.0004371498757376,
+   "active": 3
+  },
+  {
+   "cpu_s": 6.1,
+   "evals": 1261,
+   "fit": 0.9652690775242164,
+   "active": 3
+  },
+  {
+   "cpu_s": 6.2,
+   "evals": 1271,
+   "fit": 0.9341717382619374,
+   "active": 3
+  },
+  {
+   "cpu_s": 6.2,
+   "evals": 1279,
+   "fit": 0.9006641081929131,
+   "active": 3
+  },
+  {
+   "cpu_s": 6.8,
+   "evals": 1387,
+   "fit": 0.8903795365581072,
+   "active": 3
+  },
+  {
+   "cpu_s": 7.9,
+   "evals": 1595,
+   "fit": 0.8710947060959633,
+   "active": 3
+  },
+  {
+   "cpu_s": 8.2,
+   "evals": 1654,
+   "fit": 0.7916404684028359,
+   "active": 3
+  },
+  {
+   "cpu_s": 8.2,
+   "evals": 1661,
+   "fit": 0.7507238126569696,
+   "active": 3
+  },
+  {
+   "cpu_s": 8.3,
+   "evals": 1677,
+   "fit": 0.5180910677094803,
+   "active": 3
+  },
+  {
+   "cpu_s": 9.3,
+   "evals": 1859,
+   "fit": 0.4286592688737034,
+   "active": 3
+  },
+  {
+   "cpu_s": 10.5,
+   "evals": 2087,
+   "fit": 0.0,
+   "active": 5
+  }
+ ],
+ "baselines_bytes": null
+}

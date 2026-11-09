@@ -1,0 +1,144 @@
+{
+ "campaign": 8,
+ "target": "pccycle_k1s_S4",
+ "struct": "k1s_S4",
+ "k": 1,
+ "S": 4,
+ "family": "F_shared",
+ "objective": "mot",
+ "lam": 1.0,
+ "G_max": 32,
+ "seed": 0,
+ "budget_cpu_s": 180.0,
+ "search_cpu_s": 19.0,
+ "evals": 2189,
+ "evals_per_cpu_s": 115.14,
+ "active_gates": 1,
+ "gates": [
+  [
+   6,
+   2,
+   4
+  ]
+ ],
+ "outputs": [
+  18,
+  3
+ ],
+ "rule_bits": 41,
+ "final_fit": 0.0,
+ "report": {
+  "early": {
+   "err": 0.0,
+   "hold": 0.17925347222222218,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 3097,
+   "true_changes": 3097,
+   "change_mass_ratio": 1.0
+  },
+  "mid": {
+   "err": 0.0,
+   "hold": 0.17925347222222218,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 3103,
+   "true_changes": 3103,
+   "change_mass_ratio": 1.0
+  },
+  "late": {
+   "err": 0.0,
+   "hold": 0.1865862573099415,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 2930,
+   "true_changes": 2930,
+   "change_mass_ratio": 1.0
+  },
+  "all": {
+   "err": 0.0,
+   "hold": 0.18161487758945383,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 9130,
+   "true_changes": 9130,
+   "change_mass_ratio": 1.0
+  },
+  "late_period": 8,
+  "late_frozen": false,
+  "late_flicker": false,
+  "exact": true,
+  "J": 0.0
+ },
+ "export": {
+  "file": "runs/c8/controls/pccycle_k1s_S4__k1s_S4__mot1__G32__s0.best.cab",
+  "file_bytes": 81,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": true,
+  "python_decode_s": 0.0483,
+  "node_decode_ms": 17.8,
+  "updates": 135936
+ },
+ "trace": [
+  {
+   "cpu_s": 0.5,
+   "evals": 51,
+   "fit": 2.0466071284604497,
+   "active": 0
+  },
+  {
+   "cpu_s": 1.0,
+   "evals": 118,
+   "fit": 2.0,
+   "active": 0
+  },
+  {
+   "cpu_s": 18.2,
+   "evals": 2091,
+   "fit": 1.9702908749542567,
+   "active": 1
+  },
+  {
+   "cpu_s": 18.2,
+   "evals": 2094,
+   "fit": 1.767398942581755,
+   "active": 1
+  },
+  {
+   "cpu_s": 19.0,
+   "evals": 2189,
+   "fit": 0.0,
+   "active": 1
+  }
+ ],
+ "baselines_bytes": null
+}

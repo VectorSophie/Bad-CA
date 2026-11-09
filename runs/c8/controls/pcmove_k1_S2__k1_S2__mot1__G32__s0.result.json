@@ -1,0 +1,177 @@
+{
+ "campaign": 8,
+ "target": "pcmove_k1_S2",
+ "struct": "k1_S2",
+ "k": 1,
+ "S": 2,
+ "family": "F_priv",
+ "objective": "mot",
+ "lam": 1.0,
+ "G_max": 32,
+ "seed": 0,
+ "budget_cpu_s": 180.0,
+ "search_cpu_s": 0.1,
+ "evals": 9,
+ "evals_per_cpu_s": 112.61,
+ "active_gates": 10,
+ "gates": [
+  [
+   13,
+   6,
+   9
+  ],
+  [
+   4,
+   10,
+   0
+  ],
+  [
+   8,
+   8,
+   9
+  ],
+  [
+   0,
+   12,
+   12
+  ],
+  [
+   6,
+   9,
+   0
+  ],
+  [
+   4,
+   13,
+   9
+  ],
+  [
+   3,
+   11,
+   15
+  ],
+  [
+   1,
+   14,
+   16
+  ],
+  [
+   14,
+   2,
+   17
+  ],
+  [
+   5,
+   18,
+   10
+  ]
+ ],
+ "outputs": [
+  19,
+  3
+ ],
+ "rule_bits": 155,
+ "final_fit": 0.0,
+ "report": {
+  "early": {
+   "err": 0.0,
+   "hold": 0.08012820512820515,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 600,
+   "true_changes": 600,
+   "change_mass_ratio": 1.0
+  },
+  "mid": {
+   "err": 0.0,
+   "hold": 0.09294871794871798,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 600,
+   "true_changes": 600,
+   "change_mass_ratio": 1.0
+  },
+  "late": {
+   "err": 0.0,
+   "hold": 0.09294871794871797,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 570,
+   "true_changes": 570,
+   "change_mass_ratio": 1.0
+  },
+  "all": {
+   "err": 0.0,
+   "hold": 0.08860278139939158,
+   "prec_tol": 1.0,
+   "rec_tol": 1.0,
+   "f1_tol": 1.0,
+   "prec": 1.0,
+   "rec": 1.0,
+   "f1": 1.0,
+   "change_iou": 1.0,
+   "f1_tol_on": 1.0,
+   "f1_tol_off": 1.0,
+   "pred_changes": 1770,
+   "true_changes": 1770,
+   "change_mass_ratio": 1.0
+  },
+  "late_period": null,
+  "late_frozen": false,
+  "late_flicker": false,
+  "exact": true,
+  "J": 0.0
+ },
+ "export": {
+  "file": "runs/c8/controls/pcmove_k1_S2__k1_S2__mot1__G32__s0.best.cab",
+  "file_bytes": 61,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": true,
+  "python_decode_s": 0.0172,
+  "node_decode_ms": 31.27,
+  "updates": 220896
+ },
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 2,
+   "fit": 1.5062306668980276,
+   "active": 12
+  },
+  {
+   "cpu_s": 0.0,
+   "evals": 4,
+   "fit": 1.5062306668980276,
+   "active": 10
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 9,
+   "fit": 0.0,
+   "active": 10
+  }
+ ],
+ "baselines_bytes": null
+}

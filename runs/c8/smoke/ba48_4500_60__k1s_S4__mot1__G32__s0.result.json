@@ -1,0 +1,129 @@
+{
+ "campaign": 8,
+ "target": "ba48_4500_60",
+ "struct": "k1s_S4",
+ "k": 1,
+ "S": 4,
+ "family": "F_shared",
+ "objective": "mot",
+ "lam": 1.0,
+ "G_max": 32,
+ "seed": 0,
+ "budget_cpu_s": 30.0,
+ "search_cpu_s": 30.0,
+ "evals": 3157,
+ "evals_per_cpu_s": 105.22,
+ "active_gates": 0,
+ "gates": [],
+ "outputs": [
+  4,
+  8
+ ],
+ "rule_bits": 25,
+ "final_fit": 2.0,
+ "report": {
+  "early": {
+   "err": 0.11105324074074072,
+   "hold": 0.11105324074074072,
+   "prec_tol": 1.0,
+   "rec_tol": 0.0,
+   "f1_tol": 0.0,
+   "prec": 1.0,
+   "rec": 0.0,
+   "f1": 0.0,
+   "change_iou": 0.0,
+   "f1_tol_on": 0.0,
+   "f1_tol_off": 0.0,
+   "pred_changes": 0,
+   "true_changes": 636,
+   "change_mass_ratio": 0.0
+  },
+  "mid": {
+   "err": 0.23090277777777776,
+   "hold": 0.23090277777777776,
+   "prec_tol": 1.0,
+   "rec_tol": 0.0,
+   "f1_tol": 0.0,
+   "prec": 1.0,
+   "rec": 0.0,
+   "f1": 0.0,
+   "change_iou": 0.0,
+   "f1_tol_on": 0.0,
+   "f1_tol_off": 0.0,
+   "pred_changes": 0,
+   "true_changes": 279,
+   "change_mass_ratio": 0.0
+  },
+  "late": {
+   "err": 0.21527777777777776,
+   "hold": 0.21527777777777776,
+   "prec_tol": 1.0,
+   "rec_tol": 0.0,
+   "f1_tol": 0.0,
+   "prec": 1.0,
+   "rec": 0.0,
+   "f1": 0.0,
+   "change_iou": 0.0,
+   "f1_tol_on": 0.0,
+   "f1_tol_off": 0.0,
+   "pred_changes": 0,
+   "true_changes": 1167,
+   "change_mass_ratio": 0.0
+  },
+  "all": {
+   "err": 0.18524403640929063,
+   "hold": 0.18524403640929063,
+   "prec_tol": 1.0,
+   "rec_tol": 0.0,
+   "f1_tol": 0.0,
+   "prec": 1.0,
+   "rec": 0.0,
+   "f1": 0.0,
+   "change_iou": 0.0,
+   "f1_tol_on": 0.0,
+   "f1_tol_off": 0.0,
+   "pred_changes": 0,
+   "true_changes": 2082,
+   "change_mass_ratio": 0.0
+  },
+  "late_period": 1,
+  "late_frozen": true,
+  "late_flicker": false,
+  "exact": false,
+  "J": 2.0
+ },
+ "export": {
+  "file": "runs/c8/smoke/ba48_4500_60__k1s_S4__mot1__G32__s0.best.cab",
+  "file_bytes": 80,
+  "python_replay_equals_P": true,
+  "node_replay_equals_P": true,
+  "replay_equals_target": false,
+  "python_decode_s": 0.0405,
+  "node_decode_ms": 46.89,
+  "updates": 407808
+ },
+ "trace": [
+  {
+   "cpu_s": 0.0,
+   "evals": 4,
+   "fit": 2.342311264812504,
+   "active": 2
+  },
+  {
+   "cpu_s": 0.1,
+   "evals": 11,
+   "fit": 2.0,
+   "active": 0
+  }
+ ],
+ "baselines_bytes": {
+  "changelist": 2136,
+  "xor_rle": 2692,
+  "frame_rle": 4815,
+  "zlib": 2056,
+  "bz2": 2023,
+  "lzma": 1675,
+  "best": 1675,
+  "best_method": "lzma"
+ }
+}
