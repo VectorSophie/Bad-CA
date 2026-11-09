@@ -1,0 +1,2 @@
+{"event": "start", "mode": "incr", "arm": "incr_prev_5-10", "start": 4500, "cond": "E", "phase": "prev", "lengths": [5, 10], "code_snapshot": "70c0d482bb48", "solver": "cadical195 (pysat), default options"}
+{"event": "solved", "L": 5, "status": "SAT", "encode_s": 11.65, "solve_s": 3.94, "step_s": 15.6, "cum_s": 15.6, "n_clauses": 8292864, "n_vars": 11264, "maxrss_gb": 1.96, "python_rollout_exact": true}

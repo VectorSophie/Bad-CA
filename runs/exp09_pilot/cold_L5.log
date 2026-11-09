@@ -1,0 +1,3 @@
+{"event": "start", "mode": "cold", "arm": "cold_keep_L5", "start": 4500, "cond": "E", "phase": "keep", "lengths": [5], "code_snapshot": "70c0d482bb48", "solver": "cadical195 (pysat), default options"}
+{"event": "solved", "L": 5, "status": "SAT", "encode_s": 11.67, "solve_s": 3.99, "step_s": 15.65, "cum_s": 15.65, "n_clauses": 8292864, "n_vars": 11264, "maxrss_gb": 1.96, "python_rollout_exact": true}
+{"event": "done", "cum_s": 15.65}

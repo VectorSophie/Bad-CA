@@ -1,0 +1,1 @@
+{"progress": "encoded", "target": "bar12", "cond": "X5", "hidden_bits": 0, "steps_per_frame": 4, "family": "F_priv", "boundary": 0, "hidden_init": 0, "shape": [12, 12, 12], "solver": "cadical195 (pysat), default options, deterministic", "state_repeat_proof": null, "light_cone_conflicts": [], "encode_s": 5.02, "n_vars": 5264, "n_clauses": 2963488, "lut_vars": 512}

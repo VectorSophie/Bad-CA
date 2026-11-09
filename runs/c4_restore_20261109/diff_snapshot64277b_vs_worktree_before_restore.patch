@@ -1,0 +1,452 @@
+diff -ruN '--exclude=__pycache__' runs/frozen/64277b4ec640/ca/reduce.py ca/reduce.py
+--- runs/frozen/64277b4ec640/ca/reduce.py	2026-11-09 00:32:22.776044722 +0900
++++ ca/reduce.py	1970-01-01 09:00:00.000000000 +0900
+@@ -1,92 +0,0 @@
+-"""Shrink LUT rules into small 2-input-gate circuits with existing tools (no custom optimiser):
+-espresso (pyeda) multi-output two-level minimisation with don't-cares, then yosys + ABC multi-level
+-synthesis mapped to 2-input gates (`abc -g`). The result is in ca.costs.rule_circuit form:
+-gates [(tt, a, b)] over the pool [inputs 0..n-1, gate 0, ...], outputs = pool index per channel.
+-Constants and inverters are gates too, so the size counts them with their wiring."""
+-import os, subprocess, sys, tempfile
+-import numpy as np
+-from pyeda.inter import exprvars, truthtable
+-from pyeda.boolalg.minimization import espresso_tts
+-from pyeda.boolalg import expr as E
+-
+-YOSYS = os.path.join(os.path.dirname(sys.executable), "yowasp-yosys")
+-GATES = "AND,NAND,OR,NOR,XOR,XNOR,ANDNOT,ORNOT"
+-FLOWS = {  # yosys `abc` runs ABC's default strash/synthesis script before mapping
+-    "abc_default": f"abc -g {GATES}",
+-    # shortcut: custom ABC scripts (-script) exit silently in the yowasp (wasm) build, so the heavier
+-    # flow re-runs the default mapping on its own output; use a native ABC for dc2/resyn2rs/compress2rs.
+-    "abc_x4": "; ".join([f"abc -g {GATES}; opt -full"] * 4),
+-}
+-
+-
+-def espresso(luts, care, n):
+-    """Multi-output espresso with every non-care entry a don't-care. pyeda's truth table uses
+-    inputs[0] as the least significant bit, the same as the LUT index (tap k = bit k)."""
+-    X = exprvars("x", n); dc = np.ones(2 ** n, bool); dc[np.asarray(care)] = False
+-    tts = [truthtable(X, "".join("-" if d else str(int(v)) for v, d in zip(l, dc))) for l in luts]
+-    return espresso_tts(*tts)
+-
+-
+-def _v(e):
+-    if e is E.Zero: return "1'b0"
+-    if e is E.One: return "1'b1"
+-    if isinstance(e, E.Variable): return f"x{e.indices[0]}"
+-    if isinstance(e, E.Complement): return f"~x{(~e).indices[0]}"
+-    if isinstance(e, E.AndOp): return "(" + " & ".join(_v(a) for a in e.xs) + ")"
+-    if isinstance(e, E.OrOp): return "(" + " | ".join(_v(a) for a in e.xs) + ")"
+-    raise TypeError(type(e))
+-
+-
+-def verilog(exprs, n):
+-    io = ", ".join([f"input x{i}" for i in range(n)] + [f"output y{c}" for c in range(len(exprs))])
+-    body = "\n".join(f"  assign y{c} = {_v(e)};" for c, e in enumerate(exprs))
+-    return f"module rule({io});\n{body}\nendmodule\n"
+-
+-
+-def _blif_gates(path, n, C):
+-    names, outs_order = {}, [f"y{c}" for c in range(C)]
+-    lines = [l.strip() for l in open(path)]
+-    i = 0
+-    while i < len(lines):
+-        if lines[i].startswith(".names"):
+-            sig = lines[i].split()[1:]; rows = []; i += 1
+-            while i < len(lines) and lines[i] and not lines[i].startswith("."):
+-                rows.append(lines[i].split()); i += 1
+-            names[sig[-1]] = (sig[:-1], rows)
+-        else:
+-            i += 1
+-    gates, memo = [], {}
+-    def node(sig):
+-        if sig.startswith("x") and sig[1:].isdigit() and sig not in names: return int(sig[1:])
+-        if sig in memo: return memo[sig]
+-        ins, rows = names[sig]
+-        def f(vals):
+-            hit = any(all(p == "-" or int(p) == v for p, v in zip(r[0], vals)) for r in rows if len(r) == 2)
+-            if not ins: hit = any(r == ["1"] for r in rows)
+-            on = all(r[-1] == "1" for r in rows) if rows else True
+-            return int(hit if on else not hit)
+-        if not ins:
+-            gates.append((15 if f(()) else 0, 0, 0)); r = n + len(gates) - 1
+-        elif len(ins) == 1:
+-            a = node(ins[0]); fa = (f((0,)), f((1,)))
+-            if fa == (0, 1): r = a  # buffer: a wire costs nothing
+-            else:
+-                tt = sum(fa[q >> 1] << q for q in range(4)); gates.append((tt, a, a)); r = n + len(gates) - 1
+-        elif len(ins) == 2:
+-            a, b = node(ins[0]), node(ins[1])
+-            tt = sum(f((q >> 1, q & 1)) << q for q in range(4)); gates.append((tt, a, b)); r = n + len(gates) - 1
+-        else:
+-            raise ValueError(f"{sig}: {len(ins)}-input node, mapping did not reach 2-input gates")
+-        memo[sig] = r
+-        return r
+-    outputs = [node(o) for o in outs_order]
+-    return gates, outputs
+-
+-
+-def synth(exprs, n, flow):
+-    with tempfile.TemporaryDirectory() as d:
+-        open(os.path.join(d, "r.v"), "w").write(verilog(exprs, n))
+-        cmd = f"read_verilog r.v; synth -flatten -top rule; {FLOWS[flow]}; opt_clean -purge; write_blif r.blif"
+-        p = subprocess.run([YOSYS, "-q", "-p", cmd], cwd=d, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=1800)
+-        if p.returncode: raise RuntimeError((p.stdout + p.stderr)[-2000:])
+-        return _blif_gates(os.path.join(d, "r.blif"), n, len(exprs))
+diff -ruN '--exclude=__pycache__' runs/frozen/64277b4ec640/experiments/exp09_finalize.py experiments/exp09_finalize.py
+--- runs/frozen/64277b4ec640/experiments/exp09_finalize.py	2026-11-09 00:32:22.777044713 +0900
++++ experiments/exp09_finalize.py	1970-01-01 09:00:00.000000000 +0900
+@@ -1,23 +0,0 @@
+-"""Exp09 finalize (analysis, no search): export every saved exact rule from runs/<DIR>/*.L*.luts.npy and
+-replay it in the independent Node player; the SHA-256 must equal the target clip's.
+-usage: exp09_finalize.py DIR"""
+-import glob, json, os, re, subprocess, sys
+-import numpy as np
+-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+-sys.path.insert(0, ROOT); sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+-from ca.rule import family_taps
+-from ca.export import export_rule
+-from exp03_sat_ablation import CONDS, target
+-
+-out = {}
+-for p in sorted(glob.glob(os.path.join(ROOT, "runs", sys.argv[1], "*.L*.luts.npy"))):
+-    m = re.search(r"ba32_(\d+)_(\w+?)_(cold|incr)_.*\.L(\d+)\.luts\.npy$", p)
+-    start, cond, L = m.group(1), m.group(2), int(m.group(4))
+-    k, S, seen_by = CONDS[cond]; taps = family_taps(k, seen_by); tname = f"ba32_{start}_{L}"
+-    F = target(tname); luts = np.load(p)
+-    path = p.replace(".luts.npy", ".rule.json")
+-    ex = export_rule(path, taps, luts, F[0], L, S, meta=dict(source=tname, method=os.path.basename(p), cond=cond), expected=F)
+-    sha = json.loads(subprocess.run(["node", os.path.join(ROOT, "player", "replay.mjs"), path], capture_output=True, text=True, check=True).stdout)["sha256"]
+-    out[os.path.basename(path)] = sha == ex["expected_sha256"]
+-json.dump(out, open(os.path.join(ROOT, "runs", sys.argv[1], "node_verify.json"), "w"), indent=1)
+-print(json.dumps(out, indent=1))
+diff -ruN '--exclude=__pycache__' runs/frozen/64277b4ec640/experiments/exp09_incremental.py experiments/exp09_incremental.py
+--- runs/frozen/64277b4ec640/experiments/exp09_incremental.py	2026-11-09 00:32:22.777044713 +0900
++++ experiments/exp09_incremental.py	1970-01-01 09:00:00.000000000 +0900
+@@ -1,77 +0,0 @@
+-"""Exp09 (Campaign 04, part 1): incremental vs cold-start exact SAT across clip lengths. CPU only.
+-
+-Same clip/start/family for every arm: frames [START, START+L) of ba32 (target name ba32_<START>_<L>),
+-condition COND (exp03 CONDS). Plain feasibility: the first exact rule, no size objective.
+-
+-  cold: a fresh CaDiCaL instance, encode L frames, solve.  One process per length.
+-  incr: ONE CaDiCaL instance; for each length in SCHEDULE append the new generations' clauses
+-        (ca.sat.Encoder) and solve again. Learned clauses carry over.
+-PHASE (solver decision preference, never a hard constraint):
+-  keep: LUT vars prefer the 'keep' default (as exp03/exp03c).  New LUT vars get it as they appear.
+-  prev: (incr only) after each solved length, every variable prefers its value in that model;
+-        LUT vars first seen later prefer 'keep'.
+-Each solved length is logged immediately (one JSON line) so the outer `timeout -s KILL` loses
+-nothing; a length with no line is UNKNOWN_timeout. Times exclude video loading; `step_s` is
+-encode + solve for that length, `cum_s` the sum of all steps so far in this process.
+-
+-usage: exp09_incremental.py cold START L COND PHASE OUTDIR
+-       exp09_incremental.py incr START MAXL COND PHASE SCHEDULE OUTDIR   (SCHEDULE: step1 | 5,10,20,40)
+-"""
+-import json, os, resource, sys, time
+-import numpy as np
+-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+-sys.path.insert(0, ROOT); sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+-from pysat.solvers import Cadical195
+-from ca.rule import family_taps, rollout
+-from ca.sat import Encoder, luts_from_model
+-from exp03_sat_ablation import CONDS, target
+-
+-REPORT = (5, 10, 20, 40)
+-mode, start = sys.argv[1], int(sys.argv[2])
+-if mode == "cold":
+-    maxl, cond, phase, outdir = int(sys.argv[3]), sys.argv[4], sys.argv[5], sys.argv[6]
+-    lengths = [maxl]; arm = f"cold_{phase}_L{maxl}"
+-else:
+-    maxl, cond, phase, sched, outdir = int(sys.argv[3]), sys.argv[4], sys.argv[5], sys.argv[6], sys.argv[7]
+-    lengths = list(range(2, maxl + 1)) if sched == "step1" else [int(x) for x in sched.split(",")]
+-    arm = f"incr_{phase}_{sched.replace(',', '-')}"
+-assert phase in ("keep", "prev") and not (mode == "cold" and phase == "prev")
+-k, S, seen_by = CONDS[cond]; C = k + 1
+-taps = family_taps(k, seen_by); n = len(taps)
+-own = {0: 4}; own.update({c: taps.index((c, 0, 0)) for c in range(1, C)})
+-F = target(f"ba32_{start}_{maxl}")
+-OUT = os.path.join(ROOT, "runs", outdir); os.makedirs(OUT, exist_ok=True)
+-stem = os.path.join(OUT, f"ba32_{start}_{cond}_{arm}")
+-log = open(stem + ".jsonl", "a")
+-def emit(d):
+-    log.write(json.dumps(d) + "\n"); log.flush(); print(json.dumps(d), flush=True)
+-
+-emit(dict(event="start", mode=mode, arm=arm, start=start, cond=cond, phase=phase, lengths=lengths,
+-          code_snapshot=os.path.basename(os.path.realpath(ROOT)), solver="cadical195 (pysat), default options"))
+-cum = 0.0
+-with Cadical195() as s:
+-    enc = Encoder(taps, C, S, sink=s.add_clause)
+-    for L in lengths:
+-        t0 = time.perf_counter(); nl0 = len(enc.L)
+-        enc.extend(F[:L])
+-        new = list(enc.L.items())[nl0:]
+-        s.set_phases([v if (e >> own[c]) & 1 else -v for (c, e), v in new])
+-        t1 = time.perf_counter()
+-        ok = s.solve()
+-        t2 = time.perf_counter(); cum += t2 - t0
+-        rec = dict(event="solved", L=L, status="SAT" if ok else "UNSAT", encode_s=round(t1 - t0, 2), solve_s=round(t2 - t1, 2),
+-                   step_s=round(t2 - t0, 2), cum_s=round(cum, 2), n_clauses=enc.n_cl, n_vars=enc.nv,
+-                   maxrss_gb=round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 2 ** 20, 2))
+-        if not ok:
+-            emit(rec); break  # proof for this family/encoding: no longer clip can be SAT either
+-        m = s.get_model()
+-        luts = luts_from_model(m, enc.L, C, n)
+-        vis, _, _ = rollout(F[0], taps, luts, L, S)
+-        rec["python_rollout_exact"] = bool((vis == F[:L]).all())
+-        assert rec["python_rollout_exact"], "SAT model does not replay -> encoder bug"
+-        if L in REPORT:
+-            np.save(f"{stem}.L{L}.luts.npy", luts)
+-        emit(rec)
+-        if phase == "prev":
+-            s.set_phases(m)
+-emit(dict(event="done", cum_s=round(cum, 2)))
+diff -ruN '--exclude=__pycache__' runs/frozen/64277b4ec640/experiments/exp10_repair_starts.py experiments/exp10_repair_starts.py
+--- runs/frozen/64277b4ec640/experiments/exp10_repair_starts.py	2026-11-09 00:32:22.777044713 +0900
++++ experiments/exp10_repair_starts.py	1970-01-01 09:00:00.000000000 +0900
+@@ -1,43 +0,0 @@
+-"""Exp10 (Campaign 04, part 2): starting rules for SAT repair, all in the target family F_priv k=1
+-(n = 10 taps: visible Moore bits 0..8, own hidden bit 9; outputs visible, hidden).
+-
+-  keep     visible -> own centre bit, hidden -> own hidden bit (the exp03c default)
+-  conway   explicit same-family embedding of B3/S23: visible output = Life(visible 3x3, bits 0..8),
+-           ignoring the hidden bit; hidden output = own hidden bit (keep). With S=2 the embedded rule
+-           applies Life twice per observed frame.
+-  random   fixed uniform random LUT, numpy default_rng(0).random((2, 1024)) < 0.5
+-  learned  a hardened DiffLogic LUT (ca.difflogic.hard_lut), given by path; its GPU cost is recorded
+-           from the producing run, separately from the SAT repair cost.
+-
+-The repair is exp03c with REF_LUTS = start: solver decision phases prefer the start's value for every
+-LUT entry (search PREFERENCE, never a hard constraint), and the anytime objective is Hamming distance
+-to the start, so every exact rule found is reported with an UPPER BOUND on its repair distance.
+-usage: exp10_repair_starts.py OUTDIR [learned_name=path.npy ...]
+-"""
+-import json, os, shutil, sys
+-import numpy as np
+-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+-sys.path.insert(0, ROOT)
+-from ca.core import life_like_lut
+-from ca.rule import family_taps
+-from ca import costs
+-
+-taps = family_taps(1); n = len(taps); idx = np.arange(2 ** n)
+-assert taps[4] == (0, 0, 0) and taps[9] == (1, 0, 0)
+-out = os.path.join(ROOT, "runs", sys.argv[1]); os.makedirs(out, exist_ok=True)
+-starts = {
+-    "keep": costs.default_luts(taps, 2),
+-    "conway": np.stack([life_like_lut({3}, {2, 3})[idx & 511], (idx >> 9) & 1]).astype(np.uint8),
+-    "random": (np.random.default_rng(0).random((2, 2 ** n)) < 0.5).astype(np.uint8),
+-}
+-for a in sys.argv[2:]:
+-    name, p = a.split("=", 1)
+-    starts[name] = np.load(p).astype(np.uint8)
+-    shutil.copy(os.path.join(os.path.dirname(p), "result.json"), os.path.join(out, f"{name}.source_result.json"))
+-meta = {}
+-for name, L in starts.items():
+-    assert L.shape == (2, 2 ** n)
+-    np.save(os.path.join(out, f"{name}.npy"), L)
+-    meta[name] = dict(lut_entries=int(L.size), ones=int(L.sum()), keep_exceptions=int((L != starts["keep"]).sum()))
+-json.dump(meta, open(os.path.join(out, "starts.json"), "w"), indent=1)
+-print(json.dumps(meta))
+diff -ruN '--exclude=__pycache__' runs/frozen/64277b4ec640/experiments/exp11_reduce.py experiments/exp11_reduce.py
+--- runs/frozen/64277b4ec640/experiments/exp11_reduce.py	2026-11-09 00:32:22.777044713 +0900
++++ experiments/exp11_reduce.py	1970-01-01 09:00:00.000000000 +0900
+@@ -1,126 +0,0 @@
+-"""Exp11 (Campaign 04, part 3): shrink exact LUT rules into small 2-input-gate circuits. CPU only.
+-
+-For every exported rule that reproduces its target exactly, two equivalence levels:
+-  full   the circuit equals the LUT on ALL 2^n inputs, every channel (truth-table equivalence);
+-  reach  only the entries the clip's own rollout consults must match; every other entry is a
+-         don't-care (equivalent on this clip, not as a function).
+-Candidates per level: keep-exception LUT bitstream (reach: non-consulted entries set to keep), and
+-the smallest circuit from ca.reduce (espresso -> yosys/ABC 2-input gates, each flow), either of the rule
+-itself or as next_c = own_c XOR delta_c(x) with delta = rule XOR keep synthesised the same way.
+-Every candidate is checked three ways:
+-  1. its implemented LUT equals the rule on the level's care set (all entries for `full`);
+-  2. it is serialised into its decode-checked bitstream (ca.costs), DECODED, and rolled out in Python;
+-  3. the decoded rule is exported (rule-v1, or circuit-v1 evaluated gate by gate) and the independent
+-     Node player replays it from the seed frame, hidden init and boundary; its SHA-256 must equal the
+-     target clip's.
+-Circuit bits = header + gate count + per gate (4-bit op + two wire references of ceil(log2 pool) bits)
+-+ output references. Constants and inverters are gates. Wires (buffers) cost nothing.
+-
+-usage: exp11_reduce.py OUTDIR RULE_JSON [RULE_JSON ...]
+-"""
+-import base64, hashlib, json, os, subprocess, sys, time
+-import numpy as np
+-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+-sys.path.insert(0, ROOT); sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+-from ca.rule import family_taps, rollout
+-from ca.export import export_rule
+-from ca import costs, reduce as R
+-from exp03_sat_ablation import target
+-
+-OUT = os.path.join(ROOT, "runs", sys.argv[1]); os.makedirs(OUT, exist_ok=True)
+-SNAP = os.path.basename(os.path.realpath(ROOT))
+-sha = lambda F: hashlib.sha256(np.ascontiguousarray(F, np.uint8).tobytes()).hexdigest()
+-
+-
+-def node(path):
+-    return json.loads(subprocess.run(["node", os.path.join(ROOT, "player", "replay.mjs"), path],
+-                                     capture_output=True, text=True, check=True).stdout)["sha256"]
+-
+-
+-def load(path):
+-    ex = json.load(open(path))
+-    n = len(ex["taps"]); C = ex["channels"]
+-    luts = np.stack([np.unpackbits(np.frombuffer(base64.b64decode(b), np.uint8), bitorder="little")[:2 ** n] for b in ex["luts_b64"]])
+-    tname = ex["meta"].get("source")
+-    if tname is None:  # exp07/exp12 exports: the target is in the run's result.json
+-        r = json.load(open(os.path.join(os.path.dirname(path), "result.json")))
+-        # exp07/exp08 (D1) results predate the target field; every one of them ran on ba32_3000_5 (CHECKPOINT_03)
+-        tname = r.get("target") or ("ba32_3000_5" if "/exp07/" in os.path.abspath(path) else None)
+-        assert tname, f"no target for {path}"
+-    k = C - 1
+-    fam = "memoryless" if k == 0 else ("F_priv" if n == 9 + k else "F_shared")
+-    taps = [tuple(t) for t in ex["taps"]]
+-    assert taps == family_taps(k, "moore" if fam == "F_shared" else "self"), "taps are not a known family"
+-    assert ex["boundary"] == 0 and ex["hidden_init"] == 0
+-    return ex, taps, luts, tname, fam, k
+-
+-
+-def check(label, F, S, taps, fam, k, kind, obj, luts, care, stem):
+-    """Serialise -> decode -> Python rollout -> Node replay. Returns the size record."""
+-    n = len(taps)
+-    if kind == "lut":
+-        w = costs.rule_lut_exceptions(obj, taps, fam, k, S); d = costs.rule_lut_exceptions_decode(w.b); L = d["luts"]
+-        path = stem + ".rule.json"
+-        export_rule(path, d["taps"], L, F[0], len(F), d["S"], d["boundary"], d["hidden_init"], meta=dict(label=label), expected=F)
+-        rec = dict(bits=len(w), exceptions=int((obj != costs.default_luts(taps, k + 1)).sum()))
+-    else:
+-        g, o = obj
+-        w = costs.rule_circuit(g, o, n, fam, k, S); d = costs.rule_circuit_decode(w.b)
+-        L = costs.eval_circuit(d["gates"], d["outputs"], n)
+-        path = stem + ".circuit.json"
+-        ex = export_rule(path, d["taps"], L, F[0], len(F), d["S"], d["boundary"], d["hidden_init"], meta=dict(label=label), expected=F)
+-        ex.pop("luts_b64"); ex.update(format="ca-universal/circuit-v1", gates=[list(map(int, x)) for x in d["gates"]],
+-                                      outputs=list(map(int, d["outputs"])))
+-        json.dump(ex, open(path, "w"))
+-        n_const = sum(1 for tt, _, _ in g if tt in (0, 15))
+-        rec = dict(bits=len(w), gates=len(g), constant_gates=n_const, inverter_gates=sum(1 for tt, a, b in g if tt in (3, 5) or (a == b and tt in (3, 12))))
+-    assert (L[:, care] == luts[:, care]).all(), f"{label}: differs from the rule on its care set"
+-    vis, _, _ = rollout(F[0], d["taps"], L, len(F), d["S"], d["boundary"], d["hidden_init"])
+-    rec.update(full_tt_equal=bool((L == luts).all()), decoded_python_rollout_exact=bool((vis == F).all()),
+-               node_replay_matches_target=node(path) == sha(F), export=os.path.relpath(path, ROOT))
+-    return rec
+-
+-
+-results = []
+-for path in sys.argv[2:]:
+-    t0 = time.perf_counter()
+-    ex, taps, luts, tname, fam, k = load(path)
+-    F = target(tname); S = ex["steps_per_frame"]; n = len(taps)
+-    vis, _, seen = rollout(F[0], taps, luts, len(F), S)
+-    label = os.path.relpath(path, os.path.join(ROOT, "runs")).replace("/", "__").replace(".rule.json", "").replace(".json", "")
+-    res = dict(rule=os.path.relpath(path, ROOT), target=tname, family=fam, k=k, S=S, n_inputs=n, code_snapshot=SNAP,
+-               exact=bool((vis == F).all()), consulted_entries=len(seen), recording_bits=costs.recording_costs(F))
+-    if not res["exact"]:
+-        res["skipped"] = "not exact on its target"; results.append(res); print(json.dumps(res), flush=True); continue
+-    for level, care in (("full", np.arange(2 ** n)), ("reach", np.array(seen))):
+-        stem = os.path.join(OUT, f"{label}.{level}")
+-        base = luts if level == "full" else np.where(np.isin(np.arange(2 ** n), care), luts, costs.default_luts(taps, k + 1))
+-        lv = dict(care_entries=int(len(care)))
+-        lv["lut_keep_exceptions"] = check(label, F, S, taps, fam, k, "lut", base, luts, care, stem + ".lut")
+-        t1 = time.perf_counter(); cover = R.espresso(luts, care, n); lv["espresso_s"] = round(time.perf_counter() - t1, 2)
+-        lv["sop_literals"] = sum(str(e).count("x[") for e in cover)  # two-level reference size (variable occurrences)
+-        flows = {}
+-        for fl in R.FLOWS:
+-            t1 = time.perf_counter(); gc = R.synth(cover, n, fl)
+-            flows[fl] = check(label, F, S, taps, fam, k, "circuit", gc, luts, care, f"{stem}.{fl}")
+-            flows[fl]["synth_s"] = round(time.perf_counter() - t1, 2)
+-        # structured candidate: next_c = own_c XOR delta_c(x), delta = rule XOR keep, synthesised by the same tools
+-        own = [taps.index((c, 0, 0)) for c in range(k + 1)]
+-        dcover = R.espresso(luts ^ costs.default_luts(taps, k + 1), care, n)
+-        for fl in R.FLOWS:
+-            t1 = time.perf_counter(); g, o = R.synth(dcover, n, fl); g = list(g)
+-            outs = []
+-            for c in range(k + 1):
+-                g.append((6, o[c], own[c])); outs.append(n + len(g) - 1)  # tt 6 = XOR
+-            flows["keepxor_" + fl] = check(label, F, S, taps, fam, k, "circuit", (g, outs), luts, care, f"{stem}.keepxor_{fl}")
+-            flows["keepxor_" + fl]["synth_s"] = round(time.perf_counter() - t1, 2)
+-        lv["circuits"] = flows
+-        best = min(flows, key=lambda f: flows[f]["bits"]); lv["best_circuit"] = dict(flow=best, **flows[best])
+-        if level == "full":
+-            assert all(v["full_tt_equal"] for v in flows.values()) and lv["lut_keep_exceptions"]["full_tt_equal"]
+-        res[level] = lv
+-    res["wall_s"] = round(time.perf_counter() - t0, 1)
+-    results.append(res)
+-    print(json.dumps({kk: (v if kk not in ("full", "reach") else dict(lut=v["lut_keep_exceptions"]["bits"], circuit=v["best_circuit"]["bits"],
+-                                                                      gates=v["best_circuit"]["gates"])) for kk, v in res.items()}), flush=True)
+-json.dump(results, open(os.path.join(OUT, "results.json"), "w"), indent=1)
+diff -ruN '--exclude=__pycache__' runs/frozen/64277b4ec640/experiments/summarize04.py experiments/summarize04.py
+--- runs/frozen/64277b4ec640/experiments/summarize04.py	2026-11-09 00:32:22.777044713 +0900
++++ experiments/summarize04.py	1970-01-01 09:00:00.000000000 +0900
+@@ -1,67 +0,0 @@
+-"""Builds the CHECKPOINT_04 tables (analysis only, no search).
+-usage: summarize04.py EXP09_DIR EXP10_DIR EXP11_DIR EXP12_DIR"""
+-import glob, json, os, sys
+-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+-RUNS = os.path.join(ROOT, "runs")
+-d09, d10, d11, d12 = sys.argv[1:5]
+-J = lambda p: json.load(open(p))
+-
+-print("### Part 1: incremental vs cold-start SAT (ba32_4500, F_priv k=1 S=2, first exact rule)\n")
+-arms = {}
+-for p in sorted(glob.glob(os.path.join(RUNS, d09, "*.jsonl"))):
+-    recs = [json.loads(l) for l in open(p)]
+-    arm = recs[0]["arm"]
+-    arms[arm] = {r["L"]: r for r in recs if r.get("event") == "solved"}
+-cold = {L: arms.get(f"cold_keep_L{L}", {}).get(L) for L in (5, 10, 20, 40)}
+-inc = sorted(a for a in arms if a.startswith("incr"))
+-hdr = "| L | cold step s | cold sum over 5..L s | " + " | ".join(f"{a} step s / cum s" for a in inc) + " |"
+-print(hdr); print("|" + "---|" * (hdr.count("|") - 1))
+-csum, cok = 0.0, True
+-for L in (5, 10, 20, 40):
+-    c = cold[L]
+-    if c and cok: csum += c["step_s"]
+-    else: cok = False
+-    row = [str(L), f"{c['step_s']} ({c['status']})" if c else "UNKNOWN_timeout", f"{csum:.1f}" if cok else "UNKNOWN"]
+-    for a in inc:
+-        r = arms[a].get(L)
+-        row.append(f"{r['step_s']} / {r['cum_s']} ({r['status']})" if r else "UNKNOWN_timeout")
+-    print("| " + " | ".join(row) + " |")
+-print("\nlongest length reached per incremental arm:", {a: max(arms[a]) if arms[a] else None for a in inc})
+-print("peak RSS GB:", {a: max((r["maxrss_gb"] for r in arms[a].values()), default=None) for a in arms})
+-
+-print("\n### Part 2: SAT repair from different starts (warm start = phase preference + Hamming objective, NOT a hard constraint)\n")
+-print("| clip | start | status | first exact s (encode s) | repair distance at first exact | best repair-distance UPPER BOUND (s) | keep-exc rule bits | Node exact | GPU cost of start |")
+-print("|---|---|---|---|---|---|---|---|---|")
+-for p in sorted(glob.glob(os.path.join(RUNS, d10, "*", "*.result.json"))):
+-    if "__" not in os.path.basename(os.path.dirname(p)): continue
+-    r = J(p); start = os.path.basename(os.path.dirname(p)).split("__")[1]; tr = r.get("trace", [])
+-    sdir = os.path.join(RUNS, d10, "starts_" + r["target"])
+-    gpu = "-"
+-    src = os.path.join(sdir, f"{start}.source_result.json")
+-    if os.path.exists(src):
+-        s = J(src); gpu = f"{s['compute']['train_wall_s'] + s['compute']['compile_s']:.0f} GPU-s train+compile ({len(s['seeds'])} seeds vmapped); selected ckpt at {s['selected']['t']} s"
+-    print(f"| {r['target']} | {start} | {r['status']} | {tr[0]['t'] if tr else '-'} ({r.get('encode_s')}) | {tr[0]['exceptions'] if tr else '-'} | "
+-          f"{(tr[-1]['exceptions'], tr[-1]['t']) if tr else '-'} | {r.get('rule_bits', '-')} | {r.get('node_hash_matches_target', '-')} | {gpu} |")
+-
+-print("\n### Part 3: exact rules -> circuits (bits include gate ops, wiring, outputs, constants)\n")
+-print("| rule | target | consulted | full: LUT-exc bits | full: best circuit bits (gates, flow) | reach: LUT-exc bits | reach: best circuit bits (gates, flow) | best recording | all checks |")
+-print("|---|---|---|---|---|---|---|---|---|")
+-for r in J(os.path.join(RUNS, d11, "results.json")):
+-    if not r["exact"]: continue
+-    f, a = r["full"], r["reach"]
+-    ok = all(v["decoded_python_rollout_exact"] and v["node_replay_matches_target"] for lv in (f, a)
+-             for v in list(lv["circuits"].values()) + [lv["lut_keep_exceptions"]])
+-    bc = lambda lv: f"{lv['best_circuit']['bits']} ({lv['best_circuit']['gates']}, {lv['best_circuit']['flow']})"
+-    print(f"| {r['rule'].replace('runs/', '')} | {r['target']} | {r['consulted_entries']} | {f['lut_keep_exceptions']['bits']} | {bc(f)} | "
+-          f"{a['lut_keep_exceptions']['bits']} | {bc(a)} | {min(r['recording_bits'].values())} | {ok} |")
+-
+-print("\n### Part 4: binarization penalty (selection by hard autonomous rollout; penalty/soft loss are NOT success criteria)\n")
+-print("| run | exact seeds | best hard err | hold err | selected it / t | penalty at selection | video sq loss at selection | steps |")
+-print("|---|---|---|---|---|---|---|---|")
+-for p in sorted(glob.glob(os.path.join(RUNS, d12, "*_main", "result.json"))) + [os.path.join(RUNS, "exp07", "R0_main", "result.json")]:
+-    r = J(p); s = r["selected"]; log = J(os.path.join(os.path.dirname(p), "log.json"))
+-    at = [x for x in log if x["seed"] == s["seed"] and x["it"] == s["it"]]
+-    pen = at[0].get("penalty", "-") if at else "-"; vl = at[0].get("video_sq_loss", "-") if at else "-"
+-    print(f"| {os.path.relpath(os.path.dirname(p), RUNS)} ({r['target']}) | {sum(x['exact'] for x in r['per_seed'])}/{len(r['per_seed'])} | "
+-          f"{s['hard_pixel_err']:.4f} | {r['hold_pixel_err']:.4f} | {s['it']} / {s['t']} | {pen if pen == '-' else round(pen, 1)} | "
+-          f"{vl if vl == '-' else round(vl, 1)} | {r['compute']['steps']} |")

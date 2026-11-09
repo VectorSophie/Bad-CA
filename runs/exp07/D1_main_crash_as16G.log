@@ -1,0 +1,57 @@
+F1108 20:28:44.782199 3468494 env.cc:93] Check failed: ret == 0 (11 vs. 0) Thread tf_XLACompile creation via pthread_create() failed.
+*** Check failure stack trace: ***
+    @     0x7dc0728b81b4  absl::lts_20260526::log_internal::LogMessage::SendToLog()
+    @     0x7dc0728b8136  absl::lts_20260526::log_internal::LogMessage::Flush()
+    @     0x7dc07271791f  tsl::(anonymous namespace)::PThread::PThread()
+    @     0x7dc07271683c  tsl::(anonymous namespace)::PosixEnv::StartThread()
+    @     0x7dc0727280b5  Eigen::ThreadPoolTempl<>::ThreadPoolTempl()
+    @     0x7dc072726f6f  tsl::thread::ThreadPool::ThreadPool()
+    @     0x7dc07272708b  tsl::thread::ThreadPool::ThreadPool()
+    @     0x7dc072b2077f  std::make_unique<>()
+    @     0x7dc072b20391  xla::PjRtCpuRawClient::PjRtCpuRawClient()
+    @     0x7dc072b1f0e8  std::make_unique<>()
+    @     0x7dc072b1ecd6  xla::GetPjRtCpuClient()
+    @     0x7dc07290cab9  jax::nanobind__jax_exec_impl()::$_9::operator()()
+    @     0x7dc07290c539  nanobind::detail::func_create<>()::{lambda()#1}::__invoke()
+    @     0x7dc06f43fb48  nanobind::detail::nb_func_vectorcall_complex()
+    @           0x5499b5  PyObject_Vectorcall
+    @           0x5d710f  _PyEval_EvalFrameDefault
+    @           0x5499b5  PyObject_Vectorcall
+    @     0x7dc0790d2fe4  jax::StrongLRUCache::Call()
+    @     0x7dc0790d5283  jax::StrongLRUCache::VectorCall()
+    @           0x551a56  (unknown)
+    @           0x54a851  _PyObject_Call_Prepend
+    @           0x5a3778  (unknown)
+    @           0x548fb5  _PyObject_MakeTpCall
+    @           0x5d710f  _PyEval_EvalFrameDefault
+    @           0x5499b5  PyObject_Vectorcall
+    @     0x7dc0790d2fe4  jax::StrongLRUCache::Call()
+    @     0x7dc0790d5283  jax::StrongLRUCache::VectorCall()
+    @           0x551a56  (unknown)
+    @           0x54a851  _PyObject_Call_Prepend
+    @           0x5a3778  (unknown)
+    @           0x548fb5  _PyObject_MakeTpCall
+    @           0x5d710f  _PyEval_EvalFrameDefault
+    @           0x5499b5  PyObject_Vectorcall
+    @     0x7dc0790e70d2  jax::WeakrefLRUCacheBase::Call()
+    @     0x7dc0790e42ba  jax::WeakrefLRUCache::VectorCall()
+    @           0x551a56  (unknown)
+    @           0x54aaeb  _PyObject_Call_Prepend
+    @           0x5a3778  (unknown)
+    @           0x54907e  _PyObject_MakeTpCall
+    @           0x5d710f  _PyEval_EvalFrameDefault
+    @           0x5499b5  PyObject_Vectorcall
+    @     0x7dc072a952b0  jax::(anonymous namespace)::PjitFunction::Call()
+    @     0x7dc072a9374f  PjitFunction_tp_vectorcall
+    @           0x5db2ee  _PyEval_EvalFrameDefault
+    @           0x5d55eb  PyEval_EvalCode
+    @           0x608852  (unknown)
+    @           0x6b50d3  (unknown)
+    @           0x6b4e3a  _PyRun_SimpleFileObject
+    @           0x6b4c6f  _PyRun_AnyFileObject
+    @           0x6bccd5  Py_RunMain
+    @           0x6bc7bd  Py_BytesMain
+    @     0x7dc11ce2a1ca  (unknown)
+    @     0x7dc11ce2a28b  __libc_start_main
+    @           0x657a05  _start
+timeout: the monitored command dumped core

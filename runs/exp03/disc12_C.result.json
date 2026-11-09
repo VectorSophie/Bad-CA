@@ -1,0 +1,28 @@
+{
+ "target": "disc12",
+ "cond": "C",
+ "hidden_bits": 2,
+ "steps_per_frame": 1,
+ "family": "F_priv",
+ "boundary": 0,
+ "hidden_init": 0,
+ "shape": [
+  7,
+  12,
+  12
+ ],
+ "solver": "cadical195 (pysat), default options, deterministic",
+ "encode_s": 0.01,
+ "n_vars": 2472,
+ "n_clauses": 15120,
+ "lut_vars": 744,
+ "solve_s": 0.0,
+ "status": "UNSAT",
+ "returncode": 0,
+ "wall_s": 0.2,
+ "limits": {
+  "wall_s": 1800,
+  "cpu_s": 1800,
+  "mem_gb": 16
+ }
+}

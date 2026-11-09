@@ -1,0 +1,2179 @@
+{
+ "conway_correctness": {
+  "lut_vs_naive_30steps": true,
+  "glider_translates_1_1_after_4": true,
+  "js_replay_matches": true
+ },
+ "conway_recovery": {
+  "full_lut": {
+   "transitions": 77824,
+   "contexts_seen": 512,
+   "contexts_conflicting": 0,
+   "min_one_step_errors": 0,
+   "min_one_step_error_rate": 0.0
+  },
+  "full_lut_agrees_on_seen": true,
+  "unseen_entries": 0,
+  "bs_family_recovered": [
+   "B3",
+   "S2",
+   "S3"
+  ],
+  "rollout_exact": true
+ },
+ "synthetic": {
+  "translate": {
+   "hold_first_frame": {
+    "pixel_err": 0.08854166666666667,
+    "pixel_err_last": 0.125,
+    "mean_iou_white": 0.23654401154401153,
+    "mean_iou_black": 0.9108048372705578,
+    "change_iou": 0.0
+   },
+   "conway": {
+    "pixel_err": 0.07002314814814814,
+    "pixel_err_last": 0.0763888888888889,
+    "mean_iou_white": 0.13729183898538738,
+    "mean_iou_black": 0.9295703235892652,
+    "change_iou": 0.058823529411764705
+   },
+   "bs_family": {
+    "conflicts": {
+     "transitions": 6336,
+     "contexts_seen": 7,
+     "contexts_conflicting": 4,
+     "min_one_step_errors": 132,
+     "min_one_step_error_rate": 0.020833333333333332
+    },
+    "pixel_err": 0.08854166666666667,
+    "pixel_err_last": 0.125,
+    "mean_iou_white": 0.23654401154401153,
+    "mean_iou_black": 0.9108048372705578,
+    "change_iou": 0.0
+   },
+   "moore_lut": {
+    "conflicts": {
+     "transitions": 6336,
+     "contexts_seen": 26,
+     "contexts_conflicting": 0,
+     "min_one_step_errors": 0,
+     "min_one_step_error_rate": 0.0
+    },
+    "fit_seconds": 0.0005,
+    "pixel_err": 0.0,
+    "pixel_err_last": 0.0,
+    "mean_iou_white": 1.0,
+    "mean_iou_black": 1.0,
+    "change_iou": 1.0,
+    "js_replay_matches": true
+   },
+   "r2_lut_diag": {
+    "transitions": 6336,
+    "contexts_seen": 82,
+    "contexts_conflicting": 0,
+    "min_one_step_errors": 0,
+    "min_one_step_error_rate": 0.0
+   }
+  },
+  "grow_shrink": {
+   "hold_first_frame": {
+    "pixel_err": 0.09469696969696971,
+    "pixel_err_last": 0.0,
+    "mean_iou_white": 0.34570429570429567,
+    "mean_iou_black": 0.9032882011605415,
+    "change_iou": 0.0
+   },
+   "conway": {
+    "pixel_err": 0.11300505050505048,
+    "pixel_err_last": 0.020833333333333332,
+    "mean_iou_white": 0.10227272727272728,
+    "mean_iou_black": 0.8869640460549552,
+    "change_iou": 0.013157894736842105
+   },
+   "bs_family": {
+    "conflicts": {
+     "transitions": 5760,
+     "contexts_seen": 11,
+     "contexts_conflicting": 9,
+     "min_one_step_errors": 260,
+     "min_one_step_error_rate": 0.04513888888888889
+    },
+    "pixel_err": 0.09469696969696971,
+    "pixel_err_last": 0.0,
+    "mean_iou_white": 0.34570429570429567,
+    "mean_iou_black": 0.9032882011605415,
+    "change_iou": 0.0
+   },
+   "moore_lut": {
+    "conflicts": {
+     "transitions": 5760,
+     "contexts_seen": 62,
+     "contexts_conflicting": 60,
+     "min_one_step_errors": 260,
+     "min_one_step_error_rate": 0.04513888888888889
+    },
+    "fit_seconds": 0.0005,
+    "pixel_err": 0.09469696969696971,
+    "pixel_err_last": 0.0,
+    "mean_iou_white": 0.34570429570429567,
+    "mean_iou_black": 0.9032882011605415,
+    "change_iou": 0.0,
+    "js_replay_matches": true
+   },
+   "r2_lut_diag": {
+    "transitions": 5760,
+    "contexts_seen": 322,
+    "contexts_conflicting": 164,
+    "min_one_step_errors": 240,
+    "min_one_step_error_rate": 0.041666666666666664
+   }
+  },
+  "rotate_bar": {
+   "hold_first_frame": {
+    "pixel_err": 0.13599537037037038,
+    "pixel_err_last": 0.07291666666666667,
+    "mean_iou_white": 0.2934345059722281,
+    "mean_iou_black": 0.858945839939603,
+    "change_iou": 0.0
+   },
+   "conway": {
+    "pixel_err": 0.1423611111111111,
+    "pixel_err_last": 0.14930555555555555,
+    "mean_iou_white": 0.25836565212550633,
+    "mean_iou_black": 0.8519110342497093,
+    "change_iou": 0.14618973561430793
+   },
+   "bs_family": {
+    "conflicts": {
+     "transitions": 6336,
+     "contexts_seen": 11,
+     "contexts_conflicting": 11,
+     "min_one_step_errors": 442,
+     "min_one_step_error_rate": 0.06976010101010101
+    },
+    "pixel_err": 0.13599537037037038,
+    "pixel_err_last": 0.07291666666666667,
+    "mean_iou_white": 0.2934345059722281,
+    "mean_iou_black": 0.858945839939603,
+    "change_iou": 0.0
+   },
+   "moore_lut": {
+    "conflicts": {
+     "transitions": 6336,
+     "contexts_seen": 74,
+     "contexts_conflicting": 74,
+     "min_one_step_errors": 440,
+     "min_one_step_error_rate": 0.06944444444444445
+    },
+    "fit_seconds": 0.0005,
+    "pixel_err": 0.13599537037037038,
+    "pixel_err_last": 0.07291666666666667,
+    "mean_iou_white": 0.2934345059722281,
+    "mean_iou_black": 0.858945839939603,
+    "change_iou": 0.0,
+    "js_replay_matches": true
+   },
+   "r2_lut_diag": {
+    "transitions": 6336,
+    "contexts_seen": 656,
+    "contexts_conflicting": 212,
+    "min_one_step_errors": 298,
+    "min_one_step_error_rate": 0.04703282828282828
+   }
+  }
+ },
+ "badapple": {
+  "ba_t10s_30f": {
+   "t_start": 10.0,
+   "frames": 30,
+   "first_frame_uniform": false,
+   "mean_frac_changed_per_frame": 0.009451329022988505,
+   "white_frac": 0.5891493055555556,
+   "by_boundary": {
+    "0": {
+     "hold_first_frame": {
+      "pixel_err": 0.07981770833333333,
+      "pixel_err_last": 0.19921875,
+      "mean_iou_white": 0.8778199530080945,
+      "mean_iou_black": 0.8315130531957905,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.5691297743055556,
+      "pixel_err_last": 0.5963541666666666,
+      "mean_iou_white": 0.04950667339290405,
+      "mean_iou_black": 0.4250925788662867,
+      "change_iou": 0.008794619762027936
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 17,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 841,
+       "min_one_step_error_rate": 0.009440104166666666
+      },
+      "pixel_err": 0.07981770833333333,
+      "pixel_err_last": 0.19921875,
+      "mean_iou_white": 0.8778199530080945,
+      "mean_iou_black": 0.8315130531957905,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 230,
+       "contexts_conflicting": 93,
+       "min_one_step_errors": 819,
+       "min_one_step_error_rate": 0.009193157327586207
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.07923177083333334,
+      "pixel_err_last": 0.19856770833333334,
+      "mean_iou_white": 0.8786304025077213,
+      "mean_iou_black": 0.8327979856033563,
+      "change_iou": 0.0,
+      "js_replay_matches": true
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 2581,
+      "contexts_conflicting": 227,
+      "min_one_step_errors": 614,
+      "min_one_step_error_rate": 0.0068920617816091954
+     }
+    },
+    "1": {
+     "hold_first_frame": {
+      "pixel_err": 0.07981770833333333,
+      "pixel_err_last": 0.19921875,
+      "mean_iou_white": 0.8778199530080945,
+      "mean_iou_black": 0.8315130531957905,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.49902343750000006,
+      "pixel_err_last": 0.5436197916666666,
+      "mean_iou_white": 0.19555492297229884,
+      "mean_iou_black": 0.44381326825732875,
+      "change_iou": 0.006805293005671078
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 17,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 842,
+       "min_one_step_error_rate": 0.009451329022988507
+      },
+      "pixel_err": 0.07981770833333333,
+      "pixel_err_last": 0.19921875,
+      "mean_iou_white": 0.8778199530080945,
+      "mean_iou_black": 0.8315130531957905,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 230,
+       "contexts_conflicting": 97,
+       "min_one_step_errors": 823,
+       "min_one_step_error_rate": 0.009238056752873564
+      },
+      "fit_seconds": 0.0031,
+      "pixel_err": 0.07952473958333334,
+      "pixel_err_last": 0.19889322916666666,
+      "mean_iou_white": 0.8782249558527782,
+      "mean_iou_black": 0.832155499307044,
+      "change_iou": 0.0
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 2544,
+      "contexts_conflicting": 227,
+      "min_one_step_errors": 612,
+      "min_one_step_error_rate": 0.006869612068965517
+     }
+    },
+    "wrap": {
+     "hold_first_frame": {
+      "pixel_err": 0.07981770833333333,
+      "pixel_err_last": 0.19921875,
+      "mean_iou_white": 0.8778199530080945,
+      "mean_iou_black": 0.8315130531957905,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.5697265625,
+      "pixel_err_last": 0.5947265625,
+      "mean_iou_white": 0.0573397023050362,
+      "mean_iou_black": 0.42156060226856706,
+      "change_iou": 0.009355509355509356
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 17,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 842,
+       "min_one_step_error_rate": 0.009451329022988507
+      },
+      "pixel_err": 0.07981770833333333,
+      "pixel_err_last": 0.19921875,
+      "mean_iou_white": 0.8778199530080945,
+      "mean_iou_black": 0.8315130531957905,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 238,
+       "contexts_conflicting": 98,
+       "min_one_step_errors": 815,
+       "min_one_step_error_rate": 0.00914825790229885
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.079296875,
+      "pixel_err_last": 0.19856770833333334,
+      "mean_iou_white": 0.878537719417806,
+      "mean_iou_black": 0.8326731023633441,
+      "change_iou": 0.0
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 2742,
+      "contexts_conflicting": 225,
+      "min_one_step_errors": 600,
+      "min_one_step_error_rate": 0.006734913793103448
+     }
+    }
+   }
+  },
+  "ba_t10s_90f": {
+   "t_start": 10.0,
+   "frames": 90,
+   "first_frame_uniform": false,
+   "mean_frac_changed_per_frame": 0.03730322448501873,
+   "white_frac": 0.7320746527777777,
+   "by_boundary": {
+    "0": {
+     "hold_first_frame": {
+      "pixel_err": 0.2546802662037037,
+      "pixel_err_last": 0.3694661458333333,
+      "mean_iou_white": 0.6989602109978066,
+      "mean_iou_black": 0.45738396907006945,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.7216616030092591,
+      "pixel_err_last": 0.9241536458333334,
+      "mean_iou_white": 0.02654169902949467,
+      "mean_iou_black": 0.26948695628543945,
+      "change_iou": 0.012180267965895249
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 18,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 10194,
+       "min_one_step_error_rate": 0.037284936797752806
+      },
+      "pixel_err": 0.2546802662037037,
+      "pixel_err_last": 0.3694661458333333,
+      "mean_iou_white": 0.6989602109978066,
+      "mean_iou_black": 0.45738396907006945,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 284,
+       "contexts_conflicting": 179,
+       "min_one_step_errors": 9935,
+       "min_one_step_error_rate": 0.03633763459737828
+      },
+      "fit_seconds": 0.0068,
+      "pixel_err": 0.2556966145833333,
+      "pixel_err_last": 0.3720703125,
+      "mean_iou_white": 0.6972378860515172,
+      "mean_iou_black": 0.45710013748229306,
+      "change_iou": 0.0,
+      "js_replay_matches": true
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 5011,
+      "contexts_conflicting": 1108,
+      "min_one_step_errors": 8672,
+      "min_one_step_error_rate": 0.03171816479400749
+     }
+    },
+    "1": {
+     "hold_first_frame": {
+      "pixel_err": 0.2546802662037037,
+      "pixel_err_last": 0.3694661458333333,
+      "mean_iou_white": 0.6989602109978066,
+      "mean_iou_black": 0.45738396907006945,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.6572952835648148,
+      "pixel_err_last": 0.8450520833333334,
+      "mean_iou_white": 0.1330305784264202,
+      "mean_iou_black": 0.2790245022594384,
+      "change_iou": 0.017646460537021968
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 18,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 10197,
+       "min_one_step_error_rate": 0.03729590941011236
+      },
+      "pixel_err": 0.2546802662037037,
+      "pixel_err_last": 0.3694661458333333,
+      "mean_iou_white": 0.6989602109978066,
+      "mean_iou_black": 0.45738396907006945,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 283,
+       "contexts_conflicting": 182,
+       "min_one_step_errors": 9947,
+       "min_one_step_error_rate": 0.03638152504681648
+      },
+      "fit_seconds": 0.0069,
+      "pixel_err": 0.25163483796296293,
+      "pixel_err_last": 0.3616536458333333,
+      "mean_iou_white": 0.7021162023254502,
+      "mean_iou_black": 0.4555223099861595,
+      "change_iou": 0.0
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 4928,
+      "contexts_conflicting": 1103,
+      "min_one_step_errors": 8684,
+      "min_one_step_error_rate": 0.03176205524344569
+     }
+    },
+    "wrap": {
+     "hold_first_frame": {
+      "pixel_err": 0.2546802662037037,
+      "pixel_err_last": 0.3694661458333333,
+      "mean_iou_white": 0.6989602109978066,
+      "mean_iou_black": 0.45738396907006945,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.7167679398148149,
+      "pixel_err_last": 0.912109375,
+      "mean_iou_white": 0.03842405054924257,
+      "mean_iou_black": 0.2670490126774704,
+      "change_iou": 0.018141192743522903
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 18,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 10196,
+       "min_one_step_error_rate": 0.03729225187265917
+      },
+      "pixel_err": 0.2546802662037037,
+      "pixel_err_last": 0.3694661458333333,
+      "mean_iou_white": 0.6989602109978066,
+      "mean_iou_black": 0.45738396907006945,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 304,
+       "contexts_conflicting": 185,
+       "min_one_step_errors": 9991,
+       "min_one_step_error_rate": 0.03654245669475655
+      },
+      "fit_seconds": 0.007,
+      "pixel_err": 0.2554361979166667,
+      "pixel_err_last": 0.3727213541666667,
+      "mean_iou_white": 0.6979014115559952,
+      "mean_iou_black": 0.4584469265203349,
+      "change_iou": 0.0
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 5323,
+      "contexts_conflicting": 1124,
+      "min_one_step_errors": 8713,
+      "min_one_step_error_rate": 0.031868123829588015
+     }
+    }
+   }
+  },
+  "ba_t30s_30f": {
+   "t_start": 30.0,
+   "frames": 30,
+   "first_frame_uniform": false,
+   "mean_frac_changed_per_frame": 0.016152568247126436,
+   "white_frac": 0.8392469618055556,
+   "by_boundary": {
+    "0": {
+     "hold_first_frame": {
+      "pixel_err": 0.21880425347222224,
+      "pixel_err_last": 0.3199869791666667,
+      "mean_iou_white": 0.775129003182284,
+      "mean_iou_black": 0.2501478200873228,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.8158094618055555,
+      "pixel_err_last": 0.833984375,
+      "mean_iou_white": 0.039485865572999115,
+      "mean_iou_black": 0.1797684659497759,
+      "change_iou": 0.020011657276083155
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 15,
+       "contexts_conflicting": 14,
+       "min_one_step_errors": 1431,
+       "min_one_step_error_rate": 0.016062769396551723
+      },
+      "pixel_err": 0.2191189236111111,
+      "pixel_err_last": 0.3203125,
+      "mean_iou_white": 0.7747973233307534,
+      "mean_iou_black": 0.24981120829722636,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 128,
+       "contexts_conflicting": 52,
+       "min_one_step_errors": 1014,
+       "min_one_step_error_rate": 0.011382004310344827
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.11051432291666667,
+      "pixel_err_last": 0.17252604166666666,
+      "mean_iou_white": 0.8859065902190373,
+      "mean_iou_black": 0.3392023499416696,
+      "change_iou": 0.07818088911599387,
+      "js_replay_matches": true
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 1550,
+      "contexts_conflicting": 145,
+      "min_one_step_errors": 721,
+      "min_one_step_error_rate": 0.008093121408045977
+     }
+    },
+    "1": {
+     "hold_first_frame": {
+      "pixel_err": 0.21880425347222224,
+      "pixel_err_last": 0.3199869791666667,
+      "mean_iou_white": 0.775129003182284,
+      "mean_iou_black": 0.2501478200873228,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.6973958333333333,
+      "pixel_err_last": 0.7454427083333334,
+      "mean_iou_white": 0.18791827468761793,
+      "mean_iou_black": 0.19188780874860953,
+      "change_iou": 0.012540640966093822
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 15,
+       "contexts_conflicting": 14,
+       "min_one_step_errors": 1431,
+       "min_one_step_error_rate": 0.016062769396551723
+      },
+      "pixel_err": 0.2191189236111111,
+      "pixel_err_last": 0.3203125,
+      "mean_iou_white": 0.7747973233307534,
+      "mean_iou_black": 0.24981120829722636,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 130,
+       "contexts_conflicting": 52,
+       "min_one_step_errors": 960,
+       "min_one_step_error_rate": 0.010775862068965518
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.09098307291666667,
+      "pixel_err_last": 0.181640625,
+      "mean_iou_white": 0.9022924249205407,
+      "mean_iou_black": 0.5305088113915702,
+      "change_iou": 0.06544419854568448
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 1550,
+      "contexts_conflicting": 145,
+      "min_one_step_errors": 658,
+      "min_one_step_error_rate": 0.007385955459770115
+     }
+    },
+    "wrap": {
+     "hold_first_frame": {
+      "pixel_err": 0.21880425347222224,
+      "pixel_err_last": 0.3199869791666667,
+      "mean_iou_white": 0.775129003182284,
+      "mean_iou_black": 0.2501478200873228,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.8073784722222223,
+      "pixel_err_last": 0.8212890625,
+      "mean_iou_white": 0.051307402312383926,
+      "mean_iou_black": 0.1796762613235917,
+      "change_iou": 0.023009138381201045
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 15,
+       "contexts_conflicting": 14,
+       "min_one_step_errors": 1431,
+       "min_one_step_error_rate": 0.016062769396551723
+      },
+      "pixel_err": 0.2191189236111111,
+      "pixel_err_last": 0.3203125,
+      "mean_iou_white": 0.7747973233307534,
+      "mean_iou_black": 0.24981120829722636,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 130,
+       "contexts_conflicting": 52,
+       "min_one_step_errors": 960,
+       "min_one_step_error_rate": 0.010775862068965518
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.09098307291666667,
+      "pixel_err_last": 0.181640625,
+      "mean_iou_white": 0.9022924249205407,
+      "mean_iou_black": 0.5305088113915702,
+      "change_iou": 0.06544419854568448
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 1566,
+      "contexts_conflicting": 145,
+      "min_one_step_errors": 658,
+      "min_one_step_error_rate": 0.007385955459770115
+     }
+    }
+   }
+  },
+  "ba_t30s_90f": {
+   "t_start": 30.0,
+   "frames": 90,
+   "first_frame_uniform": false,
+   "mean_frac_changed_per_frame": 0.013573121488764047,
+   "white_frac": 0.7994321469907407,
+   "by_boundary": {
+    "0": {
+     "hold_first_frame": {
+      "pixel_err": 0.3150499131944444,
+      "pixel_err_last": 0.3818359375,
+      "mean_iou_white": 0.680571930577847,
+      "mean_iou_black": 0.10121060124375288,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.7882921006944444,
+      "pixel_err_last": 0.7421875,
+      "mean_iou_white": 0.01961223060450697,
+      "mean_iou_black": 0.2062726675081219,
+      "change_iou": 0.019158728459809482
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 18,
+       "contexts_conflicting": 18,
+       "min_one_step_errors": 3690,
+       "min_one_step_error_rate": 0.01349631320224719
+      },
+      "pixel_err": 0.3153718171296297,
+      "pixel_err_last": 0.3821614583333333,
+      "mean_iou_white": 0.6802421739958855,
+      "mean_iou_black": 0.10108263676968779,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 228,
+       "contexts_conflicting": 133,
+       "min_one_step_errors": 3470,
+       "min_one_step_error_rate": 0.012691654962546817
+      },
+      "fit_seconds": 0.0068,
+      "pixel_err": 0.3071976273148148,
+      "pixel_err_last": 0.3714192708333333,
+      "mean_iou_white": 0.6876665093720976,
+      "mean_iou_black": 0.1234770055741606,
+      "change_iou": 0.006517205422314911,
+      "js_replay_matches": true
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 3924,
+      "contexts_conflicting": 673,
+      "min_one_step_errors": 2895,
+      "min_one_step_error_rate": 0.010588570926966292
+     }
+    },
+    "1": {
+     "hold_first_frame": {
+      "pixel_err": 0.3150499131944444,
+      "pixel_err_last": 0.3818359375,
+      "mean_iou_white": 0.680571930577847,
+      "mean_iou_black": 0.10121060124375288,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.696021412037037,
+      "pixel_err_last": 0.6520182291666666,
+      "mean_iou_white": 0.1471566019981469,
+      "mean_iou_black": 0.21486993371042856,
+      "change_iou": 0.008706756442999768
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 18,
+       "contexts_conflicting": 18,
+       "min_one_step_errors": 3686,
+       "min_one_step_error_rate": 0.013481683052434457
+      },
+      "pixel_err": 0.3153718171296297,
+      "pixel_err_last": 0.3821614583333333,
+      "mean_iou_white": 0.6802421739958855,
+      "mean_iou_black": 0.10108263676968779,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 219,
+       "contexts_conflicting": 128,
+       "min_one_step_errors": 3467,
+       "min_one_step_error_rate": 0.012680682350187267
+      },
+      "fit_seconds": 0.0068,
+      "pixel_err": 0.30699508101851847,
+      "pixel_err_last": 0.37109375,
+      "mean_iou_white": 0.6878744477161516,
+      "mean_iou_black": 0.1234768303991851,
+      "change_iou": 0.00651890482398957
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 3762,
+      "contexts_conflicting": 680,
+      "min_one_step_errors": 2911,
+      "min_one_step_error_rate": 0.010647091526217229
+     }
+    },
+    "wrap": {
+     "hold_first_frame": {
+      "pixel_err": 0.3150499131944444,
+      "pixel_err_last": 0.3818359375,
+      "mean_iou_white": 0.680571930577847,
+      "mean_iou_black": 0.10121060124375288,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.7808195891203705,
+      "pixel_err_last": 0.7389322916666666,
+      "mean_iou_white": 0.029612480669206256,
+      "mean_iou_black": 0.20708018393678465,
+      "change_iou": 0.01483230987246103
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 18,
+       "contexts_conflicting": 18,
+       "min_one_step_errors": 3686,
+       "min_one_step_error_rate": 0.013481683052434457
+      },
+      "pixel_err": 0.3153718171296297,
+      "pixel_err_last": 0.3821614583333333,
+      "mean_iou_white": 0.6802421739958855,
+      "mean_iou_black": 0.10108263676968779,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 222,
+       "contexts_conflicting": 129,
+       "min_one_step_errors": 3469,
+       "min_one_step_error_rate": 0.012687997425093633
+      },
+      "fit_seconds": 0.007,
+      "pixel_err": 0.30699508101851847,
+      "pixel_err_last": 0.37109375,
+      "mean_iou_white": 0.6878744477161516,
+      "mean_iou_black": 0.1234768303991851,
+      "change_iou": 0.00651890482398957
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 3875,
+      "contexts_conflicting": 678,
+      "min_one_step_errors": 2907,
+      "min_one_step_error_rate": 0.010632461376404494
+     }
+    }
+   }
+  },
+  "ba_t62s_30f": {
+   "t_start": 62.0,
+   "frames": 30,
+   "first_frame_uniform": false,
+   "mean_frac_changed_per_frame": 0.07155845905172412,
+   "white_frac": 0.3521267361111111,
+   "by_boundary": {
+    "0": {
+     "hold_first_frame": {
+      "pixel_err": 0.23389756944444443,
+      "pixel_err_last": 0.3824869791666667,
+      "mean_iou_white": 0.5043762322018813,
+      "mean_iou_black": 0.7140998179700184,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.35911458333333335,
+      "pixel_err_last": 0.4365234375,
+      "mean_iou_white": 0.06727567262087253,
+      "mean_iou_black": 0.6359074581521948,
+      "change_iou": 0.030330882352941176
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 18,
+       "contexts_conflicting": 18,
+       "min_one_step_errors": 6366,
+       "min_one_step_error_rate": 0.07145743534482758
+      },
+      "pixel_err": 0.23338758680555557,
+      "pixel_err_last": 0.380859375,
+      "mean_iou_white": 0.5044662030457991,
+      "mean_iou_black": 0.7149348066927302,
+      "change_iou": 0.0004704406460718206
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 398,
+       "contexts_conflicting": 250,
+       "min_one_step_errors": 6172,
+       "min_one_step_error_rate": 0.0692798132183908
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.23319227430555553,
+      "pixel_err_last": 0.3831380208333333,
+      "mean_iou_white": 0.5073865142608791,
+      "mean_iou_black": 0.7144517301348164,
+      "change_iou": 0.003589263420724095,
+      "js_replay_matches": true
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 7433,
+      "contexts_conflicting": 1175,
+      "min_one_step_errors": 4582,
+      "min_one_step_error_rate": 0.051432291666666664
+     }
+    },
+    "1": {
+     "hold_first_frame": {
+      "pixel_err": 0.23389756944444443,
+      "pixel_err_last": 0.3824869791666667,
+      "mean_iou_white": 0.5043762322018813,
+      "mean_iou_black": 0.7140998179700184,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.4128146701388889,
+      "pixel_err_last": 0.4765625,
+      "mean_iou_white": 0.1059881817394407,
+      "mean_iou_black": 0.5705732537871349,
+      "change_iou": 0.04237635953211574
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 18,
+       "contexts_conflicting": 18,
+       "min_one_step_errors": 6367,
+       "min_one_step_error_rate": 0.07146866020114942
+      },
+      "pixel_err": 0.23338758680555557,
+      "pixel_err_last": 0.380859375,
+      "mean_iou_white": 0.5044662030457991,
+      "mean_iou_black": 0.7149348066927302,
+      "change_iou": 0.0004704406460718206
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 403,
+       "contexts_conflicting": 264,
+       "min_one_step_errors": 6186,
+       "min_one_step_error_rate": 0.06943696120689655
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.23513454861111113,
+      "pixel_err_last": 0.38671875,
+      "mean_iou_white": 0.5049786999824671,
+      "mean_iou_black": 0.7113046083823019,
+      "change_iou": 0.003108486167236556
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 7691,
+      "contexts_conflicting": 1163,
+      "min_one_step_errors": 4582,
+      "min_one_step_error_rate": 0.051432291666666664
+     }
+    },
+    "wrap": {
+     "hold_first_frame": {
+      "pixel_err": 0.23389756944444443,
+      "pixel_err_last": 0.3824869791666667,
+      "mean_iou_white": 0.5043762322018813,
+      "mean_iou_black": 0.7140998179700184,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.3617947048611111,
+      "pixel_err_last": 0.4475911458333333,
+      "mean_iou_white": 0.07902095363637775,
+      "mean_iou_black": 0.6315662948555972,
+      "change_iou": 0.03191777116581011
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 18,
+       "contexts_conflicting": 18,
+       "min_one_step_errors": 6358,
+       "min_one_step_error_rate": 0.07136763649425287
+      },
+      "pixel_err": 0.23338758680555557,
+      "pixel_err_last": 0.380859375,
+      "mean_iou_white": 0.5044662030457991,
+      "mean_iou_black": 0.7149348066927302,
+      "change_iou": 0.0004704406460718206
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 404,
+       "contexts_conflicting": 255,
+       "min_one_step_errors": 6171,
+       "min_one_step_error_rate": 0.06926858836206896
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.2345920138888889,
+      "pixel_err_last": 0.3828125,
+      "mean_iou_white": 0.5052994175940528,
+      "mean_iou_black": 0.7121419609682756,
+      "change_iou": 0.003737153534724385
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 7696,
+      "contexts_conflicting": 1187,
+      "min_one_step_errors": 4545,
+      "min_one_step_error_rate": 0.05101697198275862
+     }
+    }
+   }
+  },
+  "ba_t62s_90f": {
+   "t_start": 62.0,
+   "frames": 90,
+   "first_frame_uniform": false,
+   "mean_frac_changed_per_frame": 0.05057642790262172,
+   "white_frac": 0.347779224537037,
+   "by_boundary": {
+    "0": {
+     "hold_first_frame": {
+      "pixel_err": 0.33540219907407404,
+      "pixel_err_last": 0.3528645833333333,
+      "mean_iou_white": 0.3260100578915882,
+      "mean_iou_black": 0.6140810745097616,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.35613787615740744,
+      "pixel_err_last": 0.337890625,
+      "mean_iou_white": 0.04067050427284643,
+      "mean_iou_black": 0.6397015891285253,
+      "change_iou": 0.02144139038443374
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 18,
+       "contexts_conflicting": 18,
+       "min_one_step_errors": 13745,
+       "min_one_step_error_rate": 0.05027285229400749
+      },
+      "pixel_err": 0.3346752025462963,
+      "pixel_err_last": 0.3512369791666667,
+      "mean_iou_white": 0.32593942971359885,
+      "mean_iou_black": 0.6151356953854541,
+      "change_iou": 0.00021691973969631235
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 488,
+       "contexts_conflicting": 392,
+       "min_one_step_errors": 13484,
+       "min_one_step_error_rate": 0.04931823501872659
+      },
+      "fit_seconds": 0.0068,
+      "pixel_err": 0.3382052951388889,
+      "pixel_err_last": 0.3564453125,
+      "mean_iou_white": 0.3213206179215314,
+      "mean_iou_black": 0.612444972892655,
+      "change_iou": 0.0011551512526171395,
+      "js_replay_matches": true
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 15630,
+      "contexts_conflicting": 2156,
+      "min_one_step_errors": 9968,
+      "min_one_step_error_rate": 0.036458333333333336
+     }
+    },
+    "1": {
+     "hold_first_frame": {
+      "pixel_err": 0.33540219907407404,
+      "pixel_err_last": 0.3528645833333333,
+      "mean_iou_white": 0.3260100578915882,
+      "mean_iou_black": 0.6140810745097616,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.4043728298611111,
+      "pixel_err_last": 0.3828125,
+      "mean_iou_white": 0.08243514492261071,
+      "mean_iou_black": 0.5816218906737881,
+      "change_iou": 0.0313439244310863
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 18,
+       "contexts_conflicting": 18,
+       "min_one_step_errors": 13759,
+       "min_one_step_error_rate": 0.05032405781835206
+      },
+      "pixel_err": 0.3346752025462963,
+      "pixel_err_last": 0.3512369791666667,
+      "mean_iou_white": 0.32593942971359885,
+      "mean_iou_black": 0.6151356953854541,
+      "change_iou": 0.00021691973969631235
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 490,
+       "contexts_conflicting": 396,
+       "min_one_step_errors": 13498,
+       "min_one_step_error_rate": 0.04936944054307116
+      },
+      "fit_seconds": 0.0068,
+      "pixel_err": 0.33860315393518514,
+      "pixel_err_last": 0.3567708333333333,
+      "mean_iou_white": 0.3184937756746108,
+      "mean_iou_black": 0.6126573824280453,
+      "change_iou": 0.0010826416456153013
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 16376,
+      "contexts_conflicting": 2213,
+      "min_one_step_errors": 9923,
+      "min_one_step_error_rate": 0.03629374414794007
+     }
+    },
+    "wrap": {
+     "hold_first_frame": {
+      "pixel_err": 0.33540219907407404,
+      "pixel_err_last": 0.3528645833333333,
+      "mean_iou_white": 0.3260100578915882,
+      "mean_iou_black": 0.6140810745097616,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.3534071180555556,
+      "pixel_err_last": 0.3209635416666667,
+      "mean_iou_white": 0.07388725491248145,
+      "mean_iou_black": 0.6382102854774987,
+      "change_iou": 0.027739149527922124
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 18,
+       "contexts_conflicting": 18,
+       "min_one_step_errors": 13737,
+       "min_one_step_error_rate": 0.050243591994382025
+      },
+      "pixel_err": 0.3346752025462963,
+      "pixel_err_last": 0.3512369791666667,
+      "mean_iou_white": 0.32593942971359885,
+      "mean_iou_black": 0.6151356953854541,
+      "change_iou": 0.00021691973969631235
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 489,
+       "contexts_conflicting": 393,
+       "min_one_step_errors": 13477,
+       "min_one_step_error_rate": 0.04929263225655431
+      },
+      "fit_seconds": 0.0071,
+      "pixel_err": 0.33837890624999994,
+      "pixel_err_last": 0.3567708333333333,
+      "mean_iou_white": 0.32093671539520346,
+      "mean_iou_black": 0.6123772128056291,
+      "change_iou": 0.001371940212289696
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 16138,
+      "contexts_conflicting": 2187,
+      "min_one_step_errors": 9901,
+      "min_one_step_error_rate": 0.03621327832397004
+     }
+    }
+   }
+  },
+  "ba_t100s_30f": {
+   "t_start": 100.0,
+   "frames": 30,
+   "first_frame_uniform": false,
+   "mean_frac_changed_per_frame": 0.006633890086206896,
+   "white_frac": 0.24703776041666667,
+   "by_boundary": {
+    "0": {
+     "hold_first_frame": {
+      "pixel_err": 0.07880859375,
+      "pixel_err_last": 0.1240234375,
+      "mean_iou_white": 0.7336123083939532,
+      "mean_iou_black": 0.9019206734420248,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.2426540798611111,
+      "pixel_err_last": 0.2620442708333333,
+      "mean_iou_white": 0.06556230863799561,
+      "mean_iou_black": 0.7552311508088287,
+      "change_iou": 0.01395848246241947
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 17,
+       "contexts_conflicting": 14,
+       "min_one_step_errors": 589,
+       "min_one_step_error_rate": 0.006611440373563218
+      },
+      "pixel_err": 0.07880859375,
+      "pixel_err_last": 0.1240234375,
+      "mean_iou_white": 0.7336123083939532,
+      "mean_iou_black": 0.9019206734420248,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 156,
+       "contexts_conflicting": 62,
+       "min_one_step_errors": 527,
+       "min_one_step_error_rate": 0.0059154992816091954
+      },
+      "fit_seconds": 0.0022,
+      "pixel_err": 0.03803168402777777,
+      "pixel_err_last": 0.050130208333333336,
+      "mean_iou_white": 0.8537042578561013,
+      "mean_iou_black": 0.9515558513906142,
+      "change_iou": 0.03768844221105527,
+      "js_replay_matches": true
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 1426,
+      "contexts_conflicting": 121,
+      "min_one_step_errors": 403,
+      "min_one_step_error_rate": 0.004523617097701149
+     }
+    },
+    "1": {
+     "hold_first_frame": {
+      "pixel_err": 0.07880859375,
+      "pixel_err_last": 0.1240234375,
+      "mean_iou_white": 0.7336123083939532,
+      "mean_iou_black": 0.9019206734420248,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.3163845486111111,
+      "pixel_err_last": 0.3111979166666667,
+      "mean_iou_white": 0.12736494777460824,
+      "mean_iou_black": 0.6722441415322249,
+      "change_iou": 0.0030465513039239583
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 17,
+       "contexts_conflicting": 14,
+       "min_one_step_errors": 589,
+       "min_one_step_error_rate": 0.006611440373563218
+      },
+      "pixel_err": 0.07880859375,
+      "pixel_err_last": 0.1240234375,
+      "mean_iou_white": 0.7336123083939532,
+      "mean_iou_black": 0.9019206734420248,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 154,
+       "contexts_conflicting": 63,
+       "min_one_step_errors": 524,
+       "min_one_step_error_rate": 0.005881824712643678
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.050065104166666666,
+      "pixel_err_last": 0.08821614583333333,
+      "mean_iou_white": 0.806578834166509,
+      "mean_iou_black": 0.9377589306135186,
+      "change_iou": 0.03406593406593406
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 1417,
+      "contexts_conflicting": 119,
+      "min_one_step_errors": 399,
+      "min_one_step_error_rate": 0.004478717672413793
+     }
+    },
+    "wrap": {
+     "hold_first_frame": {
+      "pixel_err": 0.07880859375,
+      "pixel_err_last": 0.1240234375,
+      "mean_iou_white": 0.7336123083939532,
+      "mean_iou_black": 0.9019206734420248,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.2457139756944444,
+      "pixel_err_last": 0.2688802083333333,
+      "mean_iou_white": 0.1269672336785244,
+      "mean_iou_black": 0.7473852139618887,
+      "change_iou": 0.007110724132927006
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 17,
+       "contexts_conflicting": 14,
+       "min_one_step_errors": 589,
+       "min_one_step_error_rate": 0.006611440373563218
+      },
+      "pixel_err": 0.07880859375,
+      "pixel_err_last": 0.1240234375,
+      "mean_iou_white": 0.7336123083939532,
+      "mean_iou_black": 0.9019206734420248,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 156,
+       "contexts_conflicting": 62,
+       "min_one_step_errors": 527,
+       "min_one_step_error_rate": 0.0059154992816091954
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.03803168402777777,
+      "pixel_err_last": 0.050130208333333336,
+      "mean_iou_white": 0.8537042578561013,
+      "mean_iou_black": 0.9515558513906142,
+      "change_iou": 0.03768844221105527
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 1435,
+      "contexts_conflicting": 121,
+      "min_one_step_errors": 403,
+      "min_one_step_error_rate": 0.004523617097701149
+     }
+    }
+   }
+  },
+  "ba_t100s_90f": {
+   "t_start": 100.0,
+   "frames": 90,
+   "first_frame_uniform": false,
+   "mean_frac_changed_per_frame": 0.0036831402153558053,
+   "white_frac": 0.2540364583333333,
+   "by_boundary": {
+    "0": {
+     "hold_first_frame": {
+      "pixel_err": 0.1298683449074074,
+      "pixel_err_last": 0.1533203125,
+      "mean_iou_white": 0.5968446653139505,
+      "mean_iou_black": 0.8419249246130208,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.25936053240740736,
+      "pixel_err_last": 0.2659505208333333,
+      "mean_iou_white": 0.04273888618986599,
+      "mean_iou_black": 0.7383769355048083,
+      "change_iou": 0.006341537067794051
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 17,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 1007,
+       "min_one_step_error_rate": 0.0036831402153558053
+      },
+      "pixel_err": 0.1298683449074074,
+      "pixel_err_last": 0.1533203125,
+      "mean_iou_white": 0.5968446653139505,
+      "mean_iou_black": 0.8419249246130208,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 192,
+       "contexts_conflicting": 100,
+       "min_one_step_errors": 966,
+       "min_one_step_error_rate": 0.003533181179775281
+      },
+      "fit_seconds": 0.0068,
+      "pixel_err": 0.1295609085648148,
+      "pixel_err_last": 0.15299479166666666,
+      "mean_iou_white": 0.5978139057222804,
+      "mean_iou_black": 0.842238274885093,
+      "change_iou": 0.0,
+      "js_replay_matches": true
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 2517,
+      "contexts_conflicting": 262,
+      "min_one_step_errors": 740,
+      "min_one_step_error_rate": 0.0027065777153558053
+     }
+    },
+    "1": {
+     "hold_first_frame": {
+      "pixel_err": 0.1298683449074074,
+      "pixel_err_last": 0.1533203125,
+      "mean_iou_white": 0.5968446653139505,
+      "mean_iou_black": 0.8419249246130208,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.307103587962963,
+      "pixel_err_last": 0.2861328125,
+      "mean_iou_white": 0.11279430063751907,
+      "mean_iou_black": 0.681683546558214,
+      "change_iou": 0.0016651303856560912
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 17,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 1007,
+       "min_one_step_error_rate": 0.0036831402153558053
+      },
+      "pixel_err": 0.1298683449074074,
+      "pixel_err_last": 0.1533203125,
+      "mean_iou_white": 0.5968446653139505,
+      "mean_iou_black": 0.8419249246130208,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 192,
+       "contexts_conflicting": 99,
+       "min_one_step_errors": 963,
+       "min_one_step_error_rate": 0.0035222085674157305
+      },
+      "fit_seconds": 0.0069,
+      "pixel_err": 0.1295609085648148,
+      "pixel_err_last": 0.15299479166666666,
+      "mean_iou_white": 0.5978139057222804,
+      "mean_iou_black": 0.842238274885093,
+      "change_iou": 0.0
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 2506,
+      "contexts_conflicting": 262,
+      "min_one_step_errors": 738,
+      "min_one_step_error_rate": 0.0026992626404494383
+     }
+    },
+    "wrap": {
+     "hold_first_frame": {
+      "pixel_err": 0.1298683449074074,
+      "pixel_err_last": 0.1533203125,
+      "mean_iou_white": 0.5968446653139505,
+      "mean_iou_black": 0.8419249246130208,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.26104600694444446,
+      "pixel_err_last": 0.2672526041666667,
+      "mean_iou_white": 0.10373374499642936,
+      "mean_iou_black": 0.7316274788126729,
+      "change_iou": 0.0034217793252491295
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 17,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 1007,
+       "min_one_step_error_rate": 0.0036831402153558053
+      },
+      "pixel_err": 0.1298683449074074,
+      "pixel_err_last": 0.1533203125,
+      "mean_iou_white": 0.5968446653139505,
+      "mean_iou_black": 0.8419249246130208,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 192,
+       "contexts_conflicting": 100,
+       "min_one_step_errors": 966,
+       "min_one_step_error_rate": 0.003533181179775281
+      },
+      "fit_seconds": 0.007,
+      "pixel_err": 0.1295609085648148,
+      "pixel_err_last": 0.15299479166666666,
+      "mean_iou_white": 0.5978139057222804,
+      "mean_iou_black": 0.842238274885093,
+      "change_iou": 0.0
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 2522,
+      "contexts_conflicting": 262,
+      "min_one_step_errors": 740,
+      "min_one_step_error_rate": 0.0027065777153558053
+     }
+    }
+   }
+  },
+  "ba_t150s_30f": {
+   "t_start": 150.0,
+   "frames": 30,
+   "first_frame_uniform": false,
+   "mean_frac_changed_per_frame": 0.016152568247126436,
+   "white_frac": 0.21012369791666666,
+   "by_boundary": {
+    "0": {
+     "hold_first_frame": {
+      "pixel_err": 0.14048394097222222,
+      "pixel_err_last": 0.23470052083333334,
+      "mean_iou_white": 0.5258409997344368,
+      "mean_iou_black": 0.8383762176934199,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.20234375000000002,
+      "pixel_err_last": 0.23893229166666666,
+      "mean_iou_white": 0.0709568685360622,
+      "mean_iou_black": 0.7955504146671495,
+      "change_iou": 0.02537182852143482
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 17,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 1418,
+       "min_one_step_error_rate": 0.015916846264367818
+      },
+      "pixel_err": 0.1403754340277778,
+      "pixel_err_last": 0.23470052083333334,
+      "mean_iou_white": 0.5267807946849986,
+      "mean_iou_black": 0.8384375580510721,
+      "change_iou": 0.0006944444444444445
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 221,
+       "contexts_conflicting": 119,
+       "min_one_step_errors": 1223,
+       "min_one_step_error_rate": 0.013727999281609195
+      },
+      "fit_seconds": 0.0022,
+      "pixel_err": 0.0978732638888889,
+      "pixel_err_last": 0.162109375,
+      "mean_iou_white": 0.6361640377396739,
+      "mean_iou_black": 0.8836867056328157,
+      "change_iou": 0.01859628074385123,
+      "js_replay_matches": true
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 2731,
+      "contexts_conflicting": 356,
+      "min_one_step_errors": 844,
+      "min_one_step_error_rate": 0.009473778735632184
+     }
+    },
+    "1": {
+     "hold_first_frame": {
+      "pixel_err": 0.14048394097222222,
+      "pixel_err_last": 0.23470052083333334,
+      "mean_iou_white": 0.5258409997344368,
+      "mean_iou_black": 0.8383762176934199,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.31169704861111114,
+      "pixel_err_last": 0.3089192708333333,
+      "mean_iou_white": 0.1000666592501022,
+      "mean_iou_black": 0.6802411234456959,
+      "change_iou": 0.01225580055517729
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 17,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 1424,
+       "min_one_step_error_rate": 0.01598419540229885
+      },
+      "pixel_err": 0.14051649305555552,
+      "pixel_err_last": 0.2353515625,
+      "mean_iou_white": 0.5286289177306759,
+      "mean_iou_black": 0.838051579751704,
+      "change_iou": 0.002074688796680498
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 225,
+       "contexts_conflicting": 122,
+       "min_one_step_errors": 1226,
+       "min_one_step_error_rate": 0.013761673850574713
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.10757378472222222,
+      "pixel_err_last": 0.18229166666666666,
+      "mean_iou_white": 0.6020266887761827,
+      "mean_iou_black": 0.8741135330727172,
+      "change_iou": 0.015518311607697082
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 2773,
+      "contexts_conflicting": 354,
+      "min_one_step_errors": 842,
+      "min_one_step_error_rate": 0.009451329022988507
+     }
+    },
+    "wrap": {
+     "hold_first_frame": {
+      "pixel_err": 0.14048394097222222,
+      "pixel_err_last": 0.23470052083333334,
+      "mean_iou_white": 0.5258409997344368,
+      "mean_iou_black": 0.8383762176934199,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.2035915798611111,
+      "pixel_err_last": 0.23990885416666666,
+      "mean_iou_white": 0.07355951955018893,
+      "mean_iou_black": 0.7942026094738477,
+      "change_iou": 0.024795640326975475
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 17,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 1418,
+       "min_one_step_error_rate": 0.015916846264367818
+      },
+      "pixel_err": 0.1403754340277778,
+      "pixel_err_last": 0.23470052083333334,
+      "mean_iou_white": 0.5267807946849986,
+      "mean_iou_black": 0.8384375580510721,
+      "change_iou": 0.0006944444444444445
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 221,
+       "contexts_conflicting": 119,
+       "min_one_step_errors": 1223,
+       "min_one_step_error_rate": 0.013727999281609195
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.0978732638888889,
+      "pixel_err_last": 0.162109375,
+      "mean_iou_white": 0.6361640377396739,
+      "mean_iou_black": 0.8836867056328157,
+      "change_iou": 0.01859628074385123
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 2758,
+      "contexts_conflicting": 358,
+      "min_one_step_errors": 846,
+      "min_one_step_error_rate": 0.009496228448275862
+     }
+    }
+   }
+  },
+  "ba_t150s_90f": {
+   "t_start": 150.0,
+   "frames": 90,
+   "first_frame_uniform": false,
+   "mean_frac_changed_per_frame": 0.03447229049625468,
+   "white_frac": 0.23764105902777777,
+   "by_boundary": {
+    "0": {
+     "hold_first_frame": {
+      "pixel_err": 0.19118561921296298,
+      "pixel_err_last": 0.16048177083333334,
+      "mean_iou_white": 0.40924194588225926,
+      "mean_iou_black": 0.7824590313120191,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.23990523726851853,
+      "pixel_err_last": 0.2763671875,
+      "mean_iou_white": 0.05727084514262569,
+      "mean_iou_black": 0.7566065014673419,
+      "change_iou": 0.021031698204170182
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 18,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 9425,
+       "min_one_step_error_rate": 0.03447229049625468
+      },
+      "pixel_err": 0.19118561921296298,
+      "pixel_err_last": 0.16048177083333334,
+      "mean_iou_white": 0.40924194588225926,
+      "mean_iou_black": 0.7824590313120191,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 294,
+       "contexts_conflicting": 195,
+       "min_one_step_errors": 9368,
+       "min_one_step_error_rate": 0.03426381086142322
+      },
+      "fit_seconds": 0.0068,
+      "pixel_err": 0.19133029513888888,
+      "pixel_err_last": 0.1611328125,
+      "mean_iou_white": 0.4086798372520748,
+      "mean_iou_black": 0.7824045687944137,
+      "change_iou": 0.00021211157068618092,
+      "js_replay_matches": true
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 5803,
+      "contexts_conflicting": 1276,
+      "min_one_step_errors": 8430,
+      "min_one_step_error_rate": 0.030833040730337078
+     }
+    },
+    "1": {
+     "hold_first_frame": {
+      "pixel_err": 0.19118561921296298,
+      "pixel_err_last": 0.16048177083333334,
+      "mean_iou_white": 0.40924194588225926,
+      "mean_iou_black": 0.7824590313120191,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.32890625000000007,
+      "pixel_err_last": 0.3444010416666667,
+      "mean_iou_white": 0.070763329643922,
+      "mean_iou_black": 0.6630000011523156,
+      "change_iou": 0.021686339928627237
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 18,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 9425,
+       "min_one_step_error_rate": 0.03447229049625468
+      },
+      "pixel_err": 0.19118561921296298,
+      "pixel_err_last": 0.16048177083333334,
+      "mean_iou_white": 0.40924194588225926,
+      "mean_iou_black": 0.7824590313120191,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 292,
+       "contexts_conflicting": 195,
+       "min_one_step_errors": 9364,
+       "min_one_step_error_rate": 0.03424918071161049
+      },
+      "fit_seconds": 0.0068,
+      "pixel_err": 0.19100115740740742,
+      "pixel_err_last": 0.16048177083333334,
+      "mean_iou_white": 0.4098973306458563,
+      "mean_iou_black": 0.7826656541699677,
+      "change_iou": 0.00031826861871419476
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 5786,
+      "contexts_conflicting": 1298,
+      "min_one_step_errors": 8437,
+      "min_one_step_error_rate": 0.030858643492509365
+     }
+    },
+    "wrap": {
+     "hold_first_frame": {
+      "pixel_err": 0.19118561921296298,
+      "pixel_err_last": 0.16048177083333334,
+      "mean_iou_white": 0.40924194588225926,
+      "mean_iou_black": 0.7824590313120191,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.24099030671296298,
+      "pixel_err_last": 0.2809244791666667,
+      "mean_iou_white": 0.05809440070320296,
+      "mean_iou_black": 0.7554693457253936,
+      "change_iou": 0.0211383065932779
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 18,
+       "contexts_conflicting": 17,
+       "min_one_step_errors": 9425,
+       "min_one_step_error_rate": 0.03447229049625468
+      },
+      "pixel_err": 0.19118561921296298,
+      "pixel_err_last": 0.16048177083333334,
+      "mean_iou_white": 0.40924194588225926,
+      "mean_iou_black": 0.7824590313120191,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 294,
+       "contexts_conflicting": 195,
+       "min_one_step_errors": 9368,
+       "min_one_step_error_rate": 0.03426381086142322
+      },
+      "fit_seconds": 0.007,
+      "pixel_err": 0.19133029513888888,
+      "pixel_err_last": 0.1611328125,
+      "mean_iou_white": 0.4086798372520748,
+      "mean_iou_black": 0.7824045687944137,
+      "change_iou": 0.00021211157068618092
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 5854,
+      "contexts_conflicting": 1279,
+      "min_one_step_errors": 8435,
+      "min_one_step_error_rate": 0.030851328417602995
+     }
+    }
+   }
+  },
+  "ba_t200s_30f": {
+   "t_start": 200.0,
+   "frames": 30,
+   "first_frame_uniform": false,
+   "mean_frac_changed_per_frame": 0.0012571839080459768,
+   "white_frac": 0.09348958333333333,
+   "by_boundary": {
+    "0": {
+     "hold_first_frame": {
+      "pixel_err": 0.016775173611111107,
+      "pixel_err_last": 0.02734375,
+      "mean_iou_white": 0.8282162426589306,
+      "mean_iou_black": 0.9817994801826707,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.09176432291666667,
+      "pixel_err_last": 0.103515625,
+      "mean_iou_white": 0.06503632967153036,
+      "mean_iou_black": 0.9079408745877076,
+      "change_iou": 0.009458297506448839
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 14,
+       "contexts_conflicting": 10,
+       "min_one_step_errors": 112,
+       "min_one_step_error_rate": 0.001257183908045977
+      },
+      "pixel_err": 0.016775173611111107,
+      "pixel_err_last": 0.02734375,
+      "mean_iou_white": 0.8282162426589306,
+      "mean_iou_black": 0.9817994801826707,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 86,
+       "contexts_conflicting": 23,
+       "min_one_step_errors": 99,
+       "min_one_step_error_rate": 0.001111260775862069
+      },
+      "fit_seconds": 0.0022,
+      "pixel_err": 0.015766059027777776,
+      "pixel_err_last": 0.0263671875,
+      "mean_iou_white": 0.8393235165805647,
+      "mean_iou_black": 0.982869800072827,
+      "change_iou": 0.035398230088495575,
+      "js_replay_matches": true
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 557,
+      "contexts_conflicting": 31,
+      "min_one_step_errors": 88,
+      "min_one_step_error_rate": 0.0009877873563218392
+     }
+    },
+    "1": {
+     "hold_first_frame": {
+      "pixel_err": 0.016775173611111107,
+      "pixel_err_last": 0.02734375,
+      "mean_iou_white": 0.8282162426589306,
+      "mean_iou_black": 0.9817994801826707,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.2264431423611111,
+      "pixel_err_last": 0.2509765625,
+      "mean_iou_white": 0.08282581442767213,
+      "mean_iou_black": 0.7707025537498943,
+      "change_iou": 0.0009145685388422638
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 14,
+       "contexts_conflicting": 10,
+       "min_one_step_errors": 112,
+       "min_one_step_error_rate": 0.001257183908045977
+      },
+      "pixel_err": 0.016775173611111107,
+      "pixel_err_last": 0.02734375,
+      "mean_iou_white": 0.8282162426589306,
+      "mean_iou_black": 0.9817994801826707,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 88,
+       "contexts_conflicting": 23,
+       "min_one_step_errors": 100,
+       "min_one_step_error_rate": 0.001122485632183908
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.015766059027777776,
+      "pixel_err_last": 0.0263671875,
+      "mean_iou_white": 0.8393235165805647,
+      "mean_iou_black": 0.982869800072827,
+      "change_iou": 0.035398230088495575
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 561,
+      "contexts_conflicting": 31,
+      "min_one_step_errors": 88,
+      "min_one_step_error_rate": 0.0009877873563218392
+     }
+    },
+    "wrap": {
+     "hold_first_frame": {
+      "pixel_err": 0.016775173611111107,
+      "pixel_err_last": 0.02734375,
+      "mean_iou_white": 0.8282162426589306,
+      "mean_iou_black": 0.9817994801826707,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.09319661458333335,
+      "pixel_err_last": 0.10677083333333333,
+      "mean_iou_white": 0.08460312888008727,
+      "mean_iou_black": 0.9063170562412622,
+      "change_iou": 0.007222586999343401
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 14,
+       "contexts_conflicting": 10,
+       "min_one_step_errors": 112,
+       "min_one_step_error_rate": 0.001257183908045977
+      },
+      "pixel_err": 0.016775173611111107,
+      "pixel_err_last": 0.02734375,
+      "mean_iou_white": 0.8282162426589306,
+      "mean_iou_black": 0.9817994801826707,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 89088,
+       "contexts_seen": 88,
+       "contexts_conflicting": 23,
+       "min_one_step_errors": 99,
+       "min_one_step_error_rate": 0.001111260775862069
+      },
+      "fit_seconds": 0.0023,
+      "pixel_err": 0.015766059027777776,
+      "pixel_err_last": 0.0263671875,
+      "mean_iou_white": 0.8393235165805647,
+      "mean_iou_black": 0.982869800072827,
+      "change_iou": 0.035398230088495575
+     },
+     "r2_lut_diag": {
+      "transitions": 89088,
+      "contexts_seen": 572,
+      "contexts_conflicting": 31,
+      "min_one_step_errors": 88,
+      "min_one_step_error_rate": 0.0009877873563218392
+     }
+    }
+   }
+  },
+  "ba_t200s_90f": {
+   "t_start": 200.0,
+   "frames": 90,
+   "first_frame_uniform": false,
+   "mean_frac_changed_per_frame": 0.004089126872659176,
+   "white_frac": 0.14020905671296297,
+   "by_boundary": {
+    "0": {
+     "hold_first_frame": {
+      "pixel_err": 0.0637912326388889,
+      "pixel_err_last": 0.14713541666666666,
+      "mean_iou_white": 0.6108462920237008,
+      "mean_iou_black": 0.930817701709563,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.13712384259259258,
+      "pixel_err_last": 0.220703125,
+      "mean_iou_white": 0.041338583165141995,
+      "mean_iou_black": 0.8622405817470324,
+      "change_iou": 0.0075146117450598385
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 17,
+       "contexts_conflicting": 15,
+       "min_one_step_errors": 1118,
+       "min_one_step_error_rate": 0.004089126872659176
+      },
+      "pixel_err": 0.0637912326388889,
+      "pixel_err_last": 0.14713541666666666,
+      "mean_iou_white": 0.6108462920237008,
+      "mean_iou_black": 0.930817701709563,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 177,
+       "contexts_conflicting": 86,
+       "min_one_step_errors": 1086,
+       "min_one_step_error_rate": 0.003972085674157303
+      },
+      "fit_seconds": 0.0068,
+      "pixel_err": 0.0637912326388889,
+      "pixel_err_last": 0.14713541666666666,
+      "mean_iou_white": 0.6108462920237008,
+      "mean_iou_black": 0.930817701709563,
+      "change_iou": 0.0,
+      "js_replay_matches": true
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 2713,
+      "contexts_conflicting": 264,
+      "min_one_step_errors": 869,
+      "min_one_step_error_rate": 0.0031784000468164796
+     }
+    },
+    "1": {
+     "hold_first_frame": {
+      "pixel_err": 0.0637912326388889,
+      "pixel_err_last": 0.14713541666666666,
+      "mean_iou_white": 0.6108462920237008,
+      "mean_iou_black": 0.930817701709563,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.24448423032407404,
+      "pixel_err_last": 0.2705078125,
+      "mean_iou_white": 0.06861201076724678,
+      "mean_iou_black": 0.7517050805091461,
+      "change_iou": 0.002461928934010152
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 17,
+       "contexts_conflicting": 16,
+       "min_one_step_errors": 1115,
+       "min_one_step_error_rate": 0.004078154260299625
+      },
+      "pixel_err": 0.0637912326388889,
+      "pixel_err_last": 0.14713541666666666,
+      "mean_iou_white": 0.6108462920237008,
+      "mean_iou_black": 0.930817701709563,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 185,
+       "contexts_conflicting": 91,
+       "min_one_step_errors": 1075,
+       "min_one_step_error_rate": 0.003931852762172285
+      },
+      "fit_seconds": 0.0069,
+      "pixel_err": 0.0637912326388889,
+      "pixel_err_last": 0.14713541666666666,
+      "mean_iou_white": 0.6108462920237008,
+      "mean_iou_black": 0.930817701709563,
+      "change_iou": 0.0
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 2767,
+      "contexts_conflicting": 266,
+      "min_one_step_errors": 853,
+      "min_one_step_error_rate": 0.003119879447565543
+     }
+    },
+    "wrap": {
+     "hold_first_frame": {
+      "pixel_err": 0.0637912326388889,
+      "pixel_err_last": 0.14713541666666666,
+      "mean_iou_white": 0.6108462920237008,
+      "mean_iou_black": 0.930817701709563,
+      "change_iou": 0.0
+     },
+     "conway": {
+      "pixel_err": 0.13977141203703705,
+      "pixel_err_last": 0.22395833333333334,
+      "mean_iou_white": 0.04745595051102305,
+      "mean_iou_black": 0.8595186742399543,
+      "change_iou": 0.006830255502150265
+     },
+     "bs_family": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 17,
+       "contexts_conflicting": 15,
+       "min_one_step_errors": 1118,
+       "min_one_step_error_rate": 0.004089126872659176
+      },
+      "pixel_err": 0.0637912326388889,
+      "pixel_err_last": 0.14713541666666666,
+      "mean_iou_white": 0.6108462920237008,
+      "mean_iou_black": 0.930817701709563,
+      "change_iou": 0.0
+     },
+     "moore_lut": {
+      "conflicts": {
+       "transitions": 273408,
+       "contexts_seen": 177,
+       "contexts_conflicting": 86,
+       "min_one_step_errors": 1086,
+       "min_one_step_error_rate": 0.003972085674157303
+      },
+      "fit_seconds": 0.007,
+      "pixel_err": 0.0637912326388889,
+      "pixel_err_last": 0.14713541666666666,
+      "mean_iou_white": 0.6108462920237008,
+      "mean_iou_black": 0.930817701709563,
+      "change_iou": 0.0
+     },
+     "r2_lut_diag": {
+      "transitions": 273408,
+      "contexts_seen": 2730,
+      "contexts_conflicting": 264,
+      "min_one_step_errors": 870,
+      "min_one_step_error_rate": 0.003182057584269663
+     }
+    }
+   }
+  }
+ }
+}

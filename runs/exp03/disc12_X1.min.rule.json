@@ -1,0 +1,91 @@
+{
+ "format": "ca-universal/rule-v1",
+ "width": 12,
+ "height": 12,
+ "channels": 3,
+ "observed_channel": 0,
+ "taps": [
+  [
+   0,
+   -1,
+   -1
+  ],
+  [
+   0,
+   -1,
+   0
+  ],
+  [
+   0,
+   -1,
+   1
+  ],
+  [
+   0,
+   0,
+   -1
+  ],
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   -1
+  ],
+  [
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1
+  ],
+  [
+   1,
+   0,
+   0
+  ],
+  [
+   2,
+   0,
+   0
+  ]
+ ],
+ "boundary": 0,
+ "hidden_init": 0,
+ "steps_per_frame": 2,
+ "n_frames": 7,
+ "luts_b64": [
+  "/fX/9xkROjL19f//UVF/f//8///f3B+Y//z//8/MD4j/1f/3uxG6MlVVf39RUX9//1T/d78Qv5hPRH93DwAPiP////+/v/++d1f/f19f/3////913////P///3XP7v/v/////7///753Vf//VfX/f399//zf/d/8f2z/7P/0X+/////3+xM7M///8/PzU//z////////e3P//////+//c/////f787vz//9zc/Pzf/P///tz+xP7U///+3PzA/9Tf9f/9x8fvj5zW/v2X1///v//u/b//77+//679v7+r/7///////869v//+/7//3/2Pz27vj31GBQzPLuu8vqvFg==",
+  "/6//j//v/w+vr4/fL+8v////X4///7+/fy9/3z8/P///p/+H/+//z6amhNVm7mb9//9Xj///v7///3Xd//83/////8P/////o6PD13P/cv33////8//z/3ci/99zf3P/////g/////+iov//u/+q/ff/V4vz/2O/d6L//6q/uv2Hz4fXJ8///4fPh4cmzP//9/9fX/////9Vz38PNzf//4eHh9dnz2d3zITMhO7M7ub//1dX//+v/////QT///4mg//L3/P/////////c91z9/f////z//P3Vc//z3N3c3fT/9vfs///////////3e+v9//f3/P/43fdX/1Z743/rw==",
+  "////rv878Qp/f88Mf//B9/878yL///3ufzsDIv//zf78//yu/yr/Kux/zMztf+3//Cjw///f//9sLwD/zc/N7nc3b23/////fz//fHf38ff/////9z8lL3czIy538yH+7SXtLe8v7y/sL+zs7X/t///////3H3c/ZT9l/0UfZT4r/wOq/woADy99wwAI38Bf+yjzAOzOzM8rKAPMzM7Mz////6r/qqqq///VwP//9Xf/qvqq///////vzMD/z93fs6B33//6c/8vLPf/ANfwf/Mz993szszPIzNX3QDSAB/3oHdf//oz//Xv1d8g//V/8DP1VbMb95vt/93VzN/d1w=="
+ ],
+ "seed_visible_b64": "AAAAAAAAYAAP8AAGAAAAAAAA",
+ "sizes": {
+  "lut_bits": 6144,
+  "seed_bits": 144,
+  "hidden_bits_per_cell": 2,
+  "hidden_init_bits": 0
+ },
+ "meta": {
+  "source": "disc12",
+  "method": "SAT+SOP-dontcare",
+  "cond": "X1",
+  "sop": [
+   "(x0 & x4 & ~x1 & ~x7) | (x1 & x7 & ~x4 & ~x8) | (x2 & x6 & ~x0 & ~x7) | (x1 & ~x0 & ~x10 & ~x5) | (x10 & ~x1 & ~x2 & ~x9) | (x10 & ~x4 & ~x5 & ~x9) | (x2 & ~x0 & ~x1 & ~x6) | (x2 & ~x5 & ~x8 & ~x9) | (x4 & ~x1 & ~x5 & ~x9) | (x7 & ~x10 & ~x2 & ~x3) | (x9 & ~x1 & ~x3 & ~x5) | (x0 & x10 & x7 & ~x1 & ~x8) | (x0 & x4 & x9 & ~x3 & ~x8) | (x1 & x5 & x9 & ~x2 & ~x8) | (x1 & x6 & x9 & ~x0 & ~x10) | (x10 & x8 & x9 & ~x4 & ~x7) | (x4 & x5 & x6 & ~x2 & ~x3) | (x0 & x10 & x4 & x6 & x7 & ~x3) | (x0 & x10 & x4 & x8 & x9 & ~x5) | (x0 & x2 & x4 & x8 & x9 & ~x5) | (x10 & x2 & x3 & x5 & x8 & ~x7) | (x10 & x2 & x3 & x7 & x9 & ~x8) | (x2 & x3 & x5 & x8 & x9 & ~x4) | (~x0 & ~x1 & ~x4 & ~x7) | (~x0 & ~x5 & ~x6 & ~x7) | (x0 & x1 & ~x2 & ~x3 & ~x6) | (x0 & x8 & ~x3 & ~x6 & ~x9) | (x0 & x9 & ~x10 & ~x6 & ~x7) | (x1 & x7 & ~x5 & ~x8 & ~x9) | (x10 & x2 & ~x3 & ~x4 & ~x9) | (x4 & x6 & ~x10 & ~x2 & ~x7) | (x4 & x9 & ~x0 & ~x10 & ~x3) | (x4 & x9 & ~x10 & ~x3 & ~x7) | (x0 & x10 & x5 & x6 & ~x1 & ~x2) | (x1 & x3 & x4 & x9 & ~x0 & ~x2) | (x1 & x5 & x7 & x9 & ~x10 & ~x6) | (x10 & x2 & x4 & x6 & ~x7 & ~x8) | (x10 & x2 & x4 & x7 & ~x0 & ~x9) | (x10 & x2 & x7 & x9 & ~x1 & ~x4) | (x4 & x5 & x6 & x9 & ~x10 & ~x2) | (x0 & x1 & x3 & x4 & x5 & x7 & ~x10) | (x2 & x5 & x6 & x7 & x8 & x9 & ~x4) | (x9 & ~x0 & ~x10 & ~x5 & ~x8) | (x9 & ~x0 & ~x2 & ~x4 & ~x6) | (x1 & x2 & x3 & ~x5 & ~x6 & ~x7) | (x0 & x2 & x3 & x7 & x9 & ~x1 & ~x10) | (x1 & x3 & x7 & x8 & x9 & ~x2 & ~x5) | (x10 & x2 & x3 & x5 & x9 & ~x0 & ~x1) | (x0 & x9 & ~x1 & ~x2 & ~x4 & ~x8) | (x0 & x1 & x10 & x3 & x6 & x9 & ~x2 & ~x4)",
+   "(~x1 & ~x2 & ~x6) | (x0 & x5 & ~x1 & ~x3) | (x2 & x7 & ~x4 & ~x6) | (x3 & x9 & ~x4 & ~x6) | (x5 & x7 & ~x1 & ~x8) | (x7 & x8 & ~x4 & ~x9) | (x0 & x10 & x4 & x5 & ~x1) | (x1 & x10 & x6 & x8 & ~x3) | (x0 & x1 & x5 & x6 & x8 & x9) | (x0 & ~x1 & ~x10 & ~x4) | (x1 & ~x0 & ~x2 & ~x9) | (x7 & ~x0 & ~x3 & ~x5) | (x0 & x1 & x2 & ~x5 & ~x7) | (x0 & x5 & x7 & ~x6 & ~x9) | (x1 & x3 & x5 & ~x10 & ~x2) | (x1 & x3 & x5 & ~x4 & ~x7) | (x10 & x3 & x4 & ~x0 & ~x6) | (x10 & x4 & x5 & ~x8 & ~x9) | (x10 & x6 & x9 & ~x5 & ~x7) | (x2 & x5 & x9 & ~x0 & ~x8) | (x2 & x7 & x9 & ~x6 & ~x8) | (x3 & x4 & x6 & ~x0 & ~x10) | (x3 & x5 & x9 & ~x0 & ~x2) | (x4 & x5 & x9 & ~x6 & ~x7) | (x0 & x1 & x2 & x3 & x8 & ~x10) | (x0 & x1 & x3 & x4 & x7 & ~x10) | (~x10 & ~x2 & ~x8 & ~x9) | (~x10 & ~x3 & ~x6 & ~x7) | (x10 & x9 & ~x0 & ~x1 & ~x2) | (x4 & x7 & ~x2 & ~x5 & ~x8) | (x5 & x7 & ~x1 & ~x10 & ~x9) | (x1 & x2 & x4 & x9 & ~x5 & ~x8) | (x10 & x2 & x8 & x9 & ~x0 & ~x5) | (x2 & x3 & x5 & x9 & ~x1 & ~x10) | (x2 & x4 & x6 & x7 & ~x1 & ~x3) | (x4 & x6 & x8 & x9 & ~x10 & ~x5) | (x0 & x2 & x3 & x4 & x5 & x6 & ~x7) | (x1 & x10 & x3 & ~x4 & ~x5 & ~x8) | (x1 & x5 & x8 & ~x0 & ~x7 & ~x9) | (x10 & x3 & x7 & ~x2 & ~x4 & ~x5) | (x0 & x1 & x10 & x4 & x9 & ~x2 & ~x5) | (x0 & x10 & x2 & x5 & x9 & ~x3 & ~x6) | (x1 & x10 & x2 & x8 & x9 & ~x5 & ~x6) | (~x1 & ~x2 & ~x5 & ~x7 & ~x8) | (x5 & x9 & ~x0 & ~x1 & ~x4 & ~x7) | (x1 & x2 & x7 & x9 & ~x0 & ~x3 & ~x6)",
+   "(x1 & x5 & x7 & ~x9) | (x0 & x10 & x8 & ~x6 & ~x9) | (x0 & x3 & x5 & ~x1 & ~x2) | (x0 & x3 & x5 & ~x2 & ~x6) | (x10 & x4 & x9 & ~x0 & ~x5) | (x3 & x5 & x6 & ~x0 & ~x7) | (x3 & x6 & x8 & ~x2 & ~x4) | (x1 & x10 & x2 & x6 & x8 & ~x5) | (x1 & x10 & x6 & x7 & x8 & ~x3) | (x10 & x4 & x5 & x6 & x8 & ~x0) | (~x1 & ~x10 & ~x4 & ~x8) | (x0 & x1 & ~x2 & ~x4 & ~x9) | (x0 & x2 & ~x1 & ~x4 & ~x5) | (x1 & x8 & ~x10 & ~x3 & ~x7) | (x10 & x8 & ~x3 & ~x4 & ~x9) | (x2 & x7 & ~x3 & ~x5 & ~x6) | (x7 & x9 & ~x10 & ~x5 & ~x6) | (x0 & x2 & x4 & x9 & ~x1 & ~x10) | (x0 & x2 & x5 & x8 & ~x1 & ~x7) | (x0 & x3 & x4 & x7 & ~x1 & ~x10) | (x1 & x10 & x5 & x7 & ~x6 & ~x8) | (x1 & x2 & x4 & x6 & ~x3 & ~x7) | (x1 & x4 & x6 & x8 & ~x10 & ~x7) | (x10 & x3 & x4 & x5 & ~x2 & ~x8) | (x10 & x3 & x4 & x9 & ~x2 & ~x7) | (x2 & x3 & x5 & x6 & ~x10 & ~x8) | (x3 & x4 & x7 & x8 & ~x10 & ~x5) | (x1 & x10 & x2 & x3 & x5 & x6 & ~x4) | (x0 & x1 & x10 & x2 & x4 & x5 & x7 & x8) | (x1 & ~x0 & ~x10 & ~x3 & ~x4) | (x2 & ~x10 & ~x3 & ~x6 & ~x9) | (x9 & ~x0 & ~x10 & ~x2 & ~x6) | (x0 & x2 & x5 & ~x3 & ~x4 & ~x6) | (x0 & x5 & x8 & ~x1 & ~x3 & ~x6) | (x3 & x7 & x9 & ~x1 & ~x4 & ~x5) | (x5 & x7 & x8 & ~x0 & ~x1 & ~x6) | (x1 & x10 & x3 & x4 & x9 & ~x5 & ~x8) | (x1 & x3 & x4 & x7 & x9 & ~x10 & ~x2) | (x1 & x4 & x7 & x8 & x9 & ~x0 & ~x3) | (x10 & x2 & x3 & x5 & x9 & ~x6 & ~x7) | (x2 & x3 & x5 & x6 & x9 & ~x0 & ~x1) | (~x1 & ~x2 & ~x3 & ~x5 & ~x8) | (x0 & x3 & ~x5 & ~x6 & ~x7 & ~x9) | (x1 & x4 & ~x10 & ~x2 & ~x5 & ~x7) | (x10 & x5 & ~x3 & ~x4 & ~x6 & ~x7) | (x10 & x8 & ~x0 & ~x3 & ~x5 & ~x7) | (x10 & x9 & ~x1 & ~x3 & ~x6 & ~x7) | (x5 & x9 & ~x10 & ~x6 & ~x7 & ~x8) | (x0 & x10 & x2 & x9 & ~x4 & ~x6 & ~x7) | (x1 & x2 & x4 & x9 & ~x0 & ~x7 & ~x8) | (x2 & x4 & x6 & x9 & ~x1 & ~x7 & ~x8) | (x6 & x7 & x8 & x9 & ~x0 & ~x2 & ~x5) | (x1 & x10 & x3 & x4 & x6 & x7 & ~x5 & ~x8) | (x3 & ~x0 & ~x4 & ~x5 & ~x7 & ~x9) | (x5 & ~x0 & ~x1 & ~x10 & ~x2 & ~x3) | (x1 & x6 & ~x2 & ~x4 & ~x5 & ~x7 & ~x8)"
+  ]
+ },
+ "expected_sha256": "7ccdbcf1054fe950502c3af34acec116115e1dc0fe0f848b16880719810fcb4e"
+}

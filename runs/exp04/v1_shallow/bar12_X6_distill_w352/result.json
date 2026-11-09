@@ -1,0 +1,45 @@
+{
+ "target": "bar12",
+ "cond": "X6",
+ "hidden_bits": 1,
+ "steps_per_frame": 4,
+ "family": "F_priv",
+ "widths": [
+  128,
+  128,
+  64,
+  32,
+  2
+ ],
+ "n_gates": 354,
+ "opt": {
+  "seeds": 16,
+  "steps": 20000,
+  "widths": "128,128,64,32",
+  "lr": 0.05,
+  "tag": "distill_w352",
+  "eval_every": 1000,
+  "sat_ref": "keep",
+  "skip_auto": 1,
+  "skip_distill": 0,
+  "budget_s": 1500
+ },
+ "device": "cuda:0",
+ "boundary": 0,
+ "hidden_init": 0,
+ "seed_scheme": "seed s: wiring np.random.default_rng(1000+s); logits jax.random.split(PRNGKey(0), seeds)[s]",
+ "sat_status": "SAT",
+ "sat_ref": "bar12_X6_keep",
+ "capacity_distill": {
+  "compute": {
+   "compile_s": 1.32,
+   "train_s": 34.62,
+   "steps_run": 20000,
+   "seeds": 16,
+   "gpu_seconds": 35.93
+  },
+  "best_care_acc": 0.6233211233211233,
+  "seeds_exact": 0,
+  "care_entries": 819
+ }
+}

@@ -1,0 +1,2 @@
+bar12            X6  SAT              wall=  627.3s vars=13136 clauses=13037504
+bar12            X5  UNKNOWN_timeout  wall= 1795.4s vars=5264 clauses=2963488

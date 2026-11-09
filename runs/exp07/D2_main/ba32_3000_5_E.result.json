@@ -1,0 +1,75 @@
+{
+ "target": "ba32_3000_5",
+ "cond": "E",
+ "hidden_bits": 1,
+ "steps_per_frame": 2,
+ "family": "F_priv",
+ "trace": [
+  {
+   "t": 13.8,
+   "exceptions": 282
+  },
+  {
+   "t": 16.0,
+   "exceptions": 266
+  },
+  {
+   "t": 28.4,
+   "exceptions": 204
+  },
+  {
+   "t": 60.9,
+   "exceptions": 164
+  },
+  {
+   "t": 64.7,
+   "exceptions": 155
+  },
+  {
+   "t": 78.0,
+   "exceptions": 103
+  },
+  {
+   "t": 137.7,
+   "exceptions": 95
+  },
+  {
+   "t": 197.9,
+   "exceptions": 90
+  },
+  {
+   "t": 369.9,
+   "exceptions": 82
+  },
+  {
+   "t": 491.2,
+   "exceptions": 78
+  }
+ ],
+ "status": "BEST_SO_FAR_budget",
+ "search_code_snapshot": "b1f106e851cb",
+ "encode_s": 11.4,
+ "n_clauses": 8292864,
+ "changed_pixels": 13,
+ "shared": {
+  "note": "excluded from every method's cost: W, H, T, fps, threshold, first frame",
+  "first_frame_raw_bits": 768,
+  "W": 32,
+  "H": 24,
+  "T": 5
+ },
+ "recording_bits": {
+  "changelist": 195,
+  "xor_rle": 260,
+  "frame_rle": 1644
+ },
+ "objective": "hamming to REF_LUTS",
+ "ref_luts": "runs/exp07/R0_main/best_luts.npy",
+ "keep_exceptions": 664,
+ "best_exceptions": 78,
+ "rule_bits": 1726,
+ "rule_bitstream_decodes_to_exact": true,
+ "python_rollout_exact": true,
+ "node_hash_matches_target": true,
+ "visited_entries": 297
+}

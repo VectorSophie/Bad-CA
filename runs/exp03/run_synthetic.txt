@@ -1,0 +1,10 @@
+disc12           A  UNSAT            wall=    0.2s vars=62 clauses=864
+disc12           B  UNSAT            wall=    0.2s vars=1112 clauses=4752
+bar12            B  UNSAT            wall=    0.2s vars=1916 clauses=9072
+bar12            A  UNSAT            wall=    0.2s vars=83 clauses=1584
+disc12           C  UNSAT            wall=    0.2s vars=2472 clauses=15120
+bar12            C  UNSAT            wall=    0.2s vars=4164 clauses=29520
+disc12           D  UNSAT            wall=    1.1s vars=1376 clauses=324672
+bar12            D  UNSAT            wall=    1.9s vars=2096 clauses=595232
+disc12           E  SAT              wall=    7.4s vars=4640 clauses=1944000
+bar12            E  UNSAT            wall=    7.8s vars=6800 clauses=3564480

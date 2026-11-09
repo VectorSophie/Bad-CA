@@ -1,0 +1,11 @@
+{"encoded_s": 11.9, "n_clauses": 8292864, "n_vars": 11264, "code_snapshot": "9b8f0db4a7ba"}
+{"t": 13.2, "exceptions": 239}
+{"t": 17.3, "exceptions": 192}
+{"t": 19.6, "exceptions": 190}
+{"t": 86.2, "exceptions": 172}
+{"t": 142.1, "exceptions": 158}
+{"t": 157.7, "exceptions": 147}
+{"t": 222.3, "exceptions": 140}
+{"t": 235.4, "exceptions": 133}
+{"t": 296.4, "exceptions": 123}
+{"t": 440.1, "exceptions": 83}

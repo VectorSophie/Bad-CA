@@ -1,0 +1,45 @@
+{
+ "target": "disc12",
+ "cond": "E",
+ "hidden_bits": 1,
+ "steps_per_frame": 2,
+ "family": "F_priv",
+ "widths": [
+  256,
+  256,
+  128,
+  64,
+  32,
+  2
+ ],
+ "n_gates": 738,
+ "opt": {
+  "seeds": 16,
+  "steps": 20000,
+  "widths": "256,256,128,64,32",
+  "lr": 0.05,
+  "tag": "distill_w736",
+  "eval_every": 1000,
+  "sat_ref": "keep",
+  "skip_auto": 1,
+  "skip_distill": 0
+ },
+ "device": "cuda:0",
+ "boundary": 0,
+ "hidden_init": 0,
+ "seed_scheme": "seed s: wiring np.random.default_rng(1000+s); logits jax.random.split(PRNGKey(0), seeds)[s]",
+ "sat_status": "SAT",
+ "sat_ref": "disc12_E_keep",
+ "capacity_distill": {
+  "compute": {
+   "compile_s": 1.54,
+   "train_s": 38.58,
+   "steps_run": 20000,
+   "seeds": 16,
+   "gpu_seconds": 40.12
+  },
+  "best_care_acc": 0.7487373737373737,
+  "seeds_exact": 0,
+  "care_entries": 396
+ }
+}

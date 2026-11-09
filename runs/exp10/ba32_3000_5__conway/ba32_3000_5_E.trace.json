@@ -1,0 +1,1 @@
+{"trace": [{"t": 13.4, "exceptions": 340}, {"t": 17.9, "exceptions": 283}, {"t": 37.4, "exceptions": 276}, {"t": 72.3, "exceptions": 220}, {"t": 90.0, "exceptions": 215}, {"t": 110.9, "exceptions": 209}, {"t": 201.9, "exceptions": 190}, {"t": 288.0, "exceptions": 183}], "status": "running", "encode_s": 11.6, "n_clauses": 8292864, "n_vars": 11264, "code_snapshot": "9b8f0db4a7ba"}

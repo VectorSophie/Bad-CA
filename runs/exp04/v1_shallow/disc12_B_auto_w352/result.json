@@ -1,0 +1,71 @@
+{
+ "target": "disc12",
+ "cond": "B",
+ "hidden_bits": 1,
+ "steps_per_frame": 1,
+ "family": "F_priv",
+ "widths": [
+  128,
+  128,
+  64,
+  32,
+  2
+ ],
+ "n_gates": 354,
+ "opt": {
+  "seeds": 16,
+  "steps": 20000,
+  "widths": "128,128,64,32",
+  "lr": 0.05,
+  "tag": "auto_w352",
+  "eval_every": 500,
+  "sat_ref": "",
+  "skip_auto": 0,
+  "skip_distill": 1,
+  "budget_s": 1500
+ },
+ "device": "cuda:0",
+ "boundary": 0,
+ "hidden_init": 0,
+ "seed_scheme": "seed s: wiring np.random.default_rng(1000+s); logits jax.random.split(PRNGKey(0), seeds)[s]",
+ "sat_status": "UNSAT",
+ "sat_ref": "disc12_B",
+ "autonomous": {
+  "compute": {
+   "compile_s": 1.56,
+   "train_s": 283.86,
+   "steps_run": 20000,
+   "seeds": 16,
+   "gpu_seconds": 285.43
+  },
+  "seeds_exact": 0,
+  "best_seed": 2,
+  "best_it": 6500,
+  "hard_pixel_err": 0.12599206349206352,
+  "hard_change_iou": 0.13872832369942195,
+  "soft_thresh_pixel_err": 0.10416666666666666,
+  "soft_loss": 0.08235613256692886,
+  "hold_pixel_err": 0.18650793650793648,
+  "live_gates": 23,
+  "visited_entries": 99,
+  "node_replay_matches_python": true,
+  "per_seed_hard_err": [
+   0.2034,
+   0.2659,
+   0.126,
+   0.2401,
+   0.2381,
+   0.2222,
+   0.2034,
+   0.1528,
+   0.2659,
+   0.2222,
+   0.2044,
+   0.244,
+   0.2649,
+   0.1974,
+   0.3274,
+   0.2758
+  ]
+ }
+}

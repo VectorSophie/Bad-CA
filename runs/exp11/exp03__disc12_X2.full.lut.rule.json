@@ -1,0 +1,78 @@
+{
+ "format": "ca-universal/rule-v1",
+ "width": 12,
+ "height": 12,
+ "channels": 2,
+ "observed_channel": 0,
+ "taps": [
+  [
+   0,
+   -1,
+   -1
+  ],
+  [
+   0,
+   -1,
+   0
+  ],
+  [
+   0,
+   -1,
+   1
+  ],
+  [
+   0,
+   0,
+   -1
+  ],
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   -1
+  ],
+  [
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1
+  ],
+  [
+   1,
+   0,
+   0
+  ]
+ ],
+ "boundary": 0,
+ "hidden_init": 0,
+ "steps_per_frame": 3,
+ "n_frames": 7,
+ "luts_b64": [
+  "IMZT1mcRFv3gLCgFO2VyUB5n5gpUXUUZVkjDUXnoPYneLPNBmD3tAZpAEkEkBYSAdHZOAg0BVQNKBERCeQBFCWYIdEkNvvJRVTb9H0QUKDox+HWhgRVzWQcNFgikACERLyNeB0uKIEKQASEMh6gSSlEAKaEBABPABBJARJA4GsE=",
+  "3EkVr81xV+QWiwUKCVCQQCUBEQgRFVAJAUuAGIWJIQRAjGFGAABIAVVAEgAhKAEAIwAgAD4AQRAIAEAJeJEQA4glXwDfIMLCUHaAHQARwDKIjDEjEAExaQABBwiERAGBAqFiBSiLYEiQAAAJIIQMSnABAIABAPTQAQIiQgA4A4g="
+ ],
+ "seed_visible_b64": "AAAAAAAAYAAP8AAGAAAAAAAA",
+ "sizes": {
+  "lut_bits": 2048,
+  "seed_bits": 144,
+  "hidden_bits_per_cell": 1,
+  "hidden_init_bits": 0
+ },
+ "meta": {
+  "label": "exp03__disc12_X2"
+ },
+ "expected_sha256": "7ccdbcf1054fe950502c3af34acec116115e1dc0fe0f848b16880719810fcb4e"
+}

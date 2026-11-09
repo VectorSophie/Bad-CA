@@ -1,0 +1,28 @@
+{
+ "target": "bar12",
+ "cond": "X2",
+ "hidden_bits": 1,
+ "steps_per_frame": 3,
+ "family": "F_priv",
+ "boundary": 0,
+ "hidden_init": 0,
+ "shape": [
+  12,
+  12,
+  12
+ ],
+ "solver": "cadical195 (pysat), default options, deterministic",
+ "encode_s": 10.25,
+ "n_vars": 9968,
+ "n_clauses": 8300992,
+ "lut_vars": 2048,
+ "solve_s": 0.45,
+ "status": "UNSAT",
+ "returncode": 0,
+ "wall_s": 16.8,
+ "limits": {
+  "wall_s": 1800,
+  "cpu_s": 1800,
+  "mem_gb": 32
+ }
+}

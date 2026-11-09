@@ -1,0 +1,39 @@
+{
+ "target": "ba32_4500_5",
+ "cond": "E",
+ "hidden_bits": 1,
+ "steps_per_frame": 2,
+ "family": "F_priv",
+ "arch": "ref: 16 perception kernels [8,4,2,1] + update (128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 64, 32, 16, 8, 4)+[2]",
+ "opt": {
+  "seeds": 16,
+  "steps": 5000,
+  "kernels": 16,
+  "depth": 16,
+  "lr": 0.05,
+  "tag": "distill_ref",
+  "eval_every": 500,
+  "sat_ref": "keep",
+  "skip_auto": 1,
+  "skip_distill": 0,
+  "budget_s": 1500
+ },
+ "device": "cuda:0",
+ "boundary": 0,
+ "hidden_init": 0,
+ "seed_scheme": "seed s: wiring permutations np.random.default_rng(1000+s); logits deterministic pass-through init",
+ "sat_status": "SAT",
+ "sat_ref": "ba32_4500_5_E_keep",
+ "capacity_distill": {
+  "compute": {
+   "compile_s": 3.7,
+   "train_s": 47.48,
+   "steps_run": 5000,
+   "seeds": 16,
+   "gpu_seconds": 51.18
+  },
+  "best_care_acc": 0.9792,
+  "seeds_exact": 0,
+  "care_entries": 625
+ }
+}

@@ -1,0 +1,6 @@
+disc12 X4 rc=134
+ba32_4500_5 E rc=137
+disc12 E rc=137
+ba32_3000_5 E rc=137
+bar12 X6 rc=137
+disc12 X1 rc=137

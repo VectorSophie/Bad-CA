@@ -1,0 +1,10 @@
+ba32_4500_5      B  UNSAT            wall=    0.3s vars=3532 clauses=16128
+ba32_3000_5      A  UNSAT            wall=    0.3s vars=63 clauses=3072
+ba32_4500_5      A  UNSAT            wall=    0.3s vars=124 clauses=3072
+ba32_3000_5      B  UNSAT            wall=    0.3s vars=3324 clauses=16128
+ba32_3000_5      C  UNSAT            wall=    0.3s vars=6900 clauses=49920
+ba32_4500_5      C  UNSAT            wall=    0.3s vars=7470 clauses=49920
+ba32_4500_5      D  UNSAT            wall=    4.6s vars=3584 clauses=1384704
+ba32_3000_5      D  UNSAT            wall=    4.6s vars=3584 clauses=1384704
+ba32_3000_5      E  SAT              wall=   19.2s vars=11264 clauses=8292864
+ba32_4500_5      E  SAT              wall=   19.2s vars=11264 clauses=8292864

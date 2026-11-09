@@ -1,0 +1,238 @@
+{
+ "method": "T1",
+ "track": "teacher (diagnostic, not discovery)",
+ "target": "ba32_3000_5",
+ "family": "F_priv",
+ "k": 1,
+ "S": 2,
+ "boundary": 0,
+ "hidden_init": 0,
+ "opt": {
+  "budget_s": 60.0,
+  "seeds": 4,
+  "tag": "pilot",
+  "lr": 0.05,
+  "eval_s": 20.0,
+  "teacher_w": 1.0
+ },
+ "code_snapshot": "b1f106e851cb",
+ "device": "cuda:0",
+ "seeds": [
+  1000,
+  1001,
+  1002,
+  1003
+ ],
+ "compute": {
+  "compile_s": 5.47,
+  "train_wall_s": 61.5,
+  "steps": 1478,
+  "seeds": 4
+ },
+ "selected_seed": 1000,
+ "selected": {
+  "seed": 1000,
+  "exact": false,
+  "hard_pixel_err": 0.00703125,
+  "change_iou": 0.0,
+  "it": 337,
+  "t": 20.0,
+  "live_gates": 44,
+  "circuit_bits": 679,
+  "lut_exception_bits": 1114,
+  "own_output_recording_bits": {
+   "changelist": 4,
+   "xor_rle": 76,
+   "frame_rle": 1652
+  },
+  "gaps": {
+   "soft_gates_soft_state": 0.0087890625,
+   "soft_gates_round_state": 0.0087890625,
+   "soft_gates_round_hidden": 0.0087890625,
+   "hard_gates_soft_state": 0.0087890625,
+   "hard_gates_round_state": 0.0087890625,
+   "per_frame_soft": [
+    0.0013020833333333333,
+    0.005208333333333333,
+    0.01171875,
+    0.016927083333333332
+   ],
+   "per_frame_hard": [
+    0.0013020833333333333,
+    0.005208333333333333,
+    0.01171875,
+    0.016927083333333332
+   ],
+   "one_step_disagreement_per_channel": [
+    0.0,
+    0.029947916666666668
+   ]
+  }
+ },
+ "per_seed": [
+  {
+   "seed": 1000,
+   "exact": false,
+   "hard_pixel_err": 0.00703125,
+   "change_iou": 0.0,
+   "it": 337,
+   "t": 20.0,
+   "live_gates": 44,
+   "circuit_bits": 679,
+   "lut_exception_bits": 1114,
+   "own_output_recording_bits": {
+    "changelist": 4,
+    "xor_rle": 76,
+    "frame_rle": 1652
+   },
+   "gaps": {
+    "soft_gates_soft_state": 0.0087890625,
+    "soft_gates_round_state": 0.0087890625,
+    "soft_gates_round_hidden": 0.0087890625,
+    "hard_gates_soft_state": 0.0087890625,
+    "hard_gates_round_state": 0.0087890625,
+    "per_frame_soft": [
+     0.0013020833333333333,
+     0.005208333333333333,
+     0.01171875,
+     0.016927083333333332
+    ],
+    "per_frame_hard": [
+     0.0013020833333333333,
+     0.005208333333333333,
+     0.01171875,
+     0.016927083333333332
+    ],
+    "one_step_disagreement_per_channel": [
+     0.0,
+     0.029947916666666668
+    ]
+   }
+  },
+  {
+   "seed": 1001,
+   "exact": false,
+   "hard_pixel_err": 0.00703125,
+   "change_iou": 0.0,
+   "it": 337,
+   "t": 20.0,
+   "live_gates": 39,
+   "circuit_bits": 599,
+   "lut_exception_bits": 1216,
+   "own_output_recording_bits": {
+    "changelist": 4,
+    "xor_rle": 76,
+    "frame_rle": 1652
+   },
+   "gaps": {
+    "soft_gates_soft_state": 0.007486979166666667,
+    "soft_gates_round_state": 0.0087890625,
+    "soft_gates_round_hidden": 0.007486979166666667,
+    "hard_gates_soft_state": 0.0087890625,
+    "hard_gates_round_state": 0.0087890625,
+    "per_frame_soft": [
+     0.0013020833333333333,
+     0.005208333333333333,
+     0.01171875,
+     0.01171875
+    ],
+    "per_frame_hard": [
+     0.0013020833333333333,
+     0.005208333333333333,
+     0.01171875,
+     0.016927083333333332
+    ],
+    "one_step_disagreement_per_channel": [
+     0.0,
+     0.010416666666666666
+    ]
+   }
+  },
+  {
+   "seed": 1002,
+   "exact": false,
+   "hard_pixel_err": 0.00703125,
+   "change_iou": 0.0,
+   "it": 337,
+   "t": 20.0,
+   "live_gates": 13,
+   "circuit_bits": 197,
+   "lut_exception_bits": 1000,
+   "own_output_recording_bits": {
+    "changelist": 4,
+    "xor_rle": 76,
+    "frame_rle": 1652
+   },
+   "gaps": {
+    "soft_gates_soft_state": 0.0078125,
+    "soft_gates_round_state": 0.0087890625,
+    "soft_gates_round_hidden": 0.0078125,
+    "hard_gates_soft_state": 0.0087890625,
+    "hard_gates_round_state": 0.0087890625,
+    "per_frame_soft": [
+     0.0013020833333333333,
+     0.005208333333333333,
+     0.010416666666666666,
+     0.014322916666666666
+    ],
+    "per_frame_hard": [
+     0.0013020833333333333,
+     0.005208333333333333,
+     0.01171875,
+     0.016927083333333332
+    ],
+    "one_step_disagreement_per_channel": [
+     0.0,
+     0.052083333333333336
+    ]
+   }
+  },
+  {
+   "seed": 1003,
+   "exact": false,
+   "hard_pixel_err": 0.00703125,
+   "change_iou": 0.0,
+   "it": 337,
+   "t": 20.0,
+   "live_gates": 28,
+   "circuit_bits": 421,
+   "lut_exception_bits": 824,
+   "own_output_recording_bits": {
+    "changelist": 4,
+    "xor_rle": 76,
+    "frame_rle": 1652
+   },
+   "gaps": {
+    "soft_gates_soft_state": 0.007161458333333333,
+    "soft_gates_round_state": 0.0087890625,
+    "soft_gates_round_hidden": 0.007161458333333333,
+    "hard_gates_soft_state": 0.0087890625,
+    "hard_gates_round_state": 0.0087890625,
+    "per_frame_soft": [
+     0.0013020833333333333,
+     0.005208333333333333,
+     0.010416666666666666,
+     0.01171875
+    ],
+    "per_frame_hard": [
+     0.0013020833333333333,
+     0.005208333333333333,
+     0.01171875,
+     0.016927083333333332
+    ],
+    "one_step_disagreement_per_channel": [
+     0.0,
+     0.07421875
+    ]
+   }
+  }
+ ],
+ "any_exact": false,
+ "hold_pixel_err": 0.00703125,
+ "node_replay_matches_python": true,
+ "target_recording_bits": {
+  "changelist": 195,
+  "xor_rle": 260,
+  "frame_rle": 1644
+ }
+}

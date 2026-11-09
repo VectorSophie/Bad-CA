@@ -1,0 +1,80 @@
+{
+ "format": "ca-universal/rule-v1",
+ "width": 12,
+ "height": 12,
+ "channels": 2,
+ "observed_channel": 0,
+ "taps": [
+  [
+   0,
+   -1,
+   -1
+  ],
+  [
+   0,
+   -1,
+   0
+  ],
+  [
+   0,
+   -1,
+   1
+  ],
+  [
+   0,
+   0,
+   -1
+  ],
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   -1
+  ],
+  [
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1
+  ],
+  [
+   1,
+   0,
+   0
+  ]
+ ],
+ "boundary": 0,
+ "hidden_init": 0,
+ "steps_per_frame": 2,
+ "n_frames": 7,
+ "luts_b64": [
+  "0Y8KjHvn5MjR0hLA2pUYPPPb8INZyPjMw6Cd6e7jssQevgvpUgG50LAS1Yjy2ey5tbAAAuGpec23nFhxoIouqxrCsHCxUIAASl3qK9RVoXBgWqBRbu6CvHLl81bGar80M1/6zoNPZuo0Nc5ejMDbbh5Msq5K9iA+AF799u/vUSQ=",
+  "Rwe/LDWgP5sCbTiQbeAZ/7/NiVeKM2qv7hy4fncf0ZMSneRpQGJT8JlFvxH9eAL0BoKIHubG/G6uZn12c2AAhCvkqFJA+kgVj0MYqBuwgJ9jlmM6fd1yAl2GziWXwtin+L0eCWkFa1CMcQaqjzoEOd/SYritKYKxuAmtnuxKkcQ="
+ ],
+ "seed_visible_b64": "AAAAAAAAYAAP8AAGAAAAAAAA",
+ "sizes": {
+  "lut_bits": 2048,
+  "seed_bits": 144,
+  "hidden_bits_per_cell": 1,
+  "hidden_init_bits": 0
+ },
+ "meta": {
+  "source": "disc12",
+  "method": "SAT",
+  "cond": "E"
+ },
+ "expected_sha256": "7ccdbcf1054fe950502c3af34acec116115e1dc0fe0f848b16880719810fcb4e"
+}

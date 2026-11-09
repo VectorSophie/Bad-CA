@@ -1,0 +1,70 @@
+{
+ "format": "ca-universal/rule-v1",
+ "width": 32,
+ "height": 32,
+ "channels": 1,
+ "observed_channel": 0,
+ "taps": [
+  [
+   0,
+   -1,
+   -1
+  ],
+  [
+   0,
+   -1,
+   0
+  ],
+  [
+   0,
+   -1,
+   1
+  ],
+  [
+   0,
+   0,
+   -1
+  ],
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   -1
+  ],
+  [
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1
+  ]
+ ],
+ "boundary": "wrap",
+ "hidden_init": 0,
+ "steps_per_frame": 1,
+ "n_frames": 30,
+ "luts_b64": [
+  "gGjofmgWfhdoFn4XFgEXAWgWfhcWARcBFgEXAQEAAQBoFn4XFgEXARYBFwEBAAEAFgEXAQEAAQABAAEAAAAAAA=="
+ ],
+ "seed_visible_b64": "Dqg0AAlK6WwlAAARIZGisUOARKVgNGBCEotU4CgUAQmiKAFACkFAaGhqFIbMuBKxAChdAaAQYAIDZMzGAAyQBYSN4CQGK7zSQDigQRNGQkeDIScZLjOMIAqAlQCUaSRThq4hEaSkQA5XFKSaAAMAKIEogjOEw6AgUIiAjVLBb0M=",
+ "sizes": {
+  "lut_bits": 512,
+  "seed_bits": 1024,
+  "hidden_bits_per_cell": 0,
+  "hidden_init_bits": 0
+ },
+ "meta": {},
+ "expected_sha256": "d1d9290dbb549d625eb07f4b2f0aa996b0aa2201c30f30c5c44ef7a448e9d888"
+}

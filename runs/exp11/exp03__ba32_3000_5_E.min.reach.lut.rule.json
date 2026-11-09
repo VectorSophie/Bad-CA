@@ -1,0 +1,78 @@
+{
+ "format": "ca-universal/rule-v1",
+ "width": 32,
+ "height": 24,
+ "channels": 2,
+ "observed_channel": 0,
+ "taps": [
+  [
+   0,
+   -1,
+   -1
+  ],
+  [
+   0,
+   -1,
+   0
+  ],
+  [
+   0,
+   -1,
+   1
+  ],
+  [
+   0,
+   0,
+   -1
+  ],
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   -1
+  ],
+  [
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1
+  ],
+  [
+   1,
+   0,
+   0
+  ]
+ ],
+ "boundary": 0,
+ "hidden_init": 0,
+ "steps_per_frame": 2,
+ "n_frames": 5,
+ "luts_b64": [
+  "AIqA1EggwBIAAFh/AADzXwAAtNkAALvvAAH+fwAAy/8QAIr7QQD5+QAA0rEAAO/XAQAYvRAA+X4AAND0AEC/v5GA/d2QwL7fAIhf/gCA//8AAE7/AIDL3wGBzvsAiP//AQD+XyBA6v+QANbdAMD7/4AIv//UTO/vAYr//Ihn//8=",
+  "DoqyofghbqIZB6ePCiEIiJqUCSUBPUAwJH0AiQANNIKlJDWE3wpHBAEBDGJIiRAopQWnYjkBR4EBAS+LAqDCw3C6m1/Yfze393df+/9/9//+/e/1/32Pn///z1f/9///7v//317/3+/v/9f///f/93/3//+75//P/nX//++t//8="
+ ],
+ "seed_visible_b64": "/wcAAP8HAAD/BwAA/wcAAP8DAAD/A/AA/wHgAf8A4AF/AMADHwCAAwAAwAMAAMAHAADABwAAwAcAAMAHAADABwAAwAMAAMADAADABwAA4AcAAOAPAADgDwAA4B8AAOAf",
+ "sizes": {
+  "lut_bits": 2048,
+  "seed_bits": 768,
+  "hidden_bits_per_cell": 1,
+  "hidden_init_bits": 0
+ },
+ "meta": {
+  "label": "exp03__ba32_3000_5_E.min"
+ },
+ "expected_sha256": "b624dcdcfd5bfa25e257dd1991201e6249ff039ba7226c7f0fdf5450c74da08a"
+}

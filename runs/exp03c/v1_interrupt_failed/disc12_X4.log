@@ -1,0 +1,13 @@
+{"t": 1.9, "exceptions": 303}
+{"t": 19.6, "exceptions": 222}
+{"t": 20.7, "exceptions": 217}
+{"t": 22.6, "exceptions": 209}
+{"t": 146.4, "exceptions": 196}
+{"t": 494.7, "exceptions": 192}
+{"t": 690.7, "exceptions": 179}
+{"t": 1316.1, "exceptions": 176}
+{"t": 1481.4, "exceptions": 175}
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+{"t": 1641.4, "exceptions": 170}

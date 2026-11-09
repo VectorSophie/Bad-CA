@@ -1,0 +1,398 @@
+[
+ {
+  "task": "conway",
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.01,
+  "residual": 0.0,
+  "best_hard_acc": 0.76953125,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.12224604934453964,
+  "seconds": 6.4
+ },
+ {
+  "task": "conway",
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.01,
+  "residual": 3.0,
+  "best_hard_acc": 0.794921875,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.12063619494438171,
+  "seconds": 6.1
+ },
+ {
+  "task": "conway",
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.05,
+  "residual": 0.0,
+  "best_hard_acc": 0.80078125,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.11149365454912186,
+  "seconds": 6.1
+ },
+ {
+  "task": "conway",
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.05,
+  "residual": 3.0,
+  "best_hard_acc": 0.79296875,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.11120010167360306,
+  "seconds": 6.1
+ },
+ {
+  "task": "conway",
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.2,
+  "residual": 0.0,
+  "best_hard_acc": 0.8125,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.1206592321395874,
+  "seconds": 6.2
+ },
+ {
+  "task": "conway",
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.2,
+  "residual": 3.0,
+  "best_hard_acc": 0.794921875,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.10960526764392853,
+  "seconds": 6.2
+ },
+ {
+  "task": "conway",
+  "widths": [
+   256,
+   256,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.01,
+  "residual": 0.0,
+  "best_hard_acc": 0.83203125,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.09994085878133774,
+  "seconds": 12.4
+ },
+ {
+  "task": "conway",
+  "widths": [
+   256,
+   256,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.01,
+  "residual": 3.0,
+  "best_hard_acc": 0.78515625,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.10434285551309586,
+  "seconds": 12.2
+ },
+ {
+  "task": "conway",
+  "widths": [
+   256,
+   256,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.05,
+  "residual": 0.0,
+  "best_hard_acc": 0.802734375,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.10990849882364273,
+  "seconds": 12.2
+ },
+ {
+  "task": "conway",
+  "widths": [
+   256,
+   256,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.05,
+  "residual": 3.0,
+  "best_hard_acc": 0.826171875,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.09862491488456726,
+  "seconds": 12.3
+ },
+ {
+  "task": "conway",
+  "widths": [
+   256,
+   256,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.2,
+  "residual": 0.0,
+  "best_hard_acc": 0.8203125,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.09475238621234894,
+  "seconds": 12.2
+ },
+ {
+  "task": "conway",
+  "widths": [
+   256,
+   256,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.2,
+  "residual": 3.0,
+  "best_hard_acc": 0.833984375,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.0963425412774086,
+  "seconds": 12.3
+ },
+ {
+  "task": "random400",
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.01,
+  "residual": 0.0,
+  "best_hard_acc": 0.6525,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.18975089490413666,
+  "seconds": 5.4
+ },
+ {
+  "task": "random400",
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.01,
+  "residual": 3.0,
+  "best_hard_acc": 0.68,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.19342906773090363,
+  "seconds": 5.2
+ },
+ {
+  "task": "random400",
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.05,
+  "residual": 0.0,
+  "best_hard_acc": 0.655,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.1993749588727951,
+  "seconds": 5.2
+ },
+ {
+  "task": "random400",
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.05,
+  "residual": 3.0,
+  "best_hard_acc": 0.655,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.19296379387378693,
+  "seconds": 5.2
+ },
+ {
+  "task": "random400",
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.2,
+  "residual": 0.0,
+  "best_hard_acc": 0.665,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.19068898260593414,
+  "seconds": 5.2
+ },
+ {
+  "task": "random400",
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.2,
+  "residual": 3.0,
+  "best_hard_acc": 0.67,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.19834014773368835,
+  "seconds": 5.3
+ },
+ {
+  "task": "random400",
+  "widths": [
+   256,
+   256,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.01,
+  "residual": 0.0,
+  "best_hard_acc": 0.6325,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.19675876200199127,
+  "seconds": 9.9
+ },
+ {
+  "task": "random400",
+  "widths": [
+   256,
+   256,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.01,
+  "residual": 3.0,
+  "best_hard_acc": 0.715,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.16680298745632172,
+  "seconds": 9.7
+ },
+ {
+  "task": "random400",
+  "widths": [
+   256,
+   256,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.05,
+  "residual": 0.0,
+  "best_hard_acc": 0.7,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.17434364557266235,
+  "seconds": 9.7
+ },
+ {
+  "task": "random400",
+  "widths": [
+   256,
+   256,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.05,
+  "residual": 3.0,
+  "best_hard_acc": 0.71,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.16664640605449677,
+  "seconds": 9.7
+ },
+ {
+  "task": "random400",
+  "widths": [
+   256,
+   256,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.2,
+  "residual": 0.0,
+  "best_hard_acc": 0.67,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.18171395361423492,
+  "seconds": 9.7
+ },
+ {
+  "task": "random400",
+  "widths": [
+   256,
+   256,
+   128,
+   64,
+   32,
+   1
+  ],
+  "lr": 0.2,
+  "residual": 3.0,
+  "best_hard_acc": 0.715,
+  "seeds_exact": 0,
+  "min_soft_loss": 0.16668906807899475,
+  "seconds": 9.8
+ }
+]

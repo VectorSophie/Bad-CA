@@ -1,0 +1,34 @@
+{
+ "method": "D1",
+ "track": "video only",
+ "start": "runs/exp07/R0_main/best_params.pkl",
+ "code_snapshot": "b1f106e851cb",
+ "budget_s": 600.0,
+ "wall_s": 600.0,
+ "evals": 89113,
+ "rng_seed": 0,
+ "start_wrong_pixels": 22,
+ "wrong_pixels": 21,
+ "exact": false,
+ "hard_pixel_err": 0.00546875,
+ "change_iou": 0.15384615384615385,
+ "live_gates": 363,
+ "circuit_bits": 7131,
+ "lut_exception_bits": 1324,
+ "own_output_recording_bits": {
+  "changelist": 46,
+  "xor_rle": 100,
+  "frame_rle": 1652
+ },
+ "node_replay_matches_python": true,
+ "trace": [
+  {
+   "t": 0.0,
+   "wrong_pixels": 22
+  },
+  {
+   "t": 359.0,
+   "wrong_pixels": 21
+  }
+ ]
+}

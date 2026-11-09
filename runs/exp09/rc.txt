@@ -1,0 +1,15 @@
+exp09/cold_L5 rc=0
+exp09/cold_L10 rc=0
+exp10/ba32_3000_5__keep rc=137
+exp10/ba32_3000_5__R0 rc=137
+exp10/ba32_3000_5__random rc=137
+exp10/ba32_3000_5__conway rc=137
+exp09/cold_L40 rc=137
+exp09/cold_L20 rc=137
+exp10/ba32_4500_10__random rc=137
+exp10/ba32_4500_10__conway rc=137
+exp10/ba32_4500_10__keep rc=137
+exp09/incr_prev_sched rc=137
+exp09/incr_keep_step1 rc=137
+exp09/incr_prev_step1 rc=137
+ALLDONE

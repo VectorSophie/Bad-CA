@@ -1,0 +1,7 @@
+disc12_X4_keep       X4  SAT              wall=    2.0s vars=64352 clauses=807792
+disc12_E_keep        E  SAT              wall=    4.5s vars=4640 clauses=1944000
+disc12_X1_keep       X1  SAT              wall=   12.9s vars=10464 clauses=6477024
+disc12_X2_keep       X2  SAT              wall=   13.9s vars=6368 clauses=4527552
+ba32_3000_5_E_keep   E  SAT              wall=   18.5s vars=11264 clauses=8292864
+ba32_4500_5_E_keep   E  SAT              wall=   20.5s vars=11264 clauses=8292864
+bar12_X6_keep        X6  SAT              wall=  422.6s vars=13136 clauses=13037504

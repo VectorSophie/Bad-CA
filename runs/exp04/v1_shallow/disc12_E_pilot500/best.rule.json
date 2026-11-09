@@ -1,0 +1,89 @@
+{
+ "format": "ca-universal/rule-v1",
+ "width": 12,
+ "height": 12,
+ "channels": 2,
+ "observed_channel": 0,
+ "taps": [
+  [
+   0,
+   -1,
+   -1
+  ],
+  [
+   0,
+   -1,
+   0
+  ],
+  [
+   0,
+   -1,
+   1
+  ],
+  [
+   0,
+   0,
+   -1
+  ],
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   -1
+  ],
+  [
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1
+  ],
+  [
+   1,
+   0,
+   0
+  ]
+ ],
+ "boundary": 0,
+ "hidden_init": 0,
+ "steps_per_frame": 2,
+ "n_frames": 7,
+ "luts_b64": [
+  "zMzMzMzMzMzMzMzMzMzMzP/////////////////////MzMzMzMzMzMzMzMzMzMzM/////////////////////8zMzMzMzMzMzMzMzMzMzMz/////////////////////zMzMzMzMzMzMzMzMzMzMzP////////////////////8=",
+  "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8="
+ ],
+ "seed_visible_b64": "AAAAAAAAYAAP8AAGAAAAAAAA",
+ "sizes": {
+  "lut_bits": 2048,
+  "seed_bits": 144,
+  "hidden_bits_per_cell": 1,
+  "hidden_init_bits": 0
+ },
+ "meta": {
+  "source": "disc12",
+  "method": "DiffLogic",
+  "cond": "E",
+  "seed": 14,
+  "it": 250,
+  "widths": [
+   128,
+   128,
+   64,
+   32,
+   2
+  ]
+ },
+ "expected_sha256": "6579868ba9e19bbd0f39397809f6920a6d5aa421e4bf0ebb3bca1a874305e1e8"
+}

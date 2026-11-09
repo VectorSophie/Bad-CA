@@ -1,0 +1,2546 @@
+[
+ {
+  "rule": "../../exp09/ba32_4500_E_cold_keep_L10.L10.rule.json",
+  "target": "ba32_4500_10",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 629,
+  "recording_bits": {
+   "changelist": 1260,
+   "xor_rle": 1637,
+   "frame_rle": 2791
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 1941,
+    "exceptions": 573,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L10.L10.full.lut.rule.json"
+   },
+   "espresso_s": 0.03,
+   "sop_literals": 2187,
+   "circuits": {
+    "abc_default": {
+     "bits": 16335,
+     "gates": 758,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L10.L10.full.abc_default.circuit.json",
+     "synth_s": 1.03
+    },
+    "abc_x4": {
+     "bits": 15663,
+     "gates": 730,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L10.L10.full.abc_x4.circuit.json",
+     "synth_s": 1.34
+    },
+    "keepxor_abc_default": {
+     "bits": 14103,
+     "gates": 665,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L10.L10.full.keepxor_abc_default.circuit.json",
+     "synth_s": 1.04
+    },
+    "keepxor_abc_x4": {
+     "bits": 13311,
+     "gates": 632,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L10.L10.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.33
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 13311,
+    "gates": 632,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L10.L10.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 1.33
+   }
+  },
+  "reach": {
+   "care_entries": 629,
+   "lut_keep_exceptions": {
+    "bits": 1941,
+    "exceptions": 573,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L10.L10.reach.lut.rule.json"
+   },
+   "espresso_s": 0.06,
+   "sop_literals": 1329,
+   "circuits": {
+    "abc_default": {
+     "bits": 10815,
+     "gates": 528,
+     "constant_gates": 0,
+     "inverter_gates": 3,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L10.L10.reach.abc_default.circuit.json",
+     "synth_s": 0.63
+    },
+    "abc_x4": {
+     "bits": 10333,
+     "gates": 508,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L10.L10.reach.abc_x4.circuit.json",
+     "synth_s": 0.85
+    },
+    "keepxor_abc_default": {
+     "bits": 10671,
+     "gates": 522,
+     "constant_gates": 0,
+     "inverter_gates": 5,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L10.L10.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.62
+    },
+    "keepxor_abc_x4": {
+     "bits": 10101,
+     "gates": 498,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L10.L10.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.83
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 10101,
+    "gates": 498,
+    "constant_gates": 0,
+    "inverter_gates": 2,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L10.L10.reach.keepxor_abc_x4.circuit.json",
+    "synth_s": 0.83
+   }
+  },
+  "wall_s": 8.0
+ },
+ {
+  "rule": "../../exp09/ba32_4500_E_cold_keep_L5.L5.rule.json",
+  "target": "ba32_4500_5",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 625,
+  "recording_bits": {
+   "changelist": 678,
+   "xor_rle": 878,
+   "frame_rle": 1274
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 1899,
+    "exceptions": 561,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L5.L5.full.lut.rule.json"
+   },
+   "espresso_s": 0.05,
+   "sop_literals": 2197,
+   "circuits": {
+    "abc_default": {
+     "bits": 16575,
+     "gates": 768,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L5.L5.full.abc_default.circuit.json",
+     "synth_s": 1.01
+    },
+    "abc_x4": {
+     "bits": 15447,
+     "gates": 721,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L5.L5.full.abc_x4.circuit.json",
+     "synth_s": 1.36
+    },
+    "keepxor_abc_default": {
+     "bits": 15351,
+     "gates": 717,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L5.L5.full.keepxor_abc_default.circuit.json",
+     "synth_s": 0.85
+    },
+    "keepxor_abc_x4": {
+     "bits": 14775,
+     "gates": 693,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L5.L5.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.18
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 14775,
+    "gates": 693,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L5.L5.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 1.18
+   }
+  },
+  "reach": {
+   "care_entries": 625,
+   "lut_keep_exceptions": {
+    "bits": 1899,
+    "exceptions": 561,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L5.L5.reach.lut.rule.json"
+   },
+   "espresso_s": 0.06,
+   "sop_literals": 1403,
+   "circuits": {
+    "abc_default": {
+     "bits": 11799,
+     "gates": 569,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L5.L5.reach.abc_default.circuit.json",
+     "synth_s": 0.63
+    },
+    "abc_x4": {
+     "bits": 11007,
+     "gates": 536,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L5.L5.reach.abc_x4.circuit.json",
+     "synth_s": 0.88
+    },
+    "keepxor_abc_default": {
+     "bits": 11871,
+     "gates": 572,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L5.L5.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.64
+    },
+    "keepxor_abc_x4": {
+     "bits": 11439,
+     "gates": 554,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L5.L5.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.88
+    }
+   },
+   "best_circuit": {
+    "flow": "abc_x4",
+    "bits": 11007,
+    "gates": 536,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_cold_keep_L5.L5.reach.abc_x4.circuit.json",
+    "synth_s": 0.88
+   }
+  },
+  "wall_s": 7.8
+ },
+ {
+  "rule": "../../exp09/ba32_4500_E_incr_keep_step1.L10.rule.json",
+  "target": "ba32_4500_10",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 601,
+  "recording_bits": {
+   "changelist": 1260,
+   "xor_rle": 1637,
+   "frame_rle": 2791
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 1859,
+    "exceptions": 537,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L10.full.lut.rule.json"
+   },
+   "espresso_s": 0.05,
+   "sop_literals": 2137,
+   "circuits": {
+    "abc_default": {
+     "bits": 16551,
+     "gates": 767,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L10.full.abc_default.circuit.json",
+     "synth_s": 0.94
+    },
+    "abc_x4": {
+     "bits": 15687,
+     "gates": 731,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L10.full.abc_x4.circuit.json",
+     "synth_s": 1.25
+    },
+    "keepxor_abc_default": {
+     "bits": 15903,
+     "gates": 740,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L10.full.keepxor_abc_default.circuit.json",
+     "synth_s": 0.99
+    },
+    "keepxor_abc_x4": {
+     "bits": 15183,
+     "gates": 710,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L10.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.3
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 15183,
+    "gates": 710,
+    "constant_gates": 0,
+    "inverter_gates": 1,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L10.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 1.3
+   }
+  },
+  "reach": {
+   "care_entries": 601,
+   "lut_keep_exceptions": {
+    "bits": 1859,
+    "exceptions": 537,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L10.reach.lut.rule.json"
+   },
+   "espresso_s": 0.06,
+   "sop_literals": 1360,
+   "circuits": {
+    "abc_default": {
+     "bits": 11367,
+     "gates": 551,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L10.reach.abc_default.circuit.json",
+     "synth_s": 0.65
+    },
+    "abc_x4": {
+     "bits": 10863,
+     "gates": 530,
+     "constant_gates": 0,
+     "inverter_gates": 5,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L10.reach.abc_x4.circuit.json",
+     "synth_s": 0.89
+    },
+    "keepxor_abc_default": {
+     "bits": 10381,
+     "gates": 510,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L10.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.7
+    },
+    "keepxor_abc_x4": {
+     "bits": 10123,
+     "gates": 499,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L10.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.91
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 10123,
+    "gates": 499,
+    "constant_gates": 0,
+    "inverter_gates": 1,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L10.reach.keepxor_abc_x4.circuit.json",
+    "synth_s": 0.91
+   }
+  },
+  "wall_s": 7.9
+ },
+ {
+  "rule": "../../exp09/ba32_4500_E_incr_keep_step1.L5.rule.json",
+  "target": "ba32_4500_5",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 419,
+  "recording_bits": {
+   "changelist": 678,
+   "xor_rle": 878,
+   "frame_rle": 1274
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 1548,
+    "exceptions": 380,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L5.full.lut.rule.json"
+   },
+   "espresso_s": 0.05,
+   "sop_literals": 1828,
+   "circuits": {
+    "abc_default": {
+     "bits": 14127,
+     "gates": 666,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L5.full.abc_default.circuit.json",
+     "synth_s": 0.73
+    },
+    "abc_x4": {
+     "bits": 13311,
+     "gates": 632,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L5.full.abc_x4.circuit.json",
+     "synth_s": 1.0
+    },
+    "keepxor_abc_default": {
+     "bits": 12327,
+     "gates": 591,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L5.full.keepxor_abc_default.circuit.json",
+     "synth_s": 0.93
+    },
+    "keepxor_abc_x4": {
+     "bits": 11487,
+     "gates": 556,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L5.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.22
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 11487,
+    "gates": 556,
+    "constant_gates": 0,
+    "inverter_gates": 2,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L5.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 1.22
+   }
+  },
+  "reach": {
+   "care_entries": 419,
+   "lut_keep_exceptions": {
+    "bits": 1548,
+    "exceptions": 380,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L5.reach.lut.rule.json"
+   },
+   "espresso_s": 0.05,
+   "sop_literals": 927,
+   "circuits": {
+    "abc_default": {
+     "bits": 7923,
+     "gates": 399,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L5.reach.abc_default.circuit.json",
+     "synth_s": 0.5
+    },
+    "abc_x4": {
+     "bits": 7439,
+     "gates": 377,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L5.reach.abc_x4.circuit.json",
+     "synth_s": 0.67
+    },
+    "keepxor_abc_default": {
+     "bits": 7329,
+     "gates": 372,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L5.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.5
+    },
+    "keepxor_abc_x4": {
+     "bits": 7153,
+     "gates": 364,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L5.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.66
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 7153,
+    "gates": 364,
+    "constant_gates": 0,
+    "inverter_gates": 1,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_keep_step1.L5.reach.keepxor_abc_x4.circuit.json",
+    "synth_s": 0.66
+   }
+  },
+  "wall_s": 6.5
+ },
+ {
+  "rule": "../../exp09/ba32_4500_E_incr_prev_5-10-20-40.L5.rule.json",
+  "target": "ba32_4500_5",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 625,
+  "recording_bits": {
+   "changelist": 678,
+   "xor_rle": 878,
+   "frame_rle": 1274
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 1899,
+    "exceptions": 561,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_5-10-20-40.L5.full.lut.rule.json"
+   },
+   "espresso_s": 0.03,
+   "sop_literals": 2204,
+   "circuits": {
+    "abc_default": {
+     "bits": 16095,
+     "gates": 748,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_5-10-20-40.L5.full.abc_default.circuit.json",
+     "synth_s": 0.83
+    },
+    "abc_x4": {
+     "bits": 15351,
+     "gates": 717,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_5-10-20-40.L5.full.abc_x4.circuit.json",
+     "synth_s": 1.16
+    },
+    "keepxor_abc_default": {
+     "bits": 15351,
+     "gates": 717,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_5-10-20-40.L5.full.keepxor_abc_default.circuit.json",
+     "synth_s": 0.99
+    },
+    "keepxor_abc_x4": {
+     "bits": 14487,
+     "gates": 681,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_5-10-20-40.L5.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.29
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 14487,
+    "gates": 681,
+    "constant_gates": 0,
+    "inverter_gates": 1,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_5-10-20-40.L5.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 1.29
+   }
+  },
+  "reach": {
+   "care_entries": 625,
+   "lut_keep_exceptions": {
+    "bits": 1899,
+    "exceptions": 561,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_5-10-20-40.L5.reach.lut.rule.json"
+   },
+   "espresso_s": 0.06,
+   "sop_literals": 1403,
+   "circuits": {
+    "abc_default": {
+     "bits": 11799,
+     "gates": 569,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_5-10-20-40.L5.reach.abc_default.circuit.json",
+     "synth_s": 0.63
+    },
+    "abc_x4": {
+     "bits": 11007,
+     "gates": 536,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_5-10-20-40.L5.reach.abc_x4.circuit.json",
+     "synth_s": 0.86
+    },
+    "keepxor_abc_default": {
+     "bits": 11871,
+     "gates": 572,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_5-10-20-40.L5.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.65
+    },
+    "keepxor_abc_x4": {
+     "bits": 11439,
+     "gates": 554,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_5-10-20-40.L5.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.87
+    }
+   },
+   "best_circuit": {
+    "flow": "abc_x4",
+    "bits": 11007,
+    "gates": 536,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_5-10-20-40.L5.reach.abc_x4.circuit.json",
+    "synth_s": 0.86
+   }
+  },
+  "wall_s": 7.6
+ },
+ {
+  "rule": "../../exp09/ba32_4500_E_incr_prev_step1.L10.rule.json",
+  "target": "ba32_4500_10",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 628,
+  "recording_bits": {
+   "changelist": 1260,
+   "xor_rle": 1637,
+   "frame_rle": 2791
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 2197,
+    "exceptions": 833,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L10.full.lut.rule.json"
+   },
+   "espresso_s": 0.05,
+   "sop_literals": 2438,
+   "circuits": {
+    "abc_default": {
+     "bits": 19143,
+     "gates": 875,
+     "constant_gates": 0,
+     "inverter_gates": 3,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L10.full.abc_default.circuit.json",
+     "synth_s": 0.97
+    },
+    "abc_x4": {
+     "bits": 18015,
+     "gates": 828,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L10.full.abc_x4.circuit.json",
+     "synth_s": 1.32
+    },
+    "keepxor_abc_default": {
+     "bits": 18879,
+     "gates": 864,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L10.full.keepxor_abc_default.circuit.json",
+     "synth_s": 1.02
+    },
+    "keepxor_abc_x4": {
+     "bits": 17631,
+     "gates": 812,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L10.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.38
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 17631,
+    "gates": 812,
+    "constant_gates": 0,
+    "inverter_gates": 1,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L10.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 1.38
+   }
+  },
+  "reach": {
+   "care_entries": 628,
+   "lut_keep_exceptions": {
+    "bits": 1963,
+    "exceptions": 589,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L10.reach.lut.rule.json"
+   },
+   "espresso_s": 0.07,
+   "sop_literals": 1343,
+   "circuits": {
+    "abc_default": {
+     "bits": 11703,
+     "gates": 565,
+     "constant_gates": 0,
+     "inverter_gates": 3,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L10.reach.abc_default.circuit.json",
+     "synth_s": 0.63
+    },
+    "abc_x4": {
+     "bits": 10839,
+     "gates": 529,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L10.reach.abc_x4.circuit.json",
+     "synth_s": 0.86
+    },
+    "keepxor_abc_default": {
+     "bits": 10839,
+     "gates": 529,
+     "constant_gates": 0,
+     "inverter_gates": 3,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L10.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.65
+    },
+    "keepxor_abc_x4": {
+     "bits": 10333,
+     "gates": 508,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L10.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.87
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 10333,
+    "gates": 508,
+    "constant_gates": 0,
+    "inverter_gates": 1,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L10.reach.keepxor_abc_x4.circuit.json",
+    "synth_s": 0.87
+   }
+  },
+  "wall_s": 8.1
+ },
+ {
+  "rule": "../../exp09/ba32_4500_E_incr_prev_step1.L5.rule.json",
+  "target": "ba32_4500_5",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 445,
+  "recording_bits": {
+   "changelist": 678,
+   "xor_rle": 878,
+   "frame_rle": 1274
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 1733,
+    "exceptions": 445,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L5.full.lut.rule.json"
+   },
+   "espresso_s": 0.05,
+   "sop_literals": 1882,
+   "circuits": {
+    "abc_default": {
+     "bits": 14631,
+     "gates": 687,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L5.full.abc_default.circuit.json",
+     "synth_s": 0.74
+    },
+    "abc_x4": {
+     "bits": 14127,
+     "gates": 666,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L5.full.abc_x4.circuit.json",
+     "synth_s": 1.05
+    },
+    "keepxor_abc_default": {
+     "bits": 14415,
+     "gates": 678,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L5.full.keepxor_abc_default.circuit.json",
+     "synth_s": 0.91
+    },
+    "keepxor_abc_x4": {
+     "bits": 13647,
+     "gates": 646,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L5.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.21
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 13647,
+    "gates": 646,
+    "constant_gates": 0,
+    "inverter_gates": 1,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L5.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 1.21
+   }
+  },
+  "reach": {
+   "care_entries": 445,
+   "lut_keep_exceptions": {
+    "bits": 1596,
+    "exceptions": 380,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L5.reach.lut.rule.json"
+   },
+   "espresso_s": 0.06,
+   "sop_literals": 930,
+   "circuits": {
+    "abc_default": {
+     "bits": 8099,
+     "gates": 407,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L5.reach.abc_default.circuit.json",
+     "synth_s": 0.55
+    },
+    "abc_x4": {
+     "bits": 7769,
+     "gates": 392,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L5.reach.abc_x4.circuit.json",
+     "synth_s": 0.73
+    },
+    "keepxor_abc_default": {
+     "bits": 8583,
+     "gates": 429,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L5.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.51
+    },
+    "keepxor_abc_x4": {
+     "bits": 8297,
+     "gates": 416,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L5.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.72
+    }
+   },
+   "best_circuit": {
+    "flow": "abc_x4",
+    "bits": 7769,
+    "gates": 392,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp09__ba32_4500_E_incr_prev_step1.L5.reach.abc_x4.circuit.json",
+    "synth_s": 0.73
+   }
+  },
+  "wall_s": 6.8
+ },
+ {
+  "rule": "../../exp10/ba32_3000_5__BP0.1/ba32_3000_5_E.rule.json",
+  "target": "ba32_3000_5",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 195,
+  "recording_bits": {
+   "changelist": 195,
+   "xor_rle": 260,
+   "frame_rle": 1644
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 1117,
+    "exceptions": 565,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP0.1__ba32_3000_5_E.full.lut.rule.json"
+   },
+   "espresso_s": 0.03,
+   "sop_literals": 515,
+   "circuits": {
+    "abc_default": {
+     "bits": 4035,
+     "gates": 220,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP0.1__ba32_3000_5_E.full.abc_default.circuit.json",
+     "synth_s": 0.4
+    },
+    "abc_x4": {
+     "bits": 3895,
+     "gates": 213,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP0.1__ba32_3000_5_E.full.abc_x4.circuit.json",
+     "synth_s": 0.53
+    },
+    "keepxor_abc_default": {
+     "bits": 3515,
+     "gates": 194,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP0.1__ba32_3000_5_E.full.keepxor_abc_default.circuit.json",
+     "synth_s": 0.4
+    },
+    "keepxor_abc_x4": {
+     "bits": 3415,
+     "gates": 189,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP0.1__ba32_3000_5_E.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.51
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 3415,
+    "gates": 189,
+    "constant_gates": 0,
+    "inverter_gates": 1,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP0.1__ba32_3000_5_E.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 0.51
+   }
+  },
+  "reach": {
+   "care_entries": 195,
+   "lut_keep_exceptions": {
+    "bits": 862,
+    "exceptions": 136,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP0.1__ba32_3000_5_E.reach.lut.rule.json"
+   },
+   "espresso_s": 0.05,
+   "sop_literals": 270,
+   "circuits": {
+    "abc_default": {
+     "bits": 2535,
+     "gates": 145,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP0.1__ba32_3000_5_E.reach.abc_default.circuit.json",
+     "synth_s": 0.35
+    },
+    "abc_x4": {
+     "bits": 2475,
+     "gates": 142,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP0.1__ba32_3000_5_E.reach.abc_x4.circuit.json",
+     "synth_s": 0.45
+    },
+    "keepxor_abc_default": {
+     "bits": 2495,
+     "gates": 143,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP0.1__ba32_3000_5_E.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.34
+    },
+    "keepxor_abc_x4": {
+     "bits": 2475,
+     "gates": 142,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP0.1__ba32_3000_5_E.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.45
+    }
+   },
+   "best_circuit": {
+    "flow": "abc_x4",
+    "bits": 2475,
+    "gates": 142,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP0.1__ba32_3000_5_E.reach.abc_x4.circuit.json",
+    "synth_s": 0.45
+   }
+  },
+  "wall_s": 3.7
+ },
+ {
+  "rule": "../../exp10/ba32_3000_5__BP1/ba32_3000_5_E.rule.json",
+  "target": "ba32_3000_5",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 217,
+  "recording_bits": {
+   "changelist": 195,
+   "xor_rle": 260,
+   "frame_rle": 1644
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 1104,
+    "exceptions": 574,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP1__ba32_3000_5_E.full.lut.rule.json"
+   },
+   "espresso_s": 0.03,
+   "sop_literals": 546,
+   "circuits": {
+    "abc_default": {
+     "bits": 4395,
+     "gates": 238,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP1__ba32_3000_5_E.full.abc_default.circuit.json",
+     "synth_s": 0.42
+    },
+    "abc_x4": {
+     "bits": 4275,
+     "gates": 232,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP1__ba32_3000_5_E.full.abc_x4.circuit.json",
+     "synth_s": 0.54
+    },
+    "keepxor_abc_default": {
+     "bits": 4599,
+     "gates": 248,
+     "constant_gates": 0,
+     "inverter_gates": 3,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP1__ba32_3000_5_E.full.keepxor_abc_default.circuit.json",
+     "synth_s": 0.43
+    },
+    "keepxor_abc_x4": {
+     "bits": 4375,
+     "gates": 237,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP1__ba32_3000_5_E.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.56
+    }
+   },
+   "best_circuit": {
+    "flow": "abc_x4",
+    "bits": 4275,
+    "gates": 232,
+    "constant_gates": 0,
+    "inverter_gates": 1,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP1__ba32_3000_5_E.full.abc_x4.circuit.json",
+    "synth_s": 0.54
+   }
+  },
+  "reach": {
+   "care_entries": 217,
+   "lut_keep_exceptions": {
+    "bits": 883,
+    "exceptions": 155,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP1__ba32_3000_5_E.reach.lut.rule.json"
+   },
+   "espresso_s": 0.04,
+   "sop_literals": 250,
+   "circuits": {
+    "abc_default": {
+     "bits": 2455,
+     "gates": 141,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP1__ba32_3000_5_E.reach.abc_default.circuit.json",
+     "synth_s": 0.34
+    },
+    "abc_x4": {
+     "bits": 2415,
+     "gates": 139,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP1__ba32_3000_5_E.reach.abc_x4.circuit.json",
+     "synth_s": 0.44
+    },
+    "keepxor_abc_default": {
+     "bits": 2555,
+     "gates": 146,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP1__ba32_3000_5_E.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.36
+    },
+    "keepxor_abc_x4": {
+     "bits": 2495,
+     "gates": 143,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP1__ba32_3000_5_E.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.43
+    }
+   },
+   "best_circuit": {
+    "flow": "abc_x4",
+    "bits": 2415,
+    "gates": 139,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__BP1__ba32_3000_5_E.reach.abc_x4.circuit.json",
+    "synth_s": 0.44
+   }
+  },
+  "wall_s": 3.8
+ },
+ {
+  "rule": "../../exp10/ba32_3000_5__conway/ba32_3000_5_E.rule.json",
+  "target": "ba32_3000_5",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 266,
+  "recording_bits": {
+   "changelist": 195,
+   "xor_rle": 260,
+   "frame_rle": 1644
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 1449,
+    "exceptions": 559,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__conway__ba32_3000_5_E.full.lut.rule.json"
+   },
+   "espresso_s": 0.04,
+   "sop_literals": 1200,
+   "circuits": {
+    "abc_default": {
+     "bits": 8649,
+     "gates": 432,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__conway__ba32_3000_5_E.full.abc_default.circuit.json",
+     "synth_s": 0.57
+    },
+    "abc_x4": {
+     "bits": 8363,
+     "gates": 419,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__conway__ba32_3000_5_E.full.abc_x4.circuit.json",
+     "synth_s": 0.77
+    },
+    "keepxor_abc_default": {
+     "bits": 10479,
+     "gates": 514,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__conway__ba32_3000_5_E.full.keepxor_abc_default.circuit.json",
+     "synth_s": 0.76
+    },
+    "keepxor_abc_x4": {
+     "bits": 9903,
+     "gates": 489,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__conway__ba32_3000_5_E.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.0
+    }
+   },
+   "best_circuit": {
+    "flow": "abc_x4",
+    "bits": 8363,
+    "gates": 419,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__conway__ba32_3000_5_E.full.abc_x4.circuit.json",
+    "synth_s": 0.77
+   }
+  },
+  "reach": {
+   "care_entries": 266,
+   "lut_keep_exceptions": {
+    "bits": 1062,
+    "exceptions": 210,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__conway__ba32_3000_5_E.reach.lut.rule.json"
+   },
+   "espresso_s": 0.05,
+   "sop_literals": 391,
+   "circuits": {
+    "abc_default": {
+     "bits": 3715,
+     "gates": 204,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__conway__ba32_3000_5_E.reach.abc_default.circuit.json",
+     "synth_s": 0.38
+    },
+    "abc_x4": {
+     "bits": 3595,
+     "gates": 198,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__conway__ba32_3000_5_E.reach.abc_x4.circuit.json",
+     "synth_s": 0.49
+    },
+    "keepxor_abc_default": {
+     "bits": 3795,
+     "gates": 208,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__conway__ba32_3000_5_E.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.38
+    },
+    "keepxor_abc_x4": {
+     "bits": 3635,
+     "gates": 200,
+     "constant_gates": 0,
+     "inverter_gates": 3,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__conway__ba32_3000_5_E.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.5
+    }
+   },
+   "best_circuit": {
+    "flow": "abc_x4",
+    "bits": 3595,
+    "gates": 198,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__conway__ba32_3000_5_E.reach.abc_x4.circuit.json",
+    "synth_s": 0.49
+   }
+  },
+  "wall_s": 5.1
+ },
+ {
+  "rule": "../../exp10/ba32_3000_5__keep/ba32_3000_5_E.rule.json",
+  "target": "ba32_3000_5",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 207,
+  "recording_bits": {
+   "changelist": 195,
+   "xor_rle": 260,
+   "frame_rle": 1644
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 715,
+    "exceptions": 99,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__keep__ba32_3000_5_E.full.lut.rule.json"
+   },
+   "espresso_s": 0.04,
+   "sop_literals": 532,
+   "circuits": {
+    "abc_default": {
+     "bits": 4175,
+     "gates": 227,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__keep__ba32_3000_5_E.full.abc_default.circuit.json",
+     "synth_s": 0.39
+    },
+    "abc_x4": {
+     "bits": 4075,
+     "gates": 222,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__keep__ba32_3000_5_E.full.abc_x4.circuit.json",
+     "synth_s": 0.53
+    },
+    "keepxor_abc_default": {
+     "bits": 3695,
+     "gates": 203,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__keep__ba32_3000_5_E.full.keepxor_abc_default.circuit.json",
+     "synth_s": 0.39
+    },
+    "keepxor_abc_x4": {
+     "bits": 3535,
+     "gates": 195,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__keep__ba32_3000_5_E.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.51
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 3535,
+    "gates": 195,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__keep__ba32_3000_5_E.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 0.51
+   }
+  },
+  "reach": {
+   "care_entries": 207,
+   "lut_keep_exceptions": {
+    "bits": 715,
+    "exceptions": 99,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__keep__ba32_3000_5_E.reach.lut.rule.json"
+   },
+   "espresso_s": 0.04,
+   "sop_literals": 237,
+   "circuits": {
+    "abc_default": {
+     "bits": 2255,
+     "gates": 131,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__keep__ba32_3000_5_E.reach.abc_default.circuit.json",
+     "synth_s": 0.36
+    },
+    "abc_x4": {
+     "bits": 2133,
+     "gates": 125,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__keep__ba32_3000_5_E.reach.abc_x4.circuit.json",
+     "synth_s": 0.43
+    },
+    "keepxor_abc_default": {
+     "bits": 2315,
+     "gates": 134,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__keep__ba32_3000_5_E.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.34
+    },
+    "keepxor_abc_x4": {
+     "bits": 2195,
+     "gates": 128,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__keep__ba32_3000_5_E.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.42
+    }
+   },
+   "best_circuit": {
+    "flow": "abc_x4",
+    "bits": 2133,
+    "gates": 125,
+    "constant_gates": 0,
+    "inverter_gates": 1,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__keep__ba32_3000_5_E.reach.abc_x4.circuit.json",
+    "synth_s": 0.43
+   }
+  },
+  "wall_s": 3.6
+ },
+ {
+  "rule": "../../exp10/ba32_3000_5__R0/ba32_3000_5_E.rule.json",
+  "target": "ba32_3000_5",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 344,
+  "recording_bits": {
+   "changelist": 195,
+   "xor_rle": 260,
+   "frame_rle": 1644
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 1722,
+    "exceptions": 664,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__R0__ba32_3000_5_E.full.lut.rule.json"
+   },
+   "espresso_s": 0.04,
+   "sop_literals": 671,
+   "circuits": {
+    "abc_default": {
+     "bits": 5789,
+     "gates": 302,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__R0__ba32_3000_5_E.full.abc_default.circuit.json",
+     "synth_s": 0.44
+    },
+    "abc_x4": {
+     "bits": 5393,
+     "gates": 284,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__R0__ba32_3000_5_E.full.abc_x4.circuit.json",
+     "synth_s": 0.59
+    },
+    "keepxor_abc_default": {
+     "bits": 5349,
+     "gates": 282,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__R0__ba32_3000_5_E.full.keepxor_abc_default.circuit.json",
+     "synth_s": 0.5
+    },
+    "keepxor_abc_x4": {
+     "bits": 4931,
+     "gates": 263,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__R0__ba32_3000_5_E.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.64
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 4931,
+    "gates": 263,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__R0__ba32_3000_5_E.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 0.64
+   }
+  },
+  "reach": {
+   "care_entries": 344,
+   "lut_keep_exceptions": {
+    "bits": 1066,
+    "exceptions": 232,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__R0__ba32_3000_5_E.reach.lut.rule.json"
+   },
+   "espresso_s": 0.06,
+   "sop_literals": 332,
+   "circuits": {
+    "abc_default": {
+     "bits": 3195,
+     "gates": 178,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__R0__ba32_3000_5_E.reach.abc_default.circuit.json",
+     "synth_s": 0.36
+    },
+    "abc_x4": {
+     "bits": 3075,
+     "gates": 172,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__R0__ba32_3000_5_E.reach.abc_x4.circuit.json",
+     "synth_s": 0.46
+    },
+    "keepxor_abc_default": {
+     "bits": 3395,
+     "gates": 188,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__R0__ba32_3000_5_E.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.38
+    },
+    "keepxor_abc_x4": {
+     "bits": 3315,
+     "gates": 184,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__R0__ba32_3000_5_E.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.48
+    }
+   },
+   "best_circuit": {
+    "flow": "abc_x4",
+    "bits": 3075,
+    "gates": 172,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__R0__ba32_3000_5_E.reach.abc_x4.circuit.json",
+    "synth_s": 0.46
+   }
+  },
+  "wall_s": 4.2
+ },
+ {
+  "rule": "../../exp10/ba32_3000_5__random/ba32_3000_5_E.rule.json",
+  "target": "ba32_3000_5",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 266,
+  "recording_bits": {
+   "changelist": 195,
+   "xor_rle": 260,
+   "frame_rle": 1644
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 2346,
+    "exceptions": 984,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__random__ba32_3000_5_E.full.lut.rule.json"
+   },
+   "espresso_s": 0.06,
+   "sop_literals": 2722,
+   "circuits": {
+    "abc_default": {
+     "bits": 20271,
+     "gates": 922,
+     "constant_gates": 0,
+     "inverter_gates": 3,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__random__ba32_3000_5_E.full.abc_default.circuit.json",
+     "synth_s": 1.01
+    },
+    "abc_x4": {
+     "bits": 19503,
+     "gates": 890,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__random__ba32_3000_5_E.full.abc_x4.circuit.json",
+     "synth_s": 1.4
+    },
+    "keepxor_abc_default": {
+     "bits": 19791,
+     "gates": 902,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__random__ba32_3000_5_E.full.keepxor_abc_default.circuit.json",
+     "synth_s": 0.99
+    },
+    "keepxor_abc_x4": {
+     "bits": 18687,
+     "gates": 856,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__random__ba32_3000_5_E.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.34
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 18687,
+    "gates": 856,
+    "constant_gates": 0,
+    "inverter_gates": 2,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__random__ba32_3000_5_E.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 1.34
+   }
+  },
+  "reach": {
+   "care_entries": 266,
+   "lut_keep_exceptions": {
+    "bits": 1233,
+    "exceptions": 253,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__random__ba32_3000_5_E.reach.lut.rule.json"
+   },
+   "espresso_s": 0.05,
+   "sop_literals": 482,
+   "circuits": {
+    "abc_default": {
+     "bits": 4495,
+     "gates": 243,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__random__ba32_3000_5_E.reach.abc_default.circuit.json",
+     "synth_s": 0.4
+    },
+    "abc_x4": {
+     "bits": 4215,
+     "gates": 229,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__random__ba32_3000_5_E.reach.abc_x4.circuit.json",
+     "synth_s": 0.54
+    },
+    "keepxor_abc_default": {
+     "bits": 4315,
+     "gates": 234,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__random__ba32_3000_5_E.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.39
+    },
+    "keepxor_abc_x4": {
+     "bits": 4035,
+     "gates": 220,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__random__ba32_3000_5_E.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.51
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 4035,
+    "gates": 220,
+    "constant_gates": 0,
+    "inverter_gates": 0,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_3000_5__random__ba32_3000_5_E.reach.keepxor_abc_x4.circuit.json",
+    "synth_s": 0.51
+   }
+  },
+  "wall_s": 6.9
+ },
+ {
+  "rule": "../../exp10/ba32_4500_10__keep/ba32_4500_10_E.rule.json",
+  "target": "ba32_4500_10",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 651,
+  "recording_bits": {
+   "changelist": 1260,
+   "xor_rle": 1637,
+   "frame_rle": 2791
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 1940,
+    "exceptions": 572,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__keep__ba32_4500_10_E.full.lut.rule.json"
+   },
+   "espresso_s": 0.05,
+   "sop_literals": 2240,
+   "circuits": {
+    "abc_default": {
+     "bits": 17151,
+     "gates": 792,
+     "constant_gates": 0,
+     "inverter_gates": 4,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__keep__ba32_4500_10_E.full.abc_default.circuit.json",
+     "synth_s": 1.11
+    },
+    "abc_x4": {
+     "bits": 16311,
+     "gates": 757,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__keep__ba32_4500_10_E.full.abc_x4.circuit.json",
+     "synth_s": 1.44
+    },
+    "keepxor_abc_default": {
+     "bits": 16071,
+     "gates": 747,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__keep__ba32_4500_10_E.full.keepxor_abc_default.circuit.json",
+     "synth_s": 1.04
+    },
+    "keepxor_abc_x4": {
+     "bits": 15279,
+     "gates": 714,
+     "constant_gates": 0,
+     "inverter_gates": 3,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__keep__ba32_4500_10_E.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.37
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 15279,
+    "gates": 714,
+    "constant_gates": 0,
+    "inverter_gates": 3,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__keep__ba32_4500_10_E.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 1.37
+   }
+  },
+  "reach": {
+   "care_entries": 651,
+   "lut_keep_exceptions": {
+    "bits": 1940,
+    "exceptions": 572,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__keep__ba32_4500_10_E.reach.lut.rule.json"
+   },
+   "espresso_s": 0.06,
+   "sop_literals": 1436,
+   "circuits": {
+    "abc_default": {
+     "bits": 12135,
+     "gates": 583,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__keep__ba32_4500_10_E.reach.abc_default.circuit.json",
+     "synth_s": 0.78
+    },
+    "abc_x4": {
+     "bits": 11367,
+     "gates": 551,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__keep__ba32_4500_10_E.reach.abc_x4.circuit.json",
+     "synth_s": 1.03
+    },
+    "keepxor_abc_default": {
+     "bits": 11199,
+     "gates": 544,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__keep__ba32_4500_10_E.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.71
+    },
+    "keepxor_abc_x4": {
+     "bits": 10791,
+     "gates": 527,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__keep__ba32_4500_10_E.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.94
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 10791,
+    "gates": 527,
+    "constant_gates": 0,
+    "inverter_gates": 2,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__keep__ba32_4500_10_E.reach.keepxor_abc_x4.circuit.json",
+    "synth_s": 0.94
+   }
+  },
+  "wall_s": 8.8
+ },
+ {
+  "rule": "../../exp10/ba32_4500_10__R0/ba32_4500_10_E.rule.json",
+  "target": "ba32_4500_10",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 597,
+  "recording_bits": {
+   "changelist": 1260,
+   "xor_rle": 1637,
+   "frame_rle": 2791
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 2173,
+    "exceptions": 909,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__R0__ba32_4500_10_E.full.lut.rule.json"
+   },
+   "espresso_s": 0.05,
+   "sop_literals": 2273,
+   "circuits": {
+    "abc_default": {
+     "bits": 17799,
+     "gates": 819,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__R0__ba32_4500_10_E.full.abc_default.circuit.json",
+     "synth_s": 1.08
+    },
+    "abc_x4": {
+     "bits": 16935,
+     "gates": 783,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__R0__ba32_4500_10_E.full.abc_x4.circuit.json",
+     "synth_s": 1.39
+    },
+    "keepxor_abc_default": {
+     "bits": 17631,
+     "gates": 812,
+     "constant_gates": 0,
+     "inverter_gates": 1,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__R0__ba32_4500_10_E.full.keepxor_abc_default.circuit.json",
+     "synth_s": 1.01
+    },
+    "keepxor_abc_x4": {
+     "bits": 16551,
+     "gates": 767,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__R0__ba32_4500_10_E.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.35
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 16551,
+    "gates": 767,
+    "constant_gates": 0,
+    "inverter_gates": 2,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__R0__ba32_4500_10_E.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 1.35
+   }
+  },
+  "reach": {
+   "care_entries": 597,
+   "lut_keep_exceptions": {
+    "bits": 1914,
+    "exceptions": 578,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__R0__ba32_4500_10_E.reach.lut.rule.json"
+   },
+   "espresso_s": 0.07,
+   "sop_literals": 1417,
+   "circuits": {
+    "abc_default": {
+     "bits": 12327,
+     "gates": 591,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__R0__ba32_4500_10_E.reach.abc_default.circuit.json",
+     "synth_s": 0.79
+    },
+    "abc_x4": {
+     "bits": 11703,
+     "gates": 565,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__R0__ba32_4500_10_E.reach.abc_x4.circuit.json",
+     "synth_s": 1.06
+    },
+    "keepxor_abc_default": {
+     "bits": 11703,
+     "gates": 565,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__R0__ba32_4500_10_E.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.67
+    },
+    "keepxor_abc_x4": {
+     "bits": 10983,
+     "gates": 535,
+     "constant_gates": 0,
+     "inverter_gates": 3,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__R0__ba32_4500_10_E.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 0.9
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 10983,
+    "gates": 535,
+    "constant_gates": 0,
+    "inverter_gates": 3,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__R0__ba32_4500_10_E.reach.keepxor_abc_x4.circuit.json",
+    "synth_s": 0.9
+   }
+  },
+  "wall_s": 8.6
+ },
+ {
+  "rule": "../../exp10/ba32_4500_10__random/ba32_4500_10_E.rule.json",
+  "target": "ba32_4500_10",
+  "family": "F_priv",
+  "k": 1,
+  "S": 2,
+  "n_inputs": 10,
+  "code_snapshot": "64277b4ec640",
+  "exact": true,
+  "consulted_entries": 770,
+  "recording_bits": {
+   "changelist": 1260,
+   "xor_rle": 1637,
+   "frame_rle": 2791
+  },
+  "full": {
+   "care_entries": 1024,
+   "lut_keep_exceptions": {
+    "bits": 2258,
+    "exceptions": 958,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__random__ba32_4500_10_E.full.lut.rule.json"
+   },
+   "espresso_s": 0.04,
+   "sop_literals": 2629,
+   "circuits": {
+    "abc_default": {
+     "bits": 20271,
+     "gates": 922,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__random__ba32_4500_10_E.full.abc_default.circuit.json",
+     "synth_s": 1.16
+    },
+    "abc_x4": {
+     "bits": 19599,
+     "gates": 894,
+     "constant_gates": 0,
+     "inverter_gates": 3,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__random__ba32_4500_10_E.full.abc_x4.circuit.json",
+     "synth_s": 1.55
+    },
+    "keepxor_abc_default": {
+     "bits": 19887,
+     "gates": 906,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__random__ba32_4500_10_E.full.keepxor_abc_default.circuit.json",
+     "synth_s": 1.04
+    },
+    "keepxor_abc_x4": {
+     "bits": 18807,
+     "gates": 861,
+     "constant_gates": 0,
+     "inverter_gates": 3,
+     "full_tt_equal": true,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__random__ba32_4500_10_E.full.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.4
+    }
+   },
+   "best_circuit": {
+    "flow": "keepxor_abc_x4",
+    "bits": 18807,
+    "gates": 861,
+    "constant_gates": 0,
+    "inverter_gates": 3,
+    "full_tt_equal": true,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__random__ba32_4500_10_E.full.keepxor_abc_x4.circuit.json",
+    "synth_s": 1.4
+   }
+  },
+  "reach": {
+   "care_entries": 770,
+   "lut_keep_exceptions": {
+    "bits": 2054,
+    "exceptions": 720,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__random__ba32_4500_10_E.reach.lut.rule.json"
+   },
+   "espresso_s": 0.05,
+   "sop_literals": 1714,
+   "circuits": {
+    "abc_default": {
+     "bits": 12639,
+     "gates": 604,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__random__ba32_4500_10_E.reach.abc_default.circuit.json",
+     "synth_s": 0.72
+    },
+    "abc_x4": {
+     "bits": 12375,
+     "gates": 593,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__random__ba32_4500_10_E.reach.abc_x4.circuit.json",
+     "synth_s": 0.99
+    },
+    "keepxor_abc_default": {
+     "bits": 14199,
+     "gates": 669,
+     "constant_gates": 0,
+     "inverter_gates": 2,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__random__ba32_4500_10_E.reach.keepxor_abc_default.circuit.json",
+     "synth_s": 0.81
+    },
+    "keepxor_abc_x4": {
+     "bits": 13215,
+     "gates": 628,
+     "constant_gates": 0,
+     "inverter_gates": 0,
+     "full_tt_equal": false,
+     "decoded_python_rollout_exact": true,
+     "node_replay_matches_target": true,
+     "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__random__ba32_4500_10_E.reach.keepxor_abc_x4.circuit.json",
+     "synth_s": 1.08
+    }
+   },
+   "best_circuit": {
+    "flow": "abc_x4",
+    "bits": 12375,
+    "gates": 593,
+    "constant_gates": 0,
+    "inverter_gates": 2,
+    "full_tt_equal": false,
+    "decoded_python_rollout_exact": true,
+    "node_replay_matches_target": true,
+    "export": "runs/exp11_c4/..__..__..__exp10__ba32_4500_10__random__ba32_4500_10_E.reach.abc_x4.circuit.json",
+    "synth_s": 0.99
+   }
+  },
+  "wall_s": 9.1
+ }
+]

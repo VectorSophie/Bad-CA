@@ -1,0 +1,9 @@
+{
+ "ba32_4500_E_cold_keep_L10.L10.rule.json": true,
+ "ba32_4500_E_cold_keep_L5.L5.rule.json": true,
+ "ba32_4500_E_incr_keep_step1.L10.rule.json": true,
+ "ba32_4500_E_incr_keep_step1.L5.rule.json": true,
+ "ba32_4500_E_incr_prev_5-10-20-40.L5.rule.json": true,
+ "ba32_4500_E_incr_prev_step1.L10.rule.json": true,
+ "ba32_4500_E_incr_prev_step1.L5.rule.json": true
+}

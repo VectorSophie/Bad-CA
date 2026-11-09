@@ -1,0 +1,83 @@
+{
+ "format": "ca-universal/rule-v1",
+ "width": 12,
+ "height": 12,
+ "channels": 2,
+ "observed_channel": 0,
+ "taps": [
+  [
+   0,
+   -1,
+   -1
+  ],
+  [
+   0,
+   -1,
+   0
+  ],
+  [
+   0,
+   -1,
+   1
+  ],
+  [
+   0,
+   0,
+   -1
+  ],
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   -1
+  ],
+  [
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1
+  ],
+  [
+   1,
+   0,
+   0
+  ]
+ ],
+ "boundary": 0,
+ "hidden_init": 0,
+ "steps_per_frame": 4,
+ "n_frames": 12,
+ "luts_b64": [
+  "AAAP8AAAAP/w8PDw8PD//wAA8PAAAP//8PDw8PDw//8AAAD/AAAA//Dw///w8P//AAD//wAA///w8P//8PD//wAAD/AAAAD/8PDw8PDw//8AAPDwAAD///Dw8PDw8P//AAAA/wAAAP/w8P//8PD//wAA//8AAP//8PD///Dw//8=",
+  "AP8A/wD/AP///////////wD/AP8A/wD///////////8A/wD/AP8A////////////AP8A/wD/AP///////////wD/AP8A/wD///////////8A/wD/AP8A////////////AP8A/wD/AP///////////wD/AP8A/wD///////////8="
+ ],
+ "seed_visible_b64": "AAAAAAAAAOB//gcAAAAAAAAA",
+ "sizes": {
+  "lut_bits": 2048,
+  "seed_bits": 144,
+  "hidden_bits_per_cell": 1,
+  "hidden_init_bits": 0
+ },
+ "meta": {
+  "source": "bar12",
+  "method": "DiffLogic",
+  "cond": "X6",
+  "seed": 13,
+  "it": 2000,
+  "arch": "ref: 16 perception kernels [8,4,2,1] + update (128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 64, 32, 16, 8, 4)+[2]"
+ },
+ "expected_sha256": "3ccf04a2625a43c77ef43d74abb9e2b7e681a8dfa54921cbc1d65de005559489"
+}

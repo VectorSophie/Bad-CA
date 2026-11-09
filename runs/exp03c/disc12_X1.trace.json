@@ -1,0 +1,1 @@
+{"trace": [{"t": 12.5, "exceptions": 613}, {"t": 17.1, "exceptions": 545}, {"t": 32.0, "exceptions": 494}, {"t": 54.2, "exceptions": 434}, {"t": 61.2, "exceptions": 415}, {"t": 101.2, "exceptions": 377}, {"t": 143.3, "exceptions": 359}, {"t": 319.1, "exceptions": 341}, {"t": 447.6, "exceptions": 325}, {"t": 1016.9, "exceptions": 312}], "status": "running"}

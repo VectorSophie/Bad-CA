@@ -1,0 +1,1 @@
+{"event": "start", "mode": "cold", "arm": "cold_keep_L40", "start": 4500, "cond": "E", "phase": "keep", "lengths": [40], "code_snapshot": "9b8f0db4a7ba", "solver": "cadical195 (pysat), default options"}

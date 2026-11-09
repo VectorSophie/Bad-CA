@@ -1,0 +1,533 @@
+{
+ "w16": {
+  "t10s": {
+   "r1": {
+    "N": 17088,
+    "changes": 596,
+    "minerr": 558,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 99,
+    "contexts_seen": 183,
+    "explained_change": 0.06375838926174493,
+    "changes_predicted": 59,
+    "unchanged_broken": 21
+   },
+   "r2": {
+    "N": 17088,
+    "changes": 596,
+    "minerr": 294,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 196,
+    "contexts_seen": 2280,
+    "explained_change": 0.5067114093959731
+   }
+  },
+  "t30s": {
+   "r1": {
+    "N": 17088,
+    "changes": 201,
+    "minerr": 200,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 52,
+    "contexts_seen": 140,
+    "explained_change": 0.00497512437810943,
+    "changes_predicted": 1,
+    "unchanged_broken": 0
+   },
+   "r2": {
+    "N": 17088,
+    "changes": 201,
+    "minerr": 161,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 89,
+    "contexts_seen": 1421,
+    "explained_change": 0.1990049751243781
+   }
+  },
+  "t62s": {
+   "r1": {
+    "N": 17088,
+    "changes": 707,
+    "minerr": 678,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 130,
+    "contexts_seen": 286,
+    "explained_change": 0.04101838755304099,
+    "changes_predicted": 36,
+    "unchanged_broken": 7
+   },
+   "r2": {
+    "N": 17088,
+    "changes": 707,
+    "minerr": 423,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 255,
+    "contexts_seen": 2716,
+    "explained_change": 0.4016973125884017
+   }
+  },
+  "t100s": {
+   "r1": {
+    "N": 17088,
+    "changes": 43,
+    "minerr": 42,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 22,
+    "contexts_seen": 89,
+    "explained_change": 0.023255813953488413,
+    "changes_predicted": 1,
+    "unchanged_broken": 0
+   },
+   "r2": {
+    "N": 17088,
+    "changes": 43,
+    "minerr": 37,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 31,
+    "contexts_seen": 547,
+    "explained_change": 0.13953488372093026
+   }
+  },
+  "t150s": {
+   "r1": {
+    "N": 17088,
+    "changes": 552,
+    "minerr": 532,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 83,
+    "contexts_seen": 168,
+    "explained_change": 0.036231884057971064,
+    "changes_predicted": 28,
+    "unchanged_broken": 8
+   },
+   "r2": {
+    "N": 17088,
+    "changes": 552,
+    "minerr": 420,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 210,
+    "contexts_seen": 1592,
+    "explained_change": 0.23913043478260865
+   }
+  },
+  "summary_r1": {
+   "unweighted_mean_of_clips": 0.03384791984087097,
+   "pooled": 0.04240114340161982,
+   "min": 0.00497512437810943,
+   "max": 0.06375838926174493
+  },
+  "summary_r2": {
+   "unweighted_mean_of_clips": 0.2972158031224584,
+   "pooled": 0.36398284897570277,
+   "min": 0.13953488372093026,
+   "max": 0.5067114093959731
+  }
+ },
+ "w32": {
+  "t10s": {
+   "r1": {
+    "N": 68352,
+    "changes": 2476,
+    "minerr": 2401,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 127,
+    "contexts_seen": 209,
+    "explained_change": 0.030290791599353772,
+    "changes_predicted": 239,
+    "unchanged_broken": 164
+   },
+   "r2": {
+    "N": 68352,
+    "changes": 2476,
+    "minerr": 1795,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 638,
+    "contexts_seen": 3180,
+    "explained_change": 0.27504038772213246
+   }
+  },
+  "t30s": {
+   "r1": {
+    "N": 68352,
+    "changes": 882,
+    "minerr": 865,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 85,
+    "contexts_seen": 164,
+    "explained_change": 0.019274376417233507,
+    "changes_predicted": 25,
+    "unchanged_broken": 8
+   },
+   "r2": {
+    "N": 68352,
+    "changes": 882,
+    "minerr": 712,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 266,
+    "contexts_seen": 2327,
+    "explained_change": 0.19274376417233563
+   }
+  },
+  "t62s": {
+   "r1": {
+    "N": 68352,
+    "changes": 3180,
+    "minerr": 3117,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 246,
+    "contexts_seen": 387,
+    "explained_change": 0.019811320754717032,
+    "changes_predicted": 100,
+    "unchanged_broken": 37
+   },
+   "r2": {
+    "N": 68352,
+    "changes": 3180,
+    "minerr": 1996,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 869,
+    "contexts_seen": 7602,
+    "explained_change": 0.37232704402515726
+   }
+  },
+  "t100s": {
+   "r1": {
+    "N": 68352,
+    "changes": 242,
+    "minerr": 219,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 64,
+    "contexts_seen": 180,
+    "explained_change": 0.0950413223140496,
+    "changes_predicted": 23,
+    "unchanged_broken": 0
+   },
+   "r2": {
+    "N": 68352,
+    "changes": 242,
+    "minerr": 168,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 82,
+    "contexts_seen": 1501,
+    "explained_change": 0.30578512396694213
+   }
+  },
+  "t150s": {
+   "r1": {
+    "N": 68352,
+    "changes": 2322,
+    "minerr": 2290,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 145,
+    "contexts_seen": 241,
+    "explained_change": 0.013781223083548677,
+    "changes_predicted": 41,
+    "unchanged_broken": 9
+   },
+   "r2": {
+    "N": 68352,
+    "changes": 2322,
+    "minerr": 1928,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 555,
+    "contexts_seen": 3368,
+    "explained_change": 0.16968130921619295
+   }
+  },
+  "summary_r1": {
+   "unweighted_mean_of_clips": 0.03563980683378052,
+   "pooled": 0.02307185234014497,
+   "min": 0.013781223083548677,
+   "max": 0.0950413223140496
+  },
+  "summary_r2": {
+   "unweighted_mean_of_clips": 0.2631155258205521,
+   "pooled": 0.2749945067018238,
+   "min": 0.16968130921619295,
+   "max": 0.37232704402515726
+  }
+ },
+ "w64": {
+  "t10s": {
+   "r1": {
+    "N": 273408,
+    "changes": 10199,
+    "minerr": 9935,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 179,
+    "contexts_seen": 284,
+    "explained_change": 0.025884890675556438,
+    "changes_predicted": 532,
+    "unchanged_broken": 268
+   },
+   "r2": {
+    "N": 273408,
+    "changes": 10199,
+    "minerr": 8672,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 1108,
+    "contexts_seen": 5011,
+    "explained_change": 0.14972056083929797
+   }
+  },
+  "t30s": {
+   "r1": {
+    "N": 273408,
+    "changes": 3711,
+    "minerr": 3470,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 133,
+    "contexts_seen": 228,
+    "explained_change": 0.06494206413365666,
+    "changes_predicted": 777,
+    "unchanged_broken": 536
+   },
+   "r2": {
+    "N": 273408,
+    "changes": 3711,
+    "minerr": 2895,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 673,
+    "contexts_seen": 3924,
+    "explained_change": 0.21988682295877127
+   }
+  },
+  "t62s": {
+   "r1": {
+    "N": 273408,
+    "changes": 13828,
+    "minerr": 13484,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 392,
+    "contexts_seen": 488,
+    "explained_change": 0.02487706103557996,
+    "changes_predicted": 928,
+    "unchanged_broken": 584
+   },
+   "r2": {
+    "N": 273408,
+    "changes": 13828,
+    "minerr": 9968,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 2156,
+    "contexts_seen": 15630,
+    "explained_change": 0.2791437662713335
+   }
+  },
+  "t100s": {
+   "r1": {
+    "N": 273408,
+    "changes": 1007,
+    "minerr": 966,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 100,
+    "contexts_seen": 192,
+    "explained_change": 0.04071499503475673,
+    "changes_predicted": 76,
+    "unchanged_broken": 35
+   },
+   "r2": {
+    "N": 273408,
+    "changes": 1007,
+    "minerr": 740,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 262,
+    "contexts_seen": 2517,
+    "explained_change": 0.2651439920556107
+   }
+  },
+  "t150s": {
+   "r1": {
+    "N": 273408,
+    "changes": 9425,
+    "minerr": 9368,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 195,
+    "contexts_seen": 294,
+    "explained_change": 0.006047745358090162,
+    "changes_predicted": 106,
+    "unchanged_broken": 49
+   },
+   "r2": {
+    "N": 273408,
+    "changes": 9425,
+    "minerr": 8430,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 1276,
+    "contexts_seen": 5803,
+    "explained_change": 0.10557029177718835
+   }
+  },
+  "summary_r1": {
+   "unweighted_mean_of_clips": 0.03249335124752799,
+   "pooled": 0.024810060256746147,
+   "min": 0.006047745358090162,
+   "max": 0.06494206413365666
+  },
+  "summary_r2": {
+   "unweighted_mean_of_clips": 0.20389308678044035,
+   "pooled": 0.19557243908828925,
+   "min": 0.10557029177718835,
+   "max": 0.2791437662713335
+  }
+ },
+ "w128": {
+  "t10s": {
+   "r1": {
+    "N": 1093632,
+    "changes": 41235,
+    "minerr": 40384,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 231,
+    "contexts_seen": 320,
+    "explained_change": 0.020637807687644005,
+    "changes_predicted": 4227,
+    "unchanged_broken": 3376
+   },
+   "r2": {
+    "N": 1093632,
+    "changes": 41235,
+    "minerr": 37596,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 1787,
+    "contexts_seen": 7516,
+    "explained_change": 0.08825027282648235
+   }
+  },
+  "t30s": {
+   "r1": {
+    "N": 1093632,
+    "changes": 15326,
+    "minerr": 14332,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 216,
+    "contexts_seen": 310,
+    "explained_change": 0.06485710557223023,
+    "changes_predicted": 2454,
+    "unchanged_broken": 1460
+   },
+   "r2": {
+    "N": 1093632,
+    "changes": 15326,
+    "minerr": 12476,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 1575,
+    "contexts_seen": 6343,
+    "explained_change": 0.1859585018922093
+   }
+  },
+  "t62s": {
+   "r1": {
+    "N": 1093632,
+    "changes": 59271,
+    "minerr": 56048,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 465,
+    "contexts_seen": 509,
+    "explained_change": 0.05437735148723655,
+    "changes_predicted": 7677,
+    "unchanged_broken": 4454
+   },
+   "r2": {
+    "N": 1093632,
+    "changes": 59271,
+    "minerr": 46519,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 4365,
+    "contexts_seen": 31645,
+    "explained_change": 0.21514737392654082
+   }
+  },
+  "t100s": {
+   "r1": {
+    "N": 1093632,
+    "changes": 4151,
+    "minerr": 4122,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 125,
+    "contexts_seen": 200,
+    "explained_change": 0.006986268369067683,
+    "changes_predicted": 47,
+    "unchanged_broken": 18
+   },
+   "r2": {
+    "N": 1093632,
+    "changes": 4151,
+    "minerr": 3521,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 594,
+    "contexts_seen": 3792,
+    "explained_change": 0.15177065767284992
+   }
+  },
+  "t150s": {
+   "r1": {
+    "N": 1093632,
+    "changes": 38186,
+    "minerr": 37950,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 228,
+    "contexts_seen": 335,
+    "explained_change": 0.006180275493636422,
+    "changes_predicted": 453,
+    "unchanged_broken": 217
+   },
+   "r2": {
+    "N": 1093632,
+    "changes": 38186,
+    "minerr": 36083,
+    "minerr_equals_changes": false,
+    "conflicting_contexts": 2064,
+    "contexts_seen": 8089,
+    "explained_change": 0.055072539674226206
+   }
+  },
+  "summary_r1": {
+   "unweighted_mean_of_clips": 0.03060776172196298,
+   "pooled": 0.033717100063855754,
+   "min": 0.006180275493636422,
+   "max": 0.06485710557223023
+  },
+  "summary_r2": {
+   "unweighted_mean_of_clips": 0.1392398691984617,
+   "pooled": 0.13892734985995991,
+   "min": 0.055072539674226206,
+   "max": 0.21514737392654082
+  }
+ },
+ "synthetic": {
+  "translate": {
+   "N": 6336,
+   "changes": 132,
+   "minerr": 0,
+   "minerr_equals_changes": false,
+   "conflicting_contexts": 0,
+   "contexts_seen": 26,
+   "explained_change": 1.0,
+   "changes_predicted": 132,
+   "unchanged_broken": 0
+  },
+  "grow_shrink": {
+   "N": 5760,
+   "changes": 288,
+   "minerr": 260,
+   "minerr_equals_changes": false,
+   "conflicting_contexts": 60,
+   "contexts_seen": 62,
+   "explained_change": 0.09722222222222221,
+   "changes_predicted": 64,
+   "unchanged_broken": 36
+  },
+  "rotate_bar": {
+   "N": 6336,
+   "changes": 446,
+   "minerr": 440,
+   "minerr_equals_changes": false,
+   "conflicting_contexts": 74,
+   "contexts_seen": 74,
+   "explained_change": 0.013452914798206317,
+   "changes_predicted": 26,
+   "unchanged_broken": 20
+  }
+ }
+}

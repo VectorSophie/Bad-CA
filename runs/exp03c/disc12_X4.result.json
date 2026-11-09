@@ -1,0 +1,53 @@
+{
+ "target": "disc12",
+ "cond": "X4",
+ "hidden_bits": 1,
+ "steps_per_frame": 1,
+ "family": "F_shared",
+ "trace": [
+  {
+   "t": 1.8,
+   "exceptions": 303
+  },
+  {
+   "t": 19.6,
+   "exceptions": 222
+  },
+  {
+   "t": 20.7,
+   "exceptions": 217
+  },
+  {
+   "t": 22.5,
+   "exceptions": 209
+  },
+  {
+   "t": 147.4,
+   "exceptions": 196
+  },
+  {
+   "t": 488.8,
+   "exceptions": 192
+  },
+  {
+   "t": 681.5,
+   "exceptions": 179
+  },
+  {
+   "t": 1312.1,
+   "exceptions": 176
+  },
+  {
+   "t": 1481.2,
+   "exceptions": 175
+  }
+ ],
+ "status": "BEST_SO_FAR_budget",
+ "best_exceptions": 175,
+ "bits_per_exception": 19,
+ "rule_bits": 3325,
+ "change_list_bits": 1136,
+ "python_rollout_exact": true,
+ "node_hash_matches_target": true,
+ "visited_entries": 442
+}

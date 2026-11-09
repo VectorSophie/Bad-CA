@@ -1,0 +1,8 @@
+.venv/
+cache/
+refs/
+__pycache__/
+runs/frozen/
+# origin not established (see runs/c4_restore_20261109/PROVENANCE.md); kept on disk, excluded from results
+runs/exp11b/
+runs/exp11b.log

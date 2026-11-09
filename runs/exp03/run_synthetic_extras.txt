@@ -1,0 +1,8 @@
+disc12           X4  SAT              wall=    2.0s vars=64352 clauses=807792
+disc12           X3  UNSAT            wall=    2.8s vars=2240 clauses=970560
+bar12            X4  UNSAT            wall=    3.3s vars=82992 clauses=1615152
+bar12            X3  UNSAT            wall=    4.8s vars=3680 clauses=1779360
+disc12           X1  SAT              wall=   14.2s vars=10464 clauses=6477024
+disc12           X2  SAT              wall=   15.6s vars=6368 clauses=4527552
+bar12            X2  UNSAT            wall=   16.8s vars=9968 clauses=8300992
+bar12            X1  UNSAT            wall=   24.1s vars=14064 clauses=11876704

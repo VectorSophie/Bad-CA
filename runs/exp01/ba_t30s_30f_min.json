@@ -1,0 +1,74 @@
+{
+ "format": "ca-universal/rule-v1",
+ "width": 64,
+ "height": 48,
+ "channels": 1,
+ "observed_channel": 0,
+ "taps": [
+  [
+   0,
+   -1,
+   -1
+  ],
+  [
+   0,
+   -1,
+   0
+  ],
+  [
+   0,
+   -1,
+   1
+  ],
+  [
+   0,
+   0,
+   -1
+  ],
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   -1
+  ],
+  [
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1
+  ]
+ ],
+ "boundary": 1,
+ "hidden_init": 0,
+ "steps_per_frame": 1,
+ "n_frames": 30,
+ "luts_b64": [
+  "AIiIzACIAMwAio/PAIoPz/D/+v8A+K/+AP+v/wD6r/8AAIjMAAAAzAAKz88ACs/P8P/6/wDwr/4A/+//APrv/w=="
+ ],
+ "seed_visible_b64": "/////////////////////////////////////////////+//////////x/////////8B/////////wD///////9/AP7//////38A/v//////fwD+//////9/AP7///////8A/v///////wH+////////Afz///////8B+P///////wHw////////AOD///////8A8P///////wDw//////9/APj//////38A8P//////fwDw////////APj//////38A+P//////fwD8//////8/APz//////x8A+P//////HwD4//////8fAPj//////z8A+P//////PwD4////////Afj///////8A+P///////wD4////////APj//////38A+P//////fwD4//////9/APj//////z8A+P//////PwD4//////8/APj//////z8A+P//////HwD4//////8fAPj//////x8A8P//////HwDw//////8fAPD/////",
+ "sizes": {
+  "lut_bits": 512,
+  "seed_bits": 3072,
+  "hidden_bits_per_cell": 0,
+  "hidden_init_bits": 0
+ },
+ "meta": {
+  "family": "moore-r1-lut",
+  "fit": "majority+SOP-dontcare-min",
+  "sop": "(x0 & x4 & x7) | (x1 & x3 & x4) | (x2 & x3 & x7) | (x3 & x7 & ~x5) | (x4 & x6 & ~x2) | (x1 & x4 & x6 & x8) | (x0 & x1 & x3 & ~x8) | (x0 & x1 & x4 & ~x5) | (x0 & x3 & x6 & ~x2) | (x2 & x7 & ~x5 & ~x6) | (x4 & x5 & x7 & ~x2 & ~x3)"
+ },
+ "expected_sha256": "a88b655fd440ea4d2405d439a7122b479071086207bba31f2ee58aa91c2c244d"
+}

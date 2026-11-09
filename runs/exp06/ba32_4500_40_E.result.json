@@ -1,0 +1,18 @@
+{
+ "target": "ba32_4500_40",
+ "cond": "E",
+ "status": "UNKNOWN_timeout_no_solution",
+ "changed_pixels": 405,
+ "shared": {
+  "note": "excluded from every method's cost: W, H, T, fps, threshold, first frame",
+  "first_frame_raw_bits": 768,
+  "W": 32,
+  "H": 24,
+  "T": 40
+ },
+ "recording_bits": {
+  "changelist": 4476,
+  "xor_rle": 5789,
+  "frame_rle": 13261
+ }
+}

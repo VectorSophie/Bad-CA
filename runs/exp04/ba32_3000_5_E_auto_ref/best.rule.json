@@ -1,0 +1,83 @@
+{
+ "format": "ca-universal/rule-v1",
+ "width": 32,
+ "height": 24,
+ "channels": 2,
+ "observed_channel": 0,
+ "taps": [
+  [
+   0,
+   -1,
+   -1
+  ],
+  [
+   0,
+   -1,
+   0
+  ],
+  [
+   0,
+   -1,
+   1
+  ],
+  [
+   0,
+   0,
+   -1
+  ],
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   -1
+  ],
+  [
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1
+  ],
+  [
+   1,
+   0,
+   0
+  ]
+ ],
+ "boundary": 0,
+ "hidden_init": 0,
+ "steps_per_frame": 2,
+ "n_frames": 5,
+ "luts_b64": [
+  "AAD//yAg//8AAP//ICD//wAA3X0REf//AAD//xER//8AAKr6AAD//wAAqvoAAP//AAAApQAAVfUAAKqvAAD//xzM//887P//zMz//+zs///MPP//3T3//8zM///d3f//3Mz//9zM///MzP//zMz//8z8qq/u////zMyqr+7///8=",
+  "AAD//xAQBQUAAP//EBAFBQAABQW7qv//AAAFBbuq//8AAP//AAD//wAAX18AAF9fAAD//wAA//8AAFVVAABVVQAA//8AAFVVAAD//wAAVVUAAK+vEQD//wAAr68RAP//AAD//wAA//8AAF9fAABfXwAA//8AAP//AAD//wAA//8="
+ ],
+ "seed_visible_b64": "/wcAAP8HAAD/BwAA/wcAAP8DAAD/A/AA/wHgAf8A4AF/AMADHwCAAwAAwAMAAMAHAADABwAAwAcAAMAHAADABwAAwAMAAMADAADABwAA4AcAAOAPAADgDwAA4B8AAOAf",
+ "sizes": {
+  "lut_bits": 2048,
+  "seed_bits": 768,
+  "hidden_bits_per_cell": 1,
+  "hidden_init_bits": 0
+ },
+ "meta": {
+  "source": "ba32_3000_5",
+  "method": "DiffLogic",
+  "cond": "E",
+  "seed": 8,
+  "it": 2000,
+  "arch": "ref: 16 perception kernels [8,4,2,1] + update (128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 128, 64, 32, 16, 8, 4)+[2]"
+ },
+ "expected_sha256": "02584e3a40e9685bd2d750660066587ed5006661e988e386910629b2a0abcafa"
+}

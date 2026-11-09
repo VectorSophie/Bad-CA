@@ -1,0 +1,45 @@
+{
+ "target": "ba32_3000_5",
+ "cond": "E",
+ "hidden_bits": 1,
+ "steps_per_frame": 2,
+ "family": "F_priv",
+ "widths": [
+  128,
+  128,
+  64,
+  32,
+  2
+ ],
+ "n_gates": 354,
+ "opt": {
+  "seeds": 16,
+  "steps": 20000,
+  "widths": "128,128,64,32",
+  "lr": 0.05,
+  "tag": "distill_w352",
+  "eval_every": 1000,
+  "sat_ref": "keep",
+  "skip_auto": 1,
+  "skip_distill": 0,
+  "budget_s": 1500
+ },
+ "device": "cuda:0",
+ "boundary": 0,
+ "hidden_init": 0,
+ "seed_scheme": "seed s: wiring np.random.default_rng(1000+s); logits jax.random.split(PRNGKey(0), seeds)[s]",
+ "sat_status": "SAT",
+ "sat_ref": "ba32_3000_5_E_keep",
+ "capacity_distill": {
+  "compute": {
+   "compile_s": 1.45,
+   "train_s": 21.92,
+   "steps_run": 20000,
+   "seeds": 16,
+   "gpu_seconds": 23.36
+  },
+  "best_care_acc": 0.7786624203821656,
+  "seeds_exact": 0,
+  "care_entries": 314
+ }
+}

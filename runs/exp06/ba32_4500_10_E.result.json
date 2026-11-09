@@ -1,0 +1,43 @@
+{
+ "target": "ba32_4500_10",
+ "cond": "E",
+ "hidden_bits": 1,
+ "steps_per_frame": 2,
+ "family": "F_priv",
+ "trace": [
+  {
+   "t": 367.2,
+   "exceptions": 573
+  },
+  {
+   "t": 623.7,
+   "exceptions": 572
+  }
+ ],
+ "status": "BEST_SO_FAR_budget",
+ "search_code_snapshot": "b1f106e851cb",
+ "encode_s": 25.9,
+ "n_clauses": 18662784,
+ "changed_pixels": 129,
+ "shared": {
+  "note": "excluded from every method's cost: W, H, T, fps, threshold, first frame",
+  "first_frame_raw_bits": 768,
+  "W": 32,
+  "H": 24,
+  "T": 10
+ },
+ "recording_bits": {
+  "changelist": 1260,
+  "xor_rle": 1637,
+  "frame_rle": 2791
+ },
+ "objective": "exceptions vs keep",
+ "ref_luts": null,
+ "keep_exceptions": 572,
+ "best_exceptions": 572,
+ "rule_bits": 1940,
+ "rule_bitstream_decodes_to_exact": true,
+ "python_rollout_exact": true,
+ "node_hash_matches_target": true,
+ "visited_entries": 651
+}

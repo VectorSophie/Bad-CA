@@ -1,0 +1,10 @@
+exp09_pilot/cold_L5 rc=0
+exp10_pilot/keep rc=137
+exp10_pilot/random rc=137
+exp10_pilot/conway rc=137
+exp10_pilot/R0 rc=137
+exp09_pilot/cold_L10 rc=0
+exp09_pilot/incr_prev_sched rc=137
+exp09_pilot/incr_prev_step1 rc=137
+exp09_pilot/incr_keep_step1 rc=137
+ALLDONE

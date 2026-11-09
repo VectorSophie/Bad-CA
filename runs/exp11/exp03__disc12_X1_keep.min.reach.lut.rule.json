@@ -1,0 +1,84 @@
+{
+ "format": "ca-universal/rule-v1",
+ "width": 12,
+ "height": 12,
+ "channels": 3,
+ "observed_channel": 0,
+ "taps": [
+  [
+   0,
+   -1,
+   -1
+  ],
+  [
+   0,
+   -1,
+   0
+  ],
+  [
+   0,
+   -1,
+   1
+  ],
+  [
+   0,
+   0,
+   -1
+  ],
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   -1
+  ],
+  [
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1
+  ],
+  [
+   1,
+   0,
+   0
+  ],
+  [
+   2,
+   0,
+   0
+  ]
+ ],
+ "boundary": 0,
+ "hidden_init": 0,
+ "steps_per_frame": 2,
+ "n_frames": 7,
+ "luts_b64": [
+  "UQL69wAAP34CAt93AAD/fgAAu/8AAP5/AAn/9gEA/3cAAP/+EYC/fwAA//8AAH9/AQD//0AALj8AAv98AgAvJBYAff8wAH//AAL/9wAA//8QAf//AAD//wCA//0AEP//AQD//wkA//8IAP//gAD//wEA//8RAL9/AQD//wAB/z6AEN9/AID//wAA//ckhP//AAD//4AB//8EiP9/AAD/fwAQ+/8AAr//AMD//wDA/v8AAO//CCDv/wAF/34AyP//28r589AEvh4BI/7vBE7f9ARs+feGKvruAQv31ggNPtYBlH/8UQD+vgLA/v4AzPa8Aai//hvgOl5loP+nmzy/dg==",
+  "AAgFgBAAAIEAACAAAAAAgAAABAAAAACAAAgACgAAAIAAAAAAEQAAgAAAAAAAAICAAQAAAEAAAIAAAACAAgCQ2OL/f3///3///////////////////////v5+9///7/9//v/////////3////f//////////u/79//v//fv/+77Y3FiSIEABAgIMhAAgEgBABgAEAAIAIAACDgYCJAAAAgAEQAAAxMIAAAIABCCByAQCBABAACQDQgAUBAIEASFCZ///d2//639v//93v/7fvuf/791953Xze//f9H/fzv+v/f//u/7/3//9//qe/t//3////ffef+//ffwH/Zdvt6w==",
+  "WAoECFAAQAEDAyAIAAAAAQAARAAAAAAAAQkACQEAAAAAAAABAYAAAAAAAAAAAAAAAAAAAEEAEMABAgADAACRAt0KAoBwAAAAAQIAAAAAAIAQAYAAAAAAAQGBCIIAEACAAQAAABgAAAAIAAAAgAAAAAAAAAARAECAAQAAgQABEEn/////+////3////772////////3////9//3/////////////Xz3//f13//9+P/v///+///////3/+////v////7///////////9/////9////+f////////////////7/7//////////////////+/3///////////////////w=="
+ ],
+ "seed_visible_b64": "AAAAAAAAYAAP8AAGAAAAAAAA",
+ "sizes": {
+  "lut_bits": 6144,
+  "seed_bits": 144,
+  "hidden_bits_per_cell": 2,
+  "hidden_init_bits": 0
+ },
+ "meta": {
+  "label": "exp03__disc12_X1_keep.min"
+ },
+ "expected_sha256": "7ccdbcf1054fe950502c3af34acec116115e1dc0fe0f848b16880719810fcb4e"
+}

@@ -1,0 +1,74 @@
+{
+ "format": "ca-universal/rule-v1",
+ "width": 24,
+ "height": 24,
+ "channels": 1,
+ "observed_channel": 0,
+ "taps": [
+  [
+   0,
+   -1,
+   -1
+  ],
+  [
+   0,
+   -1,
+   0
+  ],
+  [
+   0,
+   -1,
+   1
+  ],
+  [
+   0,
+   0,
+   -1
+  ],
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   -1
+  ],
+  [
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1
+  ]
+ ],
+ "boundary": 0,
+ "hidden_init": 0,
+ "steps_per_frame": 1,
+ "n_frames": 11,
+ "luts_b64": [
+  "AAD//wAA/38AAP9/AAD//wAA//8AAP//AAD/9wAA//8AAP//AAB//wAA//8AAP//AAD//wAAv/8AAP/9AADv/g=="
+ ],
+ "seed_visible_b64": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAADwAADwAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+ "sizes": {
+  "lut_bits": 512,
+  "seed_bits": 576,
+  "hidden_bits_per_cell": 0,
+  "hidden_init_bits": 0
+ },
+ "meta": {
+  "source": "syn_grow_shrink",
+  "family": "moore-r1-lut",
+  "fit": "majority"
+ },
+ "expected_sha256": "b7e79e5c25117cc4e2dbe7434cfa55c53668fd10bccf82a38aa710bd037f0b96"
+}

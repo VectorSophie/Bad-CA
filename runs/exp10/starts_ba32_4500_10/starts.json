@@ -1,0 +1,22 @@
+{
+ "keep": {
+  "lut_entries": 2048,
+  "ones": 1024,
+  "keep_exceptions": 0
+ },
+ "conway": {
+  "lut_entries": 2048,
+  "ones": 792,
+  "keep_exceptions": 456
+ },
+ "random": {
+  "lut_entries": 2048,
+  "ones": 1036,
+  "keep_exceptions": 984
+ },
+ "R0": {
+  "lut_entries": 2048,
+  "ones": 1126,
+  "keep_exceptions": 810
+ }
+}

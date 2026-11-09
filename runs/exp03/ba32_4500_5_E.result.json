@@ -1,0 +1,59 @@
+{
+ "target": "ba32_4500_5",
+ "cond": "E",
+ "hidden_bits": 1,
+ "steps_per_frame": 2,
+ "family": "F_priv",
+ "boundary": 0,
+ "hidden_init": 0,
+ "shape": [
+  5,
+  24,
+  32
+ ],
+ "solver": "cadical195 (pysat), default options, deterministic",
+ "light_cone_conflicts": [],
+ "encode_s": 10.99,
+ "n_vars": 11264,
+ "n_clauses": 8292864,
+ "lut_vars": 2048,
+ "solve_s": 1.92,
+ "status": "SAT",
+ "python_rollout_exact": true,
+ "visited_entries": 544,
+ "node_hash_matches_target": true,
+ "node_frames_equal_target": true,
+ "sizes": {
+  "lut_bits_full": 2048,
+  "specified_entries": 544,
+  "specified_bits": 1088,
+  "hidden_bits_per_cell": 1,
+  "hidden_state_bits_total": 768,
+  "seed_visible_bits": 768,
+  "hidden_init_bits": 0
+ },
+ "returncode": 0,
+ "wall_s": 19.2,
+ "limits": {
+  "wall_s": 1800,
+  "cpu_s": 1800,
+  "mem_gb": 32
+ },
+ "minimized": {
+  "seconds": 71.7,
+  "per_channel": [
+   {
+    "terms": 74,
+    "literals": 474
+   },
+   {
+    "terms": 69,
+    "literals": 416
+   }
+  ],
+  "total_terms": 143,
+  "total_literals": 890,
+  "rollout_exact": true,
+  "node_hash_matches_target": true
+ }
+}

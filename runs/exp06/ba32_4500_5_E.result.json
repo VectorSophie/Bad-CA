@@ -1,0 +1,87 @@
+{
+ "target": "ba32_4500_5",
+ "cond": "E",
+ "hidden_bits": 1,
+ "steps_per_frame": 2,
+ "family": "F_priv",
+ "trace": [
+  {
+   "t": 14.6,
+   "exceptions": 561
+  },
+  {
+   "t": 17.2,
+   "exceptions": 332
+  },
+  {
+   "t": 30.0,
+   "exceptions": 316
+  },
+  {
+   "t": 198.4,
+   "exceptions": 294
+  },
+  {
+   "t": 362.9,
+   "exceptions": 282
+  },
+  {
+   "t": 514.3,
+   "exceptions": 278
+  },
+  {
+   "t": 534.1,
+   "exceptions": 274
+  },
+  {
+   "t": 541.6,
+   "exceptions": 258
+  },
+  {
+   "t": 667.4,
+   "exceptions": 252
+  },
+  {
+   "t": 759.6,
+   "exceptions": 245
+  },
+  {
+   "t": 868.7,
+   "exceptions": 236
+  },
+  {
+   "t": 985.4,
+   "exceptions": 231
+  },
+  {
+   "t": 1095.6,
+   "exceptions": 217
+  }
+ ],
+ "status": "BEST_SO_FAR_budget",
+ "search_code_snapshot": "b1f106e851cb",
+ "encode_s": 11.4,
+ "n_clauses": 8292864,
+ "changed_pixels": 74,
+ "shared": {
+  "note": "excluded from every method's cost: W, H, T, fps, threshold, first frame",
+  "first_frame_raw_bits": 768,
+  "W": 32,
+  "H": 24,
+  "T": 5
+ },
+ "recording_bits": {
+  "changelist": 678,
+  "xor_rle": 878,
+  "frame_rle": 1274
+ },
+ "objective": "exceptions vs keep",
+ "ref_luts": null,
+ "keep_exceptions": 217,
+ "best_exceptions": 217,
+ "rule_bits": 1159,
+ "rule_bitstream_decodes_to_exact": true,
+ "python_rollout_exact": true,
+ "node_hash_matches_target": true,
+ "visited_entries": 422
+}

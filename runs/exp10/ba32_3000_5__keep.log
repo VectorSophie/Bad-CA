@@ -1,0 +1,13 @@
+{"encoded_s": 11.8, "n_clauses": 8292864, "n_vars": 11264, "code_snapshot": "9b8f0db4a7ba"}
+{"t": 13.0, "exceptions": 237}
+{"t": 16.7, "exceptions": 236}
+{"t": 18.5, "exceptions": 186}
+{"t": 37.4, "exceptions": 183}
+{"t": 114.2, "exceptions": 175}
+{"t": 142.7, "exceptions": 168}
+{"t": 153.7, "exceptions": 137}
+{"t": 168.4, "exceptions": 129}
+{"t": 183.3, "exceptions": 125}
+{"t": 245.9, "exceptions": 112}
+{"t": 290.5, "exceptions": 105}
+{"t": 503.1, "exceptions": 99}

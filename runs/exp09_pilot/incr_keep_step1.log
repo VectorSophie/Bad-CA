@@ -1,0 +1,9 @@
+{"event": "start", "mode": "incr", "arm": "incr_keep_step1", "start": 4500, "cond": "E", "phase": "keep", "lengths": [2, 3, 4, 5, 6, 7, 8, 9, 10], "code_snapshot": "70c0d482bb48", "solver": "cadical195 (pysat), default options"}
+{"event": "solved", "L": 2, "status": "SAT", "encode_s": 2.96, "solve_s": 0.05, "step_s": 3.02, "cum_s": 3.02, "n_clauses": 2070912, "n_vars": 4352, "maxrss_gb": 0.32, "python_rollout_exact": true}
+{"event": "solved", "L": 3, "status": "SAT", "encode_s": 2.98, "solve_s": 0.37, "step_s": 3.35, "cum_s": 6.36, "n_clauses": 4144896, "n_vars": 6656, "maxrss_gb": 0.63, "python_rollout_exact": true}
+{"event": "solved", "L": 4, "status": "SAT", "encode_s": 2.94, "solve_s": 1.83, "step_s": 4.77, "cum_s": 11.13, "n_clauses": 6218880, "n_vars": 8960, "maxrss_gb": 1.37, "python_rollout_exact": true}
+{"event": "solved", "L": 5, "status": "SAT", "encode_s": 2.95, "solve_s": 1.78, "step_s": 4.73, "cum_s": 15.87, "n_clauses": 8292864, "n_vars": 11264, "maxrss_gb": 1.4, "python_rollout_exact": true}
+{"event": "solved", "L": 6, "status": "SAT", "encode_s": 2.91, "solve_s": 5.0, "step_s": 7.9, "cum_s": 23.77, "n_clauses": 10366848, "n_vars": 13568, "maxrss_gb": 2.37, "python_rollout_exact": true}
+{"event": "solved", "L": 7, "status": "SAT", "encode_s": 2.87, "solve_s": 36.55, "step_s": 39.42, "cum_s": 63.19, "n_clauses": 12440832, "n_vars": 15872, "maxrss_gb": 2.53, "python_rollout_exact": true}
+{"event": "solved", "L": 8, "status": "SAT", "encode_s": 2.89, "solve_s": 63.34, "step_s": 66.23, "cum_s": 129.42, "n_clauses": 14514816, "n_vars": 18176, "maxrss_gb": 3.04, "python_rollout_exact": true}
+{"event": "solved", "L": 9, "status": "SAT", "encode_s": 2.87, "solve_s": 271.04, "step_s": 273.91, "cum_s": 403.33, "n_clauses": 16588800, "n_vars": 20480, "maxrss_gb": 4.1, "python_rollout_exact": true}

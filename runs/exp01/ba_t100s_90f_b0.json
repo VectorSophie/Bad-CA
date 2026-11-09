@@ -1,0 +1,74 @@
+{
+ "format": "ca-universal/rule-v1",
+ "width": 64,
+ "height": 48,
+ "channels": 1,
+ "observed_channel": 0,
+ "taps": [
+  [
+   0,
+   -1,
+   -1
+  ],
+  [
+   0,
+   -1,
+   0
+  ],
+  [
+   0,
+   -1,
+   1
+  ],
+  [
+   0,
+   0,
+   -1
+  ],
+  [
+   0,
+   0,
+   0
+  ],
+  [
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   -1
+  ],
+  [
+   0,
+   1,
+   0
+  ],
+  [
+   0,
+   1,
+   1
+  ]
+ ],
+ "boundary": 0,
+ "hidden_init": 0,
+ "steps_per_frame": 1,
+ "n_frames": 90,
+ "luts_b64": [
+  "AASz/wAA//8AAP+fAAD/qgAA//8AAP//AAC/uwAA7/4AAP//AAD//wAA//9AAP//AAD//wEA//8AAP//EAH//w=="
+ ],
+ "seed_visible_b64": "//8fAAAAAAD//x8AAAAAAP//HwAAAAAA//8fAAAAAAD//x8AAAAAAP//HwAAAAAA//8fAAAAAAD//x8AAAAAAP//HwAAAAAA//8PAAAAAAD//w8AAH4AAP//BwAA/wEA//8DAAD+AwD//wMAAPwDAP//AQAA/AcA//8AAAD8BwD/fwAAAPgPAP8fAAAA8A8A/w8AAADAHwD/AQAAAOAfAAAAAAAA4B8AAAAAAADwHwAAAAAAAPAfAAAAAAAA+D8AAAAAAAD4PwAAAAAAAPA/AAAAAAAA4B8AAAAAAADgHwAAAAAAAOAfAAAAAAAA4B8AAAAAAADgHwAAAAAAAPAfAAAAAAAA8B8AAAAAAADwDwAAAAAAAPAfAAAAAAAA8B8AAAAAAADwHwAAAAAAAPg/AAAAAAAA+D8AAAAAAAD4fwAAAAAAAPx/AAAAAAAA/P8AAAAAAAD8/wAAAAAAAPz/AQAAAAAA/P8BAAAAAAD+/wMAAAAAAP7/AwAAAAAA/v8D",
+ "sizes": {
+  "lut_bits": 512,
+  "seed_bits": 3072,
+  "hidden_bits_per_cell": 0,
+  "hidden_init_bits": 0
+ },
+ "meta": {
+  "source": "ba_t100s_90f_b0",
+  "family": "moore-r1-lut",
+  "fit": "majority"
+ },
+ "expected_sha256": "ab4a1336c38e654799e6c0e35c60ff9a07fc32f0d2b2ba6f11d9fc0abee2e92b"
+}

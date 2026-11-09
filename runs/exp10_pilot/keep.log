@@ -1,0 +1,7 @@
+{"encoded_s": 11.6, "n_clauses": 8292864, "n_vars": 11264, "code_snapshot": "70c0d482bb48"}
+{"t": 12.8, "exceptions": 237}
+{"t": 16.5, "exceptions": 236}
+{"t": 18.3, "exceptions": 186}
+{"t": 35.6, "exceptions": 183}
+{"t": 98.2, "exceptions": 175}
+{"t": 118.5, "exceptions": 168}
