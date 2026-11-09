@@ -1,0 +1,122 @@
+[
+ {
+  "prefix_target": "pcA:p3",
+  "G": 2,
+  "struct": "k1_S1",
+  "test_clip": "pcA",
+  "frames": 6,
+  "exact": true,
+  "first_wrong_frame": null,
+  "wrong_pixels_per_frame": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pixel_err": 0.0
+ },
+ {
+  "prefix_target": "pcA:p3",
+  "G": 2,
+  "struct": "k1_S1",
+  "test_clip": "pcA_long",
+  "frames": 18,
+  "exact": true,
+  "first_wrong_frame": null,
+  "wrong_pixels_per_frame": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pixel_err": 0.0
+ },
+ {
+  "prefix_target": "pcB:p3",
+  "G": 3,
+  "struct": "k1_S2",
+  "test_clip": "pcB",
+  "frames": 6,
+  "exact": true,
+  "first_wrong_frame": null,
+  "wrong_pixels_per_frame": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pixel_err": 0.0
+ },
+ {
+  "prefix_target": "pcB:p3",
+  "G": 3,
+  "struct": "k1_S2",
+  "test_clip": "pcB_long",
+  "frames": 18,
+  "exact": true,
+  "first_wrong_frame": null,
+  "wrong_pixels_per_frame": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pixel_err": 0.0
+ },
+ {
+  "prefix_target": "translate24:p3",
+  "G": 0,
+  "struct": "k0_S1",
+  "test_clip": "translate24",
+  "frames": 12,
+  "exact": true,
+  "first_wrong_frame": null,
+  "wrong_pixels_per_frame": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "pixel_err": 0.0
+ }
+]

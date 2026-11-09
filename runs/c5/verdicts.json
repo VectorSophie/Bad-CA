@@ -1,0 +1,58 @@
+{
+ "pcA": {
+  "best_baseline": "lzma",
+  "best_baseline_bytes": 116,
+  "best_lut_route_bytes": null,
+  "best_direct_bytes": 27,
+  "ca_beats_all_tested_baselines": true
+ },
+ "pcB": {
+  "best_baseline": "zlib",
+  "best_baseline_bytes": 90,
+  "best_lut_route_bytes": null,
+  "best_direct_bytes": 29,
+  "ca_beats_all_tested_baselines": true
+ },
+ "translate24": {
+  "best_baseline": "zlib",
+  "best_baseline_bytes": 55,
+  "best_lut_route_bytes": null,
+  "best_direct_bytes": 19,
+  "ca_beats_all_tested_baselines": true
+ },
+ "disc12": {
+  "best_baseline": "zlib",
+  "best_baseline_bytes": 55,
+  "best_lut_route_bytes": 154,
+  "best_direct_bytes": null,
+  "ca_beats_all_tested_baselines": false
+ },
+ "bar12": {
+  "best_baseline": "changelist",
+  "best_baseline_bytes": 112,
+  "best_lut_route_bytes": 272,
+  "best_direct_bytes": null,
+  "ca_beats_all_tested_baselines": false
+ },
+ "ba32_3000_5": {
+  "best_baseline": "changelist",
+  "best_baseline_bytes": 80,
+  "best_lut_route_bytes": 129,
+  "best_direct_bytes": null,
+  "ca_beats_all_tested_baselines": false
+ },
+ "ba32_4500_5": {
+  "best_baseline": "changelist",
+  "best_baseline_bytes": 130,
+  "best_lut_route_bytes": 191,
+  "best_direct_bytes": null,
+  "ca_beats_all_tested_baselines": false
+ },
+ "ba32_4500_10": {
+  "best_baseline": "lzma",
+  "best_baseline_bytes": 202,
+  "best_lut_route_bytes": 278,
+  "best_direct_bytes": null,
+  "ca_beats_all_tested_baselines": false
+ }
+}

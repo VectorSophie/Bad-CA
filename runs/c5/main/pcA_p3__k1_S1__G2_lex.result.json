@@ -1,0 +1,58 @@
+{
+ "target": "pcA:p3",
+ "target_sha256": "2149c07df82fa6b714d3f0cde67bcea3decb5c777e759f06cea9f8871df5eb42",
+ "shape": [
+  3,
+  12,
+  12
+ ],
+ "struct": "k1_S1",
+ "family": "F_priv",
+ "k": 1,
+ "S": 1,
+ "boundary": 0,
+ "hidden_init": 0,
+ "n_inputs": 10,
+ "G": 2,
+ "symmetry": "lex+a<b+all used",
+ "encoding": "direct per cell-generation",
+ "solver": "cadical195 (pysat) default",
+ "code_snapshot": "f1f140b3c6fe",
+ "encode_cpu_s": 0.01,
+ "n_vars": 1971,
+ "n_clauses": 23835,
+ "circuit_copies": 268,
+ "solve_cpu_s": 0.0,
+ "solver_stats": {
+  "restarts": 16,
+  "conflicts": 142,
+  "decisions": 338,
+  "propagations": 40782
+ },
+ "status": "SAT",
+ "maxrss_gb": 0.04,
+ "gates": [
+  [
+   6,
+   1,
+   9
+  ],
+  [
+   6,
+   3,
+   10
+  ]
+ ],
+ "outputs": [
+  11,
+  4
+ ],
+ "python_rollout_exact": true,
+ "consulted_entries": 235,
+ "file_bytes": 26,
+ "python_file_decode_exact": true,
+ "node_file_decode_exact": true,
+ "node_decode_ms": 0.94,
+ "payload_bits": 45,
+ "lut_exc_bits_same_rule": 1814
+}

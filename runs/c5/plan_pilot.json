@@ -1,0 +1,7 @@
+[{"target":"pcA","struct":"k1_S1","G":[0,1,2,3],"cpu_s":60,"outdir":"c5/pilot"},
+ {"target":"pcB","struct":"k1_S2","G":[0,1,2,3,4,5],"cpu_s":60,"outdir":"c5/pilot"},
+ {"target":"translate24","struct":"k0_S1","G":[0,1,2,3],"cpu_s":60,"outdir":"c5/pilot"},
+ {"target":"disc12","struct":"k1_S2","G":[0,1,2,3,4,5,6,7,8,9,10],"cpu_s":60,"outdir":"c5/pilot"},
+ {"target":"bar12","struct":"k1_S4","G":[0,1,2,3,4,5,6,7,8,9,10],"cpu_s":60,"outdir":"c5/pilot"},
+ {"target":"ba32_3000_5","struct":"k1_S2","G":[0,1,2,3,4,5,6,7,8,9,10,11,12],"cpu_s":60,"outdir":"c5/pilot"},
+ {"target":"ba32_3000_5","struct":"k1_S2","G":[6,8,10],"cpu_s":60,"outdir":"c5/pilot","lex":true}]

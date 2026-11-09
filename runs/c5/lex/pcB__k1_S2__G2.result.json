@@ -1,0 +1,34 @@
+{
+ "target": "pcB",
+ "target_sha256": "0910b99855cd464f1f151b14cb00ab027b7af2beab7b0da62defc373a00883b7",
+ "shape": [
+  6,
+  12,
+  12
+ ],
+ "struct": "k1_S2",
+ "family": "F_priv",
+ "k": 1,
+ "S": 2,
+ "boundary": 0,
+ "hidden_init": 0,
+ "n_inputs": 10,
+ "G": 2,
+ "symmetry": "a<b+all used",
+ "encoding": "direct per cell-generation",
+ "solver": "cadical195 (pysat) default",
+ "code_snapshot": "f1f140b3c6fe",
+ "encode_cpu_s": 0.09,
+ "n_vars": 10725,
+ "n_clauses": 160095,
+ "circuit_copies": 1415,
+ "solve_cpu_s": 0.33,
+ "solver_stats": {
+  "restarts": 28,
+  "conflicts": 4249,
+  "decisions": 6997,
+  "propagations": 4574836
+ },
+ "status": "UNSAT",
+ "maxrss_gb": 0.09
+}

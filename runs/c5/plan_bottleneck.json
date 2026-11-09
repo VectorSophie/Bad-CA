@@ -1,0 +1,10 @@
+[{"target":"disc12","struct":"k1_S2","G":[3,4,5,6,7,8],"cpu_s":120,"outdir":"c5/bottleneck","entries":true},
+ {"target":"bar12","struct":"k1_S4","G":[2,3,4,5,6],"cpu_s":120,"outdir":"c5/bottleneck","entries":true},
+ {"target":"ba32_3000_5","struct":"k1_S2","G":[3,4,5,6],"cpu_s":120,"outdir":"c5/bottleneck","entries":true},
+ {"target":"pcB","struct":"k1_S2","G":[2,3],"cpu_s":120,"outdir":"c5/bottleneck","entries":true},
+ {"target":"pcB","struct":"k1_S2","G":[3],"cpu_s":120,"outdir":"c5/bottleneck"},
+ {"target":"disc12","struct":"k1_S2","G":[16],"cpu_s":300,"outdir":"c5/bottleneck","entries":true},
+ {"target":"disc12","struct":"k1_S2","G":[32],"cpu_s":300,"outdir":"c5/bottleneck","entries":true},
+ {"target":"disc12","struct":"k1_S2","G":[16],"cpu_s":300,"outdir":"c5/bottleneck"},
+ {"target":"ba32_3000_5","struct":"k1_S2","G":[16],"cpu_s":300,"outdir":"c5/bottleneck","entries":true},
+ {"target":"ba32_3000_5","struct":"k1_S2","G":[32],"cpu_s":300,"outdir":"c5/bottleneck","entries":true}]

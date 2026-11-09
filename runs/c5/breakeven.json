@@ -1,0 +1,194 @@
+[
+ {
+  "clip": "ba32_3000_5",
+  "struct": "k1_S2",
+  "n_inputs": 10,
+  "best_baseline": "changelist",
+  "best_baseline_bytes": 80,
+  "file_bytes_G0": 58,
+  "file_bytes_G12": 78,
+  "break_even_max_G": 12,
+  "proved_no_circuit_up_to_G": 4,
+  "compression_ruled_out": false,
+  "open_window": [
+   5,
+   12
+  ]
+ },
+ {
+  "clip": "ba32_3000_5",
+  "struct": "k1_S4",
+  "n_inputs": 10,
+  "best_baseline": "changelist",
+  "best_baseline_bytes": 80,
+  "file_bytes_G0": 58,
+  "file_bytes_G12": 79,
+  "break_even_max_G": 12,
+  "proved_no_circuit_up_to_G": 2,
+  "compression_ruled_out": false,
+  "open_window": [
+   3,
+   12
+  ]
+ },
+ {
+  "clip": "ba32_3000_5",
+  "struct": "k1s_S2",
+  "n_inputs": 18,
+  "best_baseline": "changelist",
+  "best_baseline_bytes": 80,
+  "file_bytes_G0": 58,
+  "file_bytes_G12": 80,
+  "break_even_max_G": 11,
+  "proved_no_circuit_up_to_G": 3,
+  "compression_ruled_out": false,
+  "open_window": [
+   4,
+   11
+  ]
+ },
+ {
+  "clip": "ba32_3000_5",
+  "struct": "k2_S2",
+  "n_inputs": 11,
+  "best_baseline": "changelist",
+  "best_baseline_bytes": 80,
+  "file_bytes_G0": 59,
+  "file_bytes_G12": 79,
+  "break_even_max_G": 12,
+  "proved_no_circuit_up_to_G": 3,
+  "compression_ruled_out": false,
+  "open_window": [
+   4,
+   12
+  ]
+ },
+ {
+  "clip": "ba32_4500_10",
+  "struct": "k1_S2",
+  "n_inputs": 10,
+  "best_baseline": "lzma",
+  "best_baseline_bytes": 202,
+  "file_bytes_G0": 48,
+  "file_bytes_G12": 69,
+  "break_even_max_G": 76,
+  "proved_no_circuit_up_to_G": 2,
+  "compression_ruled_out": false,
+  "open_window": [
+   3,
+   76
+  ]
+ },
+ {
+  "clip": "ba32_4500_5",
+  "struct": "k1_S2",
+  "n_inputs": 10,
+  "best_baseline": "changelist",
+  "best_baseline_bytes": 130,
+  "file_bytes_G0": 48,
+  "file_bytes_G12": 68,
+  "break_even_max_G": 43,
+  "proved_no_circuit_up_to_G": 3,
+  "compression_ruled_out": false,
+  "open_window": [
+   4,
+   43
+  ]
+ },
+ {
+  "clip": "bar12",
+  "struct": "k1_S4",
+  "n_inputs": 10,
+  "best_baseline": "changelist",
+  "best_baseline_bytes": 112,
+  "file_bytes_G0": 11,
+  "file_bytes_G12": 31,
+  "break_even_max_G": 53,
+  "proved_no_circuit_up_to_G": 3,
+  "compression_ruled_out": false,
+  "open_window": [
+   4,
+   53
+  ]
+ },
+ {
+  "clip": "disc12",
+  "struct": "k1_S2",
+  "n_inputs": 10,
+  "best_baseline": "zlib",
+  "best_baseline_bytes": 55,
+  "file_bytes_G0": 13,
+  "file_bytes_G12": 33,
+  "break_even_max_G": 23,
+  "proved_no_circuit_up_to_G": 4,
+  "compression_ruled_out": false,
+  "open_window": [
+   5,
+   23
+  ]
+ },
+ {
+  "clip": "disc12",
+  "struct": "k1s_S1",
+  "n_inputs": 18,
+  "best_baseline": "zlib",
+  "best_baseline_bytes": 55,
+  "file_bytes_G0": 13,
+  "file_bytes_G12": 35,
+  "break_even_max_G": 21,
+  "proved_no_circuit_up_to_G": 3,
+  "compression_ruled_out": false,
+  "open_window": [
+   4,
+   21
+  ]
+ },
+ {
+  "clip": "pcA",
+  "struct": "k1_S1",
+  "n_inputs": 10,
+  "best_baseline": "lzma",
+  "best_baseline_bytes": 116,
+  "file_bytes_G0": 23,
+  "file_bytes_G12": 44,
+  "break_even_max_G": 48,
+  "proved_no_circuit_up_to_G": 1,
+  "compression_ruled_out": false,
+  "open_window": [
+   2,
+   48
+  ]
+ },
+ {
+  "clip": "pcB",
+  "struct": "k1_S2",
+  "n_inputs": 10,
+  "best_baseline": "zlib",
+  "best_baseline_bytes": 90,
+  "file_bytes_G0": 24,
+  "file_bytes_G12": 44,
+  "break_even_max_G": 35,
+  "proved_no_circuit_up_to_G": 2,
+  "compression_ruled_out": false,
+  "open_window": [
+   3,
+   35
+  ]
+ },
+ {
+  "clip": "translate24",
+  "struct": "k0_S1",
+  "n_inputs": 9,
+  "best_baseline": "zlib",
+  "best_baseline_bytes": 55,
+  "file_bytes_G0": 19,
+  "file_bytes_G12": 38,
+  "break_even_max_G": 21,
+  "proved_no_circuit_up_to_G": null,
+  "compression_ruled_out": false,
+  "open_window": [
+   null,
+   21
+  ]
+ }
+]

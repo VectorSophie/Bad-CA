@@ -1,0 +1,34 @@
+{
+ "target": "bar12",
+ "target_sha256": "3c5d5869d694c585e54f71b29dc1bbcb9ecd48dff6252288601b173d7e407be5",
+ "shape": [
+  12,
+  12,
+  12
+ ],
+ "struct": "k1_S4",
+ "family": "F_priv",
+ "k": 1,
+ "S": 4,
+ "boundary": 0,
+ "hidden_init": 0,
+ "n_inputs": 10,
+ "G": 2,
+ "symmetry": "lex+a<b+all used",
+ "encoding": "direct per cell-generation",
+ "solver": "cadical195 (pysat) default",
+ "code_snapshot": "f1f140b3c6fe",
+ "encode_cpu_s": 0.54,
+ "n_vars": 48441,
+ "n_clauses": 798177,
+ "circuit_copies": 6213,
+ "solve_cpu_s": 17.33,
+ "solver_stats": {
+  "restarts": 1033,
+  "conflicts": 29115,
+  "decisions": 47780,
+  "propagations": 148887031
+ },
+ "status": "UNSAT",
+ "maxrss_gb": 0.32
+}

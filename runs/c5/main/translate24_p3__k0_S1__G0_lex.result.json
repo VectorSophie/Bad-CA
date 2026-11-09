@@ -1,0 +1,46 @@
+{
+ "target": "translate24:p3",
+ "target_sha256": "c680bd7ff7c370c2bbc78ef3219ca0a3482affdd929ea44f162dea2552899896",
+ "shape": [
+  3,
+  24,
+  24
+ ],
+ "struct": "k0_S1",
+ "family": "memoryless",
+ "k": 0,
+ "S": 1,
+ "boundary": 0,
+ "hidden_init": 0,
+ "n_inputs": 9,
+ "G": 0,
+ "symmetry": "lex+a<b+all used",
+ "encoding": "direct per cell-generation",
+ "solver": "cadical195 (pysat) default",
+ "code_snapshot": "f1f140b3c6fe",
+ "encode_cpu_s": 0.01,
+ "n_vars": 10,
+ "n_clauses": 374,
+ "circuit_copies": 26,
+ "solve_cpu_s": 0.0,
+ "solver_stats": {
+  "restarts": 0,
+  "conflicts": 0,
+  "decisions": 0,
+  "propagations": 10
+ },
+ "status": "SAT",
+ "maxrss_gb": 0.04,
+ "gates": [],
+ "outputs": [
+  3
+ ],
+ "python_rollout_exact": true,
+ "consulted_entries": 26,
+ "file_bytes": 18,
+ "python_file_decode_exact": true,
+ "node_file_decode_exact": true,
+ "node_decode_ms": 1.33,
+ "payload_bits": 11,
+ "lut_exc_bits_same_rule": 406
+}

@@ -1,0 +1,221 @@
+{
+ "pcA": {
+  "shape": [
+   6,
+   12,
+   12
+  ],
+  "changed_px": 339,
+  "state_repeat_memoryless": null,
+  "history_conflict_Fpriv_S1": [
+   0,
+   null
+  ],
+  "light_cone": {
+   "1": [],
+   "2": [],
+   "4": [],
+   "8": []
+  }
+ },
+ "pcB": {
+  "shape": [
+   6,
+   12,
+   12
+  ],
+  "changed_px": 210,
+  "state_repeat_memoryless": null,
+  "history_conflict_Fpriv_S1": [
+   4,
+   [
+    0,
+    119
+   ]
+  ],
+  "light_cone": {
+   "1": [
+    [
+     1,
+     4
+    ]
+   ],
+   "2": [],
+   "4": [],
+   "8": []
+  }
+ },
+ "translate24": {
+  "shape": [
+   12,
+   24,
+   24
+  ],
+  "changed_px": 132,
+  "state_repeat_memoryless": null,
+  "history_conflict_Fpriv_S1": [
+   0,
+   null
+  ],
+  "light_cone": {
+   "1": [],
+   "2": [],
+   "4": [],
+   "8": []
+  }
+ },
+ "disc12": {
+  "shape": [
+   7,
+   12,
+   12
+  ],
+  "changed_px": 136,
+  "state_repeat_memoryless": [
+   1,
+   5
+  ],
+  "history_conflict_Fpriv_S1": [
+   4,
+   [
+    2,
+    69
+   ]
+  ],
+  "light_cone": {
+   "1": [],
+   "2": [],
+   "4": [],
+   "8": []
+  }
+ },
+ "bar12": {
+  "shape": [
+   12,
+   12,
+   12
+  ],
+  "changed_px": 140,
+  "state_repeat_memoryless": null,
+  "history_conflict_Fpriv_S1": [
+   10,
+   [
+    0,
+    21
+   ]
+  ],
+  "light_cone": {
+   "1": [
+    [
+     1,
+     8
+    ],
+    [
+     2,
+     10
+    ],
+    [
+     3,
+     8
+    ],
+    [
+     4,
+     2
+    ]
+   ],
+   "2": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "4": [],
+   "8": []
+  }
+ },
+ "ba32_3000_5": {
+  "shape": [
+   5,
+   24,
+   32
+  ],
+  "changed_px": 13,
+  "state_repeat_memoryless": null,
+  "history_conflict_Fpriv_S1": [
+   6,
+   [
+    0,
+    57
+   ]
+  ],
+  "light_cone": {
+   "1": [
+    [
+     1,
+     1
+    ]
+   ],
+   "2": [],
+   "4": [],
+   "8": []
+  }
+ },
+ "ba32_4500_5": {
+  "shape": [
+   5,
+   24,
+   32
+  ],
+  "changed_px": 74,
+  "state_repeat_memoryless": null,
+  "history_conflict_Fpriv_S1": [
+   9,
+   [
+    0,
+    88
+   ]
+  ],
+  "light_cone": {
+   "1": [
+    [
+     1,
+     5
+    ]
+   ],
+   "2": [],
+   "4": [],
+   "8": []
+  }
+ },
+ "ba32_4500_10": {
+  "shape": [
+   10,
+   24,
+   32
+  ],
+  "changed_px": 129,
+  "state_repeat_memoryless": null,
+  "history_conflict_Fpriv_S1": [
+   9,
+   [
+    0,
+    88
+   ]
+  ],
+  "light_cone": {
+   "1": [
+    [
+     1,
+     5
+    ]
+   ],
+   "2": [],
+   "4": [],
+   "8": []
+  }
+ }
+}
