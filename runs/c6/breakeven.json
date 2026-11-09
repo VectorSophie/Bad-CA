@@ -1,0 +1,63 @@
+{
+ "target_sha256": "b624dcdcfd5bfa25e257dd1991201e6249ff039ba7226c7f0fdf5450c74da08a",
+ "circuit_files": {
+  "10": {
+   "bytes": 75,
+   "python_parsed_gates": 10,
+   "node_parsed_gates": 10,
+   "node_file_bytes": 75
+  },
+  "11": {
+   "bytes": 77,
+   "python_parsed_gates": 11,
+   "node_parsed_gates": 11,
+   "node_file_bytes": 77
+  },
+  "12": {
+   "bytes": 78,
+   "python_parsed_gates": 12,
+   "node_parsed_gates": 12,
+   "node_file_bytes": 78
+  },
+  "13": {
+   "bytes": 80,
+   "python_parsed_gates": 13,
+   "node_parsed_gates": 13,
+   "node_file_bytes": 80
+  },
+  "14": {
+   "bytes": 82,
+   "python_parsed_gates": 14,
+   "node_parsed_gates": 14,
+   "node_file_bytes": 82
+  }
+ },
+ "baselines": {
+  "bz2": {
+   "bytes": 115,
+   "decodes_exact": true
+  },
+  "changelist": {
+   "bytes": 80,
+   "decodes_exact": true
+  },
+  "frame_rle": {
+   "bytes": 261,
+   "decodes_exact": true
+  },
+  "lzma": {
+   "bytes": 83,
+   "decodes_exact": true
+  },
+  "xor_rle": {
+   "bytes": 88,
+   "decodes_exact": true
+  },
+  "zlib": {
+   "bytes": 80,
+   "decodes_exact": true
+  }
+ },
+ "best_baseline_bytes": 80,
+ "max_G_below_best": 12
+}

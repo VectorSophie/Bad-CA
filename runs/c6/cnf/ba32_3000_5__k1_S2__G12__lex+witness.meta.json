@@ -1,0 +1,17 @@
+{
+ "inst": "ba32_3000_5__k1_S2__G12__lex+witness",
+ "target": "ba32_3000_5",
+ "target_sha256": "b624dcdcfd5bfa25e257dd1991201e6249ff039ba7226c7f0fdf5450c74da08a",
+ "struct": "k1_S2",
+ "family": "F_priv",
+ "k": 1,
+ "S": 2,
+ "G": 12,
+ "variant": "lex+witness",
+ "n_inputs": 10,
+ "n_vars": 7413,
+ "n_clauses": 300478,
+ "cnf_sha256": "77d3d89a9e82e8a91eb8467133b5d5b374943c451ffaee5637c6dd621e6c15f6",
+ "encode_cpu_s": 0.36,
+ "code_snapshot": "2be472b71f78"
+}

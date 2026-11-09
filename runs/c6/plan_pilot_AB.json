@@ -1,0 +1,181 @@
+{
+ "workers": 4,
+ "jobs": [
+  {
+   "target": "disc12",
+   "struct": "k1_S2",
+   "G": 0,
+   "variant": "lex+nodegen",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 300,
+   "outdir": "c6/pilot_A"
+  },
+  {
+   "target": "disc12",
+   "struct": "k1_S2",
+   "G": 1,
+   "variant": "lex+nodegen",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 300,
+   "outdir": "c6/pilot_A"
+  },
+  {
+   "target": "disc12",
+   "struct": "k1_S2",
+   "G": 2,
+   "variant": "lex+nodegen",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 300,
+   "outdir": "c6/pilot_A"
+  },
+  {
+   "target": "disc12",
+   "struct": "k1_S2",
+   "G": 3,
+   "variant": "lex+nodegen",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 300,
+   "outdir": "c6/pilot_A"
+  },
+  {
+   "target": "disc12",
+   "struct": "k1_S2",
+   "G": 4,
+   "variant": "lex+nodegen",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 300,
+   "outdir": "c6/pilot_A"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 0,
+   "variant": "lex+nodegen",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 600,
+   "outdir": "c6/pilot_A"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 1,
+   "variant": "lex+nodegen",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 600,
+   "outdir": "c6/pilot_A"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 2,
+   "variant": "lex+nodegen",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 600,
+   "outdir": "c6/pilot_A"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 3,
+   "variant": "lex+nodegen",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 600,
+   "outdir": "c6/pilot_A"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 4,
+   "variant": "lex+nodegen",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 600,
+   "outdir": "c6/pilot_A"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex+nodegen+chain",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 300,
+   "outdir": "c6/pilot_B"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex+nodegen+hidc",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 300,
+   "outdir": "c6/pilot_B"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 8,
+   "variant": "lex+nodegen+chain+hidc",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 300,
+   "outdir": "c6/pilot_B"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 5,
+   "variant": "lex+witness",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 120,
+   "outdir": "c6/pilot_W"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 8,
+   "variant": "lex+witness",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 120,
+   "outdir": "c6/pilot_W"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex+witness",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 120,
+   "outdir": "c6/pilot_W"
+  }
+ ]
+}

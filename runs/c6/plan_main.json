@@ -1,0 +1,335 @@
+{
+ "workers": 2,
+ "jobs": [
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=21"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=20"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=19"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=18"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=17"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=16"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=15"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=14"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=13"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=12"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=11"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=10"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=9"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=8"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=7"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=6"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=5"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=4"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=3"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=2"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=1"
+   ],
+   "stop_on_sat": true
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "kissat404"
+   ],
+   "cpu_s": 650,
+   "outdir": "c6/main_cubes",
+   "cubes": [
+    "so0=0"
+   ],
+   "stop_on_sat": true
+  }
+ ]
+}

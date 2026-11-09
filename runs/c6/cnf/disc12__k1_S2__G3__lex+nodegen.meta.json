@@ -1,0 +1,17 @@
+{
+ "inst": "disc12__k1_S2__G3__lex+nodegen",
+ "target": "disc12",
+ "target_sha256": "7ccdbcf1054fe950502c3af34acec116115e1dc0fe0f848b16880719810fcb4e",
+ "struct": "k1_S2",
+ "family": "F_priv",
+ "k": 1,
+ "S": 2,
+ "G": 3,
+ "variant": "lex+nodegen",
+ "n_inputs": 10,
+ "n_vars": 17214,
+ "n_clauses": 268956,
+ "cnf_sha256": "dac1f6ec7691553853e487fe7d3266332587b4e8a54d3655c6f4439cc93319ea",
+ "encode_cpu_s": 0.29,
+ "code_snapshot": "2be472b71f78"
+}

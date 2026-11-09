@@ -1,0 +1,94 @@
+{
+ "claim": "old CNF == new CNF under tt[j][q] -> tt[j][3-q]",
+ "results": [
+  {
+   "target": "pcA",
+   "struct": "k1_S1",
+   "G": 2,
+   "lex": false,
+   "n_vars_old": 4995,
+   "n_vars_new": 4995,
+   "n_clauses": 60715,
+   "identical_after_tt_renaming": true,
+   "identical_without_renaming": false
+  },
+  {
+   "target": "pcB",
+   "struct": "k1_S2",
+   "G": 3,
+   "lex": false,
+   "n_vars_old": 15000,
+   "n_vars_new": 15000,
+   "n_clauses": 230464,
+   "identical_after_tt_renaming": true,
+   "identical_without_renaming": false
+  },
+  {
+   "target": "pcB",
+   "struct": "k1_S2",
+   "G": 3,
+   "lex": true,
+   "n_vars_old": 15000,
+   "n_vars_new": 15000,
+   "n_clauses": 231619,
+   "identical_after_tt_renaming": true,
+   "identical_without_renaming": false
+  },
+  {
+   "target": "disc12",
+   "struct": "k1_S2",
+   "G": 3,
+   "lex": false,
+   "n_vars_old": 17214,
+   "n_vars_new": 17214,
+   "n_clauses": 267771,
+   "identical_after_tt_renaming": true,
+   "identical_without_renaming": false
+  },
+  {
+   "target": "disc12",
+   "struct": "k1_S2",
+   "G": 4,
+   "lex": true,
+   "n_vars_old": 22085,
+   "n_vars_new": 22085,
+   "n_clauses": 357668,
+   "identical_after_tt_renaming": true,
+   "identical_without_renaming": false
+  },
+  {
+   "target": "bar12",
+   "struct": "k1_S4",
+   "G": 2,
+   "lex": false,
+   "n_vars_old": 48441,
+   "n_vars_new": 48441,
+   "n_clauses": 797682,
+   "identical_after_tt_renaming": true,
+   "identical_without_renaming": false
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 3,
+   "lex": false,
+   "n_vars_old": 58218,
+   "n_vars_new": 58218,
+   "n_clauses": 932863,
+   "identical_after_tt_renaming": true,
+   "identical_without_renaming": false
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 4,
+   "lex": true,
+   "n_vars_old": 74549,
+   "n_vars_new": 74549,
+   "n_clauses": 1237368,
+   "identical_after_tt_renaming": true,
+   "identical_without_renaming": false
+  }
+ ],
+ "all_hold": true
+}

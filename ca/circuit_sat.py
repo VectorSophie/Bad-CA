@@ -13,15 +13,26 @@ init at g = 0), variables otherwise. One circuit copy per distinct tuple of inpu
 
 
 class CircuitSAT:
-    def __init__(self, frames, taps, channels, G, S=1, boundary=0, hidden_init=0, lex=False, entries=False):
+    def __init__(self, frames, taps, channels, G, S=1, boundary=0, hidden_init=0, lex=False, entries=False,
+                 nodegen=False, chain=False, fix_out=None, fix_states=None):
         """entries=False (v1/v2 'direct'): one circuit copy per cell-generation input tuple.
         entries=True (v3): the rollout is encoded over LUT-entry variables by ca.sat.Encoder (as in
         exp03), and the circuit is evaluated once per LUT entry present in that CNF, on constant
         inputs, with its output tied to the entry variable. Same solution set: every consulted entry
-        equals the circuit's value; unconsulted entries are free in both."""
+        equals the circuit's value; unconsulted entries are free in both.
+
+        Campaign 06 options (defaults keep the Campaign 05 encoding unchanged):
+        nodegen (A, existence-preserving per 'at most G', see normalize argument in CAMPAIGN_06):
+            no buffer gates (tt 12 = a, 10 = b); constant gates (tt 0, 15) and NOT gates (tt 3 = not a,
+            5 = not b) may feed outputs only, never another gate. Breaks buffer padding, so 'no circuit with
+            <= G gates' needs UNSAT at every G' <= G under nodegen.
+        chain (B, heuristic): gate j >= 1 must read gate j-1 (as its b input).
+        fix_out (B, heuristic): {channel: pool index} fixed output selection.
+        fix_states (B, heuristic / 'uses an existing solution'): {(g, c, y, x): bit} fixed state bits."""
         self.F, self.taps, self.C, self.G, self.S = frames, taps, channels, G, S
         self.boundary, self.hidden_init, self.lex, self.entries = boundary, hidden_init, lex, entries
         self.n = len(taps); self.nv = 0; self.cl = []; self.X = {}; self.cache = {}
+        self.fix_states = fix_states or {}
         n = self.n
         if entries:
             from ca.sat import Encoder
@@ -44,7 +55,28 @@ class CircuitSAT:
                            + [self.so[c][n + j] for c in range(channels)])
         if lex:
             self._lex()
+        if nodegen:
+            self._nodegen()
+        if chain:
+            for j in range(1, G):
+                self.cl.append([self.sb[j][n + j - 1]])
+        for c, p in (fix_out or {}).items():
+            self.cl.append([self.so[c][p]])
         self._entries() if entries else self._rollout()
+
+    def _diff(self, j, P):
+        """Clause literals meaning 'truth table of gate j != P'."""
+        return [self.tt[j][q] if not (P >> q) & 1 else -self.tt[j][q] for q in range(4)]
+
+    def _nodegen(self):
+        n = self.n
+        for j in range(self.G):
+            for P in (12, 10):                      # buffers: never needed
+                self.cl.append(self._diff(j, P))
+            for P in (0, 15, 3, 5):                 # constants / NOT: outputs only
+                for k in range(j + 1, self.G):
+                    self.cl.append(self._diff(j, P) + [-self.sa[k][n + j]])
+                    self.cl.append(self._diff(j, P) + [-self.sb[k][n + j]])
 
     def _entries(self):
         for (c, e), v in self.enc.L.items():
@@ -92,6 +124,8 @@ class CircuitSAT:
             return self.TRUE if self.F[g // self.S, y, x] else -self.TRUE
         if c > 0 and g == 0:
             return self.TRUE if self.hidden_init else -self.TRUE
+        if (g, c, y, x) in self.fix_states:
+            return self.TRUE if self.fix_states[g, c, y, x] else -self.TRUE
         if (g, c, y, x) not in self.X:
             self.X[g, c, y, x] = self._new()
         return self.X[g, c, y, x]
@@ -129,6 +163,16 @@ class CircuitSAT:
                         o = self.lit(g + 1, c, y, x)
                         for s, p in zip(self.so[c], pool):
                             self.add([-s, -o, p]); self.add([-s, o, -p])
+
+    def varmap(self):
+        return dict(tt=self.tt, sa=self.sa, sb=self.sb, so=self.so, G=self.G, n=self.n)
+
+    @staticmethod
+    def decode_varmap(vm, model):
+        pos = set(v for v in model if v > 0)
+        one = lambda xs: [i for i, v in enumerate(xs) if v in pos][0]
+        gates = [(sum(1 << q for q in range(4) if vm["tt"][j][q] in pos), one(vm["sa"][j]), one(vm["sb"][j])) for j in range(vm["G"])]
+        return gates, [one(s) for s in vm["so"]]
 
     def decode(self, model):
         pos = set(v for v in model if v > 0)

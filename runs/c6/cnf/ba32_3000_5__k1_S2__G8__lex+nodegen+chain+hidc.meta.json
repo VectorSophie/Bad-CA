@@ -1,0 +1,17 @@
+{
+ "inst": "ba32_3000_5__k1_S2__G8__lex+nodegen+chain+hidc",
+ "target": "ba32_3000_5",
+ "target_sha256": "b624dcdcfd5bfa25e257dd1991201e6249ff039ba7226c7f0fdf5450c74da08a",
+ "struct": "k1_S2",
+ "family": "F_priv",
+ "k": 1,
+ "S": 2,
+ "G": 8,
+ "variant": "lex+nodegen+chain+hidc",
+ "n_inputs": 10,
+ "n_vars": 139893,
+ "n_clauses": 2671531,
+ "cnf_sha256": "7213bac5b3f133eefefc938009eb2ac1884a627be8bdeb68f87d84e5de892cb5",
+ "encode_cpu_s": 3.25,
+ "code_snapshot": "2be472b71f78"
+}

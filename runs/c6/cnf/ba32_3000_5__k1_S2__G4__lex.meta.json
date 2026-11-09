@@ -1,0 +1,17 @@
+{
+ "inst": "ba32_3000_5__k1_S2__G4__lex",
+ "target": "ba32_3000_5",
+ "target_sha256": "b624dcdcfd5bfa25e257dd1991201e6249ff039ba7226c7f0fdf5450c74da08a",
+ "struct": "k1_S2",
+ "family": "F_priv",
+ "k": 1,
+ "S": 2,
+ "G": 4,
+ "variant": "lex",
+ "n_inputs": 10,
+ "n_vars": 74549,
+ "n_clauses": 1237368,
+ "cnf_sha256": "d7541f59b60454e999ab355d4feda4601692a518a001ee9244fba278b14bf645",
+ "encode_cpu_s": 1.52,
+ "code_snapshot": "2be472b71f78"
+}

@@ -6,3 +6,5 @@ runs/frozen/
 # origin not established (see runs/c4_restore_20261109/PROVENANCE.md); kept on disk, excluded from results
 runs/exp11b/
 runs/exp11b.log
+# Campaign 06 CNF files (493 MB): regenerable from the frozen snapshot; SHA-256 in *.meta.json
+runs/c6/cnf/*.cnf

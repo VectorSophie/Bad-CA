@@ -1,0 +1,3 @@
+{"workers": 2, "jobs": [
+ {"target":"pcB","struct":"k1_S2","G":3,"variant":"lex","solvers":["cadical195","kissat404"],"cpu_s":60,"outdir":"c6/smoke"},
+ {"target":"ba32_3000_5","struct":"k1_S2","G":2,"variant":"lex+witness","solvers":["cadical195"],"cpu_s":120,"outdir":"c6/smoke"}]}

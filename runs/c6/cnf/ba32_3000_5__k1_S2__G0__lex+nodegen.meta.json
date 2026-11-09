@@ -1,0 +1,17 @@
+{
+ "inst": "ba32_3000_5__k1_S2__G0__lex+nodegen",
+ "target": "ba32_3000_5",
+ "target_sha256": "b624dcdcfd5bfa25e257dd1991201e6249ff039ba7226c7f0fdf5450c74da08a",
+ "struct": "k1_S2",
+ "family": "F_priv",
+ "k": 1,
+ "S": 2,
+ "G": 0,
+ "variant": "lex+nodegen",
+ "n_inputs": 10,
+ "n_vars": 9237,
+ "n_clauses": 156001,
+ "cnf_sha256": "47b012127a3cbd3aab53dea11f7279b9ab6ecf2afb9692429d93dee88cefef62",
+ "encode_cpu_s": 0.19,
+ "code_snapshot": "2be472b71f78"
+}

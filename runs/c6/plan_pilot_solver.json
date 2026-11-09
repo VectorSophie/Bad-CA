@@ -1,0 +1,125 @@
+{
+ "workers": 4,
+ "jobs": [
+  {
+   "target": "pcB",
+   "struct": "k1_S2",
+   "G": 2,
+   "variant": "lex",
+   "solvers": [
+    "cadical195",
+    "kissat404"
+   ],
+   "cpu_s": 300,
+   "outdir": "c6/pilot_solver"
+  },
+  {
+   "target": "pcB",
+   "struct": "k1_S2",
+   "G": 3,
+   "variant": "lex",
+   "solvers": [
+    "cadical195",
+    "kissat404"
+   ],
+   "cpu_s": 300,
+   "outdir": "c6/pilot_solver"
+  },
+  {
+   "target": "disc12",
+   "struct": "k1_S2",
+   "G": 3,
+   "variant": "lex",
+   "solvers": [
+    "cadical195",
+    "kissat404"
+   ],
+   "cpu_s": 600,
+   "outdir": "c6/pilot_solver"
+  },
+  {
+   "target": "disc12",
+   "struct": "k1_S2",
+   "G": 4,
+   "variant": "lex",
+   "solvers": [
+    "cadical195",
+    "kissat404"
+   ],
+   "cpu_s": 600,
+   "outdir": "c6/pilot_solver"
+  },
+  {
+   "target": "bar12",
+   "struct": "k1_S4",
+   "G": 2,
+   "variant": "lex",
+   "solvers": [
+    "cadical195",
+    "kissat404"
+   ],
+   "cpu_s": 300,
+   "outdir": "c6/pilot_solver"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 3,
+   "variant": "lex",
+   "solvers": [
+    "cadical195",
+    "kissat404"
+   ],
+   "cpu_s": 900,
+   "outdir": "c6/pilot_solver"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 4,
+   "variant": "lex",
+   "solvers": [
+    "cadical195",
+    "kissat404"
+   ],
+   "cpu_s": 900,
+   "outdir": "c6/pilot_solver"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 5,
+   "variant": "lex",
+   "solvers": [
+    "cadical195",
+    "kissat404"
+   ],
+   "cpu_s": 450,
+   "outdir": "c6/pilot_solver"
+  },
+  {
+   "target": "ba32_3000_5",
+   "struct": "k1_S2",
+   "G": 12,
+   "variant": "lex",
+   "solvers": [
+    "cadical195",
+    "kissat404"
+   ],
+   "cpu_s": 450,
+   "outdir": "c6/pilot_solver"
+  },
+  {
+   "target": "disc12",
+   "struct": "k1_S2",
+   "G": 5,
+   "variant": "lex",
+   "solvers": [
+    "cadical195",
+    "kissat404"
+   ],
+   "cpu_s": 450,
+   "outdir": "c6/pilot_solver"
+  }
+ ]
+}
