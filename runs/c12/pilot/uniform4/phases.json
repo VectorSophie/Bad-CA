@@ -1,0 +1,35 @@
+{
+ "spec": "1760:240",
+ "arm": "uniform",
+ "phases": [
+  {
+   "start": 1,
+   "end": 61,
+   "reason": "uniform"
+  },
+  {
+   "start": 61,
+   "end": 120,
+   "reason": "uniform"
+  },
+  {
+   "start": 120,
+   "end": 180,
+   "reason": "uniform"
+  },
+  {
+   "start": 180,
+   "end": 240,
+   "reason": "uniform"
+  }
+ ],
+ "argv": [
+  "1760:240",
+  "c12/pilot/uniform4",
+  "uniform",
+  "--K",
+  "4",
+  "--steps",
+  "12000"
+ ]
+}

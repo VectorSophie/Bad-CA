@@ -1,0 +1,45 @@
+{
+ "spec": "1760:240",
+ "arm": "uniform",
+ "phases": [
+  {
+   "start": 1,
+   "end": 41,
+   "reason": "uniform"
+  },
+  {
+   "start": 41,
+   "end": 81,
+   "reason": "uniform"
+  },
+  {
+   "start": 81,
+   "end": 120,
+   "reason": "uniform"
+  },
+  {
+   "start": 120,
+   "end": 160,
+   "reason": "uniform"
+  },
+  {
+   "start": 160,
+   "end": 200,
+   "reason": "uniform"
+  },
+  {
+   "start": 200,
+   "end": 240,
+   "reason": "uniform"
+  }
+ ],
+ "argv": [
+  "1760:240",
+  "c12/main/L240_uniform6",
+  "uniform",
+  "--K",
+  "6",
+  "--steps",
+  "12000"
+ ]
+}

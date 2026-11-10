@@ -1,0 +1,33 @@
+{
+ "spec": "1760:120",
+ "arm": "auto",
+ "phases": [
+  {
+   "start": 1,
+   "end": 47,
+   "mdl_bits": 12196.5,
+   "reason": "start"
+  },
+  {
+   "start": 47,
+   "end": 120,
+   "mdl_bits": 19849.2,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.024,
+    "sustained_change_run": 3,
+    "split_gain_bits": 1375.8
+   }
+  }
+ ],
+ "argv": [
+  "1760:120",
+  "c12/main/L120_auto2",
+  "auto",
+  "--K",
+  "2",
+  "--steps",
+  "12000"
+ ]
+}

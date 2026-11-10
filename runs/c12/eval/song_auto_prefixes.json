@@ -1,0 +1,763 @@
+{
+ "export": "runs/c12/song/chunked_auto110/export_s0.ncab",
+ "step": 120,
+ "prefixes": [
+  {
+   "frames": 120,
+   "err": 0.008520074696545284,
+   "worst16": 0.026331018518518517,
+   "gates": {
+    "sustained": false,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": false
+   },
+   "thin_fg": 0.5050391937290034,
+   "thin_bg": 0.7955271565495208
+  },
+  {
+   "frames": 240,
+   "err": 0.008227762281109562,
+   "worst16": 0.026331018518518517,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.7288043478260869,
+   "thin_bg": 0.7946428571428571
+  },
+  {
+   "frames": 360,
+   "err": 0.008854650263076446,
+   "worst16": 0.02785011574074074,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.7907845579078456,
+   "thin_bg": 0.8140610545790934
+  },
+  {
+   "frames": 480,
+   "err": 0.011568033325601175,
+   "worst16": 0.08441840277777778,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.7970811114229582,
+   "thin_bg": 0.7510760401721664
+  },
+  {
+   "frames": 600,
+   "err": 0.010997302603103939,
+   "worst16": 0.08441840277777778,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8431222498565143,
+   "thin_bg": 0.7820648717405131
+  },
+  {
+   "frames": 720,
+   "err": 0.009994913202493174,
+   "worst16": 0.08441840277777778,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8538656338447788,
+   "thin_bg": 0.791005291005291
+  },
+  {
+   "frames": 840,
+   "err": 0.01094432856575288,
+   "worst16": 0.08441840277777778,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8496269370575856,
+   "thin_bg": 0.7750943396226415
+  },
+  {
+   "frames": 960,
+   "err": 0.010690027227435986,
+   "worst16": 0.08441840277777778,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8498988288674965,
+   "thin_bg": 0.7656083244397012
+  },
+  {
+   "frames": 1080,
+   "err": 0.01530266364603714,
+   "worst16": 0.08441840277777778,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8275042444821732,
+   "thin_bg": 0.707909604519774
+  },
+  {
+   "frames": 1200,
+   "err": 0.02004467457449109,
+   "worst16": 0.11624710648148148,
+   "gates": {
+    "sustained": false,
+    "full_err": true,
+    "worst16": false,
+    "transitions": true,
+    "success": false
+   },
+   "thin_fg": 0.7997035478626757,
+   "thin_bg": 0.6590969810312584
+  },
+  {
+   "frames": 1320,
+   "err": 0.028562252548226773,
+   "worst16": 0.2503255208333333,
+   "gates": {
+    "sustained": false,
+    "full_err": true,
+    "worst16": false,
+    "transitions": true,
+    "success": false
+   },
+   "thin_fg": 0.7518768452129903,
+   "thin_bg": 0.6484261501210654
+  },
+  {
+   "frames": 1440,
+   "err": 0.0351641925977402,
+   "worst16": 0.2503255208333333,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": true,
+    "success": false
+   },
+   "thin_fg": 0.6889856300805178,
+   "thin_bg": 0.6609376198879767
+  },
+  {
+   "frames": 1560,
+   "err": 0.05122697063644786,
+   "worst16": 0.3753978587962963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": true,
+    "success": false
+   },
+   "thin_fg": 0.5897467232898476,
+   "thin_bg": 0.665361803084223
+  },
+  {
+   "frames": 1680,
+   "err": 0.0715369460437209,
+   "worst16": 0.3755787037037037,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.43193471368742414,
+   "thin_bg": 0.7307318477986968
+  },
+  {
+   "frames": 1800,
+   "err": 0.0894616736664402,
+   "worst16": 0.46317997685185186,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.43190698712939185,
+   "thin_bg": 0.6856024991659337
+  },
+  {
+   "frames": 1920,
+   "err": 0.1049986851755351,
+   "worst16": 0.46317997685185186,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.41513247746517346,
+   "thin_bg": 0.6872017700530483
+  },
+  {
+   "frames": 2040,
+   "err": 0.12365016438704521,
+   "worst16": 0.4767795138888889,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.41477424883509184,
+   "thin_bg": 0.6877399605686417
+  },
+  {
+   "frames": 2160,
+   "err": 0.14100803269689327,
+   "worst16": 0.5361689814814815,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4141322379334861,
+   "thin_bg": 0.6883585296600414
+  },
+  {
+   "frames": 2280,
+   "err": 0.15904296271919133,
+   "worst16": 0.5946903935185185,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.42216014897579146,
+   "thin_bg": 0.6761159505881195
+  },
+  {
+   "frames": 2400,
+   "err": 0.17488961449986878,
+   "worst16": 0.5946903935185185,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4258347999952109,
+   "thin_bg": 0.6683813278207779
+  },
+  {
+   "frames": 2520,
+   "err": 0.1897456644317998,
+   "worst16": 0.5946903935185185,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.42496652352588077,
+   "thin_bg": 0.6588321034891136
+  },
+  {
+   "frames": 2640,
+   "err": 0.20566612107560384,
+   "worst16": 0.5946903935185185,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.42778979802213485,
+   "thin_bg": 0.656392719746226
+  },
+  {
+   "frames": 2760,
+   "err": 0.2188664119447465,
+   "worst16": 0.7423683449074074,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.44481535801063854,
+   "thin_bg": 0.6328956134883621
+  },
+  {
+   "frames": 2880,
+   "err": 0.2250596593467382,
+   "worst16": 0.7423683449074074,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4524451454086254,
+   "thin_bg": 0.6130875310849415
+  },
+  {
+   "frames": 3000,
+   "err": 0.23488925320785942,
+   "worst16": 0.7423683449074074,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.45621242381282534,
+   "thin_bg": 0.6041945384433777
+  },
+  {
+   "frames": 3120,
+   "err": 0.2479701768135561,
+   "worst16": 0.7423683449074074,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4602919974820801,
+   "thin_bg": 0.5986845934462488
+  },
+  {
+   "frames": 3240,
+   "err": 0.26290782620378944,
+   "worst16": 0.8610749421296295,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.46199184530297527,
+   "thin_bg": 0.59806918433679
+  },
+  {
+   "frames": 3360,
+   "err": 0.27089208235475726,
+   "worst16": 0.8610749421296295,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4648538273818417,
+   "thin_bg": 0.5942148128321799
+  },
+  {
+   "frames": 3480,
+   "err": 0.2693730172037516,
+   "worst16": 0.8610749421296295,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4845061545660291,
+   "thin_bg": 0.5328537904295481
+  },
+  {
+   "frames": 3600,
+   "err": 0.27805450716762886,
+   "worst16": 0.8610749421296295,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4832479855760741,
+   "thin_bg": 0.5346835526207724
+  },
+  {
+   "frames": 3720,
+   "err": 0.28388178696981464,
+   "worst16": 0.8610749421296295,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4760630036362307,
+   "thin_bg": 0.5402416116077212
+  },
+  {
+   "frames": 3840,
+   "err": 0.2834264324235671,
+   "worst16": 0.8610749421296295,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4671872030955795,
+   "thin_bg": 0.5396793306688646
+  },
+  {
+   "frames": 3960,
+   "err": 0.2885478936880806,
+   "worst16": 0.8610749421296295,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.46925938451132904,
+   "thin_bg": 0.5326053272338228
+  },
+  {
+   "frames": 4080,
+   "err": 0.28754608064794385,
+   "worst16": 0.8610749421296295,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4729083798509209,
+   "thin_bg": 0.5235982712727897
+  },
+  {
+   "frames": 4200,
+   "err": 0.29137697026628917,
+   "worst16": 0.8610749421296295,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.47806012208447324,
+   "thin_bg": 0.5146062423636566
+  },
+  {
+   "frames": 4320,
+   "err": 0.2950605046178385,
+   "worst16": 0.8610749421296295,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4795511506037822,
+   "thin_bg": 0.509669395509027
+  },
+  {
+   "frames": 4440,
+   "err": 0.30361737399147287,
+   "worst16": 0.9211516203703703,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4836226427135518,
+   "thin_bg": 0.5063854825552628
+  },
+  {
+   "frames": 4560,
+   "err": 0.31171730927022656,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4887811460490805,
+   "thin_bg": 0.5036341050851041
+  },
+  {
+   "frames": 4680,
+   "err": 0.31723438749178756,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4909416929450318,
+   "thin_bg": 0.5016192173132697
+  },
+  {
+   "frames": 4800,
+   "err": 0.3201606189175214,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.49619466502544396,
+   "thin_bg": 0.4961800197323484
+  },
+  {
+   "frames": 4920,
+   "err": 0.3213570254794335,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.49648629137999617,
+   "thin_bg": 0.48956139603393917
+  },
+  {
+   "frames": 5040,
+   "err": 0.32541603731633995,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.5001464568166718,
+   "thin_bg": 0.4831690964462303
+  },
+  {
+   "frames": 5160,
+   "err": 0.3214400131377743,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.5027012080993705,
+   "thin_bg": 0.4790942963599885
+  },
+  {
+   "frames": 5280,
+   "err": 0.3200702863547389,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.5052802713365708,
+   "thin_bg": 0.4741661955907292
+  },
+  {
+   "frames": 5400,
+   "err": 0.3195427351086964,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.5078192332286136,
+   "thin_bg": 0.46941770238121705
+  },
+  {
+   "frames": 5520,
+   "err": 0.3233560159180743,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.5081159798594558,
+   "thin_bg": 0.46881041015387676
+  },
+  {
+   "frames": 5640,
+   "err": 0.32804659431998057,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.5089916267376716,
+   "thin_bg": 0.4682726460526029
+  },
+  {
+   "frames": 5760,
+   "err": 0.3295581432926241,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.5017655895378252,
+   "thin_bg": 0.4712674572371604
+  },
+  {
+   "frames": 5880,
+   "err": 0.3306291067389894,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4947965399377494,
+   "thin_bg": 0.475867261986828
+  },
+  {
+   "frames": 6000,
+   "err": 0.32766031992986483,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.48856939074289574,
+   "thin_bg": 0.4789497510185604
+  },
+  {
+   "frames": 6120,
+   "err": 0.3279204345299704,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4880335309144118,
+   "thin_bg": 0.4803465258905236
+  },
+  {
+   "frames": 6240,
+   "err": 0.33131635752999355,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4905855880711951,
+   "thin_bg": 0.4768798485126138
+  },
+  {
+   "frames": 6360,
+   "err": 0.3347716745877817,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.49430496534894486,
+   "thin_bg": 0.4746667737273165
+  },
+  {
+   "frames": 6480,
+   "err": 0.33809488847158625,
+   "worst16": 0.924877025462963,
+   "gates": {
+    "sustained": false,
+    "full_err": false,
+    "worst16": false,
+    "transitions": false,
+    "success": false
+   },
+   "thin_fg": 0.4967859712551065,
+   "thin_bg": 0.47370946939020364
+  }
+ ],
+ "longest_passing_prefix": 1080
+}

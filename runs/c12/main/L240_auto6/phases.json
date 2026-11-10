@@ -1,0 +1,81 @@
+{
+ "spec": "1760:240",
+ "arm": "auto",
+ "phases": [
+  {
+   "start": 1,
+   "end": 47,
+   "mdl_bits": 12196.5,
+   "reason": "start"
+  },
+  {
+   "start": 47,
+   "end": 119,
+   "mdl_bits": 18935.2,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.024,
+    "sustained_change_run": 3,
+    "split_gain_bits": 1469.9
+   }
+  },
+  {
+   "start": 119,
+   "end": 128,
+   "mdl_bits": 8556.4,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.12,
+    "sustained_change_run": 12,
+    "split_gain_bits": 3853.5
+   }
+  },
+  {
+   "start": 128,
+   "end": 145,
+   "mdl_bits": 5357.1,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.102,
+    "sustained_change_run": 12,
+    "split_gain_bits": 2169.8
+   }
+  },
+  {
+   "start": 145,
+   "end": 157,
+   "mdl_bits": 6469.5,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.054,
+    "sustained_change_run": 6,
+    "split_gain_bits": 1397.6
+   }
+  },
+  {
+   "start": 157,
+   "end": 240,
+   "mdl_bits": 11354.2,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.029,
+    "sustained_change_run": 6,
+    "split_gain_bits": 2410.4
+   }
+  }
+ ],
+ "argv": [
+  "1760:240",
+  "c12/main/L240_auto6",
+  "auto",
+  "--K",
+  "6",
+  "--steps",
+  "12000"
+ ]
+}

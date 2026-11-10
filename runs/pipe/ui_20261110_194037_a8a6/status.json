@@ -1,0 +1,42 @@
+{
+ "status": "finished",
+ "stage": null,
+ "error": null,
+ "stages": {
+  "prep": {
+   "seconds": 0.1
+  },
+  "train": {
+   "seconds": 6.7
+  },
+  "export": {
+   "seconds": 0.0
+  },
+  "replay": {
+   "seconds": 1.5
+  },
+  "video": {
+   "seconds": 1.2
+  }
+ },
+ "pid": 2031025,
+ "replay": {
+  "T": 24,
+  "H": 21,
+  "W": 32,
+  "binary_mismatch_px": 0,
+  "max_abs_dv": 3.2782554626464844e-06,
+  "mean_abs_dv": 1.8053947314911056e-07,
+  "node_sha256": "e5f0fa4779eadc7f37dbd41385199a2e1669a39c33cdc0ff815e8cd49157e42e",
+  "numpy_sha256": "e5f0fa4779eadc7f37dbd41385199a2e1669a39c33cdc0ff815e8cd49157e42e"
+ },
+ "export": "/home/jackb/workspace/CA-universal/runs/pipe/ui_20261110_194037_a8a6/model.ncab",
+ "sizes": {
+  "weights": 41280,
+  "first_frame": 84,
+  "header": 452,
+  "raw_total": 41816,
+  "file": 38954,
+  "n_params": 10320
+ }
+}

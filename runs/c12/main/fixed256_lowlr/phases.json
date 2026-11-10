@@ -1,0 +1,22 @@
+{
+ "spec": "1760:240",
+ "arm": "fixed",
+ "phases": [
+  {
+   "start": 1,
+   "end": 240,
+   "reason": "fixed"
+  }
+ ],
+ "argv": [
+  "1760:240",
+  "c12/main/fixed256_lowlr",
+  "fixed",
+  "--Fh",
+  "256",
+  "--steps",
+  "12000",
+  "--lr",
+  "1.25e-4"
+ ]
+}

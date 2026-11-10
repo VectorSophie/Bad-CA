@@ -1,0 +1,475 @@
+{
+ "spec": "0:2116",
+ "arm": "chunked",
+ "phases": [
+  {
+   "start": 1,
+   "end": 76,
+   "mdl_bits": 9848.8,
+   "reason": "start"
+  },
+  {
+   "start": 76,
+   "end": 104,
+   "mdl_bits": 3152.3,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.027,
+    "sustained_change_run": 0,
+    "split_gain_bits": 1773.5
+   }
+  },
+  {
+   "start": 104,
+   "end": 224,
+   "mdl_bits": 13832.1,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.01,
+    "sustained_change_run": 0,
+    "split_gain_bits": 1200.6
+   }
+  },
+  {
+   "start": 224,
+   "end": 340,
+   "mdl_bits": 9619.5,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.023,
+    "sustained_change_run": 0,
+    "split_gain_bits": 760.1
+   }
+  },
+  {
+   "start": 340,
+   "end": 358,
+   "mdl_bits": 8239.9,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.032,
+    "sustained_change_run": 0,
+    "split_gain_bits": 4557.5
+   }
+  },
+  {
+   "start": 358,
+   "end": 376,
+   "mdl_bits": 7651.2,
+   "reason": "cut",
+   "reason_detail": {
+    "cut_frames": [
+     358
+    ],
+    "change_at": 0.274,
+    "sustained_change_run": 9,
+    "split_gain_bits": 1402.0
+   }
+  },
+  {
+   "start": 376,
+   "end": 444,
+   "mdl_bits": 9166.2,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.018,
+    "sustained_change_run": 0,
+    "split_gain_bits": 2441.5
+   }
+  },
+  {
+   "start": 444,
+   "end": 460,
+   "mdl_bits": 10106.9,
+   "reason": "cut",
+   "reason_detail": {
+    "cut_frames": [
+     444
+    ],
+    "change_at": 0.884,
+    "sustained_change_run": 3,
+    "split_gain_bits": 3717.9
+   }
+  },
+  {
+   "start": 460,
+   "end": 484,
+   "mdl_bits": 19456.4,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.124,
+    "sustained_change_run": 11,
+    "split_gain_bits": 1637.2
+   }
+  },
+  {
+   "start": 484,
+   "end": 520,
+   "mdl_bits": 5700.3,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.084,
+    "sustained_change_run": 11,
+    "split_gain_bits": 4339.9
+   }
+  },
+  {
+   "start": 520,
+   "end": 552,
+   "mdl_bits": 7460.2,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.04,
+    "sustained_change_run": 1,
+    "split_gain_bits": 2044.3
+   }
+  },
+  {
+   "start": 552,
+   "end": 668,
+   "mdl_bits": 7857.4,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.015,
+    "sustained_change_run": 0,
+    "split_gain_bits": 1639.4
+   }
+  },
+  {
+   "start": 668,
+   "end": 744,
+   "mdl_bits": 2332.8,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.002,
+    "sustained_change_run": 0,
+    "split_gain_bits": 485.9
+   }
+  },
+  {
+   "start": 744,
+   "end": 796,
+   "mdl_bits": 9637.1,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.011,
+    "sustained_change_run": 0,
+    "split_gain_bits": 1934.8
+   }
+  },
+  {
+   "start": 796,
+   "end": 820,
+   "mdl_bits": 6098.9,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.11,
+    "sustained_change_run": 5,
+    "split_gain_bits": 2333.8
+   }
+  },
+  {
+   "start": 820,
+   "end": 852,
+   "mdl_bits": 9851.2,
+   "reason": "cut",
+   "reason_detail": {
+    "cut_frames": [
+     820,
+     821
+    ],
+    "change_at": 0.348,
+    "sustained_change_run": 4,
+    "split_gain_bits": 6112.0
+   }
+  },
+  {
+   "start": 852,
+   "end": 972,
+   "mdl_bits": 11641.9,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.035,
+    "sustained_change_run": 3,
+    "split_gain_bits": 6792.5
+   }
+  },
+  {
+   "start": 972,
+   "end": 1052,
+   "mdl_bits": 13431.2,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.019,
+    "sustained_change_run": 0,
+    "split_gain_bits": 638.6
+   }
+  },
+  {
+   "start": 1052,
+   "end": 1088,
+   "mdl_bits": 14182.4,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.035,
+    "sustained_change_run": 4,
+    "split_gain_bits": 2517.2
+   }
+  },
+  {
+   "start": 1088,
+   "end": 1116,
+   "mdl_bits": 8964.0,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.021,
+    "sustained_change_run": 4,
+    "split_gain_bits": 1800.7
+   }
+  },
+  {
+   "start": 1116,
+   "end": 1216,
+   "mdl_bits": 16260.4,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.023,
+    "sustained_change_run": 0,
+    "split_gain_bits": 4204.4
+   }
+  },
+  {
+   "start": 1216,
+   "end": 1244,
+   "mdl_bits": 10486.3,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.067,
+    "sustained_change_run": 8,
+    "split_gain_bits": 5916.9
+   }
+  },
+  {
+   "start": 1244,
+   "end": 1263,
+   "mdl_bits": 3730.7,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.019,
+    "sustained_change_run": 0,
+    "split_gain_bits": 1443.6
+   }
+  },
+  {
+   "start": 1263,
+   "end": 1292,
+   "mdl_bits": 8944.3,
+   "reason": "cut",
+   "reason_detail": {
+    "cut_frames": [
+     1263
+    ],
+    "change_at": 0.929,
+    "sustained_change_run": 1,
+    "split_gain_bits": 4916.9
+   }
+  },
+  {
+   "start": 1292,
+   "end": 1372,
+   "mdl_bits": 17406.9,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.067,
+    "sustained_change_run": 0,
+    "split_gain_bits": 2365.6
+   }
+  },
+  {
+   "start": 1372,
+   "end": 1468,
+   "mdl_bits": 9476.2,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.028,
+    "sustained_change_run": 7,
+    "split_gain_bits": 3369.8
+   }
+  },
+  {
+   "start": 1468,
+   "end": 1510,
+   "mdl_bits": 14885.7,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.019,
+    "sustained_change_run": 8,
+    "split_gain_bits": 4935.6
+   }
+  },
+  {
+   "start": 1510,
+   "end": 1528,
+   "mdl_bits": 18169.5,
+   "reason": "cut",
+   "reason_detail": {
+    "cut_frames": [
+     1510,
+     1511
+    ],
+    "change_at": 0.255,
+    "sustained_change_run": 16,
+    "split_gain_bits": 2244.3
+   }
+  },
+  {
+   "start": 1528,
+   "end": 1572,
+   "mdl_bits": 6242.7,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.072,
+    "sustained_change_run": 12,
+    "split_gain_bits": 12109.9
+   }
+  },
+  {
+   "start": 1572,
+   "end": 1588,
+   "mdl_bits": 9777.0,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.056,
+    "sustained_change_run": 10,
+    "split_gain_bits": 3521.1
+   }
+  },
+  {
+   "start": 1588,
+   "end": 1686,
+   "mdl_bits": 15883.0,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.043,
+    "sustained_change_run": 10,
+    "split_gain_bits": 4859.3
+   }
+  },
+  {
+   "start": 1686,
+   "end": 1704,
+   "mdl_bits": 10862.3,
+   "reason": "cut",
+   "reason_detail": {
+    "cut_frames": [
+     1686
+    ],
+    "change_at": 0.966,
+    "sustained_change_run": 1,
+    "split_gain_bits": 3198.3
+   }
+  },
+  {
+   "start": 1704,
+   "end": 1808,
+   "mdl_bits": 26444.2,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.035,
+    "sustained_change_run": 0,
+    "split_gain_bits": 2933.5
+   }
+  },
+  {
+   "start": 1808,
+   "end": 1880,
+   "mdl_bits": 19635.5,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.025,
+    "sustained_change_run": 3,
+    "split_gain_bits": 1903.2
+   }
+  },
+  {
+   "start": 1880,
+   "end": 1916,
+   "mdl_bits": 22103.6,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.166,
+    "sustained_change_run": 12,
+    "split_gain_bits": 2932.3
+   }
+  },
+  {
+   "start": 1916,
+   "end": 2008,
+   "mdl_bits": 13418.8,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.069,
+    "sustained_change_run": 6,
+    "split_gain_bits": 3381.7
+   }
+  },
+  {
+   "start": 2008,
+   "end": 2116,
+   "mdl_bits": 18854.2,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.025,
+    "sustained_change_run": 0,
+    "split_gain_bits": 649.7
+   }
+  }
+ ],
+ "argv": [
+  "0:2116",
+  "c12/song/noise_prefix1468",
+  "chunked",
+  "--phases",
+  "/home/jackb/workspace/CA-universal/runs/c12/song_phases_auto110_prefix2116.json",
+  "--seeds",
+  "0",
+  "--steps",
+  "8000",
+  "--init-factor",
+  "4",
+  "--eval-every",
+  "1000",
+  "--noise",
+  "0.02"
+ ]
+}

@@ -1,0 +1,60 @@
+{
+ "spec": "1760:240",
+ "arm": "greedy",
+ "phases": [
+  {
+   "start": 1,
+   "end": 83,
+   "mdl_bits": 23588.8,
+   "reason": "start"
+  },
+  {
+   "start": 83,
+   "end": 118,
+   "mdl_bits": 6954.3,
+   "reason": "mdl",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.024,
+    "sustained_change_run": 0,
+    "split_gain_bits": 1545.6
+   }
+  },
+  {
+   "start": 118,
+   "end": 157,
+   "mdl_bits": 23713.7,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.072,
+    "sustained_change_run": 11,
+    "split_gain_bits": 3331.4
+   }
+  },
+  {
+   "start": 157,
+   "end": 240,
+   "mdl_bits": 11354.2,
+   "reason": "wipe",
+   "reason_detail": {
+    "cut_frames": [],
+    "change_at": 0.029,
+    "sustained_change_run": 6,
+    "split_gain_bits": 3489.3
+   }
+  }
+ ],
+ "argv": [
+  "1760:240",
+  "c12/main/greedy4_cold",
+  "greedy",
+  "--K",
+  "4",
+  "--seeds",
+  "0",
+  "--steps",
+  "6000",
+  "--cold"
+ ]
+}

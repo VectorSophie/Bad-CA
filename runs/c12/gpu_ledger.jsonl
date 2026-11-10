@@ -1,0 +1,17 @@
+{"job": 10, "label": "c12-p-fixed64", "gpus": 1, "minutes": 37.32, "queued_min": 0.0}
+{"job": 11, "label": "c12-p-auto4", "gpus": 1, "minutes": 37.65, "queued_min": 0.0}
+{"job": 12, "label": "c12-p-uniform4", "gpus": 1, "minutes": 37.59, "queued_min": 37.3}
+{"job": 13, "label": "c12-p-autodelta4", "gpus": 1, "minutes": 38.19, "queued_min": 37.7}
+{"job": 14, "label": "c12-p-greedy4 (warm start; phase 4 exploded)", "gpus": 1, "minutes": 21.42, "queued_min": 75.0}
+{"job": 16, "label": "ui agent GPU check (owned by UI agent)", "gpus": 1, "minutes": 0.17, "queued_min": null}
+{"job": 15, "label": "c12-p-fixed256 (did not learn)", "gpus": 1, "minutes": 60.0, "queued_min": 112.0}
+{"job": 17, "label": "c12-greedy4-cold", "gpus": 1, "minutes": 10.8, "queued_min": 0.0}
+{"job": 19, "label": "c12-fixed256-lr1.25e-4", "gpus": 1, "minutes": 60.6, "queued_min": 0.0}
+{"job": 20, "label": "c12-L120-uniform2", "gpus": 1, "minutes": 18.63}
+{"job": 21, "label": "c12-L120-auto2", "gpus": 1, "minutes": 19.01}
+{"job": 22, "label": "c12-L240-uniform6", "gpus": 1, "minutes": 37.97}
+{"job": 23, "label": "c12-L240-auto6", "gpus": 1, "minutes": 37.66}
+{"job": 18, "label": "c12-song-chunked (auto110, 28 chunks)", "gpus": 1, "minutes": 401.4, "queued_min": 0.0}
+{"job": 25, "label": "c12-song-prefix-noise (0-1467, sigma 0.02)", "gpus": 1, "minutes": 93.6, "queued_min": 0.0}
+{"job": 26, "label": "c12-song-noise-ext2116 (resume, 3 chunks)", "gpus": 1, "minutes": 40.65, "queued_min": 0.0}
+{"job": 24, "label": "c12-song-chunked-uniform (uniform110, 28 chunks)", "gpus": 1, "minutes": 429.2, "queued_min": 0.0}

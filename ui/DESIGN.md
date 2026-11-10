@@ -18,3 +18,8 @@ Honesty rules baked into the UI: the "model" panel shows the architecture, param
 update and the training curve / evaluation points; it never lists "rules". The continuous view is labelled as a raw state
 value thresholded at 0.5, not a probability. The player states "autonomous playback from the first frame (hidden 0), no
 target injection", and the original frames are only drawn in the comparison and error panels.
+
+C12 additions reuse the same tokens and components (box-drawing panel tags `┌─ model.rules`, `┌─ cell.inspector`, bracket
+buttons, 1 px rules, DM Mono tables). The phase timeline is a flat bar of 1 px-ruled segments; the current phase and the
+"now" line use the accent, nothing animates. The selected cell is drawn in the accent on the CA panel. Diff colours keep
+their meaning (blue = added, red = removed, amber = changed). NCA phases are summarised as numbers only, never as rules.

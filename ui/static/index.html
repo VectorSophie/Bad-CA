@@ -25,6 +25,7 @@
       <div><h3 class="minor">imported exports</h3><ul class="cards" id="list-imported"></ul>
         <label class="btn file">[ import .ncab / .nca.json ]<input type="file" id="import-file" accept=".ncab,.json"></label>
       </div>
+      <div><h3 class="minor">c12 exports <span class="cm">// runs/c12, read-only: phased NCA, explicit rules</span></h3><ul class="cards scroll" id="list-c12"></ul></div>
     </div>
   </section>
 
@@ -35,12 +36,17 @@
       <figure><figcaption>original <span class="cm">(binary, comparison only)</span></figcaption><canvas id="cv-orig" width="1" height="1"></canvas></figure>
       <figure><figcaption id="ca-cap">CA replay <span class="cm">(export only)</span></figcaption><canvas id="cv-ca" width="1" height="1"></canvas></figure>
       <figure id="fig-err"><figcaption>error <span class="fn">■ FN orig on / CA off</span> <span class="fp">■ FP orig off / CA on</span></figcaption><canvas id="cv-err" width="1" height="1"></canvas></figure>
+      <figure id="fig-b" hidden><figcaption id="b-cap">B</figcaption><canvas id="cv-b" width="1" height="1"></canvas></figure>
+      <figure id="fig-berr" hidden><figcaption>error B <span class="fn">■ FN</span> <span class="fp">■ FP</span></figcaption><canvas id="cv-berr" width="1" height="1"></canvas></figure>
     </div>
+    <p class="cm" id="sel-note">click a cell of the CA panel to inspect it (selected cell drawn in amber)</p>
     <p class="status-line" id="compute-line" role="status"></p>
     <div class="transport">
       <button class="btn" id="b-play" disabled>[ play ]</button>
       <button class="btn" id="b-prev" disabled aria-label="previous frame">[ ◂ ]</button>
       <button class="btn" id="b-next" disabled aria-label="next frame">[ ▸ ]</button>
+      <button class="btn" id="b-sub" disabled>[ +1 substep ]</button>
+      <button class="btn" id="b-frame" disabled>[ +1 frame ]</button>
       <label class="scrub">frame <input type="range" id="scrub" min="0" max="0" value="0" disabled></label>
       <span class="counter" id="counter">–</span>
     </div>
@@ -51,6 +57,11 @@
       <label><input type="checkbox" id="t-cont"> continuous values <span class="cm">(gray = clip(v,0,1); v is a raw state value thresholded at 0.5, not a probability)</span></label>
       <span class="cm">keys: space play/pause · ←/→ step</span>
     </div>
+    <div class="transport opts">
+      <label>compare with B <select id="b-sel"><option value="">none</option></select></label>
+      <span class="cm" id="b-line"></span>
+    </div>
+    <div class="timelines" id="timelines"></div>
     <dl class="facts" id="facts"></dl>
   </section>
 
@@ -103,6 +114,16 @@
     </div>
   </section>
 
+  <section class="panel rise" id="rules" aria-labelledby="rules-h">
+    <h2 class="tag" id="rules-h">┌─ model.rules <span class="cm" id="rules-kind">// load a model above</span></h2>
+    <div id="rules-body"><p class="cm">load a model above</p></div>
+  </section>
+
+  <section class="panel rise" id="insp" aria-labelledby="insp-h">
+    <h2 class="tag" id="insp-h">┌─ cell.inspector <span class="cm" id="insp-where">// click a cell of the CA panel</span></h2>
+    <div id="insp-body"><p class="cm">no cell selected</p></div>
+  </section>
+
   <section class="panel rise" id="new" aria-labelledby="new-h">
     <h2 class="tag" id="new-h">┌─ run.new</h2>
     <div class="new-grid">
@@ -136,7 +157,7 @@
         <label>preset <select id="preset"></select></label>
         <p class="note" id="preset-note"></p>
         <label>steps override <input type="number" id="t-steps" min="1" placeholder="preset default"></label>
-        <label>device <select id="device"><option value="cpu">cpu (local, 4 threads)</option><option value="gpu">gpu via gpuq (untested)</option></select></label>
+        <label>device <select id="device"><option value="cpu">cpu (local, 4 threads)</option><option value="gpu">gpu via gpuq (shared queue, -G 1)</option></select></label>
         <button class="btn" id="b-train">[ start training ]</button>
         <div id="job" class="job" hidden>
           <p class="tag small" id="job-name"></p>

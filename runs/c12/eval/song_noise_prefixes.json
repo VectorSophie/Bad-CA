@@ -1,0 +1,245 @@
+{
+ "export": "runs/c12/song/noise_export_0-2115.ncab",
+ "step": 120,
+ "prefixes": [
+  {
+   "frames": 120,
+   "err": 0.006467864923747277,
+   "worst16": 0.023546006944444448,
+   "gates": {
+    "sustained": false,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": false
+   },
+   "thin_fg": 0.7245240761478163,
+   "thin_bg": 0.7891373801916933
+  },
+  {
+   "frames": 240,
+   "err": 0.007668429412676274,
+   "worst16": 0.023546006944444448,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8010869565217391,
+   "thin_bg": 0.7410714285714286
+  },
+  {
+   "frames": 360,
+   "err": 0.007790738161559889,
+   "worst16": 0.025788483796296294,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8410647571606475,
+   "thin_bg": 0.7932469935245143
+  },
+  {
+   "frames": 480,
+   "err": 0.009174688780638676,
+   "worst16": 0.05309606481481481,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.843811394891945,
+   "thin_bg": 0.7370875179340028
+  },
+  {
+   "frames": 600,
+   "err": 0.00855109596240648,
+   "worst16": 0.05309606481481481,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8797589439449015,
+   "thin_bg": 0.7873648505405978
+  },
+  {
+   "frames": 720,
+   "err": 0.007675269149538969,
+   "worst16": 0.05309606481481481,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8915537017726799,
+   "thin_bg": 0.8040564373897707
+  },
+  {
+   "frames": 840,
+   "err": 0.007382438308391824,
+   "worst16": 0.05309606481481481,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8924813468528793,
+   "thin_bg": 0.808
+  },
+  {
+   "frames": 960,
+   "err": 0.007389786814969297,
+   "worst16": 0.05309606481481481,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8892022809491692,
+   "thin_bg": 0.7978922091782283
+  },
+  {
+   "frames": 1080,
+   "err": 0.009092995915285071,
+   "worst16": 0.05309606481481481,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8726655348047538,
+   "thin_bg": 0.7413559322033898
+  },
+  {
+   "frames": 1200,
+   "err": 0.00950541346183548,
+   "worst16": 0.05309606481481481,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8660227598737688,
+   "thin_bg": 0.7531391931605664
+  },
+  {
+   "frames": 1320,
+   "err": 0.010134115351135821,
+   "worst16": 0.07269965277777778,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8667650780261493,
+   "thin_bg": 0.7621468926553673
+  },
+  {
+   "frames": 1440,
+   "err": 0.010363984119630403,
+   "worst16": 0.07269965277777778,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": true,
+    "transitions": true,
+    "success": true
+   },
+   "thin_fg": 0.8411603806295026,
+   "thin_bg": 0.7616818844471726
+  },
+  {
+   "frames": 1560,
+   "err": 0.01278827536645048,
+   "worst16": 0.1593605324074074,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": false,
+    "transitions": true,
+    "success": false
+   },
+   "thin_fg": 0.8403959549051359,
+   "thin_bg": 0.7755041518386714
+  },
+  {
+   "frames": 1680,
+   "err": 0.012784560915889087,
+   "worst16": 0.1593605324074074,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": false,
+    "transitions": true,
+    "success": false
+   },
+   "thin_fg": 0.8800735840933109,
+   "thin_bg": 0.8472947190323625
+  },
+  {
+   "frames": 1800,
+   "err": 0.01388921056965804,
+   "worst16": 0.1593605324074074,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": false,
+    "transitions": true,
+    "success": false
+   },
+   "thin_fg": 0.8678808950415464,
+   "thin_bg": 0.8479269661217433
+  },
+  {
+   "frames": 1920,
+   "err": 0.014717891745314883,
+   "worst16": 0.1593605324074074,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": false,
+    "transitions": true,
+    "success": false
+   },
+   "thin_fg": 0.860379677683693,
+   "thin_bg": 0.8436008850265241
+  },
+  {
+   "frames": 2040,
+   "err": 0.015332668065318874,
+   "worst16": 0.1593605324074074,
+   "gates": {
+    "sustained": true,
+    "full_err": true,
+    "worst16": false,
+    "transitions": true,
+    "success": false
+   },
+   "thin_fg": 0.8552568153821434,
+   "thin_bg": 0.838227664210854
+  }
+ ],
+ "longest_passing_prefix": 1440
+}

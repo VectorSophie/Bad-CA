@@ -83,11 +83,11 @@ def verify_gif(path, n_expected):
     return dict(path=path, decoded_frames=n, expected_frames=n_expected, frame_ms=im.info.get("duration"), ok=n == n_expected)
 
 
-def make_video(panels, footer, frame_label, stem, fps_list=((30, "1x"), (7.5, "0.25x")), scale=6):
+def make_video(panels, footer, frame_label, stem, fps_list=((30, "1x"), (7.5, "0.25x")), scale=6, gif=True):
     frames = compose(panels, footer, frame_label, scale); checks = []
     for fps, tag in fps_list:
-        mp4, gif = f"{stem}_{tag}.mp4", f"{stem}_{tag}.gif"
+        mp4, gifp = f"{stem}_{tag}.mp4", f"{stem}_{tag}.gif"
         write_mp4(frames, mp4, fps); checks.append(verify_mp4(mp4, len(frames), fps))
-        write_gif(frames, gif, fps); checks.append(verify_gif(gif, len(frames)))
+        if gif: write_gif(frames, gifp, fps); checks.append(verify_gif(gifp, len(frames)))   # gif=False for very long videos
     json.dump(checks, open(stem + ".video_check.json", "w"), indent=1)
     return checks

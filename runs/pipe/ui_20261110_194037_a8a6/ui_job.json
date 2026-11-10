@@ -1,0 +1,22 @@
+{
+ "device": "gpu",
+ "args": [
+  "/home/jackb/workspace/CA-universal/runs/ui/uploads/b5c6f3e526dc415d.mp4",
+  "/home/jackb/workspace/CA-universal/runs/pipe/ui_20261110_194037_a8a6",
+  "--start",
+  "0",
+  "--frames",
+  "24",
+  "--width",
+  "32",
+  "--threshold",
+  "128",
+  "--preset",
+  "quality",
+  "--steps",
+  "300"
+ ],
+ "started": 1794307237.13567,
+ "resumed": false,
+ "gpuq_id": "16"
+}

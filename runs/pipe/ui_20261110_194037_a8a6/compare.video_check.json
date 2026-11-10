@@ -1,0 +1,46 @@
+[
+ {
+  "path": "/home/jackb/workspace/CA-universal/runs/pipe/ui_20261110_194037_a8a6/compare_1x.mp4",
+  "decoded_frames": 24,
+  "expected_frames": 24,
+  "fps": 30.0,
+  "expected_fps": 30.0,
+  "duration_s": 0.8,
+  "expected_duration_s": 0.8,
+  "codec": "h264",
+  "size": [
+   896,
+   282
+  ],
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/runs/pipe/ui_20261110_194037_a8a6/compare_1x.gif",
+  "decoded_frames": 24,
+  "expected_frames": 24,
+  "frame_ms": 30,
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/runs/pipe/ui_20261110_194037_a8a6/compare_0.25x.mp4",
+  "decoded_frames": 24,
+  "expected_frames": 24,
+  "fps": 7.5,
+  "expected_fps": 7.5,
+  "duration_s": 3.2,
+  "expected_duration_s": 3.2,
+  "codec": "h264",
+  "size": [
+   896,
+   282
+  ],
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/runs/pipe/ui_20261110_194037_a8a6/compare_0.25x.gif",
+  "decoded_frames": 24,
+  "expected_frames": 24,
+  "frame_ms": 130,
+  "ok": true
+ }
+]

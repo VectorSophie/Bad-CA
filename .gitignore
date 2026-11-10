@@ -11,3 +11,13 @@ runs/c6/cnf/*.cnf
 
 # Campaign 10 replays (27 MB): regenerated deterministically from runs/c10/exports by experiments/exp38_eval10.py
 runs/c10/replays/
+
+# Campaign 12: large or regenerable outputs kept local
+runs/c12/**/state_*.npz
+runs/c12/media/c12_SONG_FULL_*
+# shows the source video at full 480x360 resolution (redistribution) - local only
+runs/c12/media/c12_preprocessing_loss_*
+runs/ui_server.log
+runs/c12/song/**/best_c*.npz
+runs/c12/song/noise_prefix1468/export_s0.ncab
+runs/ui/

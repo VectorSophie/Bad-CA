@@ -1,0 +1,25 @@
+{
+ "spec": "1760:120",
+ "arm": "uniform",
+ "phases": [
+  {
+   "start": 1,
+   "end": 60,
+   "reason": "uniform"
+  },
+  {
+   "start": 60,
+   "end": 120,
+   "reason": "uniform"
+  }
+ ],
+ "argv": [
+  "1760:120",
+  "c12/main/L120_uniform2",
+  "uniform",
+  "--K",
+  "2",
+  "--steps",
+  "12000"
+ ]
+}

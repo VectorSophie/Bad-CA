@@ -1,0 +1,7 @@
+{
+ "frames": 224,
+ "err_learned_init": 0.007902030393622321,
+ "err_zero_hidden": 0.45113457066932405,
+ "zero_hidden_all_uniform": false,
+ "init_values": 1620
+}

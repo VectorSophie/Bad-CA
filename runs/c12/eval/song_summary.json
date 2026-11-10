@@ -1,0 +1,21 @@
+{
+ "auto110": {
+  "err": 0.3391,
+  "longest_passing_prefix": 1080,
+  "missed_fades": "113/191"
+ },
+ "uniform110": {
+  "err": 0.3444,
+  "longest_passing_prefix": 480,
+  "missed_fades": "114/191"
+ },
+ "noise_0_1467": {
+  "err": 0.0104,
+  "gates": "all pass"
+ },
+ "noise_0_2115": {
+  "err": 0.0157,
+  "longest_passing_prefix": 1440,
+  "failing_window": "1507-1522"
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "spec": "1760:240",
+ "arm": "fixed",
+ "phases": [
+  {
+   "start": 1,
+   "end": 240,
+   "reason": "fixed"
+  }
+ ],
+ "argv": [
+  "1760:240",
+  "c12/pilot/fixed64",
+  "fixed",
+  "--steps",
+  "12000"
+ ]
+}

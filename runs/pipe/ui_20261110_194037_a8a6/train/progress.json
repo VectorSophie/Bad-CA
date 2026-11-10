@@ -1,0 +1,1 @@
+{"status": "finished", "step": 300, "steps": 300, "train_s": 2.9, "compile_s": 2.0, "best": [{"err": 0.0015527950310559005, "step": 270}], "last": [{"step": 300, "name": "s0", "bin_err": 0.0015527950310559005, "L0": 0.006430925335735083, "LB": 0.0025700549595057964, "LT": 0.0, "nonfinite_samples": 0}], "names": ["s0"]}

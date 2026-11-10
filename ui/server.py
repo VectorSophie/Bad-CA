@@ -27,6 +27,8 @@ RUN_RE = re.compile(r"^[A-Za-z0-9_][A-Za-z0-9_.-]{0,79}$")
 IMP_RE = re.compile(r"^imp-([0-9a-f]{16})$")
 UP_RE = re.compile(r"^up-([0-9a-f]{16})(\.[a-z0-9]{1,5})$")
 EXT_RE = re.compile(r"\.[A-Za-z0-9]{1,5}$")
+C12 = os.path.join(ROOT, "runs", "c12")   # read-only: phased NCA (ncab-v2) and explicit-rule (dlrule-v1) exports
+C12_RE = re.compile(r"^c12~[A-Za-z0-9_.-]+(~[A-Za-z0-9_.-]+)*$")
 JOBS = {}  # run name -> Popen (children of this server, so we can reap them)
 MIME = {".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript", ".mjs": "text/javascript",
         ".woff2": "font/woff2", ".txt": "text/plain; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png"}
@@ -157,12 +159,21 @@ def alive(name, job):
     except OSError: return True
 
 
+def gpuq_state(jid):
+    """queued / allocating / running / finished, or None if gpuq cannot tell (the queue forgets jobs after -C)."""
+    try: r = subprocess.run(["gpuq", "-s", str(jid)], capture_output=True, text=True, timeout=10)
+    except (OSError, subprocess.TimeoutExpired): return None
+    return r.stdout.strip() or None if r.returncode == 0 else None
+
+
 def run_state(name, d):
     st = rjson(os.path.join(d, "status.json"), {}) or {}; job = rjson(os.path.join(d, "ui_job.json")); ui = rjson(os.path.join(d, "ui_status.json"))
     s = st.get("status") or ("finished" if os.path.exists(os.path.join(d, "model.ncab")) else "unknown")
     if ui and ui.get("status") == "cancelled" and s == "running": s = "cancelled"
     elif job and job.get("device") == "gpu":
-        if not st: s = "queued"   # shortcut: gpuq state not parsed; status comes from the run files once the job starts
+        q = gpuq_state(job.get("gpuq_id"))
+        if not st: s = "died" if q == "finished" else "queued" if q in ("queued", "allocating", None) else "starting"
+        elif s == "running" and q == "finished": s = "died"
     elif job:
         live = alive(name, job)
         if not st: s = "starting" if live else "died"
@@ -196,7 +207,7 @@ def list_runs():
             if (IMP_RE.match(name) if pre else RUN_RE.match(name)) and os.path.isdir(os.path.join(root, f)):
                 out.append(summary(name, os.path.join(root, f)))
     order = {"example": 0, "run": 1, "imported": 2}
-    return sorted(out, key=lambda r: (order[r["kind"]], r["name"]))
+    return sorted(out, key=lambda r: (order[r["kind"]], r["name"])) + (c12_list() if os.path.isdir(C12) else [])
 
 
 def hist_of(d):
@@ -226,9 +237,13 @@ def env():
 def launch(name, d, args, device, resume=False):
     cmd = [sys.executable, "-m", "ca.pipeline", "run"] + args + (["--resume"] if resume else [])
     job = dict(device=device, args=args, started=time.time(), resumed=resume)
-    if device == "gpu":  # implemented, untested by design (another session owns the GPU queue)
-        r = subprocess.run(["gpuq", "-L", "ui-" + name, "-G", "1"] + cmd, cwd=ROOT, capture_output=True, text=True, timeout=30)
-        if r.returncode != 0: raise ApiError(500, f"gpuq failed: {r.stderr.strip()}")
+    if device == "gpu":
+        # the queue server's env is not ours: unset CPU pinning explicitly, no JAX preallocation (GPU is shared), and send
+        # output to the run's log.txt (gpuq's own log is outside the run dir and invisible to the UI)
+        log = os.path.join(d, "log.txt")
+        wrapped = ["env", "-u", "JAX_PLATFORMS", "XLA_PYTHON_CLIENT_PREALLOCATE=false", "sh", "-c", 'exec "$@" >>"$0" 2>&1', log] + cmd
+        r = subprocess.run(["gpuq", "-L", "ui-" + name, "-G", "1"] + wrapped, cwd=ROOT, capture_output=True, text=True, timeout=30)
+        if r.returncode != 0 or not r.stdout.strip().split()[-1:][0].isdigit(): raise ApiError(500, f"gpuq failed: {r.stderr.strip() or r.stdout.strip()}")
         job["gpuq_id"] = r.stdout.strip().split()[-1]
     else:
         log = open(os.path.join(d, "log.txt"), "ab")
@@ -258,7 +273,10 @@ def cancel(name):
     d = run_dir(name); job = rjson(os.path.join(d, "ui_job.json"))
     if not job: raise ApiError(403, "only runs started by this UI can be cancelled")
     if job.get("device") == "gpu":
-        subprocess.run(["gpuq", "-k", str(job["gpuq_id"])], cwd=ROOT, capture_output=True, timeout=30)
+        q = gpuq_state(job["gpuq_id"])
+        if q == "finished": raise ApiError(409, "job is not running")
+        # -r removes a waiting job, -k sends SIGTERM to a running one; both only ever for this run's own job id
+        subprocess.run(["gpuq", "-k" if q == "running" else "-r", str(job["gpuq_id"])], cwd=ROOT, capture_output=True, timeout=30)
     elif alive(name, job):
         try: os.killpg(job["pgid"], signal.SIGTERM)
         except ProcessLookupError: pass
@@ -323,6 +341,86 @@ def import_export(h):
             os.rmdir(tmpd)
 
 
+# ---------- runs/c12 exports (read-only listing; CA frames are still computed in the browser) ----------
+def c12_path(name):
+    if not C12_RE.match(name) or ".." in name: raise ApiError(400, "bad c12 name")
+    p = under(C12, *name.split("~")[1:])
+    if not (p.endswith(".ncab") or p.endswith(".rule.json")) or not os.path.isfile(p): raise ApiError(404, "no such c12 export")
+    return p
+
+
+def c12_header(p):
+    """Header of an ncab (v1/v2) or the dlrule-v1 JSON without the packed frames; raises on anything else."""
+    import zlib
+    with open(p, "rb") as f: data = f.read(MAX_EXPORT + 1)
+    if len(data) > MAX_EXPORT: raise ValueError("larger than the export limit")
+    if p.endswith(".rule.json"):
+        o = json.loads(data)
+        if not (o.get("format") == "ca-universal/dlrule-v1" or (o.get("format") == "ca-universal/rule-v1" and isinstance(o.get("programs"), list))): raise ValueError("not dlrule-v1")
+        return dict({k: v for k, v in o.items() if k not in ("first", "h0")}, format="dlrule-v1"), len(data)
+    if data[:4] != b"NCAB" or data[4] not in (1, 2): raise ValueError("not ncab-v1/v2")
+    body = zlib.decompress(data[6:]) if data[5] & 1 else data[6:]; hl = int.from_bytes(body[:4], "little")
+    return dict(json.loads(body[4:4 + hl]), format=f"ncab-v{data[4]}"), len(data)
+
+
+def c12_start(meta):
+    """Source start frame from export meta: src_start (exp45 NCA exports) or spec 'start:T' (rule exports)."""
+    if meta.get("src_start") is not None: return int(meta["src_start"])
+    m = re.match(r"^(\d+):\d+$", str(meta.get("spec", "")))
+    return int(m.group(1)) if m else None
+
+
+def c12_summary(name, p):
+    try: hd, n = c12_header(p)
+    except (OSError, ValueError) as e: return dict(name=name, label=os.path.relpath(p, C12), status="failed", kind="c12", error=str(e), has_export=False)
+    if hd["format"] == "dlrule-v1": npar = None; extra = dict(rules=sum(len(q["rules"]) for q in hd["programs"]), programs=len(hd["programs"]))
+    else:
+        shapes = [s for _, s in hd.get("blobs") or hd.get("params") or []]; npar = int(sum(np.prod(s) for s in shapes)); extra = dict(phases=len(hd.get("schedule") or [1]), mode=hd.get("mode", "v1"))
+    meta = hd.get("meta") or {}
+    return dict(name=name, label=os.path.relpath(p, C12), status="finished", kind="c12", format=hd["format"], n_params=npar, export_bytes=n, has_export=True,
+                has_original=c12_start(meta) is not None, frames=hd["T"], width=hd["W"], height=hd["H"], own=False, elapsed_s=None, **extra)
+
+
+def c12_list():
+    out = []
+    for dp, dns, fns in os.walk(C12):
+        dns.sort()
+        for f in sorted(fns):
+            if f.endswith(".ncab") or f.endswith(".rule.json"):
+                name = "c12~" + os.path.relpath(os.path.join(dp, f), C12).replace(os.sep, "~")
+                if C12_RE.match(name): out.append(c12_summary(name, os.path.join(dp, f)))
+    return out
+
+
+def c12_detail(name):
+    p = c12_path(name); sm = c12_summary(name, p); hd = c12_header(p)[0] if sm["status"] == "finished" else {}
+    return dict(summary=sm, manifest=dict(label=sm["label"], c12=dict(path=os.path.relpath(p, ROOT), header={k: v for k, v in hd.items() if k != "programs"}),
+                export=dict(sizes=dict(file=sm.get("export_bytes")), n_params=sm.get("n_params"))),
+                status=dict(status=sm["status"], error=sm.get("error")), job=None, ui_status=None, progress=None, hist=[], log_tail=[], presets=pipeline.PRESETS)
+
+
+def c12_original(name):
+    """Original binary frames for a c12 export from its meta (src_start or spec + T frames of the source at meta.width, threshold
+    meta.threshold, via ca.pipeline.prep). Comparison only; first_frame_mismatch_px reports whether it matches the export."""
+    p = c12_path(name); hd = c12_header(p)[0]; meta = hd.get("meta") or {}
+    start = c12_start(meta)
+    if start is None: raise ApiError(404, "export meta has no src_start/spec: CA-only playback")
+    src = under(ROOT, meta["source"]) if meta.get("source") else BUILTIN["badapple"]
+    if not os.path.isfile(src): raise ApiError(404, "source video of this export is not available")
+    a = dict(start=start, frames=int(hd["T"]), width=int(meta.get("width", hd["W"])), threshold=int(meta.get("threshold", 128)), invert=False, fps=None)
+    d, man = do_prep(src, a); F = np.load(os.path.join(d, "bin.npy"))
+    if F.shape[1:] != (hd["H"], hd["W"]): raise ApiError(409, f"prepared original is {F.shape[1:]} but the export is {(hd['H'], hd['W'])}")
+    if hd["format"] == "dlrule-v1":
+        from ca import rules
+        f0 = rules.load(p)["first"]
+    elif hd["format"] == "ncab-v2":
+        from ca import phase_nca
+        f0 = phase_nca.load(p)[4]
+    else: f0 = pipeline.load_export(p)[2]
+    out = b64npy(os.path.join(d, "bin.npy")); pp = man["preprocessing"]
+    return dict(bin=out, fps=pp["fps"], source_frame_index=pp["source_frame_index"], source_time_s=pp["source_time_s"], first_frame_mismatch_px=int((F[0] != f0).sum()))
+
+
 # ---------- HTTP ----------
 class H(BaseHTTPRequestHandler):
     server_version = "ca-ui/1"
@@ -372,6 +470,11 @@ class H(BaseHTTPRequestHandler):
         if G and p == ["runs"]: return self.send(200, list_runs())
         if len(p) >= 2 and p[0] == "runs":
             name = p[1]; rest = p[2:]
+            if name.startswith("c12~") and G:
+                if not rest: return self.send(200, c12_detail(name))
+                if rest == ["export"]: f = c12_path(name); return self.file(f, "application/octet-stream", os.path.basename(f))
+                if rest == ["original"]: return self.send(200, c12_original(name))
+                raise ApiError(404, "not found")
             if G and not rest: return self.send(200, run_detail(name))
             if G and rest in (["export"], ["export.ncab"]): return self.file(*export_file(name))
             if G and rest == ["original"]: return self.send(200, original(name))

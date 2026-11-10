@@ -1,0 +1,32 @@
+[
+ {
+  "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c12/media/c12_SONG_PREFIX_0-1467_orig_nonoise_vs_noise_trained_1x.mp4",
+  "decoded_frames": 1468,
+  "expected_frames": 1468,
+  "fps": 30.0,
+  "expected_fps": 30,
+  "duration_s": 48.9330078125,
+  "expected_duration_s": 48.933,
+  "codec": "h264",
+  "size": [
+   1488,
+   336
+  ],
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c12/media/c12_SONG_PREFIX_0-1467_orig_nonoise_vs_noise_trained_0.25x.mp4",
+  "decoded_frames": 1468,
+  "expected_frames": 1468,
+  "fps": 7.5,
+  "expected_fps": 7.5,
+  "duration_s": 195.7330078125,
+  "expected_duration_s": 195.733,
+  "codec": "h264",
+  "size": [
+   1488,
+   336
+  ],
+  "ok": true
+ }
+]
