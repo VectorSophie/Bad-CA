@@ -1,0 +1,42 @@
+{
+ "status": "finished",
+ "stage": null,
+ "error": null,
+ "stages": {
+  "prep": {
+   "seconds": 0.1
+  },
+  "train": {
+   "seconds": 97.0
+  },
+  "export": {
+   "seconds": 0.0
+  },
+  "replay": {
+   "seconds": 0.3
+  },
+  "video": {
+   "seconds": 1.1
+  }
+ },
+ "pid": 1611305,
+ "replay": {
+  "T": 24,
+  "H": 21,
+  "W": 32,
+  "binary_mismatch_px": 0,
+  "max_abs_dv": 6.556510925292969e-06,
+  "mean_abs_dv": 2.6021578491963737e-07,
+  "node_sha256": "573625262db7734ea0704cd14f902bc60c29973c419ca8cbf71e4d9b89419bdf",
+  "numpy_sha256": "573625262db7734ea0704cd14f902bc60c29973c419ca8cbf71e4d9b89419bdf"
+ },
+ "export": "runs/pipe/example_color_ball_demo/model.ncab",
+ "sizes": {
+  "weights": 5216,
+  "first_frame": 84,
+  "header": 449,
+  "raw_total": 5749,
+  "file": 5336,
+  "n_params": 1304
+ }
+}

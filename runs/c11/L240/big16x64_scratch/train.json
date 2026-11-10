@@ -1,0 +1,1 @@
+{"T": 240, "H": 36, "W": 48, "C": 16, "Fh": 64, "S": 4, "n_params": 10320, "steps": 15000, "sched": ["cos", 0.0005, 5e-06], "models": [{"name": "s0", "seed": 0, "lamB": 2.0, "lamT": 0.0}], "compile_s": 1.6, "train_s": 1628.6, "device": "cuda:0", "best": {"s0": {"err": 0.0655920695800403, "step": 15000}}, "meta": {"target": "L240", "src_frames": [1760, 1999], "teacher": null}}

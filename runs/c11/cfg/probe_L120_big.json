@@ -1,0 +1,14 @@
+[
+ {
+  "name": "big_s0",
+  "seed": 0,
+  "lamB": 2.0,
+  "lamT": 0.0
+ },
+ {
+  "name": "big_s1",
+  "seed": 1,
+  "lamB": 2.0,
+  "lamT": 0.0
+ }
+]

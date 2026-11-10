@@ -1,0 +1,1 @@
+{"T": 24, "H": 21, "W": 32, "C": 8, "Fh": 16, "S": 4, "n_params": 1304, "steps": 1500, "sched": ["cos", 0.002, 2e-05], "models": [{"name": "s0", "seed": 0, "lamB": 2.0, "lamT": 0.0}], "compile_s": 0.4, "train_s": 95.0, "device": "cpu:0", "best": {"s0": {"err": 0.0017468944099378882, "step": 1450}}, "meta": {"run": "runs/pipe/example_color_ball_demo"}}

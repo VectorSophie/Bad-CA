@@ -1,0 +1,20 @@
+[
+ {
+  "name": "Dconst_s0",
+  "seed": 0,
+  "lamB": 2.0,
+  "lamT": 0.0
+ },
+ {
+  "name": "Dconst_s1",
+  "seed": 1,
+  "lamB": 2.0,
+  "lamT": 0.0
+ },
+ {
+  "name": "Dconst_s2",
+  "seed": 2,
+  "lamB": 2.0,
+  "lamT": 0.0
+ }
+]

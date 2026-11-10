@@ -1,0 +1,20 @@
+[
+ {
+  "name": "Tcos_s0",
+  "seed": 0,
+  "lamB": 2.0,
+  "lamT": 1.0
+ },
+ {
+  "name": "Tcos_s1",
+  "seed": 1,
+  "lamB": 2.0,
+  "lamT": 1.0
+ },
+ {
+  "name": "Tcos_s2",
+  "seed": 2,
+  "lamB": 2.0,
+  "lamT": 1.0
+ }
+]

@@ -86,11 +86,21 @@ def full_report(P, V, F, win=None):
     sp, sf = small_cc(P[1:]), small_cc(F[1:]); r["small_cc"] = dict(pred_specks=int(sp[:, 0].sum()), true_specks=int(sf[:, 0].sum()),
                                                                      pred_holes=int(sp[:, 1].sum()), true_holes=int(sf[:, 1].sum()))
     r["err_curve"] = [round(float((P[t] != F[t]).mean()), 4) for t in range(T)]
+    r["thin"] = thin_recall(P, F)
     if win:
         a, b = win; r["window"] = frame_report(P, V, F, np.arange(a, b + 1))
         r["window"]["lag4"] = lag_terms(P[a:b + 1], F[a:b + 1], 4); r["window"]["lag1"] = lag_terms(P[a:b + 1], F[a:b + 1], 1)
         r["window"]["contour"] = contour_prf(P[a:b + 1], F[a:b + 1])
     return r
+
+
+def thin_recall(P, F):
+    """Campaign 11: are thin parts and thin gaps of the ORIGINAL kept? thin_fg = F minus its 3x3 opening (fingers, cane,
+    1-2 px limbs); thin_bg = closing(F) minus F (narrow gaps, e.g. between arm and body). Recall over frames 1..T-1."""
+    st = np.ones((1, 3, 3), bool); P = P[1:].astype(bool); F = F[1:].astype(bool)
+    tf = F & ~ndimage.binary_opening(F, st); tb = ndimage.binary_closing(F, st, border_value=0) & ~F
+    return dict(thin_fg_px=int(tf.sum()), thin_fg_recall=float(P[tf].mean()) if tf.any() else None,
+                thin_bg_px=int(tb.sum()), thin_bg_recall=float((~P[tb]).mean()) if tb.any() else None)
 
 
 def shift_curve(P, F, frames, ds=range(-3, 4)):

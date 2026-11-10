@@ -1,0 +1,9 @@
+[
+ {
+  "name": "s0",
+  "seed": 0,
+  "lamB": 2.0,
+  "lamT": 0.0,
+  "init": "/home/jackb/workspace/CA-universal/runs/c11/L120/big16x64_r2/best_s0.npz"
+ }
+]

@@ -1,0 +1,15 @@
+{
+ "status": "finished",
+ "stage": null,
+ "error": null,
+ "export": "runs/pipe/example_c11_main_3884/model.ncab",
+ "sizes": {
+  "weights": 15536,
+  "first_frame": 216,
+  "header": 446,
+  "raw_total": 16198,
+  "file": 15016,
+  "n_params": 3884
+ },
+ "imported": true
+}

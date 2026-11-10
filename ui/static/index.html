@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CA-universal · replay bench</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="masthead">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="mast-inner">
+    <p class="kicker"><b>update</b> <i>{ s += W<sub>u</sub>·relu(W<sub>p</sub> ∗ s) }</i> <span class="cm">// ×S per frame, from frame 0 with hidden = 0</span></p>
+    <h1 class="display split">replay bench</h1>
+    <p class="sub">CA-universal · continuous-state Neural CA that replays short binary video clips by autonomous playback. Pick a model, watch it run from its first frame, compare against the source.</p>
+  </div>
+</header>
+
+<main>
+  <section class="panel rise" id="shelf" aria-labelledby="shelf-h">
+    <h2 class="tag" id="shelf-h">┌─ models.shelf</h2>
+    <div class="shelf-groups">
+      <div><h3 class="minor">examples <span class="cm">// ready, no training</span></h3><ul class="cards" id="list-example"></ul></div>
+      <div><h3 class="minor">your runs</h3><ul class="cards" id="list-run"></ul></div>
+      <div><h3 class="minor">imported exports</h3><ul class="cards" id="list-imported"></ul>
+        <label class="btn file">[ import .ncab / .nca.json ]<input type="file" id="import-file" accept=".ncab,.json"></label>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel rise" id="player" aria-labelledby="player-h">
+    <h2 class="tag" id="player-h">┌─ player.compare <span class="cm" id="player-title">// no model loaded</span></h2>
+    <p class="regime">autonomous playback from the first frame (hidden 0), no target injection. The CA panel is computed in your browser from the export file alone; the original is shown for comparison only.</p>
+    <div class="stage" id="stage">
+      <figure><figcaption>original <span class="cm">(binary, comparison only)</span></figcaption><canvas id="cv-orig" width="1" height="1"></canvas></figure>
+      <figure><figcaption id="ca-cap">CA replay <span class="cm">(export only)</span></figcaption><canvas id="cv-ca" width="1" height="1"></canvas></figure>
+      <figure id="fig-err"><figcaption>error <span class="fn">■ FN orig on / CA off</span> <span class="fp">■ FP orig off / CA on</span></figcaption><canvas id="cv-err" width="1" height="1"></canvas></figure>
+    </div>
+    <p class="status-line" id="compute-line" role="status"></p>
+    <div class="transport">
+      <button class="btn" id="b-play" disabled>[ play ]</button>
+      <button class="btn" id="b-prev" disabled aria-label="previous frame">[ ◂ ]</button>
+      <button class="btn" id="b-next" disabled aria-label="next frame">[ ▸ ]</button>
+      <label class="scrub">frame <input type="range" id="scrub" min="0" max="0" value="0" disabled></label>
+      <span class="counter" id="counter">–</span>
+    </div>
+    <div class="transport opts">
+      <label>speed <select id="speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label>
+      <label>zoom <select id="zoom"><option>2</option><option>4</option><option selected>6</option><option>8</option><option>12</option></select>×</label>
+      <label><input type="checkbox" id="t-err" checked> error panel</label>
+      <label><input type="checkbox" id="t-cont"> continuous values <span class="cm">(gray = clip(v,0,1); v is a raw state value thresholded at 0.5, not a probability)</span></label>
+      <span class="cm">keys: space play/pause · ←/→ step</span>
+    </div>
+    <dl class="facts" id="facts"></dl>
+  </section>
+
+  <section class="panel rise" id="model" aria-labelledby="model-h">
+    <h2 class="tag" id="model-h">┌─ model.architecture</h2>
+    <div class="model-grid">
+      <div>
+        <dl class="facts arch" id="arch"><dt>model</dt><dd>load a model above</dd></dl>
+        <svg id="schematic" viewBox="0 0 560 250" role="img" aria-labelledby="sch-t">
+          <title id="sch-t">Local update: 3x3 neighbourhood of all channels, Fh ReLU features, 1x1 projection, residual add; repeated S times per frame</title>
+          <defs><marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" class="ink-fill"/></marker></defs>
+          <g class="sch">
+            <g transform="translate(40,54)">
+              <rect x="0" y="0" width="20" height="20"/><rect x="20" y="0" width="20" height="20"/><rect x="40" y="0" width="20" height="20"/><rect x="0" y="20" width="20" height="20"/><rect x="20" y="20" width="20" height="20" class="acc-fill"/><rect x="40" y="20" width="20" height="20"/><rect x="0" y="40" width="20" height="20"/><rect x="20" y="40" width="20" height="20"/><rect x="40" y="40" width="20" height="20"/>
+              <text x="30" y="-10" class="lbl">3×3 · <tspan id="sch-c">C</tspan> ch</text>
+              <text x="30" y="76" class="cm">s: 1 visible + hidden</text>
+            </g>
+            <path d="M104 84 H146" marker-end="url(#ar)"/>
+            <text x="125" y="76" class="lbl">W<tspan dy="3" font-size="9">p</tspan><tspan dy="-3">, b</tspan><tspan dy="3" font-size="9">p</tspan></text>
+            <g transform="translate(152,30)">
+              <rect x="0" y="0" width="104" height="108"/>
+              <text x="52" y="48" class="lbl big"><tspan id="sch-fh">Fh</tspan> features</text>
+              <text x="52" y="68" class="lbl">relu(·)</text>
+            </g>
+            <path d="M256 84 H306" marker-end="url(#ar)"/>
+            <text x="281" y="76" class="lbl">1×1 W<tspan dy="3" font-size="9">u</tspan></text>
+            <g transform="translate(312,54)">
+              <rect x="0" y="0" width="84" height="60"/>
+              <text x="42" y="35" class="lbl">Δs (<tspan id="sch-c2">C</tspan>)</text>
+            </g>
+            <path d="M396 84 H440" marker-end="url(#ar)"/>
+            <g transform="translate(446,54)">
+              <circle cx="22" cy="30" r="20"/><text x="22" y="36" class="lbl big">+</text>
+            </g>
+            <path d="M490 84 H546" marker-end="url(#ar)"/>
+            <text x="518" y="76" class="lbl">s′</text>
+            <path d="M56 146 V200 H468 V108" marker-end="url(#ar)" class="dash"/>
+            <text x="255" y="194" class="lbl">residual: s′ = s + Δs (same cell)</text>
+            <path d="M530 96 V228 H84 V146" marker-end="url(#ar)" class="acc-stroke"/>
+            <text x="300" y="243" class="lbl acc">repeat <tspan id="sch-s">S</tspan>× per video frame · visible channel &gt; 0.5 → pixel on</text>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <h3 class="minor">training curve <span class="cm">// binary error vs step, per model; ◆ = best checkpoint (exported)</span></h3>
+        <svg id="curve" viewBox="0 0 560 240" role="img" aria-label="training curve"></svg>
+        <h3 class="minor">checkpoint progression <span class="cm">// evaluation points; ★ = new best (checkpoint saved)</span></h3>
+        <div class="ckpts" id="ckpts" tabindex="0"><p class="cm">no training history for this model</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel rise" id="new" aria-labelledby="new-h">
+    <h2 class="tag" id="new-h">┌─ run.new</h2>
+    <div class="new-grid">
+      <div>
+        <h3 class="minor">1 · source video</h3>
+        <label>video <select id="video"></select></label>
+        <label class="btn file">[ upload video ]<input type="file" id="upload" accept="video/*,.mp4,.mkv,.webm,.mov,.avi,.gif"></label>
+        <p class="cm" id="probe">–</p>
+        <h3 class="minor">2 · preprocessing</h3>
+        <div class="form">
+          <label>start frame <input type="number" id="p-start" min="0" value="0"></label>
+          <label>frames <input type="number" id="p-frames" min="2" max="600" value="24"></label>
+          <label>width px <input type="number" id="p-width" min="8" max="256" value="32"></label>
+          <label>threshold <input type="number" id="p-threshold" min="0" max="255" value="128"></label>
+          <label>fps <input type="number" id="p-fps" min="0.1" step="any" placeholder="source"></label>
+          <label class="chk"><input type="checkbox" id="p-invert"> invert</label>
+        </div>
+        <button class="btn" id="b-preview">[ preview ]</button>
+      </div>
+      <div>
+        <div class="stage small">
+          <figure><figcaption>gray</figcaption><canvas id="pv-gray" width="1" height="1"></canvas></figure>
+          <figure><figcaption>binary <span class="cm">(training target)</span></figcaption><canvas id="pv-bin" width="1" height="1"></canvas></figure>
+        </div>
+        <label class="scrub">preview frame <input type="range" id="pv-scrub" min="0" max="0" value="0" disabled></label>
+        <span class="counter" id="pv-counter">–</span>
+        <p class="cm" id="pv-info"></p>
+      </div>
+      <div>
+        <h3 class="minor">3 · training</h3>
+        <label>preset <select id="preset"></select></label>
+        <p class="note" id="preset-note"></p>
+        <label>steps override <input type="number" id="t-steps" min="1" placeholder="preset default"></label>
+        <label>device <select id="device"><option value="cpu">cpu (local, 4 threads)</option><option value="gpu">gpu via gpuq (untested)</option></select></label>
+        <button class="btn" id="b-train">[ start training ]</button>
+        <div id="job" class="job" hidden>
+          <p class="tag small" id="job-name"></p>
+          <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="job-bar"><span></span></div>
+          <dl class="facts" id="job-facts"></dl>
+          <p class="error" id="job-err" role="alert"></p>
+          <button class="btn" id="b-cancel">[ cancel ]</button>
+          <button class="btn" id="b-resume">[ resume ]</button>
+          <button class="btn" id="b-open">[ open in player ]</button>
+          <pre class="log" id="job-log" tabindex="0" aria-label="log tail"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<footer class="foot cm">local only · fonts: Departure Mono, DM Mono (SIL OFL 1.1, see /static/fonts/) · NCA parameters are learned weights, not rules</footer>
+<script type="module" src="/static/app.js"></script>
+</body>
+</html>

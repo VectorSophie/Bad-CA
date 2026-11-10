@@ -1,0 +1,15 @@
+{"job": 78, "label": "c11-pilot-Dconst", "minutes": 3.55, "source": "gpuq"}
+{"job": 79, "label": "c11-pilot-Dcos", "minutes": 3.57, "source": "gpuq"}
+{"job": 80, "label": "c11-pilot-Tcos", "minutes": 3.53, "source": "gpuq"}
+{"job": 81, "label": "c11-probe-L120-big", "minutes": 2.28, "source": "gpuq"}
+{"job": 82, "label": "c11-L120-big (diverged NaN, cancelled)", "minutes": 10.92, "source": "gpuq"}
+{"job": "83 (orphaned)", "label": "c11-p1-main-D", "minutes": 25.0, "source": "train_s 1430.7 + compile/eval overhead, shared GPU"}
+{"job": "1 (2nd queue)", "label": "c11-p1-confirm-T (cancelled at ~1k steps, matrix reduction)", "minutes": 3.0, "source": "estimate from progress.json"}
+{"job": 7, "label": "c11-L240-big warm start (non-finite, cancelled)", "minutes": 11.0, "source": "gpuq"}
+{"job": "84 (orphaned)", "label": "c11-p1-main-T", "minutes": 47.5, "source": "train+compile 46.8 min + overhead"}
+{"job": "2nd-queue 1 (orphaned)", "label": "c11-p1-confirm-D", "minutes": 25.5, "source": "train+compile 25.0 min + overhead"}
+{"job": "2nd-queue 0 (orphaned)", "label": "c11-L120-big-r2", "minutes": 87.5, "source": "train+compile 86.7 min + overhead"}
+{"job": "3rd-queue 2", "label": "c11-p1-main-D3884", "minutes": 54.5, "source": "train+compile 53.9 min + overhead"}
+{"job": "3rd-queue 3", "label": "c11-p1-confirm-D3884", "minutes": 22.5, "source": "train+compile 22.0 min + overhead"}
+{"job": "3rd-queue 5", "label": "c11-L120-small3884", "minutes": 42.0, "source": "train+compile 41.6 min + overhead"}
+{"job": 8, "label": "c11-L240-big-scratch (repair)", "minutes": 27.22, "source": "gpuq"}
