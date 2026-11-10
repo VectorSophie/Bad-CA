@@ -1,0 +1,1 @@
+{"it": 10688, "err": 0.004787457912457912, "name": "B_s2", "seed": 2, "lamB": 2.0, "lamC": 0, "task": "main", "C": 16, "Fh": 64, "S": 4, "lr": 0.0002, "margin": 0.25, "start": "runs/c9/nca/nca_main_C/best_seed2.npz", "adam": "fresh moments (C9 saved none)", "rng": "none used"}

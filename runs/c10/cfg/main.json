@@ -1,0 +1,56 @@
+[
+ {
+  "name": "A_s0",
+  "seed": 0,
+  "lamB": 0,
+  "lamC": 0
+ },
+ {
+  "name": "B_s0",
+  "seed": 0,
+  "lamB": 2.0,
+  "lamC": 0
+ },
+ {
+  "name": "C_s0",
+  "seed": 0,
+  "lamB": 0,
+  "lamC": 0.05
+ },
+ {
+  "name": "A_s1",
+  "seed": 1,
+  "lamB": 0,
+  "lamC": 0
+ },
+ {
+  "name": "B_s1",
+  "seed": 1,
+  "lamB": 2.0,
+  "lamC": 0
+ },
+ {
+  "name": "C_s1",
+  "seed": 1,
+  "lamB": 0,
+  "lamC": 0.05
+ },
+ {
+  "name": "A_s2",
+  "seed": 2,
+  "lamB": 0,
+  "lamC": 0
+ },
+ {
+  "name": "B_s2",
+  "seed": 2,
+  "lamB": 2.0,
+  "lamC": 0
+ },
+ {
+  "name": "C_s2",
+  "seed": 2,
+  "lamB": 0,
+  "lamC": 0.05
+ }
+]

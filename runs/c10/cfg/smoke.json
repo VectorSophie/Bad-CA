@@ -1,0 +1,20 @@
+[
+ {
+  "name": "A_s0",
+  "seed": 0,
+  "lamB": 0,
+  "lamC": 0
+ },
+ {
+  "name": "B0.5_s0",
+  "seed": 0,
+  "lamB": 0.5,
+  "lamC": 0
+ },
+ {
+  "name": "B2_s0",
+  "seed": 0,
+  "lamB": 2,
+  "lamC": 0
+ }
+]

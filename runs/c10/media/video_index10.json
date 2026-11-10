@@ -1,0 +1,242 @@
+[
+ {
+  "name": "c10_main_1_FULL_4500-4555_orig_c9_A_B_C_best_s0",
+  "ok": true,
+  "frames": 56,
+  "fps_1x": 30.0,
+  "duration_1x": 1.8666666666666667,
+  "footer": [
+   "FULL autonomous replay from exports, src 4500-4555 (56 frames); 10,320 params each; same seed s0 start",
+   "C9 s0: err 0.0086 band 0.0084 lag1 0.83 lag4 0.96 | A s0: err 0.0035 band 0.0034 lag1 0.93 lag4 0.98 | B s0: err 0.0021 band 0.0019 lag1 0.96 lag4 0.99",
+   "C s0: err 0.0034 band 0.0033 lag1 0.93 lag4 0.98 | BC s0: err 0.0016 band 0.0014 lag1 0.96 lag4 0.99 | best seed of BC"
+  ]
+ },
+ {
+  "name": "c10_main_2_FULL_4500-4555_orig_c9_BC_diffs_best_s0",
+  "ok": true,
+  "frames": 56,
+  "fps_1x": 30.0,
+  "duration_1x": 1.8666666666666667,
+  "footer": [
+   "FULL autonomous replay from exports, src 4500-4555 (56 frames); 10,320 params each; same seed s0 start",
+   "diff: red = FN (original on, replay off), blue = FP (original off, replay on)",
+   "C9 s0: err 0.0086 band 0.0084 lag1 0.83 lag4 0.96 | BC s0: err 0.0016 band 0.0014 lag1 0.96 lag4 0.99",
+   "candidate BC: meets the pre-registered improvement criteria; best seed"
+  ]
+ },
+ {
+  "name": "c10_main_1_FULL_4500-4555_orig_c9_A_B_C_rep_s2",
+  "ok": true,
+  "frames": 56,
+  "fps_1x": 30.0,
+  "duration_1x": 1.8666666666666667,
+  "footer": [
+   "FULL autonomous replay from exports, src 4500-4555 (56 frames); 10,320 params each; same seed s2 start",
+   "C9 s2: err 0.0129 band 0.0121 lag1 0.73 lag4 0.91 | A s2: err 0.0068 band 0.0064 lag1 0.86 lag4 0.95 | B s2: err 0.0048 band 0.0041 lag1 0.90 lag4 0.97",
+   "C s2: err 0.0071 band 0.0067 lag1 0.86 lag4 0.95 | BC s2: err 0.0040 band 0.0035 lag1 0.91 lag4 0.98 | rep seed of BC"
+  ]
+ },
+ {
+  "name": "c10_main_2_FULL_4500-4555_orig_c9_BC_diffs_rep_s2",
+  "ok": true,
+  "frames": 56,
+  "fps_1x": 30.0,
+  "duration_1x": 1.8666666666666667,
+  "footer": [
+   "FULL autonomous replay from exports, src 4500-4555 (56 frames); 10,320 params each; same seed s2 start",
+   "diff: red = FN (original on, replay off), blue = FP (original off, replay on)",
+   "C9 s2: err 0.0129 band 0.0121 lag1 0.73 lag4 0.91 | BC s2: err 0.0040 band 0.0035 lag1 0.91 lag4 0.98",
+   "candidate BC: meets the pre-registered improvement criteria; rep seed"
+  ]
+ },
+ {
+  "name": "c10_main_1_FULL_4500-4555_orig_c9_A_B_C_worst_s1",
+  "ok": true,
+  "frames": 56,
+  "fps_1x": 30.0,
+  "duration_1x": 1.8666666666666667,
+  "footer": [
+   "FULL autonomous replay from exports, src 4500-4555 (56 frames); 10,320 params each; same seed s1 start",
+   "C9 s1: err 0.0197 band 0.0179 lag1 0.57 lag4 0.82 | A s1: err 0.0142 band 0.0128 lag1 0.67 lag4 0.88 | B s1: err 0.0122 band 0.0104 lag1 0.75 lag4 0.92",
+   "C s1: err 0.0140 band 0.0124 lag1 0.69 lag4 0.88 | BC s1: err 0.0110 band 0.0090 lag1 0.78 lag4 0.92 | worst seed of BC"
+  ]
+ },
+ {
+  "name": "c10_main_2_FULL_4500-4555_orig_c9_BC_diffs_worst_s1",
+  "ok": true,
+  "frames": 56,
+  "fps_1x": 30.0,
+  "duration_1x": 1.8666666666666667,
+  "footer": [
+   "FULL autonomous replay from exports, src 4500-4555 (56 frames); 10,320 params each; same seed s1 start",
+   "diff: red = FN (original on, replay off), blue = FP (original off, replay on)",
+   "C9 s1: err 0.0197 band 0.0179 lag1 0.57 lag4 0.82 | BC s1: err 0.0110 band 0.0090 lag1 0.78 lag4 0.92",
+   "candidate BC: meets the pre-registered improvement criteria; worst seed"
+  ]
+ },
+ {
+  "name": "c10_main_3_FULL_4500-4555_continuous_vs_binary_rep_s2",
+  "ok": true,
+  "frames": 56,
+  "fps_1x": 30.0,
+  "duration_1x": 1.8666666666666667,
+  "footer": [
+   "FULL autonomous replay from exports, src 4500-4555 (56 frames); 10,320 params each; same seed s2 start",
+   "continuous: gray = clip(v,0,1) (v is the raw visible state, not a probability); binary = v > 0.5",
+   "v range C9 [-0.23,1.33]  BC [-0.58,2.03]",
+   "candidate BC: meets the pre-registered improvement criteria"
+  ]
+ },
+ {
+  "name": "c10_main_4_ZOOM_FULL_4500-4555_rows4-31_cols0-27_orig_c9_BC_diffs_rep_s2",
+  "ok": true,
+  "frames": 56,
+  "fps_1x": 30.0,
+  "duration_1x": 1.866015625,
+  "footer": [
+   "ZOOM x12 (nearest) rows 4-31 cols 0-27 of the FULL replay",
+   "red = FN, blue = FP",
+   "candidate BC: meets the pre-registered improvement criteria"
+  ]
+ },
+ {
+  "name": "c10_main_4b_ZOOM_FULL_4500-4555_orig_c9_A_B_C_rep_s2",
+  "ok": true,
+  "frames": 56,
+  "fps_1x": 30.0,
+  "duration_1x": 1.866015625,
+  "footer": [
+   "ZOOM x12 rows 4-31 cols 0-27, all arms, same seed s2"
+  ]
+ },
+ {
+  "name": "main_selection",
+  "candidate": "BC",
+  "qualifies": true,
+  "roles": {
+   "best": 0,
+   "rep": 2,
+   "worst": 1
+  }
+ },
+ {
+  "name": "c10_confirm_1_FULL_1800-1859_orig_c9_A_B_C_best_s1",
+  "ok": true,
+  "frames": 60,
+  "fps_1x": 30.0,
+  "duration_1x": 2.0,
+  "footer": [
+   "FULL autonomous replay from exports, src 1800-1859 (60 frames); 10,320 params each; same seed s1 start",
+   "C9 s1: err 0.0255 band 0.0249 lag1 0.60 lag4 0.87 | A s1: err 0.0158 band 0.0154 lag1 0.71 lag4 0.91 | B s1: err 0.0139 band 0.0132 lag1 0.76 lag4 0.93",
+   "C s1: err 0.0156 band 0.0152 lag1 0.72 lag4 0.91 | BC s1: err 0.0130 band 0.0124 lag1 0.77 lag4 0.93 | best seed of BC"
+  ]
+ },
+ {
+  "name": "c10_confirm_2_FULL_1800-1859_orig_c9_BC_diffs_best_s1",
+  "ok": true,
+  "frames": 60,
+  "fps_1x": 30.0,
+  "duration_1x": 2.0,
+  "footer": [
+   "FULL autonomous replay from exports, src 1800-1859 (60 frames); 10,320 params each; same seed s1 start",
+   "diff: red = FN (original on, replay off), blue = FP (original off, replay on)",
+   "C9 s1: err 0.0255 band 0.0249 lag1 0.60 lag4 0.87 | BC s1: err 0.0130 band 0.0124 lag1 0.77 lag4 0.93",
+   "candidate BC: meets the pre-registered improvement criteria; best seed"
+  ]
+ },
+ {
+  "name": "c10_confirm_1_FULL_1800-1859_orig_c9_A_B_C_rep_s0",
+  "ok": true,
+  "frames": 60,
+  "fps_1x": 30.0,
+  "duration_1x": 2.0,
+  "footer": [
+   "FULL autonomous replay from exports, src 1800-1859 (60 frames); 10,320 params each; same seed s0 start",
+   "C9 s0: err 0.0266 band 0.0261 lag1 0.58 lag4 0.87 | A s0: err 0.0174 band 0.0170 lag1 0.69 lag4 0.90 | B s0: err 0.0143 band 0.0135 lag1 0.75 lag4 0.92",
+   "C s0: err 0.0172 band 0.0168 lag1 0.69 lag4 0.90 | BC s0: err 0.0134 band 0.0127 lag1 0.77 lag4 0.93 | rep seed of BC"
+  ]
+ },
+ {
+  "name": "c10_confirm_2_FULL_1800-1859_orig_c9_BC_diffs_rep_s0",
+  "ok": true,
+  "frames": 60,
+  "fps_1x": 30.0,
+  "duration_1x": 2.0,
+  "footer": [
+   "FULL autonomous replay from exports, src 1800-1859 (60 frames); 10,320 params each; same seed s0 start",
+   "diff: red = FN (original on, replay off), blue = FP (original off, replay on)",
+   "C9 s0: err 0.0266 band 0.0261 lag1 0.58 lag4 0.87 | BC s0: err 0.0134 band 0.0127 lag1 0.77 lag4 0.93",
+   "candidate BC: meets the pre-registered improvement criteria; rep seed"
+  ]
+ },
+ {
+  "name": "c10_confirm_1_FULL_1800-1859_orig_c9_A_B_C_worst_s2",
+  "ok": true,
+  "frames": 60,
+  "fps_1x": 30.0,
+  "duration_1x": 2.0,
+  "footer": [
+   "FULL autonomous replay from exports, src 1800-1859 (60 frames); 10,320 params each; same seed s2 start",
+   "C9 s2: err 0.0286 band 0.0281 lag1 0.54 lag4 0.85 | A s2: err 0.0194 band 0.0190 lag1 0.66 lag4 0.89 | B s2: err 0.0160 band 0.0154 lag1 0.70 lag4 0.90",
+   "C s2: err 0.0191 band 0.0187 lag1 0.66 lag4 0.89 | BC s2: err 0.0147 band 0.0141 lag1 0.73 lag4 0.91 | worst seed of BC"
+  ]
+ },
+ {
+  "name": "c10_confirm_2_FULL_1800-1859_orig_c9_BC_diffs_worst_s2",
+  "ok": true,
+  "frames": 60,
+  "fps_1x": 30.0,
+  "duration_1x": 2.0,
+  "footer": [
+   "FULL autonomous replay from exports, src 1800-1859 (60 frames); 10,320 params each; same seed s2 start",
+   "diff: red = FN (original on, replay off), blue = FP (original off, replay on)",
+   "C9 s2: err 0.0286 band 0.0281 lag1 0.54 lag4 0.85 | BC s2: err 0.0147 band 0.0141 lag1 0.73 lag4 0.91",
+   "candidate BC: meets the pre-registered improvement criteria; worst seed"
+  ]
+ },
+ {
+  "name": "c10_confirm_3_FULL_1800-1859_continuous_vs_binary_rep_s0",
+  "ok": true,
+  "frames": 60,
+  "fps_1x": 30.0,
+  "duration_1x": 2.0,
+  "footer": [
+   "FULL autonomous replay from exports, src 1800-1859 (60 frames); 10,320 params each; same seed s0 start",
+   "continuous: gray = clip(v,0,1) (v is the raw visible state, not a probability); binary = v > 0.5",
+   "v range C9 [-0.21,1.62]  BC [-0.32,1.94]",
+   "candidate BC: meets the pre-registered improvement criteria"
+  ]
+ },
+ {
+  "name": "c10_confirm_4_ZOOM_FULL_1800-1859_rows0-27_cols20-47_orig_c9_BC_diffs_rep_s0",
+  "ok": true,
+  "frames": 60,
+  "fps_1x": 30.0,
+  "duration_1x": 2.0,
+  "footer": [
+   "ZOOM x12 (nearest) rows 0-27 cols 20-47 of the FULL replay",
+   "red = FN, blue = FP",
+   "candidate BC: meets the pre-registered improvement criteria"
+  ]
+ },
+ {
+  "name": "c10_confirm_4b_ZOOM_FULL_1800-1859_orig_c9_A_B_C_rep_s0",
+  "ok": true,
+  "frames": 60,
+  "fps_1x": 30.0,
+  "duration_1x": 2.0,
+  "footer": [
+   "ZOOM x12 rows 0-27 cols 20-47, all arms, same seed s0"
+  ]
+ },
+ {
+  "name": "confirm_selection",
+  "candidate": "BC",
+  "qualifies": true,
+  "roles": {
+   "best": 1,
+   "rep": 0,
+   "worst": 2
+  }
+ }
+]

@@ -29,7 +29,7 @@ def diff_rgb(P, F):
 def compose(panels, footer, frame_label, scale=6):
     """panels: list of (title, (T,H,W) uint8 binary | (T,H,W,3) rgb). frame_label(t) -> str. Returns list of RGB arrays."""
     T = len(panels[0][1]); H, W = panels[0][1].shape[1:3]; pw, ph = W * scale, H * scale
-    ft, fs = _font(max(12, scale * 2 + 2)), _font(max(11, scale * 2))
+    ft, fs = _font(min(16, max(12, scale * 2 + 2))), _font(min(14, max(11, scale * 2)))   # capped: x12 zooms overflowed
     head, foot, gap = ft.size + fs.size + 14, (fs.size + 6) * len(footer) + 8, 8
     Wt = len(panels) * pw + (len(panels) + 1) * gap; Ht = head + ph + foot
     Wt += Wt % 2; Ht += Ht % 2                                             # yuv420p needs even sizes

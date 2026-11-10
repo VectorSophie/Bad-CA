@@ -8,3 +8,6 @@ runs/exp11b/
 runs/exp11b.log
 # Campaign 06 CNF files (493 MB): regenerable from the frozen snapshot; SHA-256 in *.meta.json
 runs/c6/cnf/*.cnf
+
+# Campaign 10 replays (27 MB): regenerated deterministically from runs/c10/exports by experiments/exp38_eval10.py
+runs/c10/replays/

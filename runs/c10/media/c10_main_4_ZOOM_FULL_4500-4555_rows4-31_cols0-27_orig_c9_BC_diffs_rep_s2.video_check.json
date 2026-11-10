@@ -1,0 +1,46 @@
+[
+ {
+  "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c10/media/c10_main_4_ZOOM_FULL_4500-4555_rows4-31_cols0-27_orig_c9_BC_diffs_rep_s2_1x.mp4",
+  "decoded_frames": 56,
+  "expected_frames": 56,
+  "fps": 30.0,
+  "expected_fps": 30,
+  "duration_s": 1.866015625,
+  "expected_duration_s": 1.867,
+  "codec": "h264",
+  "size": [
+   1728,
+   448
+  ],
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c10/media/c10_main_4_ZOOM_FULL_4500-4555_rows4-31_cols0-27_orig_c9_BC_diffs_rep_s2_1x.gif",
+  "decoded_frames": 56,
+  "expected_frames": 56,
+  "frame_ms": 30,
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c10/media/c10_main_4_ZOOM_FULL_4500-4555_rows4-31_cols0-27_orig_c9_BC_diffs_rep_s2_0.25x.mp4",
+  "decoded_frames": 56,
+  "expected_frames": 56,
+  "fps": 7.5,
+  "expected_fps": 7.5,
+  "duration_s": 7.466015625,
+  "expected_duration_s": 7.467,
+  "codec": "h264",
+  "size": [
+   1728,
+   448
+  ],
+  "ok": true
+ },
+ {
+  "path": "/home/jackb/workspace/CA-universal/experiments/../runs/c10/media/c10_main_4_ZOOM_FULL_4500-4555_rows4-31_cols0-27_orig_c9_BC_diffs_rep_s2_0.25x.gif",
+  "decoded_frames": 56,
+  "expected_frames": 56,
+  "frame_ms": 130,
+  "ok": true
+ }
+]

@@ -2,7 +2,7 @@
 includes threads) plus wall and peak RSS to runs/c9/cpu_ledger.jsonl. Limits: 1 BLAS/OMP thread,
 prlimit --as 16 GB unless the command sets its own. usage: c7_meter.py KIND [--wall S] -- cmd args..."""
 import json, os, signal, subprocess, sys, time
-LEDGER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runs", "c9", "cpu_ledger.jsonl")
+LEDGER = os.environ.get("CA_LEDGER") or os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "runs", "c9", "cpu_ledger.jsonl")  # Campaign 10 sets CA_LEDGER
 
 
 def log(rec):

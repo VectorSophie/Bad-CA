@@ -1,0 +1,1 @@
+{"err": 0.017155131826741995, "it": 9626, "t": 841.3, "name": "C_s0", "seed": 0, "lamB": 0, "lamC": 0.05, "task": "confirm", "C": 16, "Fh": 64, "S": 4, "lr": 0.0002, "margin": 0.25, "start": "runs/c9/nca/nca_confirm_C/best_seed0.npz", "adam": "fresh moments (C9 saved none)", "rng": "none used"}

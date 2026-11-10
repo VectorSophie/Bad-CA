@@ -1,0 +1,92 @@
+[
+ {
+  "name": "A_s0",
+  "seed": 0,
+  "lamB": 0,
+  "lamC": 0
+ },
+ {
+  "name": "B0.5_s0",
+  "seed": 0,
+  "lamB": 0.5,
+  "lamC": 0
+ },
+ {
+  "name": "B2_s0",
+  "seed": 0,
+  "lamB": 2,
+  "lamC": 0
+ },
+ {
+  "name": "C0.05_s0",
+  "seed": 0,
+  "lamB": 0,
+  "lamC": 0.05
+ },
+ {
+  "name": "C0.2_s0",
+  "seed": 0,
+  "lamB": 0,
+  "lamC": 0.2
+ },
+ {
+  "name": "A_s1",
+  "seed": 1,
+  "lamB": 0,
+  "lamC": 0
+ },
+ {
+  "name": "B0.5_s1",
+  "seed": 1,
+  "lamB": 0.5,
+  "lamC": 0
+ },
+ {
+  "name": "B2_s1",
+  "seed": 1,
+  "lamB": 2,
+  "lamC": 0
+ },
+ {
+  "name": "C0.05_s1",
+  "seed": 1,
+  "lamB": 0,
+  "lamC": 0.05
+ },
+ {
+  "name": "C0.2_s1",
+  "seed": 1,
+  "lamB": 0,
+  "lamC": 0.2
+ },
+ {
+  "name": "A_s2",
+  "seed": 2,
+  "lamB": 0,
+  "lamC": 0
+ },
+ {
+  "name": "B0.5_s2",
+  "seed": 2,
+  "lamB": 0.5,
+  "lamC": 0
+ },
+ {
+  "name": "B2_s2",
+  "seed": 2,
+  "lamB": 2,
+  "lamC": 0
+ },
+ {
+  "name": "C0.05_s2",
+  "seed": 2,
+  "lamB": 0,
+  "lamC": 0.05
+ },
+ {
+  "name": "C0.2_s2",
+  "seed": 2,
+  "lamB": 0,
+  "lamC": 0.2
+ }
+]
