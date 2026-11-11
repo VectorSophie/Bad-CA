@@ -1,0 +1,61 @@
+{
+ "task": "4500:56",
+ "abstraction": "kmeans",
+ "k": 1,
+ "leaves": 64,
+ "balance": 0.0,
+ "collision_rate": 0.8159511784511785,
+ "distinct_inputs": 6517,
+ "onestep_match": 0.9945102062289563,
+ "eval": {
+  "err": 0.1827756734006734,
+  "hold_err": 0.1827756734006734,
+  "thirds": [
+   0.10648148148148148,
+   0.22810570987654322,
+   0.2179783950617284
+  ],
+  "worst16": 0.23596643518518517,
+  "lag1_f1": 0.0,
+  "lag4_f1": 0.0,
+  "lag4_mass": 0.0,
+  "thin": {
+   "thin_fg_px": 911,
+   "thin_fg_recall": 0.3611416026344676,
+   "thin_bg_px": 434,
+   "thin_bg_recall": 0.4815668202764977
+  },
+  "specks": [
+   0,
+   0
+  ],
+  "holes": [
+   0,
+   19
+  ],
+  "spurious_blips": 0,
+  "exact": false,
+  "teacher_agreement_err": 0.18338594276094275
+ },
+ "complexity": {
+  "programs": 1,
+  "full_programs": 1,
+  "derived_programs": 0,
+  "edits": 0,
+  "phases": 1,
+  "distinct_programs_used": 1,
+  "reused_programs": 0,
+  "rules": 5,
+  "conditions": 29,
+  "constants": 39,
+  "hidden_bits": 1,
+  "rules_json_bytes": 633,
+  "file_bytes": 369,
+  "first_frame_bytes": 216,
+  "h0_bytes": 216
+ },
+ "teacher_vs_original_err": 0.013026094276094276,
+ "h0_from": "abstracted teacher state at the window start (stored)",
+ "cpu_s": 82.0,
+ "file": "runs/readable_rules/pilot/extract_4500_56_kmeans_k1/rule.rule.json"
+}

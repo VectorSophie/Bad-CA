@@ -3,9 +3,23 @@
 // external schedule chooses the program per frame. step() can also return, per cell, the firing rule index and features
 // (the UI cell inspector uses this exact path, so the explanation is the computation itself).
 export function parseRules(o) {
-  if (!(o.format === "ca-universal/dlrule-v1" || (o.format === "ca-universal/rule-v1" && Array.isArray(o.programs)))) throw new Error("not dlrule-v1");
+  if (!(o.format === "ca-universal/dlrule-v1" || o.format === "ca-universal/dlrule-v2" || (o.format === "ca-universal/rule-v1" && Array.isArray(o.programs)))) throw new Error("not dlrule-v1/v2");
+  o = { ...o, programs: resolvePrograms(o.programs), programsStored: o.programs };
   const { H, W, k } = o, hex = (s) => Uint8Array.from(s.match(/../g) || [], (b) => parseInt(b, 16)), bits = (u8, n) => { const a = new Uint8Array(n); for (let i = 0; i < n; i++) a[i] = (u8[i >> 3] >> (i & 7)) & 1; return a; };
   return { ...o, first: bits(hex(o.first), H * W), h0: o.h0 ? bits(hex(o.h0), k * H * W) : new Uint8Array(k * H * W) };
+}
+// dlrule-v2 derived programs {base, edits:[{op:set|insert|delete, index, rule}]} -> concrete {rules} (bases come earlier)
+export function resolvePrograms(programs) {
+  const out = [];
+  for (const p of programs) {
+    if (p.base === undefined) { out.push(p); continue; }
+    const rs = out[p.base].rules.map((r) => ({ ...r }));
+    for (const e of p.edits || []) {
+      if (e.op === "set") rs[e.index] = e.rule; else if (e.op === "insert") rs.splice(e.index, 0, e.rule); else if (e.op === "delete") rs.splice(e.index, 1); else throw new Error("unknown edit op " + e.op);
+    }
+    out.push({ rules: rs, base: p.base, edits: p.edits });
+  }
+  return out;
 }
 export function features(m, v, h, i) {
   const { H, W, k } = m, y = Math.floor(i / W), x = i % W, at = (a, yy, xx) => (yy < 0 || yy >= H || xx < 0 || xx >= W ? 0 : a[yy * W + xx]);
@@ -16,6 +30,7 @@ export function features(m, v, h, i) {
   f.n8 = n8; f.r2 = r2;
   f.N = at(v, y - 1, x - 1) + at(v, y - 1, x) + at(v, y - 1, x + 1); f.S = at(v, y + 1, x - 1) + at(v, y + 1, x) + at(v, y + 1, x + 1);
   f.W = at(v, y - 1, x - 1) + at(v, y, x - 1) + at(v, y + 1, x - 1); f.E = at(v, y - 1, x + 1) + at(v, y, x + 1) + at(v, y + 1, x + 1);
+  f.u = at(v, y - 1, x); f.d = at(v, y + 1, x); f.l = at(v, y, x - 1); f.r = at(v, y, x + 1);   // dlrule-v2 single neighbours
   for (let b = 0; b < k; b++) { const hb = h.subarray(b * H * W, (b + 1) * H * W); let s = 0; for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) if (dy || dx) s += at(hb, y + dy, x + dx); f["m" + b] = s; }
   return f;
 }

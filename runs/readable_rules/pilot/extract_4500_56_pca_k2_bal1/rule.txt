@@ -1,0 +1,65 @@
+R0: if m0 >= 5 and m1 <= 0 and n8 <= 0 -> v=0, h=01
+R1: if N >= 3 and m0 <= 0 and m1 <= 0 and n8 >= 3 -> v=1, h=00
+R2: if m0 >= 8 and m1 >= 8 -> v=0, h=11
+R3: if m0 <= 0 and m1 >= 1 and m1 <= 3 and n8 >= 3 and u >= 1 -> v=1, h=00
+R4: if h1 == 0 and m0 >= 6 and m1 >= 1 and m1 <= 3 and n8 <= 2 and r2 <= 0 -> v=0, h=01
+R5: if m0 <= 4 and m1 >= 4 and m1 <= 7 and n8 >= 6 -> v=1, h=10
+R6: if m0 <= 4 and m1 >= 7 and n8 <= 0 -> v=0, h=10
+R7: if m0 >= 8 and m1 >= 5 and m1 <= 7 -> v=0, h=11
+R8: if E >= 3 and m0 <= 2 and m1 >= 8 and n8 >= 6 and v == 1 -> v=1, h=10
+R9: if m0 == 5 and m1 >= 1 and m1 <= 4 and n8 <= 2 -> v=0, h=11
+R10: if m0 <= 2 and m1 <= 6 and n8 <= 0 -> v=0, h=00
+R11: if h1 == 1 and m0 >= 6 and m1 >= 1 and m1 <= 4 and n8 <= 2 and r2 <= 0 -> v=0, h=01
+R12: if S <= 0 and m0 >= 5 and m0 <= 7 and m1 >= 5 and m1 <= 7 -> v=0, h=11
+R13: if m0 >= 3 and m0 <= 4 and m1 <= 4 and n8 <= 0 -> v=0, h=00
+R14: if m0 <= 4 and m1 >= 7 and n8 >= 1 and n8 <= 2 -> v=0, h=10
+R15: if E <= 0 and d <= 0 and m0 >= 5 and m1 <= 0 and n8 >= 1 and v == 0 -> v=0, h=01
+R16: if m0 <= 2 and m1 >= 8 and n8 >= 3 and v == 0 -> v=1, h=10
+R17: if S <= 0 and m0 >= 5 and m0 <= 6 and m1 >= 8 -> v=0, h=10
+R18: if S >= 1 and h0 == 1 and m0 >= 5 and m0 <= 7 and m1 >= 5 and n8 <= 5 -> v=0, h=11
+R19: if m0 >= 6 and m1 >= 1 and m1 <= 4 and n8 <= 2 and r2 >= 1 -> v=0, h=11
+R20: if h1 == 0 and m0 >= 6 and m1 == 4 and n8 <= 2 and r2 <= 0 -> v=0, h=11
+R21: if h1 == 1 and m0 <= 4 and m1 >= 4 and m1 <= 7 and n8 >= 3 and n8 <= 5 and v == 1 -> v=0, h=10
+R22: if m0 >= 1 and m0 <= 3 and m1 <= 3 and n8 >= 6 and v == 1 -> v=1, h=00
+R23: if h1 == 0 and m0 >= 1 and m0 <= 3 and m1 <= 3 and n8 >= 3 and n8 <= 5 and v == 1 -> v=0, h=00
+R24: if S <= 0 and m0 == 7 and m1 >= 8 -> v=0, h=11
+R25: if h0 == 0 and h1 == 1 and m0 <= 4 and m1 >= 4 and m1 <= 7 and n8 == 3 and v == 0 -> v=1, h=10
+R26: if m0 <= 2 and m1 >= 8 and n8 == 5 and v == 1 -> v=0, h=10
+R27: if m0 >= 5 and m1 <= 0 and n8 >= 1 and n8 <= 6 and v == 1 -> v=0, h=01
+R28: if h1 == 0 and m0 >= 1 and m0 <= 4 and m1 <= 6 and n8 >= 1 and n8 <= 2 -> v=0, h=01
+R29: if E >= 1 and m0 >= 5 and m1 <= 0 and n8 >= 1 and v == 0 -> v=1, h=01
+R30: if m0 >= 3 and m0 <= 4 and m1 >= 8 and n8 >= 6 -> v=1, h=11
+R31: if h1 == 0 and m0 <= 0 and m1 >= 4 and m1 <= 7 and n8 >= 3 and n8 <= 5 -> v=1, h=00
+R32: if N <= 2 and m0 <= 0 and m1 <= 0 and n8 >= 6 and v == 1 -> v=1, h=00
+R33: if m0 >= 3 and m0 <= 4 and m1 >= 5 and m1 <= 6 and n8 <= 0 -> v=0, h=10
+R34: if l <= 0 and m0 >= 3 and m0 <= 4 and m1 >= 8 and n8 >= 3 and n8 <= 5 -> v=0, h=10
+R35: if m0 == 4 and m1 <= 3 and n8 >= 3 and n8 <= 4 -> v=0, h=00
+R36: if h0 == 0 and h1 == 1 and m0 <= 4 and m1 <= 6 and n8 >= 1 and n8 <= 2 and v == 0 -> v=0, h=00
+R37: if m0 <= 2 and m1 >= 8 and n8 >= 3 and n8 <= 4 and v == 1 -> v=0, h=10
+R38: if N <= 2 and m0 <= 0 and m1 <= 0 and n8 >= 3 and n8 <= 5 and v == 1 -> v=0, h=00
+R39: if h1 == 0 and m0 <= 0 and m1 <= 6 and n8 >= 1 and n8 <= 2 -> v=1, h=00
+R40: if m0 >= 1 and m0 <= 3 and m1 <= 0 and n8 >= 3 and v == 0 -> v=1, h=00
+R41: if h0 == 0 and h1 == 1 and m0 <= 4 and m1 >= 4 and m1 <= 7 and n8 >= 4 and n8 <= 5 and v == 0 -> v=1, h=10
+R42: if S >= 1 and m0 >= 5 and m0 <= 7 and m1 >= 5 and n8 >= 6 -> v=1, h=11
+R43: if m0 == 4 and m1 <= 3 and n8 >= 5 -> v=1, h=01
+R44: if N <= 2 and m0 <= 0 and m1 <= 0 and n8 >= 3 and v == 0 -> v=1, h=00
+R45: if E <= 2 and m0 <= 2 and m1 >= 8 and n8 >= 6 and v == 1 -> v=0, h=10
+R46: if m0 >= 5 and m1 <= 0 and n8 >= 7 and v == 1 -> v=1, h=01
+R47: if m0 >= 5 and m1 >= 1 and m1 <= 4 and n8 >= 3 and n8 <= 6 and v == 0 -> v=0, h=11
+R48: if S >= 1 and h0 == 0 and m0 >= 5 and m0 <= 7 and m1 >= 5 and n8 <= 5 -> v=0, h=10
+R49: if h0 == 1 and h1 == 0 and m0 >= 5 and m1 >= 1 and m1 <= 4 and n8 >= 3 and n8 <= 6 and v == 1 -> v=0, h=01
+R50: if h1 == 0 and m0 <= 0 and m1 >= 1 and m1 <= 3 and n8 >= 3 and u <= 0 and v == 0 -> v=1, h=00
+R51: if m0 >= 1 and m0 <= 3 and m1 >= 1 and m1 <= 3 and n8 >= 3 and v == 0 -> v=1, h=00
+R52: if E <= 0 and d >= 1 and m0 >= 5 and m1 <= 0 and n8 >= 1 and v == 0 -> v=1, h=01
+R53: if m0 >= 5 and m1 >= 1 and m1 <= 4 and n8 >= 7 -> v=1, h=11
+R54: if h1 == 0 and m0 <= 0 and m1 >= 1 and m1 <= 3 and n8 >= 3 and u <= 0 and v == 1 -> v=0, h=00
+R55: if l >= 1 and m0 >= 3 and m0 <= 4 and m1 >= 8 and n8 >= 3 and n8 <= 5 -> v=1, h=10
+R56: if h0 == 0 and h1 == 1 and m0 <= 4 and m1 <= 6 and n8 >= 1 and n8 <= 2 and v == 1 -> v=0, h=10
+R57: if h1 == 1 and m0 <= 0 and m1 >= 1 and m1 <= 3 and n8 >= 3 and u <= 0 -> v=1, h=10
+R58: if h1 == 0 and m0 >= 1 and m0 <= 4 and m1 >= 4 and m1 <= 7 and n8 >= 3 and n8 <= 5 -> v=1, h=10
+R59: if h0 == 1 and h1 == 1 and m0 <= 4 and m1 <= 6 and n8 >= 1 and n8 <= 2 -> v=0, h=01
+R60: if h1 == 1 and m0 >= 5 and m1 >= 1 and m1 <= 4 and n8 >= 3 and n8 <= 6 and v == 1 -> v=0, h=11
+R61: if h1 == 1 and m0 >= 1 and m0 <= 3 and m1 <= 3 and n8 >= 3 and n8 <= 5 and v == 1 -> v=0, h=10
+R62: if h0 == 1 and h1 == 1 and m0 <= 4 and m1 >= 4 and m1 <= 7 and n8 >= 3 and n8 <= 5 and v == 0 -> v=1, h=11
+R63: if h0 == 0 and h1 == 0 and m0 >= 5 and m1 >= 1 and m1 <= 4 and n8 >= 3 and n8 <= 6 and v == 1 -> v=1, h=01
+default: keep state

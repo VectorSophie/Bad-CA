@@ -1,0 +1,20 @@
+# program 0
+R0: if u >= 1 and W == 3 -> v=1, h=1
+R1: if h0 == 0 and N <= 2 -> v=0, h=1
+R2: if m0 == 0 -> v=1, h=0
+default: keep state
+
+# program 1 (= program 0 + 3 edits)
+R0: if W == 3 -> v=1, h=1
+default: keep state
+
+# program 2 (= program 1 + 2 edits)
+R0: if r2 <= 7 -> v=0, h=0
+R1: if h0 == 0 -> v=0, h=1
+default: keep state
+
+# program 3 (= program 2 + 3 edits)
+R0: if S == 3 -> v=1, h=1
+R1: if d >= 1 and r == 1 and u <= 0 -> v=1, h=0
+R2: if m0 <= 3 and v == 1 -> v=0, h=1
+default: keep state

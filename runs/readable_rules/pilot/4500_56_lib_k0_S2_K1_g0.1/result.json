@@ -1,0 +1,248 @@
+{
+ "task": "4500:56",
+ "options": {
+  "start": "library",
+  "k": 0,
+  "S": 2,
+  "K": 1,
+  "seg": "uniform",
+  "evals": 2000,
+  "gamma": 0.1,
+  "max_rules": 8,
+  "max_conds": 3,
+  "teacher": null
+ },
+ "results": [
+  {
+   "seed": 0,
+   "file": "runs/readable_rules/pilot/4500_56_lib_k0_S2_K1_g0.1/s0.rule.json",
+   "eval": {
+    "err": 0.12487373737373737,
+    "hold_err": 0.1827756734006734,
+    "thirds": [
+     0.09244030214424952,
+     0.14136445473251028,
+     0.14261831275720166
+    ],
+    "worst16": 0.1472800925925926,
+    "lag1_f1": 0.04860972990174629,
+    "lag4_f1": 0.058982346832814114,
+    "lag4_mass": 0.08025650991061019,
+    "thin": {
+     "thin_fg_px": 911,
+     "thin_fg_recall": 0.33040614709110866,
+     "thin_bg_px": 434,
+     "thin_bg_recall": 0.4400921658986175
+    },
+    "specks": [
+     0,
+     0
+    ],
+    "holes": [
+     0,
+     19
+    ],
+    "spurious_blips": 0,
+    "exact": false
+   },
+   "complexity": {
+    "programs": 1,
+    "full_programs": 1,
+    "derived_programs": 0,
+    "edits": 0,
+    "phases": 1,
+    "distinct_programs_used": 1,
+    "reused_programs": 0,
+    "rules": 2,
+    "conditions": 4,
+    "constants": 8,
+    "hidden_bits": 0,
+    "rules_json_bytes": 197,
+    "file_bytes": 220,
+    "first_frame_bytes": 216,
+    "h0_bytes": 0
+   },
+   "phases": [
+    {
+     "phase": 0,
+     "start": 1,
+     "end": 56,
+     "start_from": "majority",
+     "start_scores": {
+      "hold": 0.2327756734006734,
+      "life_b3s23": 0.27688147158770826,
+      "majority": 0.23117548665622673,
+      "grow": 0.6889670572651405,
+      "erode": 0.28088124631874534,
+      "shift_from_u": 0.26510669387735863,
+      "shift_from_d": 0.290633380198602,
+      "shift_from_l": 0.3205363422953334,
+      "shift_from_r": 0.30214321284250206
+     },
+     "err": 0.12487373737373737,
+     "motion": 0.058982346832814114,
+     "evals": 2000,
+     "seconds": 23.2,
+     "rules": 2,
+     "conditions": 4
+    }
+   ],
+   "cpu_s": 23.2,
+   "wall_s": 23.2
+  },
+  {
+   "seed": 1,
+   "file": "runs/readable_rules/pilot/4500_56_lib_k0_S2_K1_g0.1/s1.rule.json",
+   "eval": {
+    "err": 0.11675084175084174,
+    "hold_err": 0.1827756734006734,
+    "thirds": [
+     0.09046052631578948,
+     0.11979166666666667,
+     0.14146090534979425
+    ],
+    "worst16": 0.1431568287037037,
+    "lag1_f1": 0.09681881051175656,
+    "lag4_f1": 0.141946868838981,
+    "lag4_mass": 0.2726389428682472,
+    "thin": {
+     "thin_fg_px": 911,
+     "thin_fg_recall": 0.29308452250274425,
+     "thin_bg_px": 434,
+     "thin_bg_recall": 0.5230414746543779
+    },
+    "specks": [
+     32,
+     0
+    ],
+    "holes": [
+     5,
+     19
+    ],
+    "spurious_blips": 241,
+    "exact": false
+   },
+   "complexity": {
+    "programs": 1,
+    "full_programs": 1,
+    "derived_programs": 0,
+    "edits": 0,
+    "phases": 1,
+    "distinct_programs_used": 1,
+    "reused_programs": 0,
+    "rules": 3,
+    "conditions": 7,
+    "constants": 13,
+    "hidden_bits": 0,
+    "rules_json_bytes": 267,
+    "file_bytes": 233,
+    "first_frame_bytes": 216,
+    "h0_bytes": 0
+   },
+   "phases": [
+    {
+     "phase": 0,
+     "start": 1,
+     "end": 56,
+     "start_from": "majority",
+     "start_scores": {
+      "hold": 0.2327756734006734,
+      "life_b3s23": 0.27688147158770826,
+      "majority": 0.23117548665622673,
+      "grow": 0.6889670572651405,
+      "erode": 0.28088124631874534,
+      "shift_from_u": 0.26510669387735863,
+      "shift_from_d": 0.290633380198602,
+      "shift_from_l": 0.3205363422953334,
+      "shift_from_r": 0.30214321284250206
+     },
+     "err": 0.11675084175084174,
+     "motion": 0.141946868838981,
+     "evals": 2000,
+     "seconds": 24.7,
+     "rules": 3,
+     "conditions": 7
+    }
+   ],
+   "cpu_s": 24.7,
+   "wall_s": 24.7
+  },
+  {
+   "seed": 2,
+   "file": "runs/readable_rules/pilot/4500_56_lib_k0_S2_K1_g0.1/s2.rule.json",
+   "eval": {
+    "err": 0.13910984848484848,
+    "hold_err": 0.1827756734006734,
+    "thirds": [
+     0.08698830409356725,
+     0.1680491255144033,
+     0.16518775720164608
+    ],
+    "worst16": 0.17578125,
+    "lag1_f1": 0.11622464898595945,
+    "lag4_f1": 0.18425485457971547,
+    "lag4_mass": 0.22502914885347844,
+    "thin": {
+     "thin_fg_px": 911,
+     "thin_fg_recall": 0.3611416026344676,
+     "thin_bg_px": 434,
+     "thin_bg_recall": 0.4930875576036866
+    },
+    "specks": [
+     103,
+     0
+    ],
+    "holes": [
+     163,
+     19
+    ],
+    "spurious_blips": 96,
+    "exact": false
+   },
+   "complexity": {
+    "programs": 1,
+    "full_programs": 1,
+    "derived_programs": 0,
+    "edits": 0,
+    "phases": 1,
+    "distinct_programs_used": 1,
+    "reused_programs": 0,
+    "rules": 3,
+    "conditions": 6,
+    "constants": 12,
+    "hidden_bits": 0,
+    "rules_json_bytes": 254,
+    "file_bytes": 234,
+    "first_frame_bytes": 216,
+    "h0_bytes": 0
+   },
+   "phases": [
+    {
+     "phase": 0,
+     "start": 1,
+     "end": 56,
+     "start_from": "majority",
+     "start_scores": {
+      "hold": 0.2327756734006734,
+      "life_b3s23": 0.27688147158770826,
+      "majority": 0.23117548665622673,
+      "grow": 0.6889670572651405,
+      "erode": 0.28088124631874534,
+      "shift_from_u": 0.26510669387735863,
+      "shift_from_d": 0.290633380198602,
+      "shift_from_l": 0.3205363422953334,
+      "shift_from_r": 0.30214321284250206
+     },
+     "err": 0.13910984848484848,
+     "motion": 0.18425485457971547,
+     "evals": 2000,
+     "seconds": 24.3,
+     "rules": 3,
+     "conditions": 6
+    }
+   ],
+   "cpu_s": 24.3,
+   "wall_s": 24.3
+  }
+ ]
+}

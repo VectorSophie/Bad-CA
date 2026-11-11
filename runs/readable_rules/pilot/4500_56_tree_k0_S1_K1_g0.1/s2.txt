@@ -1,0 +1,5 @@
+# program 0
+R0: if u >= 1 and W >= 1 -> v=1
+R1: if E == 3 and u <= 0 -> v=0
+R2: if n8 <= 1 -> v=0
+default: keep state

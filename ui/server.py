@@ -356,8 +356,8 @@ def c12_header(p):
     if len(data) > MAX_EXPORT: raise ValueError("larger than the export limit")
     if p.endswith(".rule.json"):
         o = json.loads(data)
-        if not (o.get("format") == "ca-universal/dlrule-v1" or (o.get("format") == "ca-universal/rule-v1" and isinstance(o.get("programs"), list))): raise ValueError("not dlrule-v1")
-        return dict({k: v for k, v in o.items() if k not in ("first", "h0")}, format="dlrule-v1"), len(data)
+        if not (o.get("format") in ("ca-universal/dlrule-v1", "ca-universal/dlrule-v2") or (o.get("format") == "ca-universal/rule-v1" and isinstance(o.get("programs"), list))): raise ValueError("not dlrule-v1/v2")
+        return dict({k: v for k, v in o.items() if k not in ("first", "h0")}, format="dlrule"), len(data)
     if data[:4] != b"NCAB" or data[4] not in (1, 2): raise ValueError("not ncab-v1/v2")
     body = zlib.decompress(data[6:]) if data[5] & 1 else data[6:]; hl = int.from_bytes(body[:4], "little")
     return dict(json.loads(body[4:4 + hl]), format=f"ncab-v{data[4]}"), len(data)
@@ -373,7 +373,9 @@ def c12_start(meta):
 def c12_summary(name, p):
     try: hd, n = c12_header(p)
     except (OSError, ValueError) as e: return dict(name=name, label=os.path.relpath(p, C12), status="failed", kind="c12", error=str(e), has_export=False)
-    if hd["format"] == "dlrule-v1": npar = None; extra = dict(rules=sum(len(q["rules"]) for q in hd["programs"]), programs=len(hd["programs"]))
+    if hd["format"] == "dlrule":
+        from ca.rules import resolve
+        npar = None; extra = dict(rules=sum(len(q["rules"]) for q in resolve(hd["programs"])), programs=len(hd["programs"]))
     else:
         shapes = [s for _, s in hd.get("blobs") or hd.get("params") or []]; npar = int(sum(np.prod(s) for s in shapes)); extra = dict(phases=len(hd.get("schedule") or [1]), mode=hd.get("mode", "v1"))
     meta = hd.get("meta") or {}
@@ -414,7 +416,7 @@ def export_original(p):
     a = dict(start=start, frames=int(hd["T"]), width=int(meta.get("width", hd["W"])), threshold=int(meta.get("threshold", 128)), invert=False, fps=None)
     d, man = do_prep(src, a); F = np.load(os.path.join(d, "bin.npy"))
     if F.shape[1:] != (hd["H"], hd["W"]): raise ApiError(409, f"prepared original is {F.shape[1:]} but the export is {(hd['H'], hd['W'])}")
-    if hd["format"] == "dlrule-v1":
+    if hd["format"] == "dlrule":
         from ca import rules
         f0 = rules.load(p)["first"]
     elif hd["format"] == "ncab-v2":

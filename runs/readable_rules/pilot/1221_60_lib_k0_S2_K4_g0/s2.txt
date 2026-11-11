@@ -1,0 +1,41 @@
+# program 0
+R0: if S >= 2 -> v=1
+R1: if d >= 1 -> v=0
+R2: if n8 == 4 -> v=0
+R3: if E == 3 -> v=0
+R4: if W == 1 and N == 0 -> v=1
+R5: if u <= 0 -> v=0
+R6: if n8 <= 2 -> v=0
+R7: if W == 1 -> v=1
+default: keep state
+
+# program 1 (= program 0 + 8 edits)
+R0: if always -> v=1
+R1: if always -> v=1
+R2: if always -> v=1
+R3: if always -> v=1
+R4: if always -> v=1
+R5: if always -> v=1
+R6: if always -> v=1
+default: keep state
+
+# program 2 (= program 1 + 0 edits)
+R0: if always -> v=1
+R1: if always -> v=1
+R2: if always -> v=1
+R3: if always -> v=1
+R4: if always -> v=1
+R5: if always -> v=1
+R6: if always -> v=1
+default: keep state
+
+# program 3 (= program 2 + 6 edits)
+R0: if always -> v=0
+R1: if always -> v=0
+R2: if always -> v=1
+R3: if always -> v=1
+R4: if always -> v=0
+R5: if always -> v=0
+R6: if always -> v=0
+R7: if always -> v=1
+default: keep state

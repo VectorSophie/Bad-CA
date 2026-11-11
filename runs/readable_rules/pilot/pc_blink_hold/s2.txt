@@ -1,0 +1,10 @@
+# program 0
+R0: if n8 == 5 and h0 == 1 -> v=0, h=0
+R1: if always -> v=1, h=1
+R2: if always -> v=1, h=1
+R3: if always -> v=1, h=0
+R4: if always -> v=1, h=0
+R5: if always -> v=0, h=0
+R6: if always -> v=1, h=1
+R7: if always -> v=0, h=0
+default: keep state

@@ -1,0 +1,18 @@
+# program 0
+R0: if r2 >= 9 -> v=1
+R1: if u <= 0 and E >= 2 -> v=0
+default: keep state
+
+# program 1 (= program 0 + 2 edits)
+R0: if u >= 1 -> v=1
+R1: if S >= 2 and l >= 1 -> v=1
+default: keep state
+
+# program 2 (= program 1 + 2 edits)
+R0: if n8 <= 3 and r >= 1 and d == 0 -> v=0
+default: keep state
+
+# program 3 (= program 2 + 2 edits)
+R0: if S >= 3 -> v=1
+R1: if E >= 3 -> v=1
+default: keep state

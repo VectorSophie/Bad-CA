@@ -1,0 +1,75 @@
+# program 0
+R0: if r2 == 5 -> v=1
+R1: if S >= 1 -> v=1
+R2: if r2 == 10 -> v=1
+R3: if l == 0 -> v=0
+R4: if always -> v=1
+R5: if always -> v=0
+R6: if always -> v=1
+R7: if always -> v=1
+R8: if always -> v=1
+R9: if always -> v=0
+R10: if always -> v=0
+R11: if always -> v=1
+R12: if always -> v=0
+R13: if always -> v=1
+R14: if always -> v=1
+default: keep state
+
+# program 1 (= program 0 + 13 edits)
+R0: if always -> v=1
+R1: if always -> v=1
+R2: if always -> v=1
+R3: if always -> v=1
+R4: if always -> v=1
+R5: if always -> v=1
+R6: if always -> v=1
+R7: if always -> v=0
+R8: if always -> v=1
+R9: if always -> v=1
+R10: if always -> v=1
+R11: if always -> v=1
+R12: if always -> v=1
+R13: if always -> v=0
+R14: if always -> v=0
+R15: if always -> v=1
+R16: if always -> v=1
+default: keep state
+
+# program 2 (= program 1 + 0 edits)
+R0: if always -> v=1
+R1: if always -> v=1
+R2: if always -> v=1
+R3: if always -> v=1
+R4: if always -> v=1
+R5: if always -> v=1
+R6: if always -> v=1
+R7: if always -> v=0
+R8: if always -> v=1
+R9: if always -> v=1
+R10: if always -> v=1
+R11: if always -> v=1
+R12: if always -> v=1
+R13: if always -> v=0
+R14: if always -> v=0
+R15: if always -> v=1
+R16: if always -> v=1
+default: keep state
+
+# program 3 (= program 2 + 7 edits)
+R0: if always -> v=0
+R1: if always -> v=1
+R2: if always -> v=1
+R3: if always -> v=0
+R4: if always -> v=1
+R5: if always -> v=1
+R6: if always -> v=1
+R7: if always -> v=0
+R8: if always -> v=1
+R9: if always -> v=1
+R10: if always -> v=1
+R11: if always -> v=1
+R12: if always -> v=0
+R13: if always -> v=1
+R14: if always -> v=1
+default: keep state

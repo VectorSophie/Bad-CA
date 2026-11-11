@@ -1,0 +1,7 @@
+# program 0
+R0: if m0 >= 3 -> v=1, h=1
+R1: if v <= 0 -> v=0, h=1
+R2: if always -> v=1, h=1
+R3: if always -> v=1, h=1
+R4: if always -> v=0, h=1
+default: keep state

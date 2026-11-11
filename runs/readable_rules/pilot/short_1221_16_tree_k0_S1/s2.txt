@@ -1,0 +1,7 @@
+# program 0
+R0: if r2 == 15 -> v=1
+R1: if r2 <= 3 and S == 0 -> v=0
+R2: if S >= 2 and W >= 2 -> v=1
+R3: if u <= 0 -> v=1
+R4: if n8 == 6 and N == 3 -> v=0
+default: keep state

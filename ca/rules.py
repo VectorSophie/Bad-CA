@@ -21,7 +21,7 @@ OPS = {"<=": np.less_equal, ">=": np.greater_equal, "==": np.equal}
 
 
 def feature_names(k):
-    return ["v"] + [f"h{i}" for i in range(k)] + ["n8", "r2", "N", "S", "E", "W"] + [f"m{i}" for i in range(k)]
+    return ["v"] + [f"h{i}" for i in range(k)] + ["n8", "r2", "N", "S", "E", "W", "u", "d", "l", "r"] + [f"m{i}" for i in range(k)]
 
 
 def features(v, h):
@@ -33,9 +33,26 @@ def features(v, h):
     f["r2"] = sum(sh(p, dy, dx) for dy in range(-2, 3) for dx in range(-2, 3) if max(abs(dy), abs(dx)) == 2)
     f["N"] = sh(p, -1, -1) + sh(p, -1, 0) + sh(p, -1, 1); f["S"] = sh(p, 1, -1) + sh(p, 1, 0) + sh(p, 1, 1)
     f["W"] = sh(p, -1, -1) + sh(p, 0, -1) + sh(p, 1, -1); f["E"] = sh(p, -1, 1) + sh(p, 0, 1) + sh(p, 1, 1)
+    f["u"], f["d"], f["l"], f["r"] = sh(p, -1, 0), sh(p, 1, 0), sh(p, 0, -1), sh(p, 0, 1)   # dlrule-v2: single orthogonal neighbours
     for i in range(k):
         q = np.pad(h[i].astype(np.int16), 2); f[f"m{i}"] = sum(sh(q, dy, dx) for dy in (-1, 0, 1) for dx in (-1, 0, 1) if dy or dx)
     return f
+
+
+def resolve(programs):
+    """dlrule-v2 derived programs: {"base": j, "edits": [{"op": "set"|"insert", "index": i, "rule": R} | {"op": "delete", "index": i}]}
+    -> concrete {"rules": [...]}. Bases must come earlier in the list. Edits apply in order."""
+    out = []
+    for p in programs:
+        if "base" not in p: out.append(p); continue
+        rs = [dict(r) for r in out[p["base"]]["rules"]]
+        for e in p.get("edits", []):
+            if e["op"] == "set": rs[e["index"]] = e["rule"]
+            elif e["op"] == "insert": rs.insert(e["index"], e["rule"])
+            elif e["op"] == "delete": del rs[e["index"]]
+            else: raise ValueError(f"unknown edit op {e['op']}")
+        out.append({"rules": rs})
+    return out
 
 
 def step(prog, v, h, trace=False):
@@ -57,13 +74,13 @@ def step(prog, v, h, trace=False):
 def run(model, T=None):
     """model: {'k', 'S', 'programs': [...], 'schedule': [...], 'first': (H,W), 'h0': (k,H,W) or None}. Returns (T,H,W) binary
     visible frames and per-frame rule-fire counts per program."""
-    k, S = model["k"], model["S"]; v = model["first"].astype(np.uint8).copy(); T = T or model["T"]
+    k, S = model["k"], model["S"]; v = model["first"].astype(np.uint8).copy(); T = T or model["T"]; programs = resolve(model["programs"])
     h = model["h0"].astype(np.uint8).copy() if model.get("h0") is not None else np.zeros((k,) + v.shape, np.uint8)
     sched = np.zeros(T, np.int32)
     for p in model["schedule"]: sched[p["start"]:p["end"]] = p["program"]
-    out = [v.copy()]; fires = [np.zeros(len(pr["rules"]) + 1, np.int64) for pr in model["programs"]]
+    out = [v.copy()]; fires = [np.zeros(len(pr["rules"]) + 1, np.int64) for pr in programs]
     for t in range(1, T):
-        prog = model["programs"][sched[t]]
+        prog = programs[sched[t]]
         for _ in range(S):
             v, h, fired = step(prog, v, h, trace=True); fires[sched[t]] += np.bincount(fired.ravel() + 1, minlength=len(prog["rules"]) + 1)
         out.append(v.copy())
@@ -152,18 +169,29 @@ def dataset(V, Hb, k):
 
 
 def complexity(model):
-    progs = model["programs"]; nr = sum(len(p["rules"]) for p in progs); nc = sum(len(r["if"]) for p in progs for r in p["rules"])
-    blob = json.dumps({"k": model["k"], "S": model["S"], "programs": [{"rules": [{"if": r["if"], "then": r["then"]} for r in p["rules"]]} for p in progs],
-                       "schedule": model["schedule"]}, separators=(",", ":")).encode()
+    """Counts the stored program text: full programs count all their rules/conditions; derived programs count only their edits."""
+    progs = model["programs"]; base = [p for p in progs if "base" not in p]; der = [p for p in progs if "base" in p]
+    edit_rules = [e["rule"] for p in der for e in p.get("edits", []) if "rule" in e]
+    nr = sum(len(p["rules"]) for p in base) + len(edit_rules); nc = sum(len(r["if"]) for p in base for r in p["rules"]) + sum(len(r["if"]) for r in edit_rules)
+    blob = json.dumps({"k": model["k"], "S": model["S"], "programs": [_strip(p) for p in progs], "schedule": model["schedule"]}, separators=(",", ":")).encode()
     first = np.packbits(model["first"].ravel()).tobytes(); h0 = b"" if model.get("h0") is None else np.packbits(model["h0"].ravel()).tobytes()
-    return dict(programs=len(progs), rules=nr, conditions=nc, constants=nc + 2 * nr, hidden_bits=model["k"], rules_json_bytes=len(blob),
+    used = [p["program"] for p in model["schedule"]]
+    return dict(programs=len(progs), full_programs=len(base), derived_programs=len(der), edits=sum(len(p.get("edits", [])) for p in der),
+                phases=len(model["schedule"]), distinct_programs_used=len(set(used)), reused_programs=sum(1 for q in set(used) if used.count(q) > 1),
+                rules=nr, conditions=nc, constants=nc + 2 * nr, hidden_bits=model["k"], rules_json_bytes=len(blob),
                 file_bytes=len(zlib.compress(blob + first + h0, 9)), first_frame_bytes=len(first), h0_bytes=len(h0))
 
 
+def _strip(p):
+    if "base" in p: return {"base": p["base"], "edits": [dict(e, rule={"if": e["rule"]["if"], "then": e["rule"]["then"]}) if "rule" in e else e for e in p.get("edits", [])]}
+    return {"rules": [{"if": r["if"], "then": r["then"]} for r in p["rules"]]}
+
+
 def export(path, model, meta=None):
-    obj = {"format": "ca-universal/dlrule-v1", "k": model["k"], "S": model["S"], "T": int(model["T"]), "H": int(model["first"].shape[0]), "W": int(model["first"].shape[1]),
+    v2 = any("base" in p for p in model["programs"]) or any(c[0] in ("u", "d", "l", "r") for p in resolve(model["programs"]) for r in p["rules"] for c in r["if"])
+    obj = {"format": "ca-universal/dlrule-v2" if v2 else "ca-universal/dlrule-v1", "k": model["k"], "S": model["S"], "T": int(model["T"]), "H": int(model["first"].shape[0]), "W": int(model["first"].shape[1]),
            "features": feature_names(model["k"]), "semantics": "first firing rule wins; default keep; synchronous; zero boundary; S substeps per frame; schedule = external timeline",
-           "programs": [{"rules": [{"if": r["if"], "then": r["then"]} for r in p["rules"]]} for p in model["programs"]], "schedule": model["schedule"],
+           "programs": [_strip(p) for p in model["programs"]], "schedule": model["schedule"],
            "first": np.packbits(model["first"].astype(np.uint8).ravel(), bitorder="little").tobytes().hex(),
            "h0": None if model.get("h0") is None else np.packbits(model["h0"].astype(np.uint8).ravel(), bitorder="little").tobytes().hex(), "meta": meta or {}}
     json.dump(obj, open(path, "w"), separators=(",", ":")); return obj
@@ -171,7 +199,7 @@ def export(path, model, meta=None):
 
 def load(path):
     o = json.load(open(path)); H, W, k = o["H"], o["W"], o["k"]
-    assert o["format"] == "ca-universal/dlrule-v1" or (o["format"] == "ca-universal/rule-v1" and "programs" in o), "not dlrule-v1"
+    assert o["format"] in ("ca-universal/dlrule-v1", "ca-universal/dlrule-v2") or (o["format"] == "ca-universal/rule-v1" and "programs" in o), "not dlrule-v1/v2"
     first = np.unpackbits(np.frombuffer(bytes.fromhex(o["first"]), np.uint8), bitorder="little")[:H * W].reshape(H, W)
     h0 = None if o["h0"] is None else np.unpackbits(np.frombuffer(bytes.fromhex(o["h0"]), np.uint8), bitorder="little")[:k * H * W].reshape(k, H, W)
     return dict(k=k, S=o["S"], T=o["T"], programs=o["programs"], schedule=o["schedule"], first=first, h0=h0, meta=o["meta"])

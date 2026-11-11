@@ -1,0 +1,2 @@
+R0: if W >= 3 and h0 == 1 and h1 == 0 and h2 == 0 and m1 >= 1 and m2 >= 3 and n8 <= 3 and r2 >= 5 and v == 1 -> v=0, h=111
+default: keep state

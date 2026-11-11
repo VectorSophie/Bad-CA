@@ -1,0 +1,7 @@
+# program 0
+R0: if W == 1 -> v=1, h=0
+R1: if always -> v=0, h=1
+R2: if always -> v=1, h=0
+R3: if always -> v=1, h=0
+R4: if always -> v=1, h=0
+default: keep state

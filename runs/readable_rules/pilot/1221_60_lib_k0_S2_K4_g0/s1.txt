@@ -1,0 +1,16 @@
+# program 0
+R0: if d == 1 and W >= 1 -> v=1
+R1: if r2 >= 9 -> v=1
+default: keep state
+
+# program 1 (= program 0 + 2 edits)
+R0: if always -> v=1
+default: keep state
+
+# program 2 (= program 1 + 0 edits)
+R0: if always -> v=1
+default: keep state
+
+# program 3 (= program 2 + 1 edits)
+R0: if always -> v=0
+default: keep state

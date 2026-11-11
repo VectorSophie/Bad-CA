@@ -111,7 +111,7 @@ async function loadNca(u8, onUpdate) {
   const m = isNcab(u8) ? await parseNcab(u8, inflate) : parseNcaJson(JSON.parse(new TextDecoder().decode(u8)));
   return ncaEngine(u8, m, isNcab(u8) ? await ncabHeader(u8, inflate) : null, onUpdate);
 }
-const isRuleJson = (u8) => { if (isNcab(u8)) return null; try { const o = JSON.parse(new TextDecoder().decode(u8)); return o.format === "ca-universal/dlrule-v1" || (o.format === "ca-universal/rule-v1" && Array.isArray(o.programs)) ? o : null; } catch { return null; } };
+const isRuleJson = (u8) => { if (isNcab(u8)) return null; try { const o = JSON.parse(new TextDecoder().decode(u8)); return o.format === "ca-universal/dlrule-v1" || o.format === "ca-universal/dlrule-v2" || (o.format === "ca-universal/rule-v1" && Array.isArray(o.programs)) ? o : null; } catch { return null; } };
 
 async function ruleEngine(o, bytes) {
   const m = parseRules(o), N = m.H * m.W, t0 = performance.now();
@@ -526,9 +526,9 @@ function labLabel(r) {
   return m ? `frames ${m[1]}–${+m[1] + +m[2] - 1} · ${m[3]} · ${m[4]} hidden bit${m[4] === "1" ? "" : "s"} · setting ${m[5]}${m[6] ? " " + m[6] : ""}` : base.replace(/_/g, " ");
 }
 function fillLabSelect() {
-  const rs = runs.filter((r) => r.format === "dlrule-v1"), cur = $("lab-sel").value || LAB_DEFAULT;
-  const samples = rs.filter((r) => r.name.startsWith("c12~samples~")), ba = rs.filter((r) => !r.name.startsWith("c12~samples~"));
-  $("lab-sel").innerHTML = `<optgroup label="synthetic samples (exact)">${samples.map((r) => `<option value="${esc(r.name)}">${esc(labLabel(r))}</option>`).join("")}</optgroup>`
+  const rs = runs.filter((r) => r.format === "dlrule"), cur = $("lab-sel").value || LAB_DEFAULT;
+  const syn = (r) => r.name.startsWith("c12~samples~") || r.name.startsWith("c12~readable~recovered_"), samples = rs.filter(syn), ba = rs.filter((r) => !syn(r));
+  $("lab-sel").innerHTML = `<optgroup label="synthetic samples">${samples.map((r) => `<option value="${esc(r.name)}">${esc(labLabel(r))}</option>`).join("")}</optgroup>`
     + `<optgroup label="Bad Apple · explicit rules (experimental)">${ba.map((r) => `<option value="${esc(r.name)}">${esc(labLabel(r))} · ${r.rules} rules / ${r.programs} programs</option>`).join("")}</optgroup>`;
   $("lab-sel").value = cur;
 }
@@ -537,7 +537,7 @@ async function openLab(name) {
   labLoading = true;
   try {
     const u8 = await bytesOf(`/api/runs/${encodeURIComponent(name)}/export`), o = isRuleJson(u8);
-    if (!o) throw new Error("not a dlrule-v1 file");
+    if (!o) throw new Error("not a rule file");
     const e = await ruleEngine(o, u8.length), r = runs.find((x) => x.name === name), lbl = r ? labLabel(r) : name;
     LAB.load(e, { name, label: lbl, fps: o.meta?.fps || 30, fpsSrc: o.meta?.fps ? "export meta" : "assumed 30 (no fps recorded)" });
     $("lab-sel").value = name; LAB.q("ca-cap").innerHTML = `explicit rules <span class="cm">(${esc(lbl)}; computed in this browser from the file)</span>`;
@@ -690,7 +690,7 @@ async function openRun(name) {
   document.querySelectorAll("[data-run]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.run === name));
   $("model-name").textContent = "// " + det.summary.label; renderModel(det); renderFacts(det); if (det.summary.own) watchJob(name);
   if (!det.summary.has_export) { toast(`no export yet (status: ${det.summary.status})`); return; }
-  if (det.summary.format === "dlrule-v1") { location.hash = "#lab"; return openLab(name); }
+  if (det.summary.format === "dlrule") { location.hash = "#lab"; return openLab(name); }
   location.hash = "#demo"; return openResearchNca(name, det);
 }
 function renderFacts(det) {
@@ -704,8 +704,8 @@ function renderFacts(det) {
 }
 function renderModel(det) {
   const man = det.manifest || {}, s = man.settings || {}, imp = man.imported || {}, c12 = man.c12?.header || {};
-  $("schematic").style.display = c12.format === "dlrule-v1" ? "none" : "";
-  if (c12.format === "dlrule-v1") { $("arch").innerHTML = `<dt>model</dt><dd>explicit rules (dlrule-v1), not a Neural CA: ${c12.k} hidden bits, S=${c12.S}; open in the rule lab</dd>`; return renderCurve([]); }
+  $("schematic").style.display = c12.format === "dlrule" ? "none" : "";
+  if (c12.format === "dlrule") { $("arch").innerHTML = `<dt>model</dt><dd>explicit rules, not a Neural CA: ${c12.k} hidden bits, S=${c12.S}; open in the rule lab</dd>`; return renderCurve([]); }
   const C = s.C ?? imp.C ?? man.C ?? c12.C, Fh = s.Fh ?? imp.Fh ?? man.Fh ?? c12.Fh, S = imp.S ?? man.S ?? c12.S ?? 4;
   const np = man.export?.n_params ?? (C && Fh ? Fh * C * 9 + Fh + C * Fh + C : null);
   $("arch").innerHTML = [["C channels", C ? `${C}: 1 visible + ${C - 1} hidden (continuous state)` : "–"], ["Fh features", Fh ?? "–"], ["S updates", `${S} per video frame`],

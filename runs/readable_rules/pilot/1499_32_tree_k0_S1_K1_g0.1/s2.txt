@@ -1,0 +1,16 @@
+# program 0
+R0: if E <= 0 and W <= 0 and r2 >= 2 -> v=0
+R1: if S == 3 and r <= 0 and r2 <= 13 -> v=0
+R2: if E >= 2 and r2 <= 9 -> v=1
+R3: if N >= 3 and r == 0 and r2 >= 10 -> v=0
+R4: if E == 0 and r2 <= 7 and v == 1 -> v=0
+R5: if E >= 1 and N == 1 and n8 <= 1 and r2 >= 5 and u == 0 -> v=1
+R6: if r == 0 and r2 >= 9 -> v=1
+R7: if S >= 2 -> v=1
+R8: if E == 0 and l >= 0 and r2 >= 6 -> v=0
+R9: if E >= 1 and r <= 0 and r2 >= 7 -> v=0
+R10: if E >= 1 and W <= 0 and r == 0 -> v=0
+R11: if N >= 2 -> v=1
+R12: if u >= 1 -> v=1
+R13: if always -> v=0
+default: keep state

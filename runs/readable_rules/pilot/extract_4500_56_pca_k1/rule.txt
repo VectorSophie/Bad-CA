@@ -1,0 +1,5 @@
+R0: if N >= 1 and S >= 1 and h0 == 1 and m0 >= 5 and m0 <= 7 and n8 <= 3 and r2 >= 8 and v == 1 -> v=0, h=1
+R1: if h0 == 1 and m0 >= 8 and n8 <= 2 and r2 >= 6 and r2 <= 8 and v == 1 -> v=0, h=1
+R2: if N <= 0 and h0 == 1 and m0 <= 7 and n8 <= 4 and r2 == 7 and v == 1 -> v=0, h=1
+R3: if h0 == 1 and m0 >= 8 and n8 <= 4 and r2 >= 11 and v == 1 -> v=0, h=1
+default: keep state

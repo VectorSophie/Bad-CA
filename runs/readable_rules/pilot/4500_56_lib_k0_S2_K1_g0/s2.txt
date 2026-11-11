@@ -1,0 +1,5 @@
+# program 0
+R0: if l >= 1 and d >= 1 -> v=1
+R1: if r2 <= 6 -> v=0
+R2: if r2 == 13 -> v=0
+default: keep state

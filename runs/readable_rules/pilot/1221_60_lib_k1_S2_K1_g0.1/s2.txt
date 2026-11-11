@@ -1,0 +1,4 @@
+# program 0
+R0: if S >= 2 -> v=1, h=0
+R1: if S >= 1 and N >= 2 -> v=0, h=1
+default: keep state

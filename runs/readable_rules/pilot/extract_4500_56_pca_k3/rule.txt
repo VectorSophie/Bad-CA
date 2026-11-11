@@ -1,0 +1,4 @@
+R0: if W >= 3 and h0 == 0 and h1 == 0 and h2 == 1 and m2 <= 4 and n8 >= 5 and u >= 1 and v == 0 -> v=1, h=100
+R1: if S <= 0 and h0 == 1 and h1 == 0 and h2 == 1 and m0 >= 6 and n8 <= 4 and u <= 0 and v == 1 -> v=0, h=101
+R2: if h0 == 1 and h1 == 0 and h2 == 1 and m1 >= 5 and u >= 1 and v == 1 -> v=1, h=111
+default: keep state

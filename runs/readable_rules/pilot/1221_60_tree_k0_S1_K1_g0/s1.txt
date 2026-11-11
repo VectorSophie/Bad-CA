@@ -1,0 +1,5 @@
+# program 0
+R0: if N >= 2 -> v=1
+R1: if W <= 1 and v == 1 -> v=0
+R2: if r == 0 and r2 >= 4 -> v=1
+default: keep state

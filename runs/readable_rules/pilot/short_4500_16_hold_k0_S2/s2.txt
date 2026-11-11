@@ -1,0 +1,6 @@
+# program 0
+R0: if r2 >= 11 -> v=1
+R1: if n8 <= 2 and r == 1 and W == 0 -> v=0
+R2: if r2 <= 0 -> v=0
+R3: if r2 == 8 and r >= 1 -> v=0
+default: keep state

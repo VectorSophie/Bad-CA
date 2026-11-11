@@ -1,0 +1,4 @@
+# program 0
+R0: if N >= 2 and m0 <= 4 -> v=1, h=0
+R1: if n8 <= 3 -> v=0, h=1
+default: keep state

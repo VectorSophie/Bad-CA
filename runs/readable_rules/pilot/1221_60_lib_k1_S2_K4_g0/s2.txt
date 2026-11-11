@@ -1,0 +1,15 @@
+# program 0
+R0: if S >= 1 and r2 >= 6 -> v=1, h=1
+default: keep state
+
+# program 1 (= program 0 + 1 edits)
+R0: if always -> v=1, h=0
+default: keep state
+
+# program 2 (= program 1 + 0 edits)
+R0: if always -> v=1, h=0
+default: keep state
+
+# program 3 (= program 2 + 1 edits)
+R0: if always -> v=0, h=0
+default: keep state

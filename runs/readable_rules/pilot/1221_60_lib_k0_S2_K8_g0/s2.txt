@@ -1,0 +1,68 @@
+# program 0
+R0: if d == 1 -> v=1
+R1: if E == 1 -> v=0
+R2: if E >= 3 and v >= 1 -> v=0
+R3: if n8 == 4 -> v=0
+R4: if S >= 1 -> v=1
+R5: if n8 <= 1 -> v=0
+default: keep state
+
+# program 1 (= program 0 + 7 edits)
+R0: if always -> v=1
+R1: if always -> v=1
+R2: if always -> v=1
+R3: if always -> v=1
+R4: if always -> v=1
+R5: if always -> v=1
+R6: if always -> v=1
+default: keep state
+
+# program 2 (= program 1 + 0 edits)
+R0: if always -> v=1
+R1: if always -> v=1
+R2: if always -> v=1
+R3: if always -> v=1
+R4: if always -> v=1
+R5: if always -> v=1
+R6: if always -> v=1
+default: keep state
+
+# program 3 (= program 2 + 0 edits)
+R0: if always -> v=1
+R1: if always -> v=1
+R2: if always -> v=1
+R3: if always -> v=1
+R4: if always -> v=1
+R5: if always -> v=1
+R6: if always -> v=1
+default: keep state
+
+# program 4 (= program 3 + 0 edits)
+R0: if always -> v=1
+R1: if always -> v=1
+R2: if always -> v=1
+R3: if always -> v=1
+R4: if always -> v=1
+R5: if always -> v=1
+R6: if always -> v=1
+default: keep state
+
+# program 5 (= program 4 + 5 edits)
+R0: if N >= 3 -> v=1
+R1: if always -> v=0
+R2: if always -> v=0
+R3: if always -> v=1
+R4: if always -> v=1
+default: keep state
+
+# program 6 (= program 5 + 2 edits)
+R0: if N >= 2 -> v=1
+R1: if always -> v=0
+R2: if always -> v=0
+R3: if always -> v=1
+default: keep state
+
+# program 7 (= program 6 + 4 edits)
+R0: if N == 2 -> v=0
+R1: if W >= 2 -> v=1
+default: keep state

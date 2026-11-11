@@ -1,0 +1,224 @@
+{
+ "task": "4500:16",
+ "options": {
+  "start": "tree",
+  "k": 0,
+  "S": 1,
+  "K": 1,
+  "seg": "uniform",
+  "evals": 6000,
+  "gamma": 0.1,
+  "max_rules": 16,
+  "max_conds": 4,
+  "teacher": null
+ },
+ "results": [
+  {
+   "seed": 0,
+   "file": "runs/readable_rules/pilot/short_4500_16_tree_k0_S1/s0.rule.json",
+   "eval": {
+    "err": 0.04378858024691358,
+    "hold_err": 0.08989197530864197,
+    "thirds": [
+     0.04837962962962963,
+     0.040740740740740744,
+     0.04224537037037037
+    ],
+    "worst16": 0.04378858024691358,
+    "lag1_f1": 0.41861886953952127,
+    "lag4_f1": 0.6397629312545567,
+    "lag4_mass": 0.6008928571428571,
+    "thin": {
+     "thin_fg_px": 144,
+     "thin_fg_recall": 0.18055555555555555,
+     "thin_bg_px": 93,
+     "thin_bg_recall": 0.3870967741935484
+    },
+    "specks": [
+     9,
+     0
+    ],
+    "holes": [
+     7,
+     2
+    ],
+    "spurious_blips": 18,
+    "exact": false
+   },
+   "complexity": {
+    "programs": 1,
+    "full_programs": 1,
+    "derived_programs": 0,
+    "edits": 0,
+    "phases": 1,
+    "distinct_programs_used": 1,
+    "reused_programs": 0,
+    "rules": 5,
+    "conditions": 12,
+    "constants": 22,
+    "hidden_bits": 0,
+    "rules_json_bytes": 398,
+    "file_bytes": 259,
+    "first_frame_bytes": 216,
+    "h0_bytes": 0
+   },
+   "phases": [
+    {
+     "phase": 0,
+     "start": 1,
+     "end": 16,
+     "start_from": "tree",
+     "start_scores": {
+      "tree": 0.06903858024691359
+     },
+     "err": 0.04378858024691358,
+     "motion": 0.6397629312545567,
+     "evals": 6000,
+     "seconds": 15.0,
+     "rules": 5,
+     "conditions": 12
+    }
+   ],
+   "cpu_s": 15.1,
+   "wall_s": 15.1
+  },
+  {
+   "seed": 1,
+   "file": "runs/readable_rules/pilot/short_4500_16_tree_k0_S1/s1.rule.json",
+   "eval": {
+    "err": 0.0496141975308642,
+    "hold_err": 0.08989197530864197,
+    "thirds": [
+     0.04386574074074074,
+     0.047337962962962964,
+     0.05763888888888889
+    ],
+    "worst16": 0.0496141975308642,
+    "lag1_f1": 0.4456163480553724,
+    "lag4_f1": 0.6447426340078097,
+    "lag4_mass": 0.59375,
+    "thin": {
+     "thin_fg_px": 144,
+     "thin_fg_recall": 0.2847222222222222,
+     "thin_bg_px": 93,
+     "thin_bg_recall": 0.3870967741935484
+    },
+    "specks": [
+     0,
+     0
+    ],
+    "holes": [
+     0,
+     2
+    ],
+    "spurious_blips": 4,
+    "exact": false
+   },
+   "complexity": {
+    "programs": 1,
+    "full_programs": 1,
+    "derived_programs": 0,
+    "edits": 0,
+    "phases": 1,
+    "distinct_programs_used": 1,
+    "reused_programs": 0,
+    "rules": 6,
+    "conditions": 18,
+    "constants": 30,
+    "hidden_bits": 0,
+    "rules_json_bytes": 508,
+    "file_bytes": 280,
+    "first_frame_bytes": 216,
+    "h0_bytes": 0
+   },
+   "phases": [
+    {
+     "phase": 0,
+     "start": 1,
+     "end": 16,
+     "start_from": "tree",
+     "start_scores": {
+      "tree": 0.06903858024691359
+     },
+     "err": 0.0496141975308642,
+     "motion": 0.6447426340078097,
+     "evals": 6000,
+     "seconds": 16.4,
+     "rules": 6,
+     "conditions": 18
+    }
+   ],
+   "cpu_s": 16.4,
+   "wall_s": 16.4
+  },
+  {
+   "seed": 2,
+   "file": "runs/readable_rules/pilot/short_4500_16_tree_k0_S1/s2.rule.json",
+   "eval": {
+    "err": 0.04243827160493827,
+    "hold_err": 0.08989197530864197,
+    "thirds": [
+     0.04826388888888889,
+     0.036689814814814814,
+     0.04236111111111111
+    ],
+    "worst16": 0.042438271604938266,
+    "lag1_f1": 0.4191517561298873,
+    "lag4_f1": 0.6592600822130874,
+    "lag4_mass": 0.5964285714285714,
+    "thin": {
+     "thin_fg_px": 144,
+     "thin_fg_recall": 0.1597222222222222,
+     "thin_bg_px": 93,
+     "thin_bg_recall": 0.5268817204301075
+    },
+    "specks": [
+     4,
+     0
+    ],
+    "holes": [
+     0,
+     2
+    ],
+    "spurious_blips": 9,
+    "exact": false
+   },
+   "complexity": {
+    "programs": 1,
+    "full_programs": 1,
+    "derived_programs": 0,
+    "edits": 0,
+    "phases": 1,
+    "distinct_programs_used": 1,
+    "reused_programs": 0,
+    "rules": 6,
+    "conditions": 11,
+    "constants": 23,
+    "hidden_bits": 0,
+    "rules_json_bytes": 412,
+    "file_bytes": 260,
+    "first_frame_bytes": 216,
+    "h0_bytes": 0
+   },
+   "phases": [
+    {
+     "phase": 0,
+     "start": 1,
+     "end": 16,
+     "start_from": "tree",
+     "start_scores": {
+      "tree": 0.06903858024691359
+     },
+     "err": 0.04243827160493827,
+     "motion": 0.6592600822130874,
+     "evals": 6000,
+     "seconds": 15.1,
+     "rules": 6,
+     "conditions": 11
+    }
+   ],
+   "cpu_s": 15.1,
+   "wall_s": 15.1
+  }
+ ]
+}

@@ -1,0 +1,45 @@
+# program 0
+R0: if n8 >= 5 -> v=1, h=1
+R1: if m0 <= 3 and S == 1 -> v=0, h=0
+R2: if r2 == 4 -> v=0, h=1
+R3: if N == 2 -> v=0, h=0
+default: keep state
+
+# program 1 (= program 0 + 4 edits)
+R0: if u >= 1 -> v=1, h=0
+R1: if m0 <= 4 and S == 1 -> v=0, h=0
+R2: if E == 3 -> v=0, h=1
+R3: if W >= 2 -> v=1, h=0
+default: keep state
+
+# program 2 (= program 1 + 4 edits)
+R0: if S == 1 and h0 == 0 and W >= 3 -> v=0, h=1
+R1: if W >= 3 and E <= 0 -> v=1, h=1
+default: keep state
+
+# program 3 (= program 2 + 3 edits)
+R0: if n8 <= 1 -> v=0, h=1
+R1: if m0 == 2 -> v=0, h=0
+R2: if u == 1 -> v=1, h=0
+default: keep state
+
+# program 4 (= program 3 + 3 edits)
+R0: if u == 1 and E == 0 -> v=1, h=1
+R1: if S == 3 and h0 == 0 -> v=1, h=1
+default: keep state
+
+# program 5 (= program 4 + 2 edits)
+R0: if S == 1 -> v=0, h=1
+R1: if S == 3 -> v=1, h=0
+default: keep state
+
+# program 6 (= program 5 + 3 edits)
+R0: if n8 == 2 -> v=0, h=1
+R1: if S == 2 and W <= 2 and u == 0 -> v=1, h=0
+R2: if m0 >= 4 and r <= 0 -> v=0, h=1
+default: keep state
+
+# program 7 (= program 6 + 3 edits)
+R0: if m0 >= 5 -> v=0, h=1
+R1: if E == 3 -> v=1, h=0
+default: keep state
