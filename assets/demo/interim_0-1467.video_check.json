@@ -1,0 +1,22 @@
+{
+ "export": "runs/featured/interim_0-1467.ncab",
+ "frames": [
+  0,
+  1467
+ ],
+ "check": {
+  "path": "/home/jackb/workspace/CA-universal/experiments/../assets/demo/interim_0-1467.mp4",
+  "decoded_frames": 1468,
+  "expected_frames": 1468,
+  "fps": 30.0,
+  "expected_fps": 30.0,
+  "duration_s": 48.93333333333333,
+  "expected_duration_s": 48.933,
+  "codec": "h264",
+  "size": [
+   1280,
+   640
+  ],
+  "ok": true
+ }
+}

@@ -4,18 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bad CA!!</title>
+<link rel="icon" type="image/png" href="/static/favicon.png">
 <link rel="stylesheet" href="/static/app.css">
 </head>
 <body>
 <header class="masthead">
   <canvas id="field" aria-hidden="true"></canvas>
   <div class="mast-inner">
-    <p class="kicker"><b>update</b> <i>{ s += W<sub>u</sub>·relu(W<sub>p</sub> ∗ s) + b<sub>u</sub> }</i> <span class="cm">// ×S per frame, from the first frame</span></p>
-    <h1 class="display split">Bad CA!!</h1>
+    <p class="kicker"><b>update</b> <i>{ s += W<sub>u</sub>·relu(W<sub>p</sub> ∗ s + b<sub>p</sub>) + b<sub>u</sub> }</i> <span class="cm">// ×S per frame, from the first frame</span></p>
+    <div class="brand"><img class="mark" src="/assets/logo/bad-ca-mark.png" width="80" height="60" alt="Bad CA!! logo: pixel silhouette of a girl biting an apple, from a Bad Apple!! frame"><h1 class="display split">Bad CA!!</h1></div>
     <nav class="tabs" role="tablist" aria-label="views">
       <a class="tab" role="tab" href="#demo" id="tab-demo" aria-controls="v-demo">[ demo ]</a>
       <a class="tab" role="tab" href="#lab" id="tab-lab" aria-controls="v-lab">[ rule lab ]</a>
-      <a class="tab" role="tab" href="#research" id="tab-research" aria-controls="v-research">[ research ]</a>
+      <a class="tab" role="tab" href="#research" id="tab-research" aria-controls="v-research">[ how it was built ]</a>
     </nav>
   </div>
 </header>
@@ -24,10 +25,13 @@
   <!-- ============ DEMO: one model (the featured one, or a research export opened from the research view) ============ -->
   <section class="view" id="v-demo" role="tabpanel" aria-labelledby="tab-demo">
     <div class="panel">
-      <h2 class="tag">┌─ demo <span class="cm" id="demo-title">// loading the featured model…</span></h2>
+      <h2 class="tag">┌─ demo <span class="cm" id="demo-title">// loading…</span></h2>
       <p class="banner" id="demo-banner" hidden></p>
-      <div class="regime" id="demo-reason"></div>
+      <p class="lede">A neural cellular automaton: every cell updates itself from its 3×3 neighbourhood with learned weights, and the
+        weights switch at phase boundaries. Every frame below is computed live in this browser from the model file alone.</p>
+      <p class="actions"><a class="btn" href="#new">[ Open your own video ]</a> <a class="btn" id="demo-dl" href="/api/featured/export" download>[ save model file ]</a></p>
       <p class="error" id="demo-warn" role="alert"></p>
+      <details class="why" id="demo-details"><summary>Model details</summary><dl class="facts" id="demo-facts"><dt>model</dt><dd>loading…</dd></dl></details>
       <div class="demo-grid">
         <div class="demo-left" id="demo-player"></div>
         <aside class="demo-right" id="rulepanel" aria-label="rule in effect"><p class="cm">the rule in effect appears here once the model is loaded</p></aside>
@@ -43,14 +47,14 @@
   <!-- ============ RULE LAB: explicit dlrule-v1 rules, separate from the NCA demo ============ -->
   <section class="view" id="v-lab" role="tabpanel" aria-labelledby="tab-lab" hidden>
     <div class="panel">
-      <h2 class="tag">┌─ rule.lab <span class="cm">// explicit condition rules (experimental on Bad Apple)</span></h2>
-      <p class="note">This is a separate model family: executable decision lists (dlrule-v1, <code>player/rule_core.mjs</code>). They did <b>not</b> produce the Neural CA in the demo. On Bad Apple they are experimental (C12); the synthetic sample is exact.</p>
+      <h2 class="tag">┌─ rule lab <span class="cm">// Bad Apple · explicit rules (experimental)</span></h2>
+      <p class="note">A separate model family: readable if-then rule lists that every cell runs. They did <b>not</b> produce the neural CA in the demo. On Bad Apple they are experimental (about 0.10 error at best); the synthetic sample is reproduced exactly.</p>
       <label>model <select id="lab-sel"></select></label>
       <div id="lab-player"></div>
       <div class="tl-wrap" id="lab-timeline-slot"></div>
     </div>
     <section class="panel" aria-labelledby="rules-h">
-      <h2 class="tag" id="rules-h">┌─ model.rules <span class="cm" id="rules-kind">// dlrule-v1</span></h2>
+      <h2 class="tag" id="rules-h">┌─ model.rules <span class="cm" id="rules-kind">// explicit if-then rules</span></h2>
       <div id="rules-body"><p class="cm">load a model above</p></div>
     </section>
     <section class="panel" aria-labelledby="linsp-h">
@@ -59,8 +63,71 @@
     </section>
   </section>
 
-  <!-- ============ RESEARCH: campaigns, every earlier export, new runs ============ -->
+  <!-- ============ HOW IT WAS BUILT: decision flow, new runs, archive (campaign log, shelves, model details) ============ -->
   <section class="view" id="v-research" role="tabpanel" aria-labelledby="tab-research" hidden>
+    <section class="panel" aria-labelledby="flow-h">
+      <h2 class="tag" id="flow-h">┌─ how it was built <span class="cm">// each step answered the question before it</span></h2>
+      <ol class="history flow">
+        <li><b>A</b><span class="t">Can simple local rules make a video?</span><span class="m">memoryless rules · Life-like rules · lookup tables</span><span class="k">Exact lookup-table rules replay short clips, but the tables are far larger than the recordings. Memoryless Life-like rules cannot express direction: the best ones only erode the picture. <span class="rec">record: <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_01.md">CHECKPOINT_01</a> · <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_07.md">CHECKPOINT_07</a></span></span></li>
+        <li><b>B</b><span class="t">What if cells have memory and several updates per frame?</span><span class="m">exact SAT search</span><span class="k">Hidden bits per cell help an exact SAT search find rules on short clips. Exact rules reached 10 frames; 20–40 frames timed out, and the rules were larger than every recording baseline. <span class="rec">record: <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_02.md">CHECKPOINT_02</a> · <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_03.md">CHECKPOINT_03</a> · <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_04.md">CHECKPOINT_04</a></span></span></li>
+        <li><b>C</b><span class="t">Can we search for small rules directly?</span><span class="m">circuit synthesis · CGP · DiffLogic · decision lists</span><span class="k">Small circuits won only on synthetic controls, and soft DiffLogic rules did not harden well. CGP circuits of 3–10 gates follow coarse shape on 60 frames but not motion: 0/32 motion-aware runs followed it (late “motion” was edge flicker). Explicit decision lists reach ~0.10 error at best. <span class="rec">record: <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_05.md">CHECKPOINT_05</a> · <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_06.md">CHECKPOINT_06</a> · <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_07.md">CHECKPOINT_07</a> · <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_08.md">CHECKPOINT_08</a> · <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_12.md">CHECKPOINT_12</a></span></span></li>
+        <li><b>D</b><span class="t">What if the state is continuous?</span><span class="m">Neural CA</span><span class="k">A 10,320-parameter neural CA replays a short real action from the first frame, where CGP passes no stage. More training and a contour loss cleaned the outlines (error 0.0040 on 56 frames, 0.0134 on 60); 120 frames pass, 240 fail, and smaller models fail. The files are larger than recordings: this is not compression. <span class="rec">record: <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_09.md">CHECKPOINT_09</a> · <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_10.md">CHECKPOINT_10</a> · <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_11.md">CHECKPOINT_11</a></span></span></li>
+        <li><b>E</b><span class="t">What if the rule changes with the scene?</span><span class="m">phases on an external schedule, state carried over</span><span class="k">4–6 phases fixed the 240-frame transition interval (error 0.019–0.028, vs 0.045 for a same-size single rule). Automatic segmentation was never better than equal spacing. <span class="rec">record: <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_12.md">CHECKPOINT_12</a></span></span></li>
+        <li><b>F</b><span class="t">How do we keep long replays stable?</span><span class="m">training-only state noise · export checks</span><span class="k">Chained phase rules amplified tiny numerical differences between training and replay; without noise the whole song diverged after ~1,080 frames. Training-only state noise (σ = 0.02), with chunk states carried by the replay's own arithmetic, made replay equal training; the whole song (6,572 frames) then passed every check. Each export is replayed independently (numpy, Node, browser) and checked before it becomes the demo. <span class="rec">record: <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CHECKPOINT_12.md">CHECKPOINT_12</a> · <a href="https://github.com/VectorSophie/Bad-CA/blob/master/docs/CAMPAIGN_13.md">CAMPAIGN_13</a></span></span></li>
+      </ol>
+    </section>
+
+    <section class="panel" id="new" aria-labelledby="new-h">
+      <h2 class="tag" id="new-h">┌─ run.new <span class="cm">// open your own video: preview, train, play, save</span></h2>
+      <div class="new-grid">
+        <div>
+          <h3 class="minor">1 · source video</h3>
+          <label>video <select id="video"></select></label>
+          <label class="btn file">[ upload video ]<input type="file" id="upload" accept="video/*,.mp4,.mkv,.webm,.mov,.avi,.gif"></label>
+          <p class="cm" id="probe">–</p>
+          <h3 class="minor">2 · preprocessing</h3>
+          <div class="form">
+            <label>start frame <input type="number" id="p-start" min="0" value="0"></label>
+            <label>frames <input type="number" id="p-frames" min="2" max="600" value="24"></label>
+            <label>width px <input type="number" id="p-width" min="8" max="256" value="32"></label>
+            <label>threshold <input type="number" id="p-threshold" min="0" max="255" value="128"></label>
+            <label>fps <input type="number" id="p-fps" min="0.1" step="any" placeholder="source"></label>
+            <label class="chk"><input type="checkbox" id="p-invert"> invert</label>
+          </div>
+          <button class="btn" id="b-preview">[ preview ]</button>
+        </div>
+        <div>
+          <div class="stage small">
+            <figure><figcaption>gray</figcaption><canvas id="pv-gray" width="1" height="1"></canvas></figure>
+            <figure><figcaption>binary <span class="cm">(training target)</span></figcaption><canvas id="pv-bin" width="1" height="1"></canvas></figure>
+          </div>
+          <label class="scrub">preview frame <input type="range" id="pv-scrub" min="0" max="0" value="0" disabled></label>
+          <span class="counter" id="pv-counter">–</span>
+          <p class="cm" id="pv-info"></p>
+        </div>
+        <div>
+          <h3 class="minor">3 · training</h3>
+          <label>preset <select id="preset"></select></label>
+          <p class="note" id="preset-note"></p>
+          <label>steps override <input type="number" id="t-steps" min="1" placeholder="preset default"></label>
+          <label>device <select id="device"><option value="cpu">cpu (local, 4 threads)</option><option value="gpu">gpu via gpuq (shared queue, -G 1)</option></select></label>
+          <button class="btn" id="b-train">[ start training ]</button>
+          <div id="job" class="job" hidden>
+            <p class="tag small" id="job-name"></p>
+            <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="job-bar"><span></span></div>
+            <dl class="facts" id="job-facts"></dl>
+            <p class="error" id="job-err" role="alert"></p>
+            <button class="btn" id="b-cancel">[ cancel ]</button>
+            <button class="btn" id="b-resume">[ resume ]</button>
+            <button class="btn" id="b-open">[ open in player ]</button>
+            <a class="btn" id="b-dl" href="#" download hidden>[ download export ]</a>
+            <pre class="log" id="job-log" tabindex="0" aria-label="log tail"></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <details class="archive" id="archive"><summary>All saved models (research archive) <span class="cm">// campaign log, every earlier export, model details</span></summary>
     <section class="panel" aria-labelledby="hist-h">
       <h2 class="tag" id="hist-h">┌─ research.timeline <span class="cm">// docs/research/README.md, docs/CAMPAIGN_*.md, docs/CHECKPOINT_*.md</span></h2>
       <ol class="history">
@@ -76,7 +143,7 @@
         <li><b>C10</b><span class="t">cleaner replay at the same size</span><span class="m">method: full-span diagnosis, more training, contour hinge, change matching</span><span class="k">found: errors were contour bites and under-motion; 0.0040 (56 frames), 0.0134 (60 frames)</span></li>
         <li><b>C11</b><span class="t">smaller model, longer playback, pipeline, UI</span><span class="m">method: 1,304 / 3,884 / 10,320 params, ncab export, video→CA pipeline, local UI</span><span class="k">found: small models fail; 120 frames pass at 10,320 (≈ 0.031); 240 fail; every file larger than a lossless recording</span></li>
         <li><b>C12</b><span class="t">phases, explicit rules, inspection UI</span><span class="m">method: phased NCA on an external schedule with carried state, automatic segmentation, dlrule-v1 rules, noise repair</span><span class="k">found: longest gate-passing replay 0–1467 (48.9 s; the current featured model); whole song failed after ~1,080 frames</span></li>
-        <li><b>C13</b><span class="t">whole-song demo (in progress)</span><span class="m">method: numpy-carried state between chunks, wipe pilots, acceptance criteria fixed before results</span><span class="k">status: running; see docs/CAMPAIGN_13.md. The demo switches when runs/featured/manifest.json does</span></li>
+        <li><b>C13</b><span class="t">whole-song demo</span><span class="m">method: numpy-carried state between chunks, wipe pilots, acceptance criteria fixed before results</span><span class="k">whole song 0–6571 passes the fixed criteria (seed 0, error 0.0152); see docs/CHECKPOINT_13.md</span></li>
       </ol>
     </section>
 
@@ -142,55 +209,7 @@
       </div>
     </section>
 
-    <section class="panel" id="new" aria-labelledby="new-h">
-      <h2 class="tag" id="new-h">┌─ run.new</h2>
-      <div class="new-grid">
-        <div>
-          <h3 class="minor">1 · source video</h3>
-          <label>video <select id="video"></select></label>
-          <label class="btn file">[ upload video ]<input type="file" id="upload" accept="video/*,.mp4,.mkv,.webm,.mov,.avi,.gif"></label>
-          <p class="cm" id="probe">–</p>
-          <h3 class="minor">2 · preprocessing</h3>
-          <div class="form">
-            <label>start frame <input type="number" id="p-start" min="0" value="0"></label>
-            <label>frames <input type="number" id="p-frames" min="2" max="600" value="24"></label>
-            <label>width px <input type="number" id="p-width" min="8" max="256" value="32"></label>
-            <label>threshold <input type="number" id="p-threshold" min="0" max="255" value="128"></label>
-            <label>fps <input type="number" id="p-fps" min="0.1" step="any" placeholder="source"></label>
-            <label class="chk"><input type="checkbox" id="p-invert"> invert</label>
-          </div>
-          <button class="btn" id="b-preview">[ preview ]</button>
-        </div>
-        <div>
-          <div class="stage small">
-            <figure><figcaption>gray</figcaption><canvas id="pv-gray" width="1" height="1"></canvas></figure>
-            <figure><figcaption>binary <span class="cm">(training target)</span></figcaption><canvas id="pv-bin" width="1" height="1"></canvas></figure>
-          </div>
-          <label class="scrub">preview frame <input type="range" id="pv-scrub" min="0" max="0" value="0" disabled></label>
-          <span class="counter" id="pv-counter">–</span>
-          <p class="cm" id="pv-info"></p>
-        </div>
-        <div>
-          <h3 class="minor">3 · training</h3>
-          <label>preset <select id="preset"></select></label>
-          <p class="note" id="preset-note"></p>
-          <label>steps override <input type="number" id="t-steps" min="1" placeholder="preset default"></label>
-          <label>device <select id="device"><option value="cpu">cpu (local, 4 threads)</option><option value="gpu">gpu via gpuq (shared queue, -G 1)</option></select></label>
-          <button class="btn" id="b-train">[ start training ]</button>
-          <div id="job" class="job" hidden>
-            <p class="tag small" id="job-name"></p>
-            <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="job-bar"><span></span></div>
-            <dl class="facts" id="job-facts"></dl>
-            <p class="error" id="job-err" role="alert"></p>
-            <button class="btn" id="b-cancel">[ cancel ]</button>
-            <button class="btn" id="b-resume">[ resume ]</button>
-            <button class="btn" id="b-open">[ open in player ]</button>
-            <a class="btn" id="b-dl" href="#" download hidden>[ download export ]</a>
-            <pre class="log" id="job-log" tabindex="0" aria-label="log tail"></pre>
-          </div>
-        </div>
-      </div>
-    </section>
+    </details>
   </section>
 </main>
 
@@ -207,6 +226,7 @@
     <span class="counter" data-r="counter">–</span>
   </div>
   <p class="status-line" data-r="status" role="status"></p>
+  <p class="error" data-r="warn" role="alert"></p>
   <button class="btn" data-r="tools-btn" aria-expanded="false">[ tools ]</button>
   <div class="tools" data-r="tools" hidden>
     <div class="transport opts">

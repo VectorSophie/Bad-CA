@@ -41,7 +41,7 @@ def stats(E, K):
 
 
 def right_panel(dr, x0, hd, k, ph, st, recent):
-    y = 70; f, fs, fb = font(17), font(15), font(17, True)
+    y = 70; f, fs, fb = font(15), font(14), font(16, True)   # fits rule ids up to 3 digits (overflow guard)
     dr.text((x0, y), "rule in effect", font=fs, fill=DIM); y += 28
     lines = [  # (segments) each segment (text, colour)
         [("every cell at once · 4 substeps per video frame · zero padding", BLUE)],
@@ -80,8 +80,12 @@ def render(path, stem, compare=False, rng=None, fps=30):
     bd.rectangle((20, tl_y, W_IMG - 20, tl_y + tl_h), outline=DIM)
     for s0 in bounds[1:]: x = 20 + (W_IMG - 40) * s0 / T; bd.line((x, tl_y, x, tl_y + tl_h), fill=BLUE)
     bd.text((20, tl_y + 22), f"0 s", font=font(13), fill=DIM); bd.text((W_IMG - 80, tl_y + 22), f"{(T - 1) / fps:.1f} s", font=font(13), fill=DIM)
-    bd.text((20, 14), "CA-universal · autonomous replay of the export (first frame + stored initial hidden, nothing injected)", font=font(15), fill=DIM)
-    frames, cache = [], {}
+    bd.text((20, 14), "Bad CA!! · autonomous replay of the export (first frame + stored initial hidden, nothing injected)", font=font(15), fill=DIM)
+    import av
+    from fractions import Fraction
+    os.makedirs(os.path.dirname(stem), exist_ok=True); cont = av.open(stem + ".mp4", "w"); vs = cont.add_stream("libx264", rate=Fraction(fps).limit_denominator(1000))
+    vs.width, vs.height, vs.pix_fmt = W_IMG, H_IMG, "yuv420p"; vs.options = {"crf": "16", "preset": "medium"}; n = 0; poster_t = a + (b - a) // 3
+    cache = {}   # frames are streamed to the encoder (a whole-song list of frames would not fit in memory)
     for t in range(a, b):
         k = int(sched[t]) if t else int(sched[1]); ph = hd["schedule"][[i for i, p in enumerate(hd["schedule"]) if p["start"] <= max(t, 1) < p["end"]][0]]
         pi = hd["schedule"].index(ph); recent = t > 1 and 0 <= t - ph["start"] < 15 and pi > 0
@@ -98,10 +102,11 @@ def render(path, stem, compare=False, rng=None, fps=30):
             dr.text((20, 494), "original (binary target), comparison only:", font=font(13), fill=DIM)
             im.paste(Image.fromarray((F[t] * 255).astype(np.uint8)).resize((96, 72), Image.NEAREST).convert("RGB"), (20, 512))
         x = 20 + (W_IMG - 40) * t / T; dr.rectangle((x - 1, tl_y - 4, x + 1, tl_y + tl_h + 4), fill=AMB)
-        frames.append(np.asarray(im))
-    os.makedirs(os.path.dirname(stem), exist_ok=True)
-    write_mp4(frames, stem + ".mp4", fps); chk = verify_mp4(stem + ".mp4", len(frames), fps)
-    Image.fromarray(frames[min(len(frames) - 1, max(0, len(frames) // 3))]).save(stem + "_poster.png")
+        for pkt in vs.encode(av.VideoFrame.from_ndarray(np.asarray(im), format="rgb24")): cont.mux(pkt)
+        if t == poster_t: im.save(stem + "_poster.png")
+        n += 1
+    for pkt in vs.encode(): cont.mux(pkt)
+    cont.close(); chk = verify_mp4(stem + ".mp4", n, fps)
     json.dump(dict(export=os.path.relpath(path, ROOT), frames=[a, b - 1], check=chk), open(stem + ".video_check.json", "w"), indent=1)
     return chk
 

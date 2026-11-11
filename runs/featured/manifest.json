@@ -1,23 +1,47 @@
 {
  "featured": {
-  "display_name": "Bad Apple!! - opening 48.9 s (26 phases)",
-  "export": "runs/featured/interim_0-1467.ncab",
-  "sha256": "676c6251353d98736d5178e935ebdc02e0f947ebb25eac099a191e637b8c5e28",
+  "display_name": "Bad Apple!! \u00b7 whole song (3 min 39 s, 110 phases)",
+  "export": "runs/featured/whole_song_s0.ncab",
+  "sha256": "facb43d9911399eeffa0e04df010a82f713d54b2212d5d2e2e4cf7c72358e4f5",
   "frames": [
    0,
-   1467
+   6571
   ],
   "fps": 30,
-  "status": "interim",
-  "reason": "Longest replay that passes every C12 gate and the C13 acceptance criteria except specks/holes at 3x (passes at the calibrated 6x); the user accepted its look. Interim default until a whole-song model passes docs/CAMPAIGN_13.md section 3.",
-  "model": "phased Neural CA, 26 phases x 10,320 float32 params, external schedule, state carried across phases, learned low-res initial hidden",
-  "source": "runs/c12/song/noise_export_0-1467.ncab (C12 noise repair, sigma 0.02, chunked-joint)",
+  "status": "whole song; passes every Campaign 13 criterion",
+  "reason": "Only whole-song export so far that passes every Campaign 13 acceptance criterion (docs/CAMPAIGN_13.md section 3) on the numpy replay of the file; Node and browser replays agree (browser == Node bit-exact; numpy differs in 92 threshold pixels over the song). Selection rule: among passing whole-song exports, the lowest full-song error; re-checked when the seed-1 and transition-weighted runs finish.",
+  "model": "phased Neural CA, 110 phases x 10,320 float32 params, external schedule, state carried across phases, learned low-res initial hidden",
+  "source": "runs/c13/song_noise_s0/export_s0.ncab (chunked-joint training, training-only state noise sigma 0.02, numpy-carried chunk state; seed 0)",
   "metrics": {
-   "err": 0.0104,
-   "c12_gates": "pass",
-   "c13_criteria": "pass (K at 6x)"
+   "err": 0.0152,
+   "window240_max": 0.041,
+   "failing16_frac": 0.015,
+   "c13_criteria": "all pass",
+   "c12_gates": "fail (16-frame windows > 0.09 at 1499-1530, 2849-2874, 3641-3682)",
+   "node_mismatch_px": 92
   }
  },
  "candidates": [],
- "history": "see docs/research/README.md (research timeline)"
+ "history": "see docs/research/README.md (research timeline)",
+ "previous": [
+  {
+   "display_name": "Bad Apple!! - opening 48.9 s (26 phases)",
+   "export": "runs/featured/interim_0-1467.ncab",
+   "sha256": "676c6251353d98736d5178e935ebdc02e0f947ebb25eac099a191e637b8c5e28",
+   "frames": [
+    0,
+    1467
+   ],
+   "fps": 30,
+   "status": "interim",
+   "reason": "Longest replay that passes every C12 gate and the C13 acceptance criteria except specks/holes at 3x (passes at the calibrated 6x); the user accepted its look. Interim default until a whole-song model passes docs/CAMPAIGN_13.md section 3.",
+   "model": "phased Neural CA, 26 phases x 10,320 float32 params, external schedule, state carried across phases, learned low-res initial hidden",
+   "source": "runs/c12/song/noise_export_0-1467.ncab (C12 noise repair, sigma 0.02, chunked-joint)",
+   "metrics": {
+    "err": 0.0104,
+    "c12_gates": "pass",
+    "c13_criteria": "pass (K at 6x)"
+   }
+  }
+ ]
 }

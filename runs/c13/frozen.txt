@@ -1,0 +1,2 @@
+/home/jackb/workspace/CA-universal/runs/frozen/ad4f4b2c2410 diag
+/home/jackb/workspace/CA-universal/runs/frozen/3d5f7c9d159c main+pilot

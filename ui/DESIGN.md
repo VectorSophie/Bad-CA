@@ -5,7 +5,7 @@ copied; only its fonts (SIL OFL 1.1, licence files in `static/fonts/`) are reuse
 
 | mechanism there | what we took | how it changed here |
 |---|---|---|
-| Pixel-font display heading (Departure Mono, line-height ~1.16) with a tiny mono "code tag" kicker | the scale contrast: huge pixel heading, small DM Mono kicker, keyword in the accent | the kicker is the real update equation `update { s += Wu·relu(Wp ∗ s) } // ×S per frame, from frame 0 with hidden = 0`; heading "replay bench" |
+| Pixel-font display heading (Departure Mono, line-height ~1.16) with a tiny mono "code tag" kicker | the scale contrast: huge pixel heading, small DM Mono kicker, keyword in the accent | the kicker is the real update equation `update { s += Wu·relu(Wp ∗ s + bp) + bu } // ×S per frame, from the first frame`; heading "Bad CA!!" next to the pixel mark |
 | Box-drawing section tags, `[ label ]` buttons in the accent | `┌─ ` prefix and bracketed buttons | panels are named after what they hold (`┌─ player.compare`, `┌─ model.architecture`, `┌─ run.new`, `┌─ job <run>`); disabled buttons fade to the rule colour |
 | Header canvas of sparse 4 px squares on a 28 px grid, lit near the pointer, alpha ×0.88 every 48 ms, stops when hidden | the same grid/decay numbers | amber squares, header only, the timer stops as soon as nothing is lit, when the tab is hidden, and **whenever the video starts playing**; off entirely under `prefers-reduced-motion` |
 | Chromatic split heading (2 px opposite text-shadows) | the split | the two colours are our diff colours, FN red left and FP blue right, the same ones the error panel uses |
@@ -32,3 +32,8 @@ the legend says it in words, and parameters are underlined monospace badges (but
 heatmaps use amber (positive) / paper (negative) on ink, brightness sqrt(|v|/max), so they do not reuse blue/red. The
 timeline is ink segments with thin boundaries, a dim "computed" bar and the amber playhead; labels sit in HTML below the
 SVG so they cannot collide. Comparison panels live behind `[ tools ]`, off by default.
+
+Polish pass (same tokens): the pixel mark (80×60, `image-rendering: pixelated`, 1 px rule border) sits left of the heading.
+A light theme reuses every role under `prefers-color-scheme: light` (ink `#f3f0e8`, paper `#141412`, accent darkened to
+`#8a5300`, diff red/blue to `#b8261a` / `#1d5fb8` so text stays ≥ 4.8:1); dark stays the default. Timeline fills are
+variables (`--seg-cur`, `--seg-alt`). Disclosures (`Model details`, the research archive) use the amber summary style.

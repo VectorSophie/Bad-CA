@@ -1,5 +1,7 @@
 # Research record index
 
+> Start with [How we got here](journey.md) (the decisions, in order) or the [timeline](timeline.md); this page lists every original record.
+
 Every campaign has a plan (`CAMPAIGN_NN.md`, written before its runs; later decisions are appended, never rewritten)
 and a result (`CHECKPOINT_NN.md`). Machine-readable results live under `runs/`. The records are kept unchanged in
 `docs/`; this page only indexes them. One line per file. Where a line gives a result, it comes from that file.

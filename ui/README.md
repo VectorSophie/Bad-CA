@@ -13,6 +13,16 @@ comparison and error panels.
 
 Open a given model directly: `http://127.0.0.1:8765/?run=example_c10_main`. Views: `#demo` (default), `#lab`, `#research`.
 
+**Default screens (demo, rule lab) use plain names only**: the featured model's `display_name` verbatim, no campaign
+numbers, file names or `runs/` paths. Provenance (parameter count, precision, file size, sha256 and whether it matched,
+source path, the manifest's `model` / `status` / `reason` / `source` / `metrics`) sits in the collapsed **Model details**.
+Problems that affect playback stay visible outside it: sha256 mismatch, "computing ahead at N frames/s" while slower than
+real time, "no original for comparison". `[ Open your own video ]` (`#new`) jumps to `run.new`; `[ save model file ]`
+downloads the export being played. **How it was built** (`#research`) is the decision flow A–F with small record links;
+the campaign log, shelves and model details are inside the collapsed "All saved models (research archive)". The header
+shows `/assets/logo/bad-ca-mark.png` (server: read-only `/assets/{logo,figures}/*.png`), favicon `static/favicon.png`.
+Light theme: same CSS variables under `prefers-color-scheme: light` (text contrast ≥ 4.8:1); the CA video stays black/white.
+
 ## Views (C13)
 - **demo** (default): one model. By default the featured model named in `runs/featured/manifest.json` (`featured.export`,
   `display_name`, `reason`, `sha256`, `fps`; nothing is hard-coded, switch the manifest to switch the demo). The browser
@@ -46,7 +56,7 @@ so playback of a freshly loaded model may wait at the buffer edge.
 ## Endpoints
 | method | path | what |
 |---|---|---|
-| GET | `/`, `/static/*`, `/player/<name>.mjs` | UI; `player/` served read-only, `.mjs` only |
+| GET | `/`, `/static/*`, `/player/<name>.mjs`, `/assets/{logo,figures}/*.png` | UI; `player/` served read-only, `.mjs` only; assets read-only, `.png` only |
 | GET | `/api/config` | presets (with notes), limits |
 | GET | `/api/videos` | built-in (Bad Apple, `tests/data/color_disc_96x64.mp4`) + uploads |
 | GET | `/api/video/<id>/probe` | decoder-validated metadata |

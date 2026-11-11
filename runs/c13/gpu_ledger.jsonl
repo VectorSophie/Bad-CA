@@ -1,0 +1,5 @@
+{"job": 29, "label": "c13-diag-stability", "gpus": 1, "minutes": 2.54}
+{"job": 31, "label": "c13-wipe-tw2", "gpus": 1, "minutes": 14.28}
+{"job": 32, "label": "c13-wipe-shift", "gpus": 1, "minutes": 14.30}
+{"job": 33, "label": "c13-wipe-shift-tw2", "gpus": 1, "minutes": 14.36}
+{"job": 30, "label": "c13-song-noise-s0 (resume from 9 C12 chunks, 19 new)", "gpus": 1, "minutes": 276.6}

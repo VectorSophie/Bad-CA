@@ -21,3 +21,9 @@ runs/ui_server.log
 runs/c12/song/**/best_c*.npz
 runs/c12/song/noise_prefix1468/export_s0.ncab
 runs/ui/
+# Campaign 13: checkpoints/resume states are regenerable; in-progress runs are added when finished
+runs/c13/**/state_*.npz
+runs/c13/**/best_c*.npz
+runs/c13/**/export_s*.ncab
+runs/c13/song_noise_s1/
+runs/c13/pilot_wipe_tw2/

@@ -1,176 +1,157 @@
-# Bad CA!!
+<p align="center">
+  <img src="assets/logo/bad-ca-mark.png" alt="Bad CA!! logo: pixelated frame of the apple at the lips" width="200">
+</p>
 
-Bad CA!! is a local research tool that tries to turn a video into a cellular automaton: a starting grid plus
-local update rules that, run on their own from the first frame, replay the video. It preprocesses a video to a small
-binary grid, trains a CA on it, exports the result to a self-contained file, and replays that file in Python, in
-Node and in a local browser UI, without ever showing the CA the original frames after the first one. Bad Apple!! is
-the test video. The pipeline accepts other videos too, including colour footage.
+<h1 align="center">Bad CA!!</h1>
 
-> **Status (2026-11-11).** The pipeline, the export formats, the two independent players and the local UI exist and
-> are tested. Quality is verified only on the Bad Apple intervals listed under "Results so far". The longest
-> autonomous replay that passes every evaluation gate is **frames 0–1467 (48.9 s, including the black opening)**,
-> using 26 externally scheduled rules with the state carried across rule changes. A whole-song run (110 rules)
-> **failed** as a replay after about 1,080 frames. The models that work are continuous-state Neural CAs with
-> 10,320 float32 parameters per rule. They are not small rule sets, and every model file is larger than a lossless
-> recording of the same frames. Explicit, human-readable rules exist and run exactly, but on real motion they are far
-> worse than the Neural CAs (experimental). The final goal, the whole video replayed autonomously with automatically
-> optimised phases and readable rules, has **not** been reached. Details: `docs/CHECKPOINT_12.md`.
-> Campaign 13 (a whole-song run with the noise-trained recipe) is **in progress**; until it passes its fixed
-> criteria (`docs/CAMPAIGN_13.md` §3), the UI's default model is the 0–1467 replay.
+<p align="center">
+  Replays a video with phase-wise local update rules, and lets you inspect those rules and every cell's state.
+</p>
 
-## Try it
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#demo">Demo</a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="#results-and-limits">Results and limits</a> ·
+  <a href="#why-this-approach">Why this approach</a> ·
+  <a href="docs/research/journey.md">How we got here</a>
+</p>
 
-Every command below was run on this checkout on 2026-11-10 (CPU only, no training). The Python environment is the
-local `.venv` (Python 3.12; `requirements.txt` pins the versions used: numpy, scipy, PyAV, Pillow, JAX; GPU training
-needs a CUDA build of jaxlib). Node 24 runs the
-players.
+> **Status (2026-11-11).** Bad CA!! replays the **whole Bad Apple!! video** (frames 0–6571, 3 min 39 s) from one
+> exported file: a phased Neural CA with 110 phases, one learned local rule per phase, an external schedule, and the
+> cell state carried across every phase change. The same file replays in numpy, Node and the browser. It passes the
+> project's fixed acceptance criteria (`docs/CAMPAIGN_13.md` §3), with the weak spots listed under
+> [Results and limits](#results-and-limits). This is **one trained model (seed 0)**; a second seed is still being
+> trained. The rules are learned float32 networks, not small Boolean rules, and the file is larger than a lossless
+> recording.
+
+## Demo
+
+<p align="center">
+  <a href="assets/demo/whole_song.mp4"><img src="assets/demo/preview.gif" alt="Bad CA!! demo: CA output on the left, the rule in effect on the right, phase timeline below" width="640"></a>
+</p>
+
+<p align="center"><a href="assets/demo/whole_song.mp4">▶ whole song (MP4, 3 min 39 s, 9.1 MB)</a>, rendered from the exported file. GitHub opens it in the file view; there is no external hosting. The preview above is 6 s (frames 1850–2029) cut from it.</p>
+
+**What you just watched.** Every frame on the left is computed from one exported file, nothing else:
+
+1. **Initial state:** the first frame (black) is stored as the visible layer, plus a small learned low-resolution
+   array (1,620 values) as the hidden layers (15 channels per cell), which the rules grow the opening from.
+2. **Local update:** each cell reads its 3×3 neighbourhood (all 16 channels) and applies the update shown on the right.
+   All cells update at once, 4 times per video frame. A pixel is shown when the visible channel exceeds 0.5.
+3. **One rule per phase:** all cells share the same rule within a phase (blue = fixed structure, red = that phase's learned
+   numbers, 10,320 per rule).
+4. **Rule changes follow a timeline:** the timeline (bottom) switches rules at fixed frames, and the switch is instant.
+   This is a time-varying CA with an *external* schedule.
+5. **State carries on:** visible and hidden state continue across a switch. There is no reset and no target frame is
+   injected after the first one.
+6. **Original for comparison only:** the original video is used only for training and for comparison, never as input
+   to the replay.
+
+## Quick start
+
+Requires Python 3.12 with `requirements.txt` (numpy, scipy, PyAV, Pillow, JAX) and Node 24 for the independent player.
+Bad Apple!! itself is not included (see [Data and licence](#data-and-licence)).
 
 ```sh
-# local UI (127.0.0.1 only; default port 8765). Stop with Ctrl-C.
-.venv/bin/python ui/server.py --port 8790
-#   -> "Bad CA!! on http://127.0.0.1:8790/"
-#   open http://127.0.0.1:8790/?run=example_c10_main
+git clone https://github.com/VectorSophie/Bad-CA.git && cd Bad-CA
+python3.12 -m venv .venv && .venv/bin/pip install -r requirements.txt
 
-# video -> CA pipeline CLI
-.venv/bin/python -m ca.pipeline --help
-#   -> subcommands: probe, prep, train, export, replay, video, run, import
+# local UI on 127.0.0.1 (Ctrl-C to stop): the demo model plays from its file, even without the source video
+.venv/bin/python ui/server.py --port 8766        # open http://127.0.0.1:8766/
 
-# pipeline tests (about 9 s; one needs the Bad Apple file, see "Data")
-.venv/bin/python tests/test_pipeline.py
-#   -> ok test_color_and_cache / ok test_bad_apple_path / ok test_rejects / ok test_export_only_replay
+# replay any export from the file alone (Node), and inspect it
+node player/nca_replay.mjs runs/featured/whole_song_s0.ncab          # whole song, ~1 min
+.venv/bin/python -m ca.pipeline info runs/featured/whole_song_s0.ncab
 
-# replay an export in Node, from the file alone; prints a SHA-256 over the binary frames
-node player/nca_replay.mjs runs/pipe/example_c10_main/model.ncab
-#   -> {"sha256":"f2401adb7b9f…","T":56,"H":36,"W":48,"C":16,"S":4,"weight_dtype":"f32"}
-node player/rule_replay.mjs runs/c12/samples/life_then_grow.rule.json
-#   -> {"sha256":"a97f536bf2d4…","T":30,"H":24,"W":24,"k":0,"S":1}
-
-# UI inspector check: browser-side rollout and cell traces vs the reference step (about 45 s)
-node ui/test_inspector.mjs
-#   -> PASS lines for both samples and example_c10_main, then "ALL PASS"
-```
-
-Train a small model on your own clip (CPU, `demo` preset, 1,304 parameters; minutes):
-
-```sh
+# your own clip: CPU demo preset (small, minutes); phased training with --phases uniform:K
 .venv/bin/python -m ca.pipeline run my.mp4 runs/pipe/mine --start 0 --frames 24 --width 32 --preset demo
 ```
 
-The `quality` preset (10,320 parameters) needs a GPU. On this machine GPU jobs go through the shared `gpuq` queue.
+Comparison with the original in the UI needs the source video at `refs/Bad-Apple-Starter/BadApple!!.mp4`, followed by
+`ui/make_examples.sh`; without it the CA plays alone. GPU training uses JAX with a CUDA build of jaxlib.
 
-## What it actually does
+## How it works
 
-| stage | what exists | where |
-|---|---|---|
-| Preprocess | decode only the requested interval (PyAV), luma (ITU-R 601), box resize keeping aspect ratio, explicit threshold and fps; cached by sha256 of source + settings | `ca/pipeline.py` `prep` |
-| Train (single rule) | continuous-state Neural CA, JAX, resumable, contour-weighted loss | `ca/pipeline.py` `train`, `ca/nca_train.py` |
-| Train (phases) | K rules on an external schedule, joint BPTT across phase boundaries, or greedy/chunked | `ca/phase_train.py`, `experiments/exp45_c12.py` |
-| Segment | automatic phase boundaries from the video (MDL dynamic programming, cut and wipe detection) | `ca/segment.py` |
-| Explicit rules | decision lists over integer neighbourhood features, ≤ 3 hidden bits; learner and exact executor | `ca/rules.py`, `player/rule_core.mjs` |
-| Export | `nca-v1`, `ncab-v1`, `ncab-v2`, `dlrule-v1` (see `docs/format.md`) | `ca/nca.py`, `ca/ncab.py`, `ca/phase_nca.py`, `ca/rules.py` |
-| Replay | numpy reference and an independent Node/browser player that read only the export | `player/` |
-| Evaluate | full-interval autonomous replay vs the preprocessed binary original; shape, motion and transition metrics; gates | `ca/diag10.py`, `experiments/exp46_eval12.py` |
-| Inspect | local UI: synchronised original / CA / error panels, phase timeline, rule list and diffs, per-cell inspector, rule editing | `ui/` |
+![pipeline: video, preprocess, phases, training, export, independent replay](assets/figures/pipeline.png)
 
-Replay is autonomous in every reported result: the first frame (plus, where stated, stored initial hidden state)
-goes in, and nothing from the target is read afterwards. There are no resets, no frame injection, and no coordinate
-or frame-number inputs to the cells. A phase schedule, where used, is part of the export and is counted in its size.
+![one cell, one substep: neighbourhood, features, residual update, next state](assets/figures/cell_update.png)
 
-## Results so far
+![phase switch: the rule changes at a boundary, the state carries on](assets/figures/phase_switch.png)
 
-All errors are the fraction of wrong pixels over the full interval of an autonomous replay from the export, at
-48×36, against the binary original. Sources: `docs/CHECKPOINT_10.md`, `docs/CHECKPOINT_11.md`,
-`docs/CAMPAIGN_12.md`, `docs/CHECKPOINT_12.md`.
+- **Preprocessing:** the video is reduced to a 48×36 binary grid (luma, box resize, threshold 128). The loss from that
+  reduction is separate from the CA's own error.
+- **Training:** consecutive phases are trained together in chunks of about 8 s, with the state carried from chunk to chunk.
+  Small Gaussian noise is added to the state during training only, so the rules tolerate tiny numerical differences.
+- **Export:** `.ncab` v2 holds the first frame, the initial hidden array, every phase's rule and the schedule.
+- **Replay:** independent players (numpy, Node, browser) read only that file. They agree to float precision; a few
+  threshold pixels can differ.
 
-| interval (Bad Apple frames) | model | error | verdict |
-|---|---|---|---|
-| 4500–4555 (56 frames) | 1 rule, 10,320 params (C10) | 0.0040 (median of 3 seeds) | passes |
-| 1800–1859 (60 frames) | 1 rule, 10,320 params (C10) | 0.0134 (median) | passes |
-| 4500–4555 | 1 rule, 3,884 / 1,304 params (C11) | 0.0062 / 0.0175 (median) | fail the C11 gates |
-| 1760–1879 (120 frames) | 1 rule, 10,320 params (C11) | 0.0304 / 0.0323 (2 seeds) | passes the sustained-motion gate |
-| 1760–1999 (240 frames, a wipe and a shot change) | 1 rule, 10,320 params | 0.0656 (C11), 0.072 / 0.065 (C12 pilot) | fails |
-| 1760–1999 | 4 phases, uniform or automatic boundaries (C12 pilot) | 0.027 / 0.028 (uniform), 0.028 / 0.033 (auto) | uniform passes in both seeds, auto in one |
-| 4500–4555 | explicit dlrule-v1, 14 phase programs, 117 rules (C12 pilot) | 0.0995 | experimental; far from the NCA |
-| 1760–1999 | 1 rule with the same parameter count (41,232; C12) | 0.047 / 0.045 | fails; 4 phases beat it |
-| 1760–1999 | 6 phases, uniform / automatic (C12) | 0.019 / 0.021, 0.021 / 0.022 | pass |
-| 0–1467 (48.9 s, black opening included) | 26 phases, chunked-joint, training-only state noise, 1 seed (C12) | 0.0104 | **passes; longest** |
-| 0–2115 | 37 phases, same recipe, 1 seed (C12) | 0.0157 | fails one window (fast wipe at 1507–1522) |
-| 0–6571 (whole song) | 110 phases, chunked-joint without noise, 1 seed (C12) | 0.339 | **fails** after ~1,080 frames (not robust to float differences) |
+Details: [architecture](docs/architecture.md), [rule models](docs/rule-models.md), [file formats](docs/format.md),
+[evaluation](docs/evaluation.md).
 
-What this does **not** show yet:
-- **That phases help everywhere.** They beat a same-size single rule on 1760–1999 (with a wipe and a shot change),
-  but on the cut-free 1760–1879 two phases gave no clear gain. Two seeds per arm.
-- **That automatic segmentation helps.** At K = 2, 4 and 6 it was never better than equal-length phases.
-- **The whole song.** Only one seed. The whole-song attempt failed; the noise-trained recipe that fixes the
-  divergence has been run to frame 2115 only.
-- **Compression.** Every model file is larger than the same frames stored losslessly (1 bit/px + zlib-9).
-- **Generality.** Other videos run through the pipeline (a synthetic colour-ball demo trains to error 0.0017),
-  but quality has only been studied on the Bad Apple intervals above.
+## Results and limits
 
-## Replay types
+![error per frame of the featured export](assets/figures/featured_error.png)
 
-1. **Fixed rule:** one rule for the whole interval.
-2. **External schedule:** a time-varying CA. The export stores which rule owns each frame. State is carried across
-   phase boundaries unchanged. This is the main path for long intervals.
-3. **Internal-state phase switching**, where the cells' own state selects the rule: not implemented.
-4. **Clip concatenation with resets:** diagnostic only, never counted as autonomous playback.
+![frames 1760-1999: one rule vs phased rules, same steps, 2 seeds each](assets/figures/l240_fixed_vs_phased.png)
 
-## Limits
+**Whole song (the featured model, seed 0, replayed from its file):**
+- **Error:** 0.0152 wrong pixels per frame on average. Every 240-frame window stays ≤ 0.041; all 191 blank (fade)
+  frames are reproduced.
+- **Motion:** the replay matches the original's motion in every window where the original moves.
+- **Thin structure:** thin parts and gaps are kept at 0.83 / 0.78 recall. A blurred copy of the original reaches only
+  0.71 / 0.63, and that is one of the checks it fails.
+- **Implementations agree:** numpy, Node and the browser replay the same file. Node and the browser are bit-identical;
+  numpy differs in 92 threshold pixels over the whole song, with no growth over time.
+- **Transitions** (earlier comparison, figure above): on a 240-frame stretch with a wipe and a cut, a single rule
+  reaches 0.065–0.072. A single rule as large as four phases reaches 0.045–0.047, while 4–6 phases reach 0.019–0.033.
+  Same steps, 2 seeds each.
 
-- Resolution: every result is 48×36 binary. Preprocessing loss (480×360 → 48×36 box → threshold 128) is
-  separate from CA error (`experiments/exp48_preproc_video.py` renders it).
-- A parameter count is not a rule count. The Neural CA weights are not readable rules, and the UI never shows them
-  as rules.
-- A black first frame with zero hidden state cannot form a picture under a shift-invariant rule with a zero
-  boundary. The song run therefore stores a learned low-resolution initial hidden array, counted in the file.
-- Python and Node replays agree bit for bit on most exports. In C11, 5 of the checked models differed by 1–2
-  pixels, and the continuous difference grows with replay length. That agreement is reported separately from
-  accuracy.
-- The `ca.pipeline` CLI trains, exports and replays single-rule (v1) models only. Phased v2 models come from
-  `experiments/exp45_c12.py`. The UI lists and plays both.
-- Local use only. The UI binds to 127.0.0.1 and checks Host and a custom header. Upload hardening for any public
-  deployment has not been done.
+**Limits:**
+- **Fast wipes and cuts are the weakest parts.** Three short stretches exceed 0.09 error over 16 frames: frames
+  1499–1530, 2849–2874 and 3641–3682 (1.5 % of the song). Single frames at cuts reach ~0.3.
+- **Speckle:** the replay has about 2× the small specks and 2.7× the small holes of the original, and some
+  single-frame flicker (0.39 spurious flips per frame).
+- **One seed.** A second, independent training run is in progress; until it finishes, reproducibility of the
+  *procedure* is not shown, only of this *file*.
+- **Automatic segmentation** of phases was never better than equal spacing.
+- **Not compression:** the whole-song model is 4.2 MB; the same frames stored losslessly (1 bit/px + zlib) take 231 kB.
+- **Readable rules:** explicit condition rules run exactly (UI "Rule lab"), but on Bad Apple they reach only about 0.10
+  error on a 2-second clip.
+- **Other videos:** they run through the same pipeline, but quality has only been studied on Bad Apple.
 
-## Experimental
+## Why this approach
 
-- **Explicit rules (`dlrule-v1`).** Learned directly from frames, or extracted from a trained NCA. Exact on the
-  positive controls (Conway's Life; a hidden-bit rule). On real motion they collapse to "hold" or flicker unless
-  split into many short phases. See `docs/rule-models.md`.
-- **Low-rank per-phase deltas** (`mode=delta`): 0.049 / 0.054 on 1760–1999, worse than independent phases.
-- **Greedy phase training:** worse than joint training on the wipe and shot-change phases.
-- **Rule editing in the UI:** edits replay from frame 0 by default. Continuing from the current state is labelled
-  as a hybrid.
-- **GPU training from the UI** (via `gpuq`): implemented, exercised once with a short check job.
+![approaches tried](assets/figures/approach_tree.png)
 
-## Documentation
+1. **Simple local rules first.** Memoryless, Life-like and lookup-table rules replay frames exactly only where the 3×3
+   context never conflicts. The video quickly produces conflicts.
+2. **Memory and several updates per frame.** These made exact short replays possible (SAT search, up to ~10 frames). But
+   the rules grew larger than the recordings, and the search timed out on longer clips.
+3. **Searching for small rules directly.** Circuit synthesis, CGP, DiffLogic and decision lists gave small rules that
+   follow coarse shapes but not real motion; some scores were flicker loopholes.
+4. **Continuous state.** A Neural CA with hidden channels produced recognisable motion from the first frame, and a
+   contour-weighted loss cleaned the outlines. This gave up "small rule" for "replays the video".
+5. **Change the rule with the scene.** One rule failed across wipes and cuts. Per-phase rules with carried state fixed
+   that, at 4–6 times the parameters. Automatic phase boundaries did not beat equal spacing.
+6. **Keep long replays stable.** Chained rules amplified float-order differences until a whole-song replay fell
+   apart after ~1,080 frames. Training with small state noise, and carrying chunk states with the replay's own
+   arithmetic, made the exported replay match training. The whole song then passed.
 
-| file | contents |
-|---|---|
-| `docs/architecture.md` | modules, data flow, players, UI |
-| `docs/rule-models.md` | Neural CA, phased NCA and explicit rule models |
-| `docs/format.md` | every export format, field by field, and the byte accounting |
-| `docs/evaluation.md` | how replays are scored, metrics, gates, baselines |
-| `docs/roadmap.md` | next steps, grounded in documented failures |
-| `docs/research/README.md` | index of every campaign plan and checkpoint |
-| `ui/README.md`, `ui/DESIGN.md` | UI endpoints and limits; design sources |
+The full story with evidence and costs: [How we got here](docs/research/journey.md); the original campaign records:
+[research index](docs/research/README.md).
 
 ## Data and licence
 
-- **Bad Apple!! video and music are not part of this repository and must not be added to it.** The experiments use
-  `refs/Bad-Apple-Starter/BadApple!!.mp4` from a local clone of `C-mykk/Bad-Apple-Starter` (commit `7b04ba8e`;
-  that repository has no licence file). Only the file's sha256 is recorded
-  (`d8f21232313506da4f8d631ca289793bcf2f0a33440d68ccb02f4ac52e963cd0`; h264 480×360, 6,572 frames at 30 fps). Its
-  upstream identity is not verified. `refs/` is git-ignored. To reproduce, supply your own copy at that path.
-- Committed run artefacts (exports, small frame grids, videos under `runs/`) are derived from that file at 48×36
-  for research comparison.
-- `tests/data/*.mp4` are synthetic clips generated by this project (`tests/data/make_test_videos.py`).
-- The UI bundles OFL-licensed fonts with their licence files (`ui/static/fonts/`). No code was copied from the
-  GPL-3.0 design reference (`ui/DESIGN.md`).
-- Licence: GNU GPL v3.0 (`LICENSE`). It covers this project's code and documentation; the bundled fonts keep their
-  OFL licences, and the Bad Apple!! source material is not covered (it is not included).
+- **Bad Apple!! video and music are not part of this repository.** The experiments use a local copy (sha256
+  `d8f21232…cd0`, 480×360, 6,572 frames at 30 fps) from a clone of `C-mykk/Bad-Apple-Starter`; its upstream identity
+  is not verified.
+- **Derived material:** committed results and videos contain 48×36 binary frames derived from it for research
+  comparison. The logo is a pixelated frame of the video (`assets/logo/README.md`); its rights stay with their owners.
+- **Licence:** GNU GPL v3.0 (`LICENSE`), for this project's code and documentation. The bundled fonts keep their SIL
+  OFL licences (`ui/static/fonts/`).
+- **Former name:** the project was called CA-universal until 2026-11; the campaign records keep that name, and the
+  Python package (`ca`) and format identifiers (`ca-universal/...`) are unchanged.
 
-Repository: https://github.com/VectorSophie/Bad-CA (`git clone https://github.com/VectorSophie/Bad-CA.git`). The
-project was called CA-universal until Campaign 13; the campaign records keep that name, and the Python package (`ca`),
-the export format identifiers (`ca-universal/...`) and run paths are unchanged.
-
-Documentation layout follows the README/doc structure of VectorSophie/hgit.
+README layout follows the structure of [VectorSophie/hgit](https://github.com/VectorSophie/hgit).

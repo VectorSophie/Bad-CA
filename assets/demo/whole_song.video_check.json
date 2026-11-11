@@ -1,0 +1,22 @@
+{
+ "export": "runs/featured/whole_song_s0.ncab",
+ "frames": [
+  0,
+  6571
+ ],
+ "check": {
+  "path": "/home/jackb/workspace/CA-universal/experiments/../assets/demo/whole_song.mp4",
+  "decoded_frames": 6572,
+  "expected_frames": 6572,
+  "fps": 30.0,
+  "expected_fps": 30.0,
+  "duration_s": 219.06666666666666,
+  "expected_duration_s": 219.067,
+  "codec": "h264",
+  "size": [
+   1280,
+   640
+  ],
+  "ok": true
+ }
+}

@@ -479,6 +479,8 @@ class H(BaseHTTPRequestHandler):
         self.guard(); path = urlparse(self.path).path; parts = [p for p in path.split("/") if p]; G = self.command == "GET"
         if G and path in ("/", "/index.html"): return self.file(os.path.join(STATIC, "index.html"))
         if G and parts[:1] == ["static"] and len(parts) >= 2: return self.file(under(STATIC, *parts[1:]))
+        if G and len(parts) >= 3 and parts[0] == "assets" and parts[1] in ("logo", "figures") and parts[-1].endswith(".png"):
+            return self.file(under(os.path.join(ROOT, "assets", parts[1]), *parts[2:]))  # read-only: logo + figures, png only
         if G and parts[:1] == ["player"] and len(parts) == 2 and parts[1].endswith(".mjs"): return self.file(under(PLAYER, parts[1]))
         if parts[:1] != ["api"]: raise ApiError(404, "not found")
         p = parts[1:]

@@ -1,5 +1,5 @@
 // Bad CA!! local UI: vanilla JS, no build step. Three views: demo (one NCA model, the featured one by default),
-// rule lab (explicit dlrule-v1 rules), research (campaigns, every earlier export, new runs).
+// rule lab (explicit dlrule-v1 rules), research = "how it was built" (decision flow, new runs, archive of every export).
 // CA frames come only from the export: NCA in worker.js (streamed, frame-index based), explicit rules here with
 // player/rule_core.mjs. Substep states, the rule panel and the inspectors use the same core functions.
 import { parseNcab, parseNcaJson, ruleAt, substep, traceCell, ncabHeader } from "/player/nca_core.mjs";
@@ -65,6 +65,7 @@ const field = (() => {
 const VIEWS = ["demo", "lab", "research"];
 let view = "demo";
 function showView(v) {
+  const jump = v === "new"; if (jump) v = "research"; // "Open your own video" lands on run.new
   if (!VIEWS.includes(v)) v = "demo";
   view = v;
   for (const k of VIEWS) { $("v-" + k).hidden = k !== v; $("tab-" + k).setAttribute("aria-selected", k === v); }
@@ -72,6 +73,7 @@ function showView(v) {
   if (v !== "lab") LAB.setPlaying(false);
   if (v === "lab" && !LAB.e && !labLoading) openLab($("lab-sel").value || LAB_DEFAULT);
   (v === "demo" ? DEMO : v === "lab" ? LAB : null)?.fit();
+  if (jump) $("new").scrollIntoView();
 }
 addEventListener("hashchange", () => showView(location.hash.slice(1)));
 
@@ -193,7 +195,8 @@ function makePlayer(mount, tlSlot, opts = {}) {
     let s = e.kind === "rule"
       ? `explicit rules run in this browser with rule_core.mjs (${e.hybridFrom != null ? "hybrid: no single-version run() reference" : e.runMatch ? "identical to run()" : "MISMATCH vs run()"}): ${e.T} frames × ${e.S} substeps, ${e.ms.toFixed(0)} ms · sha256 ${e.sha.slice(0, 16)}… · version ${e.ver}: ${e.verNote}`
       : done && e.sha ? `all ${fmtInt(e.T)} frames computed from the export in a worker (${(e.ms / 1000).toFixed(1)} s, ${((e.T - 1) / (e.ms / 1000)).toFixed(1)} frames/s) · sha256 of binary frames ${e.sha.slice(0, 16)}…`
-      : `computing from the export in a worker: computed up to frame ${fmtInt(e.upto - 1)} of ${fmtInt(e.T - 1)}` + (e.upto > 1 ? ` (${((e.upto - 1) / ((performance.now() - e.t0) / 1000)).toFixed(1)} frames/s)` : "") + "; playback only shows computed frames";
+      : (e.upto > 1 ? `computing ahead at ${((e.upto - 1) / ((performance.now() - e.t0) / 1000)).toFixed(1)} frames/s (real time is ${P.fps} frames/s; playback waits at the computed edge) · ` : "computing frames from the model file · ")
+        + `computed up to frame ${fmtInt(e.upto - 1)} of ${fmtInt(e.T - 1)}`;
     if (waiting) s = `waiting for frame ${P.want} (computed up to ${e.upto - 1}) · ` + s;
     if (e.error) s = "ERROR: " + e.error + " · " + s;
     q("status").textContent = s;
@@ -263,7 +266,7 @@ function makePlayer(mount, tlSlot, opts = {}) {
   });
   P.load = (e, meta) => {
     P.e?.stop(); if (P.B?.e) { P.B.e.stop(); P.B = null; q("fig-b").hidden = true; q("b-sel").value = ""; q("b-line").textContent = ""; tlB(); }
-    P.setPlaying(false); Object.assign(P, { e, t: 0, sub: 0, sel: null, want: null, orig: null, origReq: null, shown: false }, meta);
+    P.setPlaying(false); Object.assign(P, { e, t: 0, sub: 0, sel: null, want: null, orig: null, origReq: null, shown: false }, meta); q("warn").textContent = "";
     q("play").disabled = e.upto < 2; P.fit();
   };
   // ---- B: second export synchronised by frame index (demo tools) ----
@@ -301,14 +304,14 @@ document.addEventListener("keydown", (ev) => {
 });
 
 async function fetchOrig(P, url) {
-  if (P.origReq) return; const e = P.e; P.origReq = url;
+  if (P.origReq) return; const e = P.e; P.origReq = url; P.q("warn").textContent = "";
   try {
     const o = await api(url); if (P.e !== e) return;
     if (o.bin.shape[0] < e.T || o.bin.shape[1] !== e.H || o.bin.shape[2] !== e.W) throw new Error(`original is ${o.bin.shape.join("×")}, export is ${e.T}×${e.H}×${e.W}`);
     P.orig = { ...o, u8: b64u8(o.bin.b64) }; if (o.fps) { P.fps = o.fps; P.fpsSrc = "source video"; }
     if (o.first_frame_mismatch_px) toast(`original resolved from export meta differs from the export's first frame in ${o.first_frame_mismatch_px} px`, true);
     P.render(true);
-  } catch (err) { toast("no original for comparison: " + err.message, true); }
+  } catch (err) { if (P.e === e) P.q("warn").textContent = "no original for comparison: " + err.message; }
 }
 function loadOrigDemo(P) { if (!P.q("t-orig").checked && !P.q("t-err").checked) return; fetchOrig(P, demoSrc.kind === "featured" ? "/api/featured/original" : `/api/runs/${encodeURIComponent(demoSrc.name)}/original`); }
 function loadOrigLab(P) { if ((P.q("t-orig").checked || P.q("t-err").checked) && LAB.name) fetchOrig(P, `/api/runs/${encodeURIComponent(LAB.name)}/original`); }
@@ -319,30 +322,40 @@ async function openFeatured() {
   const seq = ++demoSeq; demoSrc = { kind: "featured" };
   $("demo-banner").hidden = true; $("demo-warn").textContent = "";
   let f;
-  try { f = await api("/api/featured"); } catch (err) { $("demo-title").textContent = "// no featured model: " + err.message; return; }
+  try { f = await api("/api/featured"); } catch (err) { $("demo-title").textContent = "// no demo model: " + err.message; return; }
   const ft = f.manifest.featured;
-  $("demo-title").textContent = `// featured: ${ft.display_name || f.path}`;
-  $("demo-reason").innerHTML = `${esc(ft.model || "")}${ft.status ? ` · <span class="verbadge">${esc(ft.status)}</span>` : ""}<details class="why"><summary>why this model</summary><span class="cm">${esc(ft.reason || "–")} · file ${esc(f.path)} · sha256 ${esc(ft.sha256 || "–")}</span></details>`;
+  $("demo-title").textContent = `// ${ft.display_name || "demo model"}`; $("demo-dl").href = "/api/featured/export";
   const u8 = await bytesOf("/api/featured/export"); if (seq !== demoSeq) return;
   const sha = await hex(u8);  // verify what is actually played, in the browser
-  if (sha !== ft.sha256) $("demo-warn").textContent = `WARNING: sha256 of ${f.path} is ${sha}, but the manifest says ${ft.sha256 || "(none)"}. This is not the file the manifest describes.`;
-  await startDemo(u8, seq, { fps: f.fps, fpsSrc: "featured manifest", name: null, label: ft.display_name, shaOk: sha === ft.sha256 });
+  if (sha !== ft.sha256) $("demo-warn").textContent = `WARNING: the model file's sha256 is ${sha}, but the manifest says ${ft.sha256 || "(none)"}. This is not the file the manifest describes (see Model details).`;
+  const facts = [["source file", f.path], ["sha256", `${sha} · ${sha === ft.sha256 ? "matches the manifest" : `MISMATCH: manifest says ${ft.sha256 || "(none)"}`}`],
+    ["model", ft.model], ["status", ft.status], ["why this model", ft.reason], ["trained from", ft.source], ["metrics", ft.metrics && Object.entries(ft.metrics).map(([k, v]) => `${k}: ${v}`).join(" · ")]];
+  await startDemo(u8, seq, { fps: f.fps, fpsSrc: "featured manifest", name: null, label: ft.display_name, shaOk: sha === ft.sha256 }, facts);
 }
 async function openResearchNca(name, det) {
   const seq = ++demoSeq; demoSrc = { kind: "run", name };
   const label = det.summary.label;
-  $("demo-title").textContent = `// research export: ${label}`; $("demo-warn").textContent = ""; $("demo-reason").textContent = "";
+  $("demo-title").textContent = `// research export: ${label}`; $("demo-warn").textContent = ""; $("demo-dl").href = `/api/runs/${encodeURIComponent(name)}/export`;
   $("demo-banner").hidden = false; $("demo-banner").innerHTML = `viewing a research export, not the featured model · <button class="btn" id="b-featured">[ back to the featured model ]</button>`;
   $("b-featured").onclick = () => openFeatured();
   const u8 = await bytesOf(`/api/runs/${encodeURIComponent(name)}/export`); if (seq !== demoSeq) return;
   const man = det.manifest || {}, pp = man.data?.preprocessing;
-  await startDemo(u8, seq, { fps: pp?.fps || 30, fpsSrc: pp?.fps ? "run manifest" : "assumed 30 (no fps recorded)", name, label });
+  await startDemo(u8, seq, { fps: pp?.fps || 30, fpsSrc: pp?.fps ? "run manifest" : "assumed 30 (no fps recorded)", name, label },
+    [["run", name], ["label", label], ["sha256", await hex(u8)], ["source", man.c12?.path ?? (det.summary.kind === "run" || det.summary.kind === "example" ? `runs/pipe/${name}` : "imported file")], ["preset", man.preset]]);
 }
-async function startDemo(u8, seq, meta) {
+// provenance shown only inside the collapsed "Model details" (errors that affect playback stay visible above it)
+function renderDemoFacts(e, u8, facts) {
+  const bi = blobInfo(e), n = (ks) => Object.entries(bi).filter(([k]) => ks(k)).reduce((t, [, s]) => t + s.reduce((x, y) => x * y, 1), 0), W = (k) => ["Wp", "bp", "Wu", "bu"].includes(k);
+  const K = scheduleOf(e).length, rest = n((k) => !W(k));
+  const rows = [["parameters", `${fmtInt(n(W) || e.m.Fh * e.m.C * 9 + e.m.Fh + e.m.C * e.m.Fh + e.m.C)} learned weights${rest ? ` + ${fmtInt(rest)} other stored values (initial hidden state or per-phase deltas)` : ""} · ${K} phase${K > 1 ? "s" : ""}, ${e.m.C} channels, ${e.m.Fh} features, ${e.S} updates per frame`],
+    ["precision", e.m.weight_dtype === "f16" ? "float16 stored, computed in float32" : "float32"], ["file size", `${fmtInt(u8.length)} B`], ["frames", `${fmtInt(e.T)} at ${e.W}×${e.H}`], ...facts];
+  $("demo-facts").innerHTML = rows.filter(([, v]) => v != null && v !== "").map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
+}
+async function startDemo(u8, seq, meta, facts = []) {
   try {
     const e = await loadNca(u8, (e) => { if (DEMO.e === e) { DEMO.onStream(); if (e.sha) window.__bench = { sha256: e.sha, T: e.T, H: e.H, W: e.W, ms: e.ms, chunks: e.chunks, error: e.error }; } });
     if (seq !== demoSeq) return e.stop();
-    e.phaseStats = null; mx = null; DEMO.load(e, meta); renderRulePanel(DEMO, true); renderInspector();
+    e.phaseStats = null; mx = null; DEMO.load(e, meta); renderRulePanel(DEMO, true); renderInspector(); renderDemoFacts(e, u8, facts);
     if (meta.fps && e.m.meta?.fps && e.m.meta.fps !== meta.fps) toast(`fps: manifest ${meta.fps}, export meta ${e.m.meta.fps}`, true);
   } catch (err) { $("demo-warn").textContent = "export could not be replayed: " + err.message; }
 }
@@ -488,10 +501,10 @@ function renderInspector() {
   const sch = scheduleOf(e), ph = sch.findIndex((p) => f >= p.start && f < p.end), rid = m.sched ? m.sched[Math.min(f, e.T - 1)] : 0;
   $("insp-where").textContent = `// cell (x=${x}, y=${y}) · frame ${P.t}${P.sub ? ` + ${P.sub} substeps` : ""}`;
   const s = e.stateAt(g);
-  if (!s) { $("insp-body").innerHTML = `<p class="cm">state not available yet (checkpoint for frame ${P.t - (P.t % e.every)} still being computed)</p>`; return; }
+  if (!s) { $("insp-body").innerHTML = `<p class="cm">state not available yet (the stored state for frame ${P.t - (P.t % e.every)} is still being computed)</p>`; return; }
   const tr = traceCell(m, ruleAt(m, f), s, i), nx = last ? null : e.stateAt(g + 1), agree = nx && tr.next.every((v, c) => Object.is(v, nx[c * e.N + i]));
   let h = `<dl class="facts"><dt>cell</dt><dd>x=${x}, y=${y} (row-major index ${i}) of the ${e.W}×${e.H} grid</dd>
-    <dt>state shown</dt><dd>${P.sub ? `after substep ${g} = frame ${P.t}·${S} + ${P.sub}` : `the state after frame ${P.t} (after ${g} = ${P.t}·${S} substeps)`}; this state is the input of the next update · regenerated from the checkpoint at frame ${P.t - (P.t % e.every)} with substep()</dd>
+    <dt>state shown</dt><dd>${P.sub ? `after substep ${g} = frame ${P.t}·${S} + ${P.sub}` : `the state after frame ${P.t} (after ${g} = ${P.t}·${S} substeps)`}; this state is the input of the next update · regenerated with substep() from the full state kept at frame ${P.t - (P.t % e.every)}</dd>
     <dt>next update</dt><dd>${last ? "none: this is the last frame of the export" : `substep ${g} → ${g + 1}, part of producing frame ${f}; rule id ${rid} in effect (phase ${ph + 1} of ${sch.length})`}</dd></dl>`;
   h += `<div class="two-col"><div><h3 class="minor">all ${C} channels <span class="cm">// 3×3 neighbourhood NW N NE / W · E / SW S SE; · = outside the grid (zero padding)</span></h3><div class="scrollbox"><table class="rtab"><thead><tr><th>c</th><th class="num">s now</th><th>3×3 neighbourhood</th>${last ? "" : '<th class="num">Δs = Wu·p + bu</th><th class="num">next s</th>'}</tr></thead><tbody>`;
   for (let c = 0; c < C; c++) h += `<tr><td>${c === 0 ? "0 vis" : c}</td><td class="num">${fmtN(tr.cur[c])}</td><td>${tr.nbr[c].map(fmtN).join(" ")}</td>${last ? "" : `<td class="num">${fmtN(tr.upd[c] + tr.bias[c])}</td><td class="num">${fmtN(tr.next[c])}</td>`}</tr>`;
@@ -506,11 +519,17 @@ function renderInspector() {
 // ---------- rule lab (dlrule-v1) ----------
 const LAB_DEFAULT = "c12~samples~life_then_grow.rule.json";
 let labLoading = false;
+// readable names for rule files ("4500_56_direct_k0_K14_L32_b0" -> "frames 4500–4555 · direct · 0 hidden bits · L32 b0")
+function labLabel(r) {
+  const base = r.name.split("~").pop().replace(/\.rule\.json$/, ""), m = base.match(/^(\d+)_(\d+)_([a-z]+)_k(\d+)_K\d+_(L\d+)(?:_(b[\d.]+))?$/);
+  if (r.name.startsWith("c12~samples~")) return `sample: ${base.replace(/_/g, " ")}`;
+  return m ? `frames ${m[1]}–${+m[1] + +m[2] - 1} · ${m[3]} · ${m[4]} hidden bit${m[4] === "1" ? "" : "s"} · setting ${m[5]}${m[6] ? " " + m[6] : ""}` : base.replace(/_/g, " ");
+}
 function fillLabSelect() {
   const rs = runs.filter((r) => r.format === "dlrule-v1"), cur = $("lab-sel").value || LAB_DEFAULT;
   const samples = rs.filter((r) => r.name.startsWith("c12~samples~")), ba = rs.filter((r) => !r.name.startsWith("c12~samples~"));
-  $("lab-sel").innerHTML = `<optgroup label="synthetic samples (exact)">${samples.map((r) => `<option value="${esc(r.name)}">${esc(r.label)}</option>`).join("")}</optgroup>`
-    + `<optgroup label="experimental: Bad Apple dlrule results (runs/c12/rules)">${ba.map((r) => `<option value="${esc(r.name)}">${esc(r.label)} · ${r.rules} rules / ${r.programs} programs</option>`).join("")}</optgroup>`;
+  $("lab-sel").innerHTML = `<optgroup label="synthetic samples (exact)">${samples.map((r) => `<option value="${esc(r.name)}">${esc(labLabel(r))}</option>`).join("")}</optgroup>`
+    + `<optgroup label="Bad Apple · explicit rules (experimental)">${ba.map((r) => `<option value="${esc(r.name)}">${esc(labLabel(r))} · ${r.rules} rules / ${r.programs} programs</option>`).join("")}</optgroup>`;
   $("lab-sel").value = cur;
 }
 $("lab-sel").onchange = () => openLab($("lab-sel").value);
@@ -519,9 +538,9 @@ async function openLab(name) {
   try {
     const u8 = await bytesOf(`/api/runs/${encodeURIComponent(name)}/export`), o = isRuleJson(u8);
     if (!o) throw new Error("not a dlrule-v1 file");
-    const e = await ruleEngine(o, u8.length), r = runs.find((x) => x.name === name);
-    LAB.load(e, { name, label: r?.label ?? name, fps: o.meta?.fps || 30, fpsSrc: o.meta?.fps ? "export meta" : "assumed 30 (no fps recorded)" });
-    $("lab-sel").value = name; LAB.q("ca-cap").innerHTML = `explicit rules <span class="cm">(${esc(r?.label ?? name)}; computed in this browser from the file)</span>`;
+    const e = await ruleEngine(o, u8.length), r = runs.find((x) => x.name === name), lbl = r ? labLabel(r) : name;
+    LAB.load(e, { name, label: lbl, fps: o.meta?.fps || 30, fpsSrc: o.meta?.fps ? "export meta" : "assumed 30 (no fps recorded)" });
+    $("lab-sel").value = name; LAB.q("ca-cap").innerHTML = `explicit rules <span class="cm">(${esc(lbl)}; computed in this browser from the file)</span>`;
     renderRules(); renderLabInspector();
   } catch (err) { toast("rule file could not be loaded: " + err.message, true); } finally { labLoading = false; }
 }
@@ -536,7 +555,7 @@ const fmtPrograms = (ps) => "[\n" + ps.map((p) => ' {"rules": [\n' + p.rules.map
 function renderRules() {
   const e = LAB.e; if (!e) return;
   const m = e.m, sch = scheduleOf(e), k = m.k, cnt = e.counts;
-  $("rules-kind").textContent = `// dlrule-v1: explicit, executable decision lists · ${LAB.label}`;
+  $("rules-kind").textContent = `// explicit if-then rules (first firing rule wins) · ${LAB.label}`;
   const used = (p) => sch.map((s, i) => (s.rule === p ? i : null)).filter((x) => x != null);
   let h = `<dl class="facts"><dt>state</dt><dd>v + ${k} hidden bit${k === 1 ? "" : "s"} per cell; ${m.S} substep${m.S > 1 ? "s" : ""} per frame; zero boundary; synchronous</dd>
     <dt>semantics</dt><dd>${esc(m.semantics || "first firing rule wins; default keep")}</dd><dt>features</dt><dd>${esc((m.features || []).join(", "))}</dd>

@@ -8,8 +8,9 @@ Started 2026-11-11 from commit `827ac5c`. Results go to `docs/CHECKPOINT_13.md`.
 |---|---|
 | main run | gpuq **30** `c13-song-noise-s0`: whole song, resumed from the 9 noise-trained C12 chunks; `runs/c13/song_noise_s0`; internal limit 6.5 h |
 | seed check | gpuq **34** `c13-song-noise-s1`: same recipe, seed 1, from scratch; `runs/c13/song_noise_s1`; internal limit 8.5 h |
-| queued next | s0-tw2: resume `runs/c13/pilot_wipe_tw2` to the whole song with `--trans-weight 2` once gpuq 30 ends |
+| s0-tw2 | gpuq 36 (queued behind another session's 2-GPU job 35): `runs/c13/pilot_wipe_tw2` (chunks 0-6 from the pilot) resumed to the whole song with `--trans-weight 2`; internal limit 7.5 h |
 | done | gpuq 29 (diagnosis), 31–33 (wipe pilots) |
+| published | 2026-11-11: display name **Bad CA!!**; remote `origin` = https://github.com/VectorSophie/Bad-CA (`master`); first push `0c891d0` (merge of the remote LICENSE commit `c100dd2`, GPL-3.0; no force push). In-progress `runs/c13` not pushed. |
 | last checkpoint | per chunk: `runs/c13/song_noise_s0/best_c{i}_s0.npz` + `chunks.json` (replay error per chunk) |
 | resume | re-submit the same command; finished chunks are skipped |
 | budget used | see `runs/c13/gpu_ledger.jsonl` (GPU, assigned GPUs × runtime) and `runs/c13/cpu_ledger.jsonl` |
