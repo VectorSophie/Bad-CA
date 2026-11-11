@@ -45,7 +45,7 @@ accounting. It has not been reached.
 
 ## Engineering
 
-- A requirements or lock file for the `.venv` environment (none exists).
+- A full lock file (only the direct dependencies are pinned in `requirements.txt`).
 - `ca.pipeline` support for phased (`ncab-v2`) training, export and replay. Today this lives in experiment scripts.
 - Pre-deployment hardening for the UI (content-based MIME checks, isolated decoding, authentication, request and
   storage limits) before it is ever exposed beyond 127.0.0.1.

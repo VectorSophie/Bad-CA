@@ -1,4 +1,4 @@
-"""Local web UI server for CA-universal (stdlib only). Reuses ca.pipeline for probe/prep/train/export; never computes
+"""Local web UI server for Bad CA!! (stdlib only). Reuses ca.pipeline for probe/prep/train/export; never computes
 CA frames itself (the browser does, from the export, with player/nca_core.mjs).
 
     .venv/bin/python ui/server.py [--host 127.0.0.1] [--port 8765]
@@ -400,9 +400,13 @@ def c12_detail(name):
 
 
 def c12_original(name):
-    """Original binary frames for a c12 export from its meta (src_start or spec + T frames of the source at meta.width, threshold
-    meta.threshold, via ca.pipeline.prep). Comparison only; first_frame_mismatch_px reports whether it matches the export."""
-    p = c12_path(name); hd = c12_header(p)[0]; meta = hd.get("meta") or {}
+    return export_original(c12_path(name))
+
+
+def export_original(p):
+    """Original binary frames for an ncab/dlrule export from its meta (src_start or spec + T frames of the source at meta.width,
+    threshold meta.threshold, via ca.pipeline.prep). Comparison only; first_frame_mismatch_px reports whether it matches the export."""
+    hd = c12_header(p)[0]; meta = hd.get("meta") or {}
     start = c12_start(meta)
     if start is None: raise ApiError(404, "export meta has no src_start/spec: CA-only playback")
     src = under(ROOT, meta["source"]) if meta.get("source") else BUILTIN["badapple"]
@@ -419,6 +423,26 @@ def c12_original(name):
     else: f0 = pipeline.load_export(p)[2]
     out = b64npy(os.path.join(d, "bin.npy")); pp = man["preprocessing"]
     return dict(bin=out, fps=pp["fps"], source_frame_index=pp["source_frame_index"], source_time_s=pp["source_time_s"], first_frame_mismatch_px=int((F[0] != f0).sum()))
+
+
+# ---------- featured model (runs/featured/manifest.json, chosen by the experiment owner; never hard-coded here) ----------
+FEATURED = os.path.join(ROOT, "runs", "featured", "manifest.json")
+
+
+def featured_path():
+    man = rjson(FEATURED)
+    if not man or not (man.get("featured") or {}).get("export"): raise ApiError(404, "runs/featured/manifest.json has no featured.export")
+    p = under(os.path.join(ROOT, "runs"), man["featured"]["export"].removeprefix("runs/"))
+    if not p.endswith(".ncab") or not os.path.isfile(p): raise ApiError(404, f"featured export {man['featured']['export']} not found")
+    return man, p
+
+
+def featured():
+    man, p = featured_path(); f = man["featured"]
+    with open(p, "rb") as fh: sha = hashlib.sha256(fh.read()).hexdigest()
+    hd = c12_header(p)[0]
+    return dict(manifest=man, path=os.path.relpath(p, ROOT), file_sha256=sha, sha_ok=sha == f.get("sha256"),
+                header={k: v for k, v in hd.items() if k not in ("programs",)}, fps=f.get("fps") or (hd.get("meta") or {}).get("fps") or 30)
 
 
 # ---------- HTTP ----------
@@ -468,6 +492,9 @@ class H(BaseHTTPRequestHandler):
         if not G and p == ["train"]: return self.send(200, start_train(self.body_json()))
         if not G and p == ["import-export"]: return self.send(200, import_export(self))
         if G and p == ["runs"]: return self.send(200, list_runs())
+        if G and p == ["featured"]: return self.send(200, featured())
+        if G and p == ["featured", "export"]: f = featured_path()[1]; return self.file(f, "application/octet-stream", os.path.basename(f))
+        if G and p == ["featured", "original"]: return self.send(200, export_original(featured_path()[1]))
         if len(p) >= 2 and p[0] == "runs":
             name = p[1]; rest = p[2:]
             if name.startswith("c12~") and G:
@@ -495,7 +522,7 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--host", default="127.0.0.1"); ap.add_argument("--port", type=int, default=8765)
     a = ap.parse_args(); os.makedirs(UPLOADS, exist_ok=True); os.makedirs(IMPORTED, exist_ok=True)
     srv = ThreadingHTTPServer((a.host, a.port), H)
-    print(f"CA-universal replay bench on http://{a.host}:{a.port}/  (Ctrl-C to stop; CPU training jobs keep running in their own session)", flush=True)
+    print(f"Bad CA!! on http://{a.host}:{a.port}/  (Ctrl-C to stop; CPU training jobs keep running in their own session)", flush=True)
     try: srv.serve_forever()
     except KeyboardInterrupt: pass
     finally: srv.server_close()

@@ -23,3 +23,12 @@ C12 additions reuse the same tokens and components (box-drawing panel tags `┌�
 buttons, 1 px rules, DM Mono tables). The phase timeline is a flat bar of 1 px-ruled segments; the current phase and the
 "now" line use the accent, nothing animates. The selected cell is drawn in the accent on the CA panel. Diff colours keep
 their meaning (blue = added, red = removed, amber = changed). NCA phases are summarised as numbers only, never as rules.
+
+C13 restructure (same tokens, not a redesign): a compact masthead with three bracket tabs (`[ demo ]`, `[ rule lab ]`,
+`[ research ]`; the selected one is filled amber). The demo is a two-column screen (CA video left, `┌─ rule.in_effect`
+right, single column under 960 px) with the timeline full-width below. The rule panel is the one place that uses the diff
+blue/red for another meaning: blue = fixed structure of the update, red = phase parameters. Colour is never the only cue:
+the legend says it in words, and parameters are underlined monospace badges (buttons that open the values). Matrix
+heatmaps use amber (positive) / paper (negative) on ink, brightness sqrt(|v|/max), so they do not reuse blue/red. The
+timeline is ink segments with thin boundaries, a dim "computed" bar and the amber playhead; labels sit in HTML below the
+SVG so they cannot collide. Comparison panels live behind `[ tools ]`, off by default.

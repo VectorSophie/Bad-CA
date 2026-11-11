@@ -47,5 +47,30 @@ def test_export_only_replay():
     shutil.rmtree(t)
 
 
+
+
+def test_v2_info_import_replay():
+    """ncab-v2 (phased) through the CLI functions: info, import (copied as is), export-only replay, comparison video."""
+    v2 = os.path.join(ROOT, "runs", "featured", "interim_0-1467.ncab"); inf = pipeline.info(v2)
+    assert inf["format"] == "ncab-v2" and inf["T"] == 1468 and inf["phases"] == 26
+    run = tempfile.mkdtemp(); r, sizes = pipeline.import_export(v2, run, BA, 0, 48)
+    assert sizes["format"] == "ncab-v2" and open(os.path.join(run, "model.ncab"), "rb").read() == open(v2, "rb").read()
+    B, V, rep = pipeline.replay(os.path.join(run, "model.ncab"), node=False); assert B.shape == (1468, 36, 48)
+    try: pipeline.load_export(v2); raise AssertionError("v1 loader accepted v2")
+    except ValueError: pass
+    shutil.rmtree(run)
+
+
+def test_phased_training_cli():
+    """--phases uniform:2 on the colour clip (CPU, tiny): chunked training -> ncab-v2 export -> Python == Node binary replay."""
+    run = tempfile.mkdtemp(); env = dict(os.environ, JAX_PLATFORMS="cpu")
+    subprocess.run([sys.executable, "-m", "ca.pipeline", "run", COLOR, run, "--frames", "24", "--width", "32", "--steps", "20", "--phases", "uniform:2", "--noise", "0.02"],
+                   cwd=ROOT, env=env, check=True, capture_output=True)
+    st = json.load(open(os.path.join(run, "status.json"))); assert st["status"] == "finished", st
+    inf = pipeline.info(os.path.join(run, "model.ncab")); assert inf["format"] == "ncab-v2" and inf["K"] == 2 and inf["T"] == 24
+    assert st["replay"]["binary_mismatch_px"] == 0, st["replay"]
+    shutil.rmtree(run)
+
+
 if __name__ == "__main__":
-    for f in (test_color_and_cache, test_bad_apple_path, test_rejects, test_export_only_replay): f(); print("ok", f.__name__)
+    for f in (test_color_and_cache, test_bad_apple_path, test_rejects, test_export_only_replay, test_v2_info_import_replay, test_phased_training_cli): f(); print("ok", f.__name__)

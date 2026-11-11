@@ -1,14 +1,21 @@
-// CA-universal replay bench: vanilla JS, no build step. CA frames come only from the export, computed in worker.js
-// (NCA) or here with player/rule_core.mjs (explicit rules). Substep states and the inspector use the same core functions.
+// Bad CA!! local UI: vanilla JS, no build step. Three views: demo (one NCA model, the featured one by default),
+// rule lab (explicit dlrule-v1 rules), research (campaigns, every earlier export, new runs).
+// CA frames come only from the export: NCA in worker.js (streamed, frame-index based), explicit rules here with
+// player/rule_core.mjs. Substep states, the rule panel and the inspectors use the same core functions.
 import { parseNcab, parseNcaJson, ruleAt, substep, traceCell, ncabHeader } from "/player/nca_core.mjs";
 import { parseRules, run as ruleRun, step as ruleStep, programAt, explainCell } from "/player/rule_core.mjs";
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const fmtInt = (n) => (n == null ? "–" : Number(n).toLocaleString("en-US"));
 const fmtS = (s) => (s == null ? "–" : s < 120 ? `${(+s).toFixed(1)} s` : `${(s / 60).toFixed(1)} min`);
+const fmtN = (x) => (x == null ? "·" : x === 0 ? "0" : Math.abs(x) >= 1e4 || Math.abs(x) < 1e-3 ? x.toExponential(3) : x.toPrecision(5));
 const b64u8 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const COL = { on: [236, 232, 223], off: [12, 12, 11], fn: [255, 90, 78], fp: [78, 168, 255], sel: [255, 180, 58] };
+const inflate = async (b) => new Uint8Array(await new Response(new Blob([b]).stream().pipeThrough(new DecompressionStream("deflate"))).arrayBuffer());
+const isNcab = (u8) => u8[0] === 0x4e && u8[1] === 0x43 && u8[2] === 0x41 && u8[3] === 0x42;
+const hex = async (u8) => [...new Uint8Array(await crypto.subtle.digest("SHA-256", u8))].map((x) => x.toString(16).padStart(2, "0")).join("");
+const sup = (k) => `<sup>(${k})</sup>`;
 
 async function api(path, opts = {}) {
   const o = { ...opts, headers: { ...(opts.headers || {}) } };
@@ -18,6 +25,7 @@ async function api(path, opts = {}) {
   if (!r.ok) throw new Error(j.error || `HTTP ${r.status}`);
   return j;
 }
+async function bytesOf(url) { const r = await fetch(url); if (!r.ok) throw new Error(`HTTP ${r.status}`); return new Uint8Array(await r.arrayBuffer()); }
 
 let toastTimer;
 function toast(msg, bad = false) {
@@ -25,7 +33,8 @@ function toast(msg, bad = false) {
   clearTimeout(toastTimer); toastTimer = setTimeout(() => (t.className = "toast"), 4500);
 }
 
-// ---------- header pixel field (header only; stops while the video plays, when hidden, and under reduced motion) ----------
+// ---------- header pixel field (header only; stops while a video plays, when hidden, and under reduced motion) ----------
+const anyPlaying = () => DEMO.playing || LAB.playing;
 const field = (() => {
   const cv = $("field"), ctx = cv.getContext("2d"), G = 28, SZ = 4; let cells = new Map(), timer = null, cols = 0;
   const fit = () => { cv.width = cv.clientWidth; cv.height = cv.clientHeight; cols = Math.ceil(cv.width / G); };
@@ -39,7 +48,7 @@ const field = (() => {
   };
   const stop = () => { clearInterval(timer); timer = null; ctx.clearRect(0, 0, cv.width, cv.height); };
   const poke = (e) => {
-    if (reduced || player.playing || document.hidden) return;
+    if (reduced || anyPlaying() || document.hidden) return;
     const r = cv.getBoundingClientRect(), cx = Math.floor((e.clientX - r.left) / G), cy = Math.floor((e.clientY - r.top) / G);
     for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
       const d = Math.hypot(dx, dy); if (d > 2.2 || Math.random() < 0.45) continue; // sparse
@@ -52,173 +61,636 @@ const field = (() => {
   return { stop: () => { cells.clear(); stop(); } };
 })();
 
-// ---------- runs shelf ----------
+// ---------- views ----------
+const VIEWS = ["demo", "lab", "research"];
+let view = "demo";
+function showView(v) {
+  if (!VIEWS.includes(v)) v = "demo";
+  view = v;
+  for (const k of VIEWS) { $("v-" + k).hidden = k !== v; $("tab-" + k).setAttribute("aria-selected", k === v); }
+  if (v !== "demo") DEMO.setPlaying(false);
+  if (v !== "lab") LAB.setPlaying(false);
+  if (v === "lab" && !LAB.e && !labLoading) openLab($("lab-sel").value || LAB_DEFAULT);
+  (v === "demo" ? DEMO : v === "lab" ? LAB : null)?.fit();
+}
+addEventListener("hashchange", () => showView(location.hash.slice(1)));
+
+// ---------- engines ----------
+// NCA: frames streamed from worker.js, kept packed (1 bit per pixel); full-state checkpoints every `every` frames;
+// any other state is regenerated from the nearest earlier checkpoint with substep() (never from original frames).
+function ncaEngine(u8, m, hdr, onUpdate) {
+  const N = m.H * m.W, B = Math.ceil(N / 8);
+  const e = { kind: "nca", m, hdr, bytes: u8.length, T: m.T, S: m.S, H: m.H, W: m.W, N, B, packed: new Uint8Array(m.T * B), upto: 0, ckpt: new Map(),
+    every: 1, sha: null, ms: null, memo: null, error: null, chunks: 0, t0: performance.now() };
+  const w = new Worker("/static/worker.js", { type: "module" });
+  w.onmessage = ({ data: d }) => {
+    if (d.error) e.error = d.error;
+    else if (d.info) e.every = d.info.every;
+    else if (d.ckpt != null) e.ckpt.set(d.ckpt, d.state);
+    else if (d.packed) {
+      if (d.from !== e.upto) e.error = `stream gap: chunk starts at frame ${d.from}, expected ${e.upto}`; // never expected
+      e.packed.set(d.packed, d.from * B); e.upto = d.upto; e.chunks++;
+    } else if (d.done) { e.sha = d.sha; e.ms = d.ms; }
+    onUpdate(e);
+  };
+  const copy = u8.slice(); w.postMessage({ id: 1, bytes: copy.buffer }, [copy.buffer]);
+  e.stop = () => w.terminate();
+  e.frame = (t) => { const out = new Uint8Array(N), o = t * B; for (let i = 0; i < N; i++) out[i] = (e.packed[o + (i >> 3)] >> (i & 7)) & 1; return out; };
+  e.stateAt = (g) => { // full state after g substeps (frame t = after t*S substeps)
+    const S = e.S, t = Math.floor(g / S), t0 = t - (t % e.every); let from = t0 * S, s = e.ckpt.get(t0);
+    if (!s) return null;
+    if (e.memo && e.memo.g <= g && e.memo.g >= from) ({ g: from, s } = e.memo);
+    for (let x = from; x < g; x++) s = substep(e.m, ruleAt(e.m, Math.floor(x / S) + 1), s);
+    e.memo = { g, s }; return s;
+  };
+  return e;
+}
+async function loadNca(u8, onUpdate) {
+  const m = isNcab(u8) ? await parseNcab(u8, inflate) : parseNcaJson(JSON.parse(new TextDecoder().decode(u8)));
+  return ncaEngine(u8, m, isNcab(u8) ? await ncabHeader(u8, inflate) : null, onUpdate);
+}
+const isRuleJson = (u8) => { if (isNcab(u8)) return null; try { const o = JSON.parse(new TextDecoder().decode(u8)); return o.format === "ca-universal/dlrule-v1" || (o.format === "ca-universal/rule-v1" && Array.isArray(o.programs)) ? o : null; } catch { return null; } };
+
+async function ruleEngine(o, bytes) {
+  const m = parseRules(o), N = m.H * m.W, t0 = performance.now();
+  const e = { kind: "rule", m, base: m, json: o, bytes, S: m.S, T: m.T, H: m.H, W: m.W, N, ver: 1, verNote: "export", hybridFrom: null, stop: () => {} };
+  e.progAt = (g) => m.programs[programAt(m, Math.floor(g / m.S) + 1)];
+  simulateRule(e, m.programs, 0, null); e.ms = performance.now() - t0;
+  const ref = ruleRun(m).frames; e.runMatch = ref.every((f, t) => f.every((x, i) => x === e.vis[t * N + i])); // the substep cache equals run()
+  e.sha = await hex(e.vis); e.upto = m.T;
+  e.frame = (t) => e.vis.subarray(t * N, (t + 1) * N);
+  e.stateAt = (g) => e.seq[g];
+  return e;
+}
+// seq[g] = full state {v, h} after g substeps. With a prefix, states 0..g0 are kept and later substeps use `programs`.
+function simulateRule(e, programs, g0, prefix) {
+  const m = e.m, S = m.S, G = (m.T - 1) * S, seq = prefix ? prefix.slice(0, g0 + 1) : [{ v: m.first.slice(), h: m.h0.slice() }];
+  for (let g = seq.length - 1; g < G; g++) { const [v, h] = ruleStep(m, programs[programAt(m, Math.floor(g / S) + 1)], seq[g].v, seq[g].h); seq.push({ v, h }); }
+  e.seq = seq; e.vis = new Uint8Array(m.T * e.N);
+  for (let t = 0; t < m.T; t++) e.vis.set(seq[t * S].v, t * e.N);
+}
+function scheduleOf(e) {
+  if (e.kind === "rule") return e.m.schedule.map((p) => ({ start: p.start, end: p.end, rule: p.program, reason: p.reason ?? null }));
+  if (e.m.schedule) return e.m.schedule.map((p) => ({ start: p.start, end: p.end, rule: p.rule, reason: p.reason ?? null }));
+  return [{ start: 1, end: e.T, rule: 0, reason: "single rule (ncab-v1)" }];
+}
+
+// ---------- player (one per view; same markup from #player-tpl) ----------
+function makePlayer(mount, tlSlot, opts = {}) {
+  mount.append($("player-tpl").content.cloneNode(true));
+  const q = (r) => mount.querySelector(`[data-r="${r}"]`);
+  const P = { e: null, t: 0, sub: 0, playing: false, fps: 30, fpsSrc: "assumed", orig: null, origReq: null, sel: null, want: null, label: "", name: null, B: null, q, opts };
+  const ctx = (r) => q(r).getContext("2d");
+  const cx = { ca: ctx("cv-ca"), orig: ctx("cv-orig"), err: ctx("cv-err"), b: ctx("cv-b") };
+  if (!opts.compareB) q("b-wrap").hidden = true;
+  tlSlot.innerHTML = `<div class="tl"><svg role="img" aria-label="timeline: phases, computed range and playhead; click to seek" data-r="tl-svg"></svg>
+    <div class="tl-axis"><span data-r="tl-a"></span><span data-r="tl-b"></span></div><p class="cur-line" data-r="tl-cur"></p></div>`;
+  const tq = (r) => tlSlot.querySelector(`[data-r="${r}"]`);
+
+  const paint = (c, W, H, fn) => {
+    const img = c.createImageData(W, H), d = img.data;
+    for (let i = 0; i < W * H; i++) { const k = fn(i); d[4 * i] = k[0]; d[4 * i + 1] = k[1]; d[4 * i + 2] = k[2]; d[4 * i + 3] = 255; }
+    c.putImageData(img, 0, 0);
+  };
+  P.fit = () => {
+    const e = P.e; if (!e) return;
+    const zv = q("zoom").value, avail = Math.max(60, (q("cv-ca").closest(".stage").clientWidth || 300) - 4);
+    const z = zv === "fit" ? Math.max(1, Math.min(16, Math.floor(avail / e.W), Math.floor((innerHeight * 0.6) / e.H))) : +zv;
+    const sz = (c, W, H) => { c.width = W; c.height = H; c.style.width = `${W * z}px`; c.style.height = `${H * z}px`; };
+    for (const r of ["cv-ca", "cv-orig", "cv-err"]) sz(q(r), e.W, e.H);
+    if (P.B?.e) sz(q("cv-b"), P.B.e.W, P.B.e.H);
+    P.render(true);
+  };
+  q("zoom").onchange = P.fit; addEventListener("resize", () => !mount.closest(".view").hidden && P.fit());
+
+  P.render = (force = false) => {
+    const e = P.e; if (!e || P.t >= e.upto) return;
+    const { t, sub } = P, N = e.N, S = e.S, f = e.frame(t); P.shown = true;
+    let vis = (i) => f[i], cont = null;
+    if (sub > 0 || (q("t-cont").checked && !P.playing && e.kind === "nca")) {
+      const st = e.stateAt(t * S + sub);
+      if (st && e.kind === "rule") vis = (i) => st.v[i];
+      else if (st) { vis = sub > 0 ? (i) => (st[i] > e.m.threshold ? 1 : 0) : vis; if (q("t-cont").checked && !P.playing) cont = (i) => st[i]; }
+    }
+    paint(cx.ca, e.W, e.H, (i) => (i === P.sel ? COL.sel : cont ? ((g) => [g, g, g])(Math.round(Math.min(1, Math.max(0, cont(i))) * 255)) : vis(i) ? COL.on : COL.off));
+    const toolsOn = !q("tools").hidden, o = P.orig && toolsOn ? P.orig.u8.subarray(t * N, (t + 1) * N) : null;
+    q("fig-orig").hidden = !(o && q("t-orig").checked); q("fig-err").hidden = !(o && q("t-err").checked);
+    if (o && q("t-orig").checked) paint(cx.orig, e.W, e.H, (i) => (o[i] ? COL.on : COL.off));
+    if (o && q("t-err").checked) paint(cx.err, e.W, e.H, (i) => { const a = o[i], b = f[i]; return a && b ? COL.on : !a && !b ? COL.off : a ? COL.fn : COL.fp; });
+    renderB();
+    let wrong = 0; if (o) for (let i = 0; i < N; i++) wrong += o[i] !== f[i];
+    const sec = (t / P.fps).toFixed(2);
+    q("counter").textContent = `frame ${String(t).padStart(String(e.T - 1).length, "0")} / ${e.T - 1} · ${sec} s` + (sub ? ` · +${sub}/${S} substeps toward frame ${t + 1}` : "")
+      + (o ? ` · ${wrong} px differ from the original (${((100 * wrong) / N).toFixed(2)}%)` : "");
+    q("prev").disabled = t === 0 && !sub; q("next").disabled = q("sub").disabled = t >= e.T - 1;
+    status(); renderTimeline();
+    opts.onFrame?.(P, force);
+    if (!P.playing) opts.onPaused?.(P);
+  };
+  function status() {
+    const e = P.e; if (!e) return;
+    const done = e.upto >= e.T, waiting = P.want != null && P.want >= e.upto;
+    let s = e.kind === "rule"
+      ? `explicit rules run in this browser with rule_core.mjs (${e.hybridFrom != null ? "hybrid: no single-version run() reference" : e.runMatch ? "identical to run()" : "MISMATCH vs run()"}): ${e.T} frames × ${e.S} substeps, ${e.ms.toFixed(0)} ms · sha256 ${e.sha.slice(0, 16)}… · version ${e.ver}: ${e.verNote}`
+      : done && e.sha ? `all ${fmtInt(e.T)} frames computed from the export in a worker (${(e.ms / 1000).toFixed(1)} s, ${((e.T - 1) / (e.ms / 1000)).toFixed(1)} frames/s) · sha256 of binary frames ${e.sha.slice(0, 16)}…`
+      : `computing from the export in a worker: computed up to frame ${fmtInt(e.upto - 1)} of ${fmtInt(e.T - 1)}` + (e.upto > 1 ? ` (${((e.upto - 1) / ((performance.now() - e.t0) / 1000)).toFixed(1)} frames/s)` : "") + "; playback only shows computed frames";
+    if (waiting) s = `waiting for frame ${P.want} (computed up to ${e.upto - 1}) · ` + s;
+    if (e.error) s = "ERROR: " + e.error + " · " + s;
+    q("status").textContent = s;
+  }
+  function renderTimeline() {
+    const e = P.e, svg = tq("tl-svg"); if (!e) return;
+    const Wd = 1000, T = e.T, x = (fr) => (fr / T) * Wd, sch = scheduleOf(e);
+    const g = P.t + P.sub / e.S, ph = phaseAt(e, P.t, P.sub);
+    let h = `<rect class="seg0" x="0" y="0" width="${x(1)}" height="26"><title>frame 0: the given first frame</title></rect>`;
+    sch.forEach((p, k) => {
+      h += `<rect class="seg${k % 2 ? " alt" : ""}${k === ph.k ? " cur" : ""}" x="${x(p.start)}" y="0" width="${Math.max(0.5, x(p.end) - x(p.start))}" height="26"><title>phase ${k + 1}: frames ${p.start}–${p.end - 1} (${(p.start / P.fps).toFixed(2)}–${((p.end - 1) / P.fps).toFixed(2)} s), rule id ${p.rule}</title></rect>`;
+      if (k) h += `<line class="bd" x1="${x(p.start)}" x2="${x(p.start)}" y1="0" y2="26"/>`;
+    });
+    h += `<rect class="buf-bg" x="0" y="30" width="${Wd}" height="6"/><rect class="buf" x="0" y="30" width="${x(e.upto)}" height="6"><title>computed up to frame ${e.upto - 1}</title></rect>`;
+    const xn = x(g + 0.5); h += `<line class="now" x1="${xn}" x2="${xn}" y1="0" y2="40"/>`;
+    svg.setAttribute("viewBox", `0 0 ${Wd} 40`); svg.setAttribute("preserveAspectRatio", "none"); svg.innerHTML = h;
+    tq("tl-a").textContent = `frame 0 · 0 s`; tq("tl-b").textContent = `frame ${T - 1} · ${((T - 1) / P.fps).toFixed(1)} s`;
+    const word = e.kind === "rule" ? "program" : "rule id";
+    tq("tl-cur").innerHTML = `<span class="leg-seg"></span> ${sch.length} phase${sch.length > 1 ? "s" : ""} (boundaries = thin lines) · <span class="leg-buf"></span> computed: frames 0–${e.upto - 1} of ${T - 1} · <span class="leg-now"></span> playhead · `
+      + (ph.k < 0 ? "frame 0 (given first frame)" : `now: phase ${ph.k + 1} of ${sch.length}, ${word} ${sch[ph.k].rule}`) + ` · seconds = frame / ${P.fps} fps (${esc(P.fpsSrc)}) · click or drag to seek`;
+  }
+  const seekX = (ev) => { const r = tq("tl-svg").getBoundingClientRect(); if (P.e) P.seek(Math.round(((ev.clientX - r.left) / r.width) * P.e.T - 0.5)); };
+  tq("tl-svg").addEventListener("pointerdown", (ev) => { seekX(ev); tq("tl-svg").setPointerCapture(ev.pointerId); });
+  tq("tl-svg").addEventListener("pointermove", (ev) => ev.buttons & 1 && seekX(ev));
+
+  // playback: wall clock only decides WHEN the next computed frame is shown; frames are never skipped in the simulation
+  let raf = null, last = 0, acc = 0;
+  function loop(ts) {
+    if (!P.playing) return;
+    acc += Math.min(0.25, (ts - last) / 1000) * P.fps * +q("speed").value; last = ts; // a backgrounded tab resumes where it was
+    let moved = false;
+    while (acc >= 1) {
+      if (P.t >= P.e.T - 1) { P.setPlaying(false); return; }
+      if (P.t + 1 >= P.e.upto) { acc = 0; P.want = P.t + 1; break; } // not computed yet: wait (buffer bar shows progress)
+      acc -= 1; P.t++; P.sub = 0; P.want = null; moved = true;
+    }
+    if (moved) P.render(); else status();
+    raf = requestAnimationFrame(loop);
+  }
+  P.setPlaying = (on) => {
+    if (!P.e || P.playing === on) return;
+    P.playing = on; q("play").textContent = on ? "[ pause ]" : "[ play ]";
+    if (on) { field.stop(); if (P.t >= P.e.T - 1) P.t = 0; P.sub = 0; last = performance.now(); acc = 0; raf = requestAnimationFrame(loop); }
+    else { cancelAnimationFrame(raf); P.want = null; P.render(); }
+  };
+  P.seek = (t, sub = 0) => {
+    const e = P.e; if (!e) return; P.setPlaying(false);
+    t = Math.max(0, Math.min(e.T - 1, t));
+    if (t >= e.upto) { P.want = t; status(); return; } // resumes in onStream when computed
+    P.want = null; P.t = t; P.sub = sub; P.render();
+  };
+  P.step = (d) => { P.setPlaying(false); P.seek(P.sub && d < 0 ? P.t : P.t + d); };
+  P.substep = () => { P.setPlaying(false); const e = P.e; if (!e || P.t >= e.T - 1) return; if (P.sub + 1 >= e.S) { if (P.t + 1 < e.upto) P.seek(P.t + 1); } else { P.sub++; P.render(); } };
+  P.onStream = () => {
+    const e = P.e; if (!e) return;
+    if (P.want != null && P.want < e.upto && !P.playing) { const w = P.want; P.want = null; P.seek(w); return; }
+    if (!P.playing && (!P.shown || e.sha)) P.render(); else { status(); renderTimeline(); }
+    q("play").disabled = e.upto < 2;
+  };
+  q("play").onclick = () => P.setPlaying(!P.playing); q("prev").onclick = () => P.step(-1); q("next").onclick = () => P.step(1); q("sub").onclick = P.substep;
+  q("tools-btn").onclick = () => { const on = q("tools").hidden; q("tools").hidden = !on; q("tools-btn").setAttribute("aria-expanded", on); q("tools-btn").textContent = on ? "[ tools: on ]" : "[ tools ]"; if (on) opts.loadOrig?.(P); P.fit(); };
+  for (const r of ["t-orig", "t-err"]) q(r).onchange = () => { opts.loadOrig?.(P); P.render(); };
+  q("t-cont").onchange = () => P.render();
+  q("cv-ca").addEventListener("click", (ev) => {
+    const e = P.e; if (!e) return; const r = ev.target.getBoundingClientRect(), x = Math.floor((ev.clientX - r.left) / (r.width / e.W)), y = Math.floor((ev.clientY - r.top) / (r.height / e.H));
+    if (x < 0 || y < 0 || x >= e.W || y >= e.H) return; P.sel = y * e.W + x; P.setPlaying(false); P.render();
+  });
+  P.load = (e, meta) => {
+    P.e?.stop(); if (P.B?.e) { P.B.e.stop(); P.B = null; q("fig-b").hidden = true; q("b-sel").value = ""; q("b-line").textContent = ""; tlB(); }
+    P.setPlaying(false); Object.assign(P, { e, t: 0, sub: 0, sel: null, want: null, orig: null, origReq: null, shown: false }, meta);
+    q("play").disabled = e.upto < 2; P.fit();
+  };
+  // ---- B: second export synchronised by frame index (demo tools) ----
+  function tlB() { q("timeline-b").innerHTML = P.B?.e ? `<p class="cm">B phases: ${scheduleOf(P.B.e).map((p, k) => `${k + 1}: ${p.start}–${p.end - 1} rule ${p.rule}`).join(" · ")}</p>` : ""; }
+  function renderB() {
+    const be = P.B?.e; if (!be || q("tools").hidden) return;
+    const t = Math.min(P.t, be.T - 1);
+    q("fig-b").hidden = false;
+    if (t < be.upto) { const f = be.frame(t); paint(cx.b, be.W, be.H, (i) => (f[i] ? COL.on : COL.off)); }
+  }
+  q("b-sel").onchange = async () => {
+    const name = q("b-sel").value; P.B?.e?.stop(); P.B = name ? { name, e: null } : null; q("fig-b").hidden = true; q("b-line").textContent = ""; tlB();
+    if (!name) return;
+    const r = runs.find((x) => x.name === name); q("b-line").textContent = "loading B…";
+    try {
+      const u8 = await bytesOf(`/api/runs/${encodeURIComponent(name)}/export`), o = isRuleJson(u8);
+      const be = o ? await ruleEngine(o, u8.length) : await loadNca(u8, (be) => { q("b-line").textContent = `B: ${esc(r?.label ?? name)} · computed ${be.upto}/${be.T} frames` + (be.sha ? ` · sha256 ${be.sha.slice(0, 16)}…` : "") + (be.T !== P.e.T ? ` · T differs from A (${P.e.T}); B holds its last frame` : ""); renderB(); });
+      if (P.B?.name !== name) return be.stop();
+      P.B.e = be; q("b-cap").innerHTML = `B <span class="cm">${esc(r?.label ?? name)} (export only)</span>`; tlB(); P.fit();
+    } catch (err) { q("b-line").textContent = "B could not be replayed: " + err.message; }
+  };
+  return P;
+}
+
+// ---------- the two players ----------
+const DEMO = makePlayer($("demo-player"), $("demo-timeline-slot"), { compareB: true, onFrame: (P, force) => renderRulePanel(P, force), onPaused: () => renderInspector(), loadOrig: loadOrigDemo });
+const LAB = makePlayer($("lab-player"), $("lab-timeline-slot"), { onPaused: () => renderLabInspector(), loadOrig: loadOrigLab });
+window.__ui = { DEMO, LAB };
+document.addEventListener("keydown", (ev) => {
+  const tag = ev.target.tagName, P = view === "demo" ? DEMO : view === "lab" ? LAB : null;
+  if (!P?.e || (["INPUT", "SELECT", "TEXTAREA"].includes(tag) && ev.target.type !== "checkbox") || (tag === "BUTTON" && ev.key === " ")) return;
+  if (ev.key === " ") { ev.preventDefault(); P.setPlaying(!P.playing); }
+  else if (ev.key === "ArrowRight") { ev.preventDefault(); P.step(1); }
+  else if (ev.key === "ArrowLeft") { ev.preventDefault(); P.step(-1); }
+});
+
+async function fetchOrig(P, url) {
+  if (P.origReq) return; const e = P.e; P.origReq = url;
+  try {
+    const o = await api(url); if (P.e !== e) return;
+    if (o.bin.shape[0] < e.T || o.bin.shape[1] !== e.H || o.bin.shape[2] !== e.W) throw new Error(`original is ${o.bin.shape.join("×")}, export is ${e.T}×${e.H}×${e.W}`);
+    P.orig = { ...o, u8: b64u8(o.bin.b64) }; if (o.fps) { P.fps = o.fps; P.fpsSrc = "source video"; }
+    if (o.first_frame_mismatch_px) toast(`original resolved from export meta differs from the export's first frame in ${o.first_frame_mismatch_px} px`, true);
+    P.render(true);
+  } catch (err) { toast("no original for comparison: " + err.message, true); }
+}
+function loadOrigDemo(P) { if (!P.q("t-orig").checked && !P.q("t-err").checked) return; fetchOrig(P, demoSrc.kind === "featured" ? "/api/featured/original" : `/api/runs/${encodeURIComponent(demoSrc.name)}/original`); }
+function loadOrigLab(P) { if ((P.q("t-orig").checked || P.q("t-err").checked) && LAB.name) fetchOrig(P, `/api/runs/${encodeURIComponent(LAB.name)}/original`); }
+
+// ---------- demo: featured model (default) or a research export ----------
+let demoSrc = { kind: "featured" }, demoSeq = 0;
+async function openFeatured() {
+  const seq = ++demoSeq; demoSrc = { kind: "featured" };
+  $("demo-banner").hidden = true; $("demo-warn").textContent = "";
+  let f;
+  try { f = await api("/api/featured"); } catch (err) { $("demo-title").textContent = "// no featured model: " + err.message; return; }
+  const ft = f.manifest.featured;
+  $("demo-title").textContent = `// featured: ${ft.display_name || f.path}`;
+  $("demo-reason").innerHTML = `${esc(ft.model || "")}${ft.status ? ` · <span class="verbadge">${esc(ft.status)}</span>` : ""}<details class="why"><summary>why this model</summary><span class="cm">${esc(ft.reason || "–")} · file ${esc(f.path)} · sha256 ${esc(ft.sha256 || "–")}</span></details>`;
+  const u8 = await bytesOf("/api/featured/export"); if (seq !== demoSeq) return;
+  const sha = await hex(u8);  // verify what is actually played, in the browser
+  if (sha !== ft.sha256) $("demo-warn").textContent = `WARNING: sha256 of ${f.path} is ${sha}, but the manifest says ${ft.sha256 || "(none)"}. This is not the file the manifest describes.`;
+  await startDemo(u8, seq, { fps: f.fps, fpsSrc: "featured manifest", name: null, label: ft.display_name, shaOk: sha === ft.sha256 });
+}
+async function openResearchNca(name, det) {
+  const seq = ++demoSeq; demoSrc = { kind: "run", name };
+  const label = det.summary.label;
+  $("demo-title").textContent = `// research export: ${label}`; $("demo-warn").textContent = ""; $("demo-reason").textContent = "";
+  $("demo-banner").hidden = false; $("demo-banner").innerHTML = `viewing a research export, not the featured model · <button class="btn" id="b-featured">[ back to the featured model ]</button>`;
+  $("b-featured").onclick = () => openFeatured();
+  const u8 = await bytesOf(`/api/runs/${encodeURIComponent(name)}/export`); if (seq !== demoSeq) return;
+  const man = det.manifest || {}, pp = man.data?.preprocessing;
+  await startDemo(u8, seq, { fps: pp?.fps || 30, fpsSrc: pp?.fps ? "run manifest" : "assumed 30 (no fps recorded)", name, label });
+}
+async function startDemo(u8, seq, meta) {
+  try {
+    const e = await loadNca(u8, (e) => { if (DEMO.e === e) { DEMO.onStream(); if (e.sha) window.__bench = { sha256: e.sha, T: e.T, H: e.H, W: e.W, ms: e.ms, chunks: e.chunks, error: e.error }; } });
+    if (seq !== demoSeq) return e.stop();
+    e.phaseStats = null; mx = null; DEMO.load(e, meta); renderRulePanel(DEMO, true); renderInspector();
+    if (meta.fps && e.m.meta?.fps && e.m.meta.fps !== meta.fps) toast(`fps: manifest ${meta.fps}, export meta ${e.m.meta.fps}`, true);
+  } catch (err) { $("demo-warn").textContent = "export could not be replayed: " + err.message; }
+}
+
+// ---------- demo right panel: the rule in effect ----------
+function phaseAt(e, t, sub) {
+  const sch = scheduleOf(e), f = sub > 0 || t === 0 ? t + 1 : t; // the frame whose rule produced / is producing what is shown
+  const k = sch.findIndex((p) => f >= p.start && f < p.end);
+  return { k, f, boundary: k > 0 && sub === 0 && t === sch[k].start, first: t === 0 && sub === 0 };
+}
+function blobInfo(e) { // stored blob names/shapes (ncab-v2 header.blobs, ncab-v1 header.params)
+  const hd = e.hdr?.header || {}; return Object.fromEntries((hd.blobs || hd.params || []).map(([n, s]) => [n, s]));
+}
+function ruleParams(e, rid) { return e.m.rules ? e.m.rules[rid] : e.m; }
+function phaseStats(e) {
+  if (e.phaseStats) return e.phaseStats;
+  const sch = scheduleOf(e);
+  e.phaseStats = sch.map((s, k) => {
+    if (!k) return null;
+    const R = ruleParams(e, s.rule), Pv = ruleParams(e, sch[k - 1].rule), per = {};
+    let ch = 0, l2 = 0, mx = 0;
+    for (const n of ["Wp", "bp", "Wu", "bu"]) { let c = 0; for (let j = 0; j < R[n].length; j++) { const d = R[n][j] - Pv[n][j], a = Math.abs(d); if (a > 1e-6) c++; l2 += d * d; if (a > mx) mx = a; } per[n] = c; ch += c; }
+    return { changed: ch, l2: Math.sqrt(l2), max: mx, per, prevRule: sch[k - 1].rule };
+  });
+  return e.phaseStats;
+}
+let mx = null, panelKey = "";
+function renderRulePanel(P, force) {
+  const e = P.e, el = $("rulepanel"); if (!e) return;
+  const ph = phaseAt(e, P.t, P.sub), key = `${e.T}:${ph.k}:${ph.boundary}:${JSON.stringify(mx)}`;
+  if (!force && key === panelKey) return; panelKey = key;
+  const m = e.m, { C, Fh, S } = m, sch = scheduleOf(e), K = sch.length, p = sch[Math.max(0, ph.k)], k = p.rule, bi = blobInfo(e), v2 = m.version === 2;
+  const users = sch.map((s, i) => (s.rule === k ? i + 1 : null)).filter(Boolean), stats = phaseStats(e)[Math.max(0, ph.k)], per = Fh * C * 9 + Fh + C * Fh + C;
+  const sec = (fr) => (fr / P.fps).toFixed(2), delta = m.mode === "delta";
+  const blobTxt = (n) => (v2 ? (delta ? `${n} (base) + per-phase delta` : `${n}[${k}] of ${n} ${bi[n]?.join("×")}`) : `stored param ${n} ${bi[n]?.join("×") ?? ""}`);
+  const PM = (n, idx) => `<button class="pm" data-mx="${n}" title="show the values of ${n}${sup(k)}">${n}${sup(k)}${idx}</button>`;
+  let h = `<h2 class="tag">┌─ rule.in_effect</h2>
+    <p class="ph-head"><b>phase ${ph.k < 0 ? 1 : ph.k + 1} of ${K}</b> · frames ${p.start}–${p.end - 1} · ${sec(p.start)}–${sec(p.end - 1)} s · <b>rule id ${k}</b>${users.length > 1 ? ` <span class="cm">(rule id ${k} is used by phases ${users.join(", ")})</span>` : K > 1 ? ` <span class="cm">(used only by this phase)</span>` : ""}</p>
+    <p class="cm">1 video frame = ${S} CA substeps · frame t (t ≥ 1) is produced from frame t−1 by ${S} substeps of its phase's rule · ${ph.first ? "showing frame 0 = the given first frame; the next update uses this rule" : P.sub ? `showing ${P.sub}/${S} of the way from frame ${P.t} to ${P.t + 1}` : `showing frame ${P.t}, produced by this rule`}</p>`;
+  if (ph.boundary) h += `<p class="switch">rule switch at frame ${P.t}: frame ${P.t - 1} → ${P.t} is the first update with rule id ${k} (frames before used rule id ${stats.prevRule}). Hard switch: no interpolated weights; the state is carried over unchanged.</p>`;
+  h += `<p class="legend"><span class="sx">blue = fixed structure</span> (the same for every phase) · <span class="pm-l">red badge = phase parameters</span> (learned numbers of rule id ${k}; click one to see its values)</p>
+  <div class="eq">
+    <p class="sx">for every cell (y, x), all cells at once, ${S} substeps per video frame; s<sub>c</sub> = 0 outside the ${m.W}×${m.H} grid (zero padding)</p>
+    <p><span class="sx">p<sub>f</sub> = ReLU( Σ<sub>c=0..${C - 1}</sub> Σ<sub>dy,dx∈{−1,0,1}</sub></span> ${PM("Wp", "[f,c,dy,dx]")} <span class="sx">· s<sub>c</sub>(y+dy, x+dx) +</span> ${PM("bp", "[f]")} <span class="sx">),&nbsp; f = 0..${Fh - 1}</span></p>
+    <p><span class="sx">s<sub>c</sub> ← s<sub>c</sub> + Σ<sub>f=0..${Fh - 1}</sub></span> ${PM("Wu", "[c,f]")} <span class="sx">· p<sub>f</sub> +</span> ${PM("bu", "[c]")}<span class="sx">,&nbsp; c = 0..${C - 1}</span> <span class="cm">(residual update of all ${C} channels; channel 0 = visible)</span></p>
+    <p><span class="sx">shown pixel = 1 if s<sub>0</sub> &gt; ${m.threshold} else 0</span> <span class="cm">(s<sub>0</sub> is a regressed state value, not a probability)</span></p>
+    ${delta ? `<p class="cm">delta mode: Wp${sup(k)} = Wp + reshape(Ap[${k}]·Bp[${k}]), bp${sup(k)} = bp + dbp[${k}], Wu${sup(k)} = Wu + Au[${k}]·Bu[${k}], bu${sup(k)} = bu + dbu[${k}]; combined in float64, rounded to float32 once</p>` : ""}
+    <p class="cm">arithmetic as in player/nca_core.mjs substep() and ca/nca.py step_np: sums in float64 here (float32 in numpy), each stored value rounded to float32</p>
+  </div>
+  <div class="hscroll"><table class="rtab ptbl"><thead><tr><th>parameter</th><th>shape</th><th class="num">values</th><th>stored as</th>${stats ? '<th class="num">changed</th>' : ""}</tr></thead><tbody>`;
+  for (const [n, shp] of [["Wp", `${Fh}×${C}×3×3`], ["bp", `${Fh}`], ["Wu", `${C}×${Fh}`], ["bu", `${C}`]]) {
+    const cnt = ruleParams(e, k)[n].length;
+    h += `<tr class="${ph.boundary && stats?.per[n] ? "chg" : ""}"><td>${PM(n, "")}</td><td>${shp}</td><td class="num">${fmtInt(cnt)}</td><td class="wrap">${esc(blobTxt(n))}</td>${stats ? `<td class="num">${fmtInt(stats.per[n])}${ph.boundary && stats.per[n] ? " ◆" : ""}</td>` : ""}</tr>`;
+  }
+  h += `</tbody></table></div><p class="cm">${fmtInt(per)} parameters in this phase's rule = ${Fh}·${C}·9 + ${Fh} + ${C}·${Fh} + ${C}.</p>`;
+  h += `<div class="chg-box${ph.boundary ? " on" : ""}"><b>vs previous phase:</b> ` + (!stats ? `this is the first phase; frame 1 is produced from the given first frame${m.hidden0 ? " and the learned low-res initial hidden state" : " with hidden = 0"}.`
+    : stats.prevRule === k ? `same rule id ${k} as the previous phase: no parameter changes.`
+    : `phase ${ph.k} used rule id ${stats.prevRule}. ${fmtInt(stats.changed)} of ${fmtInt(per)} values changed (|Δ| &gt; 1e-6) · L2 of the change ${stats.l2.toPrecision(4)} · max |Δ| ${stats.max.toPrecision(4)}`
+      + (m.mode === "indep" ? ` · <b>all parameters replaced (independent rule)</b>` : delta ? " · shared base; only the low-rank and bias deltas differ" : "")) + `</div>`;
+  if (mx) h += matrixHTML(e, k, sch, ph);
+  h += `<details class="allph"><summary>all ${K} phases <span class="cm">(parameter count, change vs previous phase, stored bytes)</span></summary>${phasesTable(e, P)}</details>`;
+  el.innerHTML = h;
+  el.querySelectorAll("[data-mx]").forEach((b) => (b.onclick = () => { mx = mx?.n === b.dataset.mx ? null : { n: b.dataset.mx, page: 0, mode: "val", pick: null }; renderRulePanel(P, true); }));
+  if (mx) wireMatrix(e, k, sch, ph, P);
+  el.querySelectorAll("tr[data-seek]").forEach((r) => (r.onclick = () => P.seek(+r.dataset.seek)));
+}
+function phasesTable(e, P) {
+  const m = e.m, { C, Fh } = m, w = m.weight_dtype === "f16" ? 2 : 4, per = Fh * C * 9 + Fh + C * Fh + C, sch = scheduleOf(e), st = phaseStats(e), seen = new Map(), cur = phaseAt(e, P.t, P.sub).k;
+  let h = `<div class="scrollbox"><table class="rtab"><thead><tr><th>phase</th><th>frames</th><th>rule id</th><th class="num">params</th><th class="num">changed (|Δ|&gt;1e-6)</th><th class="num">L2 Δ</th><th class="num">max |Δ|</th><th class="num">stored bytes</th><th>reason</th></tr></thead><tbody>`;
+  sch.forEach((s, i) => {
+    const x = st[i], bytes = m.mode === "delta" ? "delta + shared base" : m.mode === "fixed" || !m.rules ? (i ? "shared (one rule)" : fmtInt(per * w)) : seen.has(s.rule) ? `same as phase ${seen.get(s.rule) + 1}` : fmtInt(per * w);
+    if (!seen.has(s.rule)) seen.set(s.rule, i);
+    h += `<tr data-seek="${s.start}" class="${i === cur ? "cur" : ""}"><td>${i + 1}</td><td>${s.start}–${s.end - 1}</td><td>${s.rule}</td><td class="num">${fmtInt(per)}</td><td class="num">${x ? fmtInt(x.changed) : "–"}</td><td class="num">${x ? x.l2.toPrecision(3) : "–"}</td><td class="num">${x ? x.max.toPrecision(3) : "–"}</td><td class="num">${bytes}</td><td>${esc(s.reason ?? "–")}</td></tr>`;
+  });
+  return h + `</tbody></table></div><p class="cm">click a row to seek to its first frame. Stored bytes are raw float bytes before deflate.</p>`;
+}
+
+// ---------- matrix viewer: heatmap + paged numbers ----------
+const MX = {
+  Wp: (C, Fh) => ({ dims: [Fh, C, 3, 3], pageDim: "f", pages: Fh, img: [Fh * 4 - 1, C * 4 - 1] }),
+  Wu: (C, Fh) => ({ dims: [C, Fh], pageDim: "c", pages: C, img: [Fh, C] }),
+  bp: (C, Fh) => ({ dims: [Fh], pages: 1, img: [Fh, 1] }),
+  bu: (C) => ({ dims: [C], pages: 1, img: [C, 1] }),
+};
+function mxValues(e, rid, n, sch, ph) {
+  const v = ruleParams(e, rid)[n];
+  if (mx.mode !== "diff" || ph.k < 1) return v;
+  const pv = ruleParams(e, sch[ph.k - 1].rule)[n]; return Float64Array.from(v, (x, j) => x - pv[j]);
+}
+function matrixHTML(e, k, sch, ph) {
+  const { C, Fh } = e.m, d = MX[mx.n](C, Fh), v = mxValues(e, k, mx.n, sch, ph);
+  let amax = 0; for (const x of v) amax = Math.max(amax, Math.abs(x));
+  const [iw, ih] = d.img, zoom = Math.max(2, Math.floor(480 / iw));
+  let tbl = "";
+  if (mx.n === "Wp") {
+    const f = mx.page; tbl = `<table class="rtab mtab"><thead><tr><th>c \\ (dy,dx)</th>${[-1, 0, 1].flatMap((dy) => [-1, 0, 1].map((dx) => `<th class="num">${dy},${dx}</th>`)).join("")}</tr></thead><tbody>`;
+    for (let c = 0; c < C; c++) tbl += `<tr><td>${c}${c === 0 ? " vis" : ""}</td>${Array.from({ length: 9 }, (_, j) => `<td class="num">${fmtN(v[(f * C + c) * 9 + j])}</td>`).join("")}</tr>`;
+    tbl += "</tbody></table>";
+  } else if (mx.n === "Wu") {
+    const c = mx.page; tbl = `<table class="rtab mtab"><tbody>`;
+    for (let r = 0; r < Fh / 8; r++) tbl += `<tr><td class="cm">f ${r * 8}–${r * 8 + 7}</td>${Array.from({ length: 8 }, (_, j) => `<td class="num">${fmtN(v[c * Fh + r * 8 + j])}</td>`).join("")}</tr>`;
+    tbl += "</tbody></table>";
+  } else {
+    tbl = `<table class="rtab mtab"><tbody>`;
+    for (let r = 0; r < Math.ceil(v.length / 8); r++) tbl += `<tr><td class="cm">${r * 8}–${Math.min(v.length, r * 8 + 8) - 1}</td>${Array.from({ length: Math.min(8, v.length - r * 8) }, (_, j) => `<td class="num">${fmtN(v[r * 8 + j])}</td>`).join("")}</tr>`;
+    tbl += "</tbody></table>";
+  }
+  const pg = d.pages > 1 ? `<span class="pager"><button class="btn" data-pg="-1" aria-label="previous page">[ ◂ ]</button> ${d.pageDim} = ${mx.page} of 0..${d.pages - 1} <button class="btn" data-pg="1" aria-label="next page">[ ▸ ]</button></span>` : "";
+  const what = mx.n === "Wp" ? `x = feature f (blocks of 3 columns: dx −1,0,1), y = channel c (blocks of 3 rows: dy −1,0,1)` : mx.n === "Wu" ? "x = feature f, y = channel c" : "x = index";
+  return `<div class="mx"><h3 class="minor">${mx.n}${sup(k)} <span class="cm">// ${d.dims.join("×")} = ${fmtInt(v.length)} values${mx.mode === "diff" ? ", Δ vs previous phase" : ""}</span></h3>
+    <label>show <select id="mx-mode"><option value="val">values</option><option value="diff"${mx.mode === "diff" ? " selected" : ""} ${ph.k < 1 ? "disabled" : ""}>change vs previous phase</option></select></label>
+    <canvas id="mx-cv" width="${iw}" height="${ih}" style="width:${iw * zoom}px;height:${ih * zoom}px" aria-label="heatmap of ${mx.n}"></canvas>
+    <p class="cm">heatmap: ${what}; amber = positive, light = negative, black = 0; brightness = sqrt(|value| / max |value|), max |value| = ${fmtN(amax)}. Click the heatmap to page to that row and read one value.</p>
+    <p id="mx-pick" class="counter">${mx.pick ?? ""}</p>${pg}<div class="scrollbox">${tbl}</div></div>`;
+}
+function wireMatrix(e, k, sch, ph, P) {
+  const { C, Fh } = e.m, d = MX[mx.n](C, Fh), v = mxValues(e, k, mx.n, sch, ph), cv = $("mx-cv"), c2 = cv.getContext("2d"), [iw, ih] = d.img;
+  let amax = 1e-30; for (const x of v) amax = Math.max(amax, Math.abs(x));
+  const img = c2.createImageData(iw, ih), put = (x, y, val) => { const a = Math.sqrt(Math.min(1, Math.abs(val) / amax)), o = 4 * (y * iw + x), c = val >= 0 ? [255, 180, 58] : [236, 232, 223]; img.data[o] = 12 + a * (c[0] - 12); img.data[o + 1] = 12 + a * (c[1] - 12); img.data[o + 2] = 11 + a * (c[2] - 11); img.data[o + 3] = 255; };
+  for (let i = 0; i < iw * ih; i++) { img.data[4 * i] = 52; img.data[4 * i + 1] = 51; img.data[4 * i + 2] = 47; img.data[4 * i + 3] = 255; } // separators in the rule colour
+  if (mx.n === "Wp") { for (let f = 0; f < Fh; f++) for (let c = 0; c < C; c++) for (let j = 0; j < 9; j++) put(f * 4 + (j % 3), c * 4 + ((j / 3) | 0), v[(f * C + c) * 9 + j]); }
+  else if (mx.n === "Wu") { for (let c = 0; c < C; c++) for (let f = 0; f < Fh; f++) put(f, c, v[c * Fh + f]); }
+  else for (let i = 0; i < v.length; i++) put(i, 0, v[i]);
+  c2.putImageData(img, 0, 0);
+  cv.onclick = (ev) => {
+    const r = cv.getBoundingClientRect(), x = Math.floor(((ev.clientX - r.left) / r.width) * iw), y = Math.floor(((ev.clientY - r.top) / r.height) * ih);
+    const name = `${mx.n}(${k})`;
+    if (mx.n === "Wp") { const f = (x / 4) | 0, c = (y / 4) | 0, dx = x % 4, dy = y % 4; if (dx > 2 || dy > 2) return; mx.page = f; mx.pick = `${name}[f=${f}, c=${c}, dy=${dy - 1}, dx=${dx - 1}] = ${fmtN(v[(f * C + c) * 9 + dy * 3 + dx])} (stored index ${dy},${dx})`; }
+    else if (mx.n === "Wu") { mx.page = y; mx.pick = `${name}[c=${y}, f=${x}] = ${fmtN(v[y * Fh + x])}`; }
+    else mx.pick = `${name}[${x}] = ${fmtN(v[x])}`;
+    if (mx.mode === "diff") mx.pick += " (change vs previous phase)";
+    renderRulePanel(P, true);
+  };
+  $("mx-mode").onchange = (ev) => { mx.mode = ev.target.value; mx.pick = null; renderRulePanel(P, true); };
+  document.querySelectorAll("[data-pg]").forEach((b) => (b.onclick = () => { mx.page = (mx.page + +b.dataset.pg + d.pages) % d.pages; renderRulePanel(P, true); }));
+}
+
+// ---------- demo cell inspector (NCA): traceCell = the substep's own arithmetic for one cell ----------
+function renderInspector() {
+  const P = DEMO, e = P.e, i = P.sel;
+  if (!e || i == null) { $("insp-where").textContent = "// click a cell of the CA video"; $("insp-body").innerHTML = '<p class="cm">no cell selected</p>'; return; }
+  const S = e.S, g = P.t * S + P.sub, f = Math.floor(g / S) + 1, last = g >= (e.T - 1) * S, x = i % e.W, y = Math.floor(i / e.W), m = e.m, C = m.C;
+  const sch = scheduleOf(e), ph = sch.findIndex((p) => f >= p.start && f < p.end), rid = m.sched ? m.sched[Math.min(f, e.T - 1)] : 0;
+  $("insp-where").textContent = `// cell (x=${x}, y=${y}) · frame ${P.t}${P.sub ? ` + ${P.sub} substeps` : ""}`;
+  const s = e.stateAt(g);
+  if (!s) { $("insp-body").innerHTML = `<p class="cm">state not available yet (checkpoint for frame ${P.t - (P.t % e.every)} still being computed)</p>`; return; }
+  const tr = traceCell(m, ruleAt(m, f), s, i), nx = last ? null : e.stateAt(g + 1), agree = nx && tr.next.every((v, c) => Object.is(v, nx[c * e.N + i]));
+  let h = `<dl class="facts"><dt>cell</dt><dd>x=${x}, y=${y} (row-major index ${i}) of the ${e.W}×${e.H} grid</dd>
+    <dt>state shown</dt><dd>${P.sub ? `after substep ${g} = frame ${P.t}·${S} + ${P.sub}` : `the state after frame ${P.t} (after ${g} = ${P.t}·${S} substeps)`}; this state is the input of the next update · regenerated from the checkpoint at frame ${P.t - (P.t % e.every)} with substep()</dd>
+    <dt>next update</dt><dd>${last ? "none: this is the last frame of the export" : `substep ${g} → ${g + 1}, part of producing frame ${f}; rule id ${rid} in effect (phase ${ph + 1} of ${sch.length})`}</dd></dl>`;
+  h += `<div class="two-col"><div><h3 class="minor">all ${C} channels <span class="cm">// 3×3 neighbourhood NW N NE / W · E / SW S SE; · = outside the grid (zero padding)</span></h3><div class="scrollbox"><table class="rtab"><thead><tr><th>c</th><th class="num">s now</th><th>3×3 neighbourhood</th>${last ? "" : '<th class="num">Δs = Wu·p + bu</th><th class="num">next s</th>'}</tr></thead><tbody>`;
+  for (let c = 0; c < C; c++) h += `<tr><td>${c === 0 ? "0 vis" : c}</td><td class="num">${fmtN(tr.cur[c])}</td><td>${tr.nbr[c].map(fmtN).join(" ")}</td>${last ? "" : `<td class="num">${fmtN(tr.upd[c] + tr.bias[c])}</td><td class="num">${fmtN(tr.next[c])}</td>`}</tr>`;
+  h += `</tbody></table></div>${last ? "" : `<p>next s<sub>0</sub> = ${fmtN(tr.next[0])} → pixel ${tr.next[0] > m.threshold ? "on" : "off"} (on if s<sub>0</sub> &gt; ${m.threshold}) · <b class="${agree ? "ok" : "bad"}">${agree ? `equals the real substep's state at substep ${g + 1} (all ${C} channels, float32 bit-exact)` : "DIFFERS from the real substep (bug)"}</b></p>
+    <p class="cm">next s<sub>c</sub> = float32(s<sub>c</sub> + float32(Σ<sub>f</sub> Wu[c,f]·p<sub>f</sub>) + bu[c]), the same expression as substep().</p>`}</div>`;
+  h += `<div><h3 class="minor">p (perception) <span class="cm">// pre = bp[f] + Σ Wp·neighbourhood (float64), post = float32(ReLU(pre))</span></h3><div class="scrollbox"><table class="rtab"><thead><tr><th>f</th><th class="num">pre-ReLU</th><th class="num">post-ReLU p<sub>f</sub></th></tr></thead><tbody>`;
+  for (let k = 0; k < m.Fh; k++) h += `<tr><td>${k}</td><td class="num">${fmtN(tr.pre[k])}</td><td class="num${tr.post[k] ? "" : " skip"}">${fmtN(tr.post[k])}</td></tr>`;
+  h += `</tbody></table></div><p class="cm">${tr.post.filter((v) => v > 0).length}/${m.Fh} features active (p<sub>f</sub> &gt; 0)</p></div></div>`;
+  $("insp-body").innerHTML = h;
+}
+
+// ---------- rule lab (dlrule-v1) ----------
+const LAB_DEFAULT = "c12~samples~life_then_grow.rule.json";
+let labLoading = false;
+function fillLabSelect() {
+  const rs = runs.filter((r) => r.format === "dlrule-v1"), cur = $("lab-sel").value || LAB_DEFAULT;
+  const samples = rs.filter((r) => r.name.startsWith("c12~samples~")), ba = rs.filter((r) => !r.name.startsWith("c12~samples~"));
+  $("lab-sel").innerHTML = `<optgroup label="synthetic samples (exact)">${samples.map((r) => `<option value="${esc(r.name)}">${esc(r.label)}</option>`).join("")}</optgroup>`
+    + `<optgroup label="experimental: Bad Apple dlrule results (runs/c12/rules)">${ba.map((r) => `<option value="${esc(r.name)}">${esc(r.label)} · ${r.rules} rules / ${r.programs} programs</option>`).join("")}</optgroup>`;
+  $("lab-sel").value = cur;
+}
+$("lab-sel").onchange = () => openLab($("lab-sel").value);
+async function openLab(name) {
+  labLoading = true;
+  try {
+    const u8 = await bytesOf(`/api/runs/${encodeURIComponent(name)}/export`), o = isRuleJson(u8);
+    if (!o) throw new Error("not a dlrule-v1 file");
+    const e = await ruleEngine(o, u8.length), r = runs.find((x) => x.name === name);
+    LAB.load(e, { name, label: r?.label ?? name, fps: o.meta?.fps || 30, fpsSrc: o.meta?.fps ? "export meta" : "assumed 30 (no fps recorded)" });
+    $("lab-sel").value = name; LAB.q("ca-cap").innerHTML = `explicit rules <span class="cm">(${esc(r?.label ?? name)}; computed in this browser from the file)</span>`;
+    renderRules(); renderLabInspector();
+  } catch (err) { toast("rule file could not be loaded: " + err.message, true); } finally { labLoading = false; }
+}
+const ruleLine = (r, i, k) => `R${i}: if ${r.if.map(([f, op, c]) => `${f} ${op} ${c}`).join(" and ") || "always"} -> v=${r.then.v}` + (k ? `, h=${r.then.h.toString(2).padStart(k, "0")}` : "");
+function progDiff(a, b) { // b vs a: rules keyed by their condition list
+  const key = (r) => JSON.stringify(r.if), A = new Map(a.rules.map((r) => [key(r), r])), Bm = new Map(b.rules.map((r) => [key(r), r]));
+  const added = b.rules.filter((r) => !A.has(key(r))), removed = a.rules.filter((r) => !Bm.has(key(r))), changed = b.rules.filter((r) => A.has(key(r)) && JSON.stringify(A.get(key(r)).then) !== JSON.stringify(r.then));
+  const order = !added.length && !removed.length && a.rules.map(key).join() !== b.rules.map(key).join();
+  return { added, removed, changed, order, same: !added.length && !removed.length && !changed.length && !order };
+}
+const fmtPrograms = (ps) => "[\n" + ps.map((p) => ' {"rules": [\n' + p.rules.map((r) => "  " + JSON.stringify({ if: r.if, then: r.then })).join(",\n") + "\n ]}").join(",\n") + "\n]";
+function renderRules() {
+  const e = LAB.e; if (!e) return;
+  const m = e.m, sch = scheduleOf(e), k = m.k, cnt = e.counts;
+  $("rules-kind").textContent = `// dlrule-v1: explicit, executable decision lists · ${LAB.label}`;
+  const used = (p) => sch.map((s, i) => (s.rule === p ? i : null)).filter((x) => x != null);
+  let h = `<dl class="facts"><dt>state</dt><dd>v + ${k} hidden bit${k === 1 ? "" : "s"} per cell; ${m.S} substep${m.S > 1 ? "s" : ""} per frame; zero boundary; synchronous</dd>
+    <dt>semantics</dt><dd>${esc(m.semantics || "first firing rule wins; default keep")}</dd><dt>features</dt><dd>${esc((m.features || []).join(", "))}</dd>
+    <dt>size</dt><dd>${m.programs.length} programs, ${m.programs.reduce((a, p) => a + p.rules.length, 0)} rules, ${m.programs.reduce((a, p) => a + p.rules.reduce((b, r) => b + r.if.length, 0), 0)} conditions · file ${fmtInt(e.bytes)} B (JSON with hex first frame)</dd></dl>`;
+  h += `<h3 class="minor">fire counts <span class="cm">// cells × substeps in which each rule fired, from running the engine over frames</span></h3>
+    <label>from frame <input type="number" id="fc-from" min="1" max="${m.T - 1}" value="${cnt?.from ?? 1}"></label><label>to frame <input type="number" id="fc-to" min="1" max="${m.T - 1}" value="${cnt?.to ?? m.T - 1}"></label>
+    <button class="btn" id="b-count">[ count firings ]</button> <span class="cm">${cnt ? `counted frames ${cnt.from}–${cnt.to} (${fmtInt(cnt.cells)} cell-substeps, version ${cnt.ver})${cnt.note}` : "not counted yet"}</span>`;
+  h += `<div class="two-col"><div>`;
+  m.programs.forEach((p, pi) => {
+    const lines = p.rules.map((r, i) => ruleLine(r, i, k) + (cnt ? `   ×${fmtInt(cnt.c[pi][i + 1])}` : "")).concat("default: keep state" + (cnt ? `   ×${fmtInt(cnt.c[pi][0])}` : ""));
+    h += `<div class="prog"><h3 class="minor">program ${pi} <span class="cm">// phases ${used(pi).map((x) => x + 1).join(", ") || "none"} · ${p.rules.length} rules in priority order · ${fmtInt(JSON.stringify(p).length)} B JSON</span></h3><pre>${esc(lines.join("\n"))}</pre></div>`;
+  });
+  h += `</div><div><h3 class="minor">what changes at each phase boundary <span class="cm">// vs the previous phase's program; rules matched by their conditions</span></h3><div class="scrollbox"><table class="rtab"><thead><tr><th>phase</th><th>frames</th><th>program</th><th>vs previous</th></tr></thead><tbody>`;
+  sch.forEach((s, i) => {
+    let d = "first phase";
+    if (i) {
+      const a = sch[i - 1].rule, b = s.rule, df = progDiff(m.programs[a], m.programs[b]);
+      d = a === b ? "same program" : df.same ? `program ${a} → ${b}: identical rules` : `program ${a} → ${b}: <span class="diff-add">+${df.added.length} added</span> <span class="diff-del">−${df.removed.length} removed</span> <span class="diff-chg">~${df.changed.length} changed</span>${df.order ? " · order changed" : ""}`
+        + [...df.added.map((r) => `<br><span class="diff-add">+ ${esc(ruleLine(r, m.programs[b].rules.indexOf(r), k))}</span>`), ...df.removed.map((r) => `<br><span class="diff-del">− ${esc(ruleLine(r, m.programs[a].rules.indexOf(r), k))}</span>`), ...df.changed.map((r) => `<br><span class="diff-chg">~ ${esc(ruleLine(r, m.programs[b].rules.indexOf(r), k))}</span>`)].join("");
+    }
+    h += `<tr data-seek="${s.start}"><td>${i + 1}</td><td>${s.start}–${s.end - 1}</td><td>${s.rule}</td><td style="white-space:normal">${d}</td></tr>`;
+  });
+  h += `</tbody></table></div>
+    <h3 class="minor">edit programs <span class="cm">// JSON list of programs; the schedule is kept</span> <span class="verbadge">version ${e.ver}: ${esc(e.verNote)}</span></h3>
+    <textarea id="rule-edit" spellcheck="false" aria-label="programs JSON">${esc(fmtPrograms(m.programs))}</textarea>
+    <p class="error" id="edit-err" role="alert"></p>
+    <button class="btn" id="b-replay">[ replay from start ]</button> <span class="cm">default: recomputes every frame from frame 0 with the edited programs</span><br>
+    <button class="btn" id="b-continue">[ experimental: continue from current state ]</button> <span class="cm">keeps substeps 0..current from the previous version, runs the edited programs after it (a hybrid, labelled as such)</span><br>
+    <button class="btn" id="b-reset">[ reset to export ]</button></div></div>`;
+  $("rules-body").innerHTML = h;
+  $("b-count").onclick = () => countFires(e); $("b-replay").onclick = () => applyEdit("start"); $("b-continue").onclick = () => applyEdit("continue"); $("b-reset").onclick = () => applyEdit("reset");
+  $("rules-body").querySelectorAll("tr[data-seek]").forEach((r) => (r.onclick = () => LAB.seek(+r.dataset.seek)));
+}
+function countFires(e) {
+  const m = e.m, S = m.S, from = Math.max(1, Math.min(+$("fc-from").value || 1, m.T - 1)), to = Math.max(from, Math.min(+$("fc-to").value || m.T - 1, m.T - 1));
+  const g0 = Math.max((from - 1) * S, e.hybridFrom ?? 0), c = m.programs.map((p) => new Array(p.rules.length + 1).fill(0)), fired = new Int32Array(e.N);
+  for (let g = g0; g < to * S; g++) { // re-run each substep with the engine's step() and count the firing rule index per cell
+    const pi = programAt(m, Math.floor(g / S) + 1), st = e.seq[g]; ruleStep(m, m.programs[pi], st.v, st.h, fired);
+    for (let i = 0; i < e.N; i++) c[pi][fired[i] + 1]++;
+  }
+  e.counts = { from, to, c, cells: (to * S - g0) * e.N, ver: e.ver, note: e.hybridFrom != null && e.hybridFrom > (from - 1) * S ? ` · hybrid version: counted from substep ${e.hybridFrom} on (earlier substeps ran the previous programs)` : "" };
+  renderRules();
+}
+const FEATS = (k) => ["v", ...Array.from({ length: k }, (_, b) => "h" + b), "n8", "r2", "N", "S", "E", "W", ...Array.from({ length: k }, (_, b) => "m" + b)];
+function validatePrograms(ps, m) {
+  if (!Array.isArray(ps) || !ps.length) throw new Error("expected a non-empty JSON list of programs");
+  const need = Math.max(...m.schedule.map((s) => s.program)) + 1, names = new Set(FEATS(m.k));
+  if (ps.length < need) throw new Error(`the schedule uses programs 0..${need - 1}; only ${ps.length} given`);
+  return ps.map((p, pi) => {
+    if (!p || !Array.isArray(p.rules)) throw new Error(`program ${pi}: missing "rules" list`);
+    return { rules: p.rules.map((r, ri) => {
+      const where = `program ${pi} rule ${ri}`;
+      if (!Array.isArray(r.if) || !r.then) throw new Error(`${where}: needs "if" (list) and "then"`);
+      for (const c of r.if) if (!Array.isArray(c) || c.length !== 3 || !names.has(c[0]) || !["<=", ">=", "=="].includes(c[1]) || !Number.isInteger(c[2])) throw new Error(`${where}: bad condition ${JSON.stringify(c)} (feature one of ${[...names].join(",")}; op <=, >=, ==; integer constant)`);
+      if (![0, 1].includes(r.then.v) || !Number.isInteger(r.then.h ?? 0) || (r.then.h ?? 0) < 0 || (r.then.h ?? 0) >= 2 ** m.k) throw new Error(`${where}: then.v must be 0|1 and then.h 0..${2 ** m.k - 1}`);
+      return { if: r.if, then: { v: r.then.v, h: r.then.h ?? 0 } };
+    }) };
+  });
+}
+let verCounter = 1;
+async function applyEdit(mode) {
+  const e = LAB.e; if (!e || e.kind !== "rule") return;
+  let ps;
+  try { ps = mode === "reset" ? e.base.programs : validatePrograms(JSON.parse($("rule-edit").value), e.m); } catch (err) { $("edit-err").textContent = err.message; return; }
+  LAB.setPlaying(false); const prevVer = e.ver; e.ver = ++verCounter; e.counts = null;
+  const t0 = performance.now(), m2 = { ...e.m, programs: ps };
+  if (mode === "continue") {
+    const g0 = LAB.t * e.S + LAB.sub, old = e.progAt;
+    e.m = m2; simulateRule(e, ps, g0, e.seq); e.hybridFrom = g0;
+    e.progAt = (g) => (g < g0 ? old(g) : ps[programAt(m2, Math.floor(g / e.S) + 1)]);
+    e.verNote = `EXPERIMENTAL hybrid: substeps 0..${g0} from version ${prevVer}, substeps after ${g0} from the edited programs`;
+  } else {
+    e.m = m2; simulateRule(e, ps, 0, null); e.hybridFrom = null; e.progAt = (g) => ps[programAt(m2, Math.floor(g / e.S) + 1)];
+    e.verNote = mode === "reset" ? "export programs, replayed from frame 0" : "edited programs, replayed from frame 0";
+  }
+  e.ms = performance.now() - t0; e.runMatch = e.hybridFrom == null && ruleRun(e.m).frames.every((f, t) => f.every((x, i) => x === e.vis[t * e.N + i]));
+  e.sha = await hex(e.vis); // every cached frame of the old version is replaced
+  renderRules(); LAB.render(true); toast(`rules version ${e.ver}: ${mode === "continue" ? "experimental hybrid" : "recomputed from frame 0"}`);
+}
+function renderLabInspector() {
+  const P = LAB, e = P.e, i = P.sel;
+  if (!e || i == null) { $("linsp-where").textContent = "// click a cell of the rule CA"; $("linsp-body").innerHTML = '<p class="cm">no cell selected</p>'; return; }
+  const S = e.S, g = P.t * S + P.sub, f = Math.floor(g / S) + 1, last = g >= (e.T - 1) * S, x = i % e.W, y = Math.floor(i / e.W), m = e.m;
+  const sch = scheduleOf(e), ph = sch.findIndex((p) => f >= p.start && f < p.end), rid = programAt(m, f);
+  $("linsp-where").textContent = `// cell (x=${x}, y=${y}) · state after substep ${g} = frame ${P.t} + ${P.sub}`;
+  let h = `<dl class="facts"><dt>cell</dt><dd>x=${x}, y=${y} (row-major index ${i})</dd><dt>state shown</dt><dd>after ${g} substeps (frame ${P.t}, substep ${P.sub} of ${S}) · version ${e.ver}</dd>
+    <dt>next substep</dt><dd>${last ? "none: this is the last frame of the file" : `${g} → ${g + 1}, part of producing frame ${f}; program ${rid} in effect (phase ${ph + 1}${e.hybridFrom != null && g < e.hybridFrom ? ", pre-edit programs of the hybrid" : ""})`}</dd></dl>`;
+  const st = e.stateAt(g), prog = e.progAt(Math.min(g, (e.T - 1) * S - 1)), ex = explainCell(m, prog, st.v, st.h, i);
+  h += `<h3 class="minor">features <span class="cm">// rule_core.features() on the current grid (zero boundary)</span></h3><pre class="codeblock">${esc(Object.entries(ex.features).map(([k, v]) => `${k}=${v}`).join("  "))}</pre>`;
+  if (!last) {
+    const nx = e.stateAt(g + 1), agree = nx.v[i] === ex.next.v && ex.next.h.every((b, j) => b === nx.h[j * e.N + i]);
+    h += `<h3 class="minor">rule evaluation <span class="cm">// rule_core.fire(): first firing rule wins; ✓/✗ per condition; ✗ in amber = first failing condition</span></h3><div class="scrollbox"><pre class="codeblock" style="max-height:none;border:0">`;
+    for (const r of ex.rules) {
+      if (r.skipped) { h += `<span class="skip">R${r.r}..R${prog.rules.length - 1}: not evaluated (R${ex.fired} fired first)</span>\n`; break; }
+      const conds = r.conds.map((c, j) => `<span class="${c.ok ? "ok" : j === r.firstFail ? "fired" : "bad"}">${esc(`${c.n} ${c.op} ${c.c}`)} [${c.n}=${c.val} ${c.ok ? "✓" : "✗"}]</span>`).join(" and ") || "always";
+      h += r.ok ? `<span class="fired">R${r.r} FIRES:</span> if ${conds} -> v=${r.then.v}${m.k ? ", h=" + r.then.h.toString(2).padStart(m.k, "0") : ""}\n`
+        : `<span class="skip">R${r.r} fails at</span> ${esc(`${r.conds[r.firstFail].n} ${r.conds[r.firstFail].op} ${r.conds[r.firstFail].c}`)} (${r.conds[r.firstFail].n}=${r.conds[r.firstFail].val}): ${conds}\n`;
+    }
+    if (ex.fired < 0) h += `<span class="fired">no rule fired → default: keep state</span>\n`;
+    h += `</pre></div><dl class="facts"><dt>current</dt><dd>v=${ex.cur.v}${m.k ? ", h=" + ex.cur.h.join("") + " (h0..)" : ""}</dd><dt>next</dt><dd>v=${ex.next.v}${m.k ? ", h=" + ex.next.h.join("") : ""} · ${agree ? "equals the stepped state at substep " + (g + 1) : "DIFFERS from the stepped state (bug)"}</dd></dl>`;
+  }
+  $("linsp-body").innerHTML = h;
+}
+
+// ---------- research: shelves, model details ----------
 let runs = [], cfg = null;
 async function loadRuns() {
   runs = await api("/api/runs");
   for (const kind of ["example", "run", "imported", "c12"]) {
     const ul = $("list-" + kind), items = runs.filter((r) => r.kind === kind);
-    ul.innerHTML = items.length ? items.map((r) => `<li><button data-run="${esc(r.name)}" aria-pressed="${r.name === player.name}">
+    ul.innerHTML = items.length ? items.map((r) => `<li><button data-run="${esc(r.name)}">
       <span class="t">${esc(r.label)}</span>
       <span class="m"><span class="st ${esc(r.status)}">${esc(r.status)}${r.stage ? " · " + esc(r.stage) : ""}</span>
       ${r.format ? esc(r.format) + " · " : ""}${r.rules != null ? `${r.rules} rules / ${r.programs} programs · ` : ""}${r.phases ? `${r.phases} phases (${esc(r.mode)}) · ` : ""}${r.n_params ? fmtInt(r.n_params) + " params" : ""}${r.export_bytes ? " · " + fmtInt(r.export_bytes) + " B" : ""}
       ${r.frames ? ` · ${r.frames}f ${r.width ?? "?"}×${r.height ?? "?"}` : ""}${r.preset ? " · " + esc(r.preset) : ""}${r.elapsed_s ? " · " + fmtS(r.elapsed_s) : ""}
       ${r.has_original ? "" : " · CA only"}</span></button></li>`).join("") : `<li class="cm" style="padding:8px 6px">none yet</li>`;
   }
-  const bs = $("b-sel"), keep = bs.value;
+  const bs = DEMO.q("b-sel"), keep = bs.value;
   bs.innerHTML = '<option value="">none</option>' + runs.filter((r) => r.has_export).map((r) => `<option value="${esc(r.name)}">${esc(r.kind)}: ${esc(r.label)}</option>`).join("");
-  bs.value = keep;
+  bs.value = keep; fillLabSelect();
 }
-document.addEventListener("click", (e) => { const b = e.target.closest("[data-run]"); if (b) openRun(b.dataset.run); });
-
-$("import-file").addEventListener("change", async (e) => {
-  const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+document.addEventListener("click", (ev) => { const b = ev.target.closest("[data-run]"); if (b) openRun(b.dataset.run); });
+$("import-file").addEventListener("change", async (ev) => {
+  const f = ev.target.files[0]; ev.target.value = ""; if (!f) return;
   try {
     const r = await api("/api/import-export", { method: "POST", body: f, headers: { "X-Filename": f.name.replace(/[^\x20-\x7e]/g, "_") } });
     toast(`imported ${r.name} (${fmtInt(r.export.n_params)} params, ${r.T} frames, CA-only playback)`); await loadRuns(); openRun(r.name);
   } catch (err) { toast("import rejected: " + err.message, true); }
 });
-
-// ---------- player ----------
-const player = { name: null, T: 0, H: 0, W: 0, vis: null, cont: null, orig: null, t: 0, sub: 0, playing: false, fps: 30, fpsSrc: "assumed", src: null, srcT: null, sha: null, det: null };
-const cache = new Map(); // run name + export size -> {vis, cont, facts, sha, ms}
-const worker = new Worker("/static/worker.js", { type: "module" });
-let reqId = 0; const pending = new Map();
-worker.onmessage = ({ data }) => {
-  const p = pending.get(data.id); if (!p) return;
-  if (data.progress != null) return p.progress(data.progress);
-  pending.delete(data.id); data.error ? p.reject(new Error(data.error)) : p.resolve(data);
-};
-const computeCA = (url, progress) => new Promise((resolve, reject) => { const id = ++reqId; pending.set(id, { resolve, reject, progress }); worker.postMessage({ id, url }); });
-
-const ctxs = { orig: $("cv-orig").getContext("2d"), ca: $("cv-ca").getContext("2d"), err: $("cv-err").getContext("2d") };
-function paint(ctx, fn, W = player.W, H = player.H) {
-  const img = ctx.createImageData(W, H), d = img.data;
-  for (let i = 0; i < W * H; i++) { const c = fn(i); d[4 * i] = c[0]; d[4 * i + 1] = c[1]; d[4 * i + 2] = c[2]; d[4 * i + 3] = 255; }
-  ctx.putImageData(img, 0, 0);
-}
-function blank(ctx, msg) { const { canvas: c } = ctx; ctx.fillStyle = "#0c0c0b"; ctx.fillRect(0, 0, c.width, c.height); c.title = msg || ""; }
-
-function render() {
-  const { t, W, H, T, vis, cont, orig } = player; if (!vis) return;
-  const N = W * H, o = t * N, sub = player.sub;
-  let caVis = (i) => vis[o + i], caCont = cont ? (i) => cont[o + i] : null;
-  if (sub > 0) { // between frames: the state after t*S + sub substeps, from cached frame states (never from the original)
-    const st = stateAt(eng, t * eng.S + sub);
-    if (eng.kind === "rule") { caVis = (i) => st.v[i]; caCont = null; } else { caVis = (i) => (st[i] > eng.m.threshold ? 1 : 0); caCont = (i) => st[i]; }
-  }
-  const cv = $("t-cont").checked && caCont, sel = insp.i;
-  paint(ctxs.ca, (i) => (i === sel ? COL.sel : cv ? ((g) => [g, g, g])(Math.round(Math.min(1, Math.max(0, caCont(i))) * 255)) : caVis(i) ? COL.on : COL.off));
-  renderB();
-  if (orig) {
-    paint(ctxs.orig, (i) => (orig[o + i] ? COL.on : COL.off));
-    if ($("t-err").checked) paint(ctxs.err, (i) => { const a = orig[o + i], b = vis[o + i]; return a && b ? COL.on : !a && !b ? COL.off : a ? COL.fn : COL.fp; });
-  } else { blank(ctxs.orig, "no original"); blank(ctxs.err, "no original"); }
-  $("scrub").value = t;
-  let wrong = 0; if (orig) for (let i = 0; i < N; i++) wrong += orig[o + i] !== vis[o + i];
-  const src = player.src ? ` · source frame #${player.src[t]}` : "", time = player.srcT ? ` · t=${player.srcT[t].toFixed(3)} s` : ` · t=${(t / player.fps).toFixed(3)} s`;
-  const S = eng?.S ?? 1, subTxt = ` · CA substep ${t * S + sub} = ${t}·S + ${sub} (S=${S})` + (sub ? ` — CA panel is ${sub}/${S} of the way to frame ${t + 1}; original/error show frame ${t}` : "");
-  $("counter").textContent = `frame ${String(t).padStart(String(T - 1).length, "0")}/${T - 1}${src}${time}${orig ? ` · ${wrong} px differ (${(100 * wrong / N).toFixed(2)}%)` : " · no original"}${subTxt}`;
-  $("b-sub").disabled = $("b-frame").disabled = t >= T - 1;
-  renderTimelines(); if (!player.playing) renderInspector(); // the inspector re-runs a substep; not during playback
-}
-function setZoom() {
-  const z = +$("zoom").value;
-  const sz = (c, W, H) => { c.width = W || 1; c.height = H || 1; c.style.width = `${(W || 1) * z}px`; c.style.height = `${(H || 1) * z}px`; };
-  for (const c of [$("cv-orig"), $("cv-ca"), $("cv-err")]) sz(c, player.W, player.H);
-  for (const c of [$("cv-b"), $("cv-berr")]) sz(c, B.e?.m.W, B.e?.m.H);
-  render();
-}
-$("zoom").onchange = setZoom; $("t-cont").onchange = () => { $("ca-cap").innerHTML = $("t-cont").checked ? 'CA visible value <span class="cm">gray = clip(v,0,1), raw state thresholded at 0.5, not a probability</span>' : 'CA replay <span class="cm">(export only)</span>'; render(); };
-$("t-err").onchange = () => { $("fig-err").hidden = !$("t-err").checked; render(); };
-
-let raf = null, last = 0, acc = 0;
-function loop(ts) {
-  if (!player.playing) return;
-  acc += ((ts - last) / 1000) * player.fps * +$("speed").value; last = ts;
-  while (acc >= 1) { acc -= 1; if (player.t >= player.T - 1) { setPlaying(false); return; } player.t++; player.sub = 0; render(); }
-  raf = requestAnimationFrame(loop);
-}
-function setPlaying(on) {
-  if (!player.vis) return;
-  player.playing = on; $("b-play").textContent = on ? "[ pause ]" : "[ play ]";
-  if (on) { field.stop(); if (player.t >= player.T - 1) player.t = 0; last = performance.now(); acc = 0; raf = requestAnimationFrame(loop); render(); }
-  else { cancelAnimationFrame(raf); renderInspector(); }
-}
-const step = (d) => { setPlaying(false); player.sub = 0; player.t = Math.max(0, Math.min(player.T - 1, player.t + d)); render(); };
-const seek = (t) => { setPlaying(false); player.sub = 0; player.t = Math.max(0, Math.min(player.T - 1, t)); render(); };
-$("b-sub").onclick = () => { setPlaying(false); if (player.t >= player.T - 1) return; if (++player.sub >= eng.S) { player.sub = 0; player.t++; } render(); };
-$("b-frame").onclick = () => step(1);
-$("b-play").onclick = () => setPlaying(!player.playing); $("b-prev").onclick = () => step(-1); $("b-next").onclick = () => step(1);
-$("scrub").oninput = (e) => seek(+e.target.value);
-document.addEventListener("keydown", (e) => {
-  const tag = e.target.tagName;
-  if (["INPUT", "SELECT", "TEXTAREA"].includes(tag) && e.target.type !== "checkbox" || tag === "BUTTON" && e.key === " ") return;
-  if (!player.vis) return;
-  if (e.key === " ") { e.preventDefault(); setPlaying(!player.playing); }
-  else if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
-  else if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
-});
-
-let openSeq = 0;
 async function openRun(name) {
-  const seq = ++openSeq; setPlaying(false);
-  const det = await api(`/api/runs/${encodeURIComponent(name)}`).catch((e) => (toast(e.message, true), null)); if (!det || seq !== openSeq) return;
-  player.name = name; document.querySelectorAll("[data-run]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.run === name));
-  $("player-title").textContent = "// " + det.summary.label; renderModel(det); if (det.summary.own) watchJob(name);
-  for (const b of ["b-play", "b-prev", "b-next", "scrub", "b-sub", "b-frame"]) $(b).disabled = true;
-  player.vis = null; eng = null; insp.i = null; player.sub = 0; player.det = det;
-  if (!det.summary.has_export) { $("compute-line").textContent = `no export yet (status: ${det.summary.status}); the player needs the exported model file`; renderFacts(det, null); return; }
-  const man = det.manifest || {}, pp = man.data?.preprocessing, key = `${name}:${man.export?.sizes?.file ?? det.status?.sizes?.file}`;
-  let ca;
-  $("compute-line").textContent = "computing CA frames from the export…";
-  try { ca = await loadEngine(name, key, (p) => seq === openSeq && ($("compute-line").textContent = `computing CA frames from the export in a worker… ${Math.round(p * 100)}%`)); }
-  catch (e) { if (seq === openSeq) $("compute-line").textContent = "export could not be replayed: " + e.message; return; }
-  let orig = null;
-  if (det.summary.has_original) { try { const o = await api(`/api/runs/${encodeURIComponent(name)}/original`); orig = { ...o, u8: b64u8(o.bin.b64) }; } catch (e) { orig = null; } }
-  if (seq !== openSeq) return;
-  const f = ca.facts; eng = ca;
-  if (orig?.first_frame_mismatch_px) toast(`original resolved from export meta differs from the export's first frame in ${orig.first_frame_mismatch_px} px`, true);
-  player.fpsSrc = orig?.fps ? "source video" : pp?.fps ? "run manifest" : f.meta?.fps ? "export meta" : "assumed (no fps recorded)";
-  Object.assign(player, { T: f.T, H: f.H, W: f.W, vis: ca.vis, cont: ca.cont, sha: ca.sha, t: 0, fps: orig?.fps || pp?.fps || f.meta?.fps || 30,
-    orig: orig && orig.bin.shape[0] >= f.T && orig.bin.shape[1] === f.H && orig.bin.shape[2] === f.W ? orig.u8 : null,
-    src: orig?.source_frame_index || null, srcT: orig?.source_time_s || null });
-  window.__bench = { name, sha256: ca.sha, T: f.T, H: f.H, W: f.W, ms: ca.ms };
-  $("scrub").max = f.T - 1; for (const b of ["b-play", "b-prev", "b-next", "scrub", "b-sub", "b-frame"]) $(b).disabled = false;
-  computeLine();
-  renderFacts(det, ca); renderModel(det); renderRules(); setZoom();
+  const det = await api(`/api/runs/${encodeURIComponent(name)}`).catch((err) => (toast(err.message, true), null)); if (!det) return;
+  document.querySelectorAll("[data-run]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.run === name));
+  $("model-name").textContent = "// " + det.summary.label; renderModel(det); renderFacts(det); if (det.summary.own) watchJob(name);
+  if (!det.summary.has_export) { toast(`no export yet (status: ${det.summary.status})`); return; }
+  if (det.summary.format === "dlrule-v1") { location.hash = "#lab"; return openLab(name); }
+  location.hash = "#demo"; return openResearchNca(name, det);
 }
-
-function renderFacts(det, ca) {
-  if (ca?.kind === "rule") {
-    const f = ca.facts;
-    $("facts").innerHTML = [["format", "dlrule-v1 explicit rules (executable decision lists)"], ["state", `v + ${f.k} hidden bits`], ["S substeps/frame", f.S], ["programs / rules", `${f.programs} / ${f.rules}`],
-      ["export bytes", `${fmtInt(f.bytes)} B file`], ["frames", `${f.T} × ${f.H}×${f.W}`], ["source", det.manifest?.c12?.path ?? "–"], ["meta", JSON.stringify(f.meta || {})]]
-      .map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
-    return;
-  }
-  const man = det.manifest || {}, ex = man.export || {}, sz = ex.sizes || det.status?.sizes || {}, f = ca?.facts || {}, pr = det.progress, imp = man.imported || {};
-  const train = pr ? `${fmtS(pr.train_s)} (${fmtInt(pr.step)}/${fmtInt(pr.steps)} steps)` : imp.t ? `${fmtS(imp.t)} to best checkpoint at step ${fmtInt(imp.it)} (recorded by the source run${imp.start ? `; continued from ${imp.start}, earlier training not included` : ""})` : "–";
-  const rows = [["parameters", ca?.m?.version === 2 ? `${fmtInt(ex.n_params)} stored values (${ca.m.K} rule${ca.m.K > 1 ? "s" : ""}, mode ${ca.m.mode}; see model.rules)` : fmtInt(f.n_params ?? ex.n_params)], ["C channels", f.C ? `${f.C} (1 visible + ${f.C - 1} hidden)` : "–"], ["Fh features", f.Fh ?? "–"],
-    ["S updates/frame", f.S ?? "–"], ["weight dtype", f.weight_dtype ?? ex.weight_dtype ?? "–"],
-    ["export bytes", sz.file ? `${fmtInt(sz.file)} B file` + (sz.weights ? ` (raw: weights ${fmtInt(sz.weights)} + first frame ${fmtInt(sz.first_frame)} + header ${fmtInt(sz.header)} = ${fmtInt(sz.raw_total)}, deflated)` : "") : f.bytes ? `${fmtInt(f.bytes)} B file` : "–"],
-    ["frames", f.T ? `${f.T} × ${f.H}×${f.W}` : "–"], ["training time", train], ["status", det.summary.status + (det.status?.error ? ` — ${det.status.error}` : "")],
-    ["replay check", det.status?.replay ? `numpy vs Node: ${det.status.replay.binary_mismatch_px} px mismatch` : "–"]];
-  $("facts").innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
+function renderFacts(det) {
+  const man = det.manifest || {}, ex = man.export || {}, sz = ex.sizes || det.status?.sizes || {}, pr = det.progress, imp = man.imported || {}, hd = man.c12?.header || {};
+  const train = pr ? `${fmtS(pr.train_s)} (${fmtInt(pr.step)}/${fmtInt(pr.steps)} steps)` : imp.t ? `${fmtS(imp.t)} to best checkpoint at step ${fmtInt(imp.it)}` : "–";
+  const rows = [["format", hd.format ?? "ncab / nca-v1"], ["parameters", fmtInt(ex.n_params ?? sz.n_params)], ["export bytes", sz.file ? `${fmtInt(sz.file)} B file` + (sz.weights ? ` (raw: weights ${fmtInt(sz.weights)} + first frame ${fmtInt(sz.first_frame)} + header ${fmtInt(sz.header)} = ${fmtInt(sz.raw_total)}, deflated)` : "") : "–"],
+    ["frames", det.summary.frames ? `${det.summary.frames} × ${det.summary.width}×${det.summary.height}` : "–"], ["training time", train], ["status", det.summary.status + (det.status?.error ? ` — ${det.status.error}` : "")],
+    ["replay check", det.status?.replay ? `numpy vs Node: ${det.status.replay.binary_mismatch_px} px mismatch` : "–"], ["source", man.c12?.path ?? "–"],
+    ["download", det.summary.has_export ? `<a href="/api/runs/${encodeURIComponent(det.summary.name)}/export">[ export file ]</a>` : "–"]];
+  $("facts").innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${k === "download" ? v : esc(v)}</dd>`).join("");
 }
-
-// ---------- model panel ----------
 function renderModel(det) {
   const man = det.manifest || {}, s = man.settings || {}, imp = man.imported || {}, c12 = man.c12?.header || {};
   $("schematic").style.display = c12.format === "dlrule-v1" ? "none" : "";
-  if (c12.format === "dlrule-v1") {
-    $("arch").innerHTML = `<dt>model</dt><dd>explicit rules (dlrule-v1), not a Neural CA: ${c12.k} hidden bits, S=${c12.S}; the rules themselves are listed in model.rules below</dd>`;
-    return renderCurve([]);
-  }
+  if (c12.format === "dlrule-v1") { $("arch").innerHTML = `<dt>model</dt><dd>explicit rules (dlrule-v1), not a Neural CA: ${c12.k} hidden bits, S=${c12.S}; open in the rule lab</dd>`; return renderCurve([]); }
   const C = s.C ?? imp.C ?? man.C ?? c12.C, Fh = s.Fh ?? imp.Fh ?? man.Fh ?? c12.Fh, S = imp.S ?? man.S ?? c12.S ?? 4;
   const np = man.export?.n_params ?? (C && Fh ? Fh * C * 9 + Fh + C * Fh + C : null);
   $("arch").innerHTML = [["C channels", C ? `${C}: 1 visible + ${C - 1} hidden (continuous state)` : "–"], ["Fh features", Fh ?? "–"], ["S updates", `${S} per video frame`],
-    ["parameters", c12.format === "ncab-v2" ? `${fmtInt(np)} stored values: K=${c12.K} rule(s), mode ${c12.mode}, each rule Fh·C·9 + Fh + C·Fh + C = ${fmtInt(Fh * C * 9 + Fh + C * Fh + C)} effective (learned weights, not rules)` : np ? `${fmtInt(np)} = Fh·C·9 + Fh + C·Fh + C (learned weights, not rules)` : "–"], ["preset", man.preset ? `${man.preset}: ${s.note || ""}` : "–"]]
+    ["parameters", c12.format === "ncab-v2" ? `${fmtInt(np)} stored values: K=${c12.K} rule(s), mode ${c12.mode}, each rule Fh·C·9 + Fh + C·Fh + C = ${fmtInt(Fh * C * 9 + Fh + C * Fh + C)} (learned weights, not rules)` : np ? `${fmtInt(np)} = Fh·C·9 + Fh + C·Fh + C (learned weights, not rules)` : "–"], ["preset", man.preset ? `${man.preset}: ${s.note || ""}` : "–"]]
     .map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("");
   $("sch-c").textContent = C ?? "C"; $("sch-c2").textContent = C ?? "C"; $("sch-fh").textContent = Fh ?? "Fh"; $("sch-s").textContent = S;
   renderCurve(det.hist || []);
@@ -255,11 +727,11 @@ async function loadVideos(select) {
 async function probeSel() {
   $("probe").textContent = "probing…";
   try { const p = await api(`/api/video/${encodeURIComponent($("video").value)}/probe`); $("probe").textContent = `${p.width}×${p.height} · ${p.fps} fps · ${fmtInt(p.frames)} frames · ${p.duration_s?.toFixed(2)} s · ${p.codec}/${p.pix_fmt} · ${fmtInt(p.bytes)} B`; }
-  catch (e) { $("probe").textContent = "probe failed: " + e.message; }
+  catch (err) { $("probe").textContent = "probe failed: " + err.message; }
 }
 $("video").onchange = probeSel;
-$("upload").addEventListener("change", async (e) => {
-  const f = e.target.files[0]; e.target.value = ""; if (!f) return;
+$("upload").addEventListener("change", async (ev) => {
+  const f = ev.target.files[0]; ev.target.value = ""; if (!f) return;
   if (f.size > (cfg?.max_upload ?? 200 << 20)) return toast("file larger than 200 MB", true);
   $("probe").textContent = `uploading ${f.name}…`;
   try { const r = await api("/api/upload", { method: "POST", body: f, headers: { "X-Filename": f.name.replace(/[^\x20-\x7e]/g, "_") } }); toast(`uploaded ${r.name}`); await loadVideos(r.id); }
@@ -267,7 +739,6 @@ $("upload").addEventListener("change", async (e) => {
 });
 const params = () => ({ video: $("video").value, start: $("p-start").value, frames: $("p-frames").value, width: $("p-width").value,
   threshold: $("p-threshold").value, fps: $("p-fps").value || null, invert: $("p-invert").checked });
-
 const pv = { T: 0, H: 0, W: 0, gray: null, bin: null, man: null };
 function pvRender() {
   if (!pv.gray) return;
@@ -289,23 +760,21 @@ $("b-preview").onclick = async () => {
     $("pv-scrub").max = pv.T - 1; $("pv-scrub").value = 0; $("pv-scrub").disabled = false;
     $("pv-info").textContent = `${pv.T} frames × ${pv.H}×${pv.W} (height from aspect) · fps ${pp.fps} · ${pp.binarize} with threshold ${pp.threshold} · ${(100 * on).toFixed(1)}% pixels on · cache key ${r.manifest.key}`;
     pvRender();
-  } catch (e) { $("pv-info").textContent = "preview rejected: " + e.message; } finally { $("b-preview").disabled = false; }
+  } catch (err) { $("pv-info").textContent = "preview rejected: " + err.message; } finally { $("b-preview").disabled = false; }
 };
 $("preset").onchange = () => { const p = cfg.presets[$("preset").value]; $("preset-note").textContent = `${p.note}. Defaults: C=${p.C}, Fh=${p.Fh}, steps=${fmtInt(p.steps)}, lr=${p.lr}. Your preprocessing values are used as entered; nothing is replaced silently.`; };
-
 $("b-train").onclick = async () => {
   $("b-train").disabled = true;
   try {
     const r = await api("/api/train", { method: "POST", json: { ...params(), preset: $("preset").value, steps: $("t-steps").value || null, device: $("device").value } });
     toast(`job started: ${r.name}`); await loadRuns(); watchJob(r.name);
-  } catch (e) { toast("training not started: " + e.message, true); } finally { $("b-train").disabled = false; }
+  } catch (err) { toast("training not started: " + err.message, true); } finally { $("b-train").disabled = false; }
 };
-
 let watch = { name: null, timer: null, last: null };
 function watchJob(name) { clearTimeout(watch.timer); watch = { name, timer: null, last: null }; $("job").hidden = false; pollJob(); }
 async function pollJob() {
   const name = watch.name; let d;
-  try { d = await api(`/api/runs/${encodeURIComponent(name)}`); } catch (e) { $("job-err").textContent = e.message; return; }
+  try { d = await api(`/api/runs/${encodeURIComponent(name)}`); } catch (err) { $("job-err").textContent = err.message; return; }
   if (name !== watch.name) return;
   const s = d.summary.status, pr = d.progress || {}, best = (pr.best || []).map((b, i) => `${pr.names?.[i] ?? i}: ${b.err?.toFixed(4)} @ ${b.step}`).join(", ");
   $("job-name").textContent = `┌─ job ${name}`;
@@ -317,289 +786,23 @@ async function pollJob() {
   $("job-log").textContent = d.log_tail.join("\n"); $("job-log").scrollTop = 1e9;
   const live = ["running", "starting", "queued"].includes(s);
   $("b-cancel").disabled = !live || !d.summary.own; $("b-resume").disabled = live || s === "finished" || !d.summary.own; $("b-open").disabled = !d.summary.has_export;
-  if (watch.last && watch.last !== s) {
-    toast(`job ${name}: ${s}`, ["failed", "died"].includes(s)); loadRuns();
-    if (s === "finished" && player.name === name) openRun(name);
-  }
+  $("b-dl").hidden = !d.summary.has_export; $("b-dl").href = `/api/runs/${encodeURIComponent(name)}/export`;
+  if (watch.last && watch.last !== s) { toast(`job ${name}: ${s}`, ["failed", "died"].includes(s)); loadRuns(); }
   watch.last = s;
   if (live) watch.timer = setTimeout(pollJob, 1500);
 }
-$("b-cancel").onclick = async () => { try { await api(`/api/runs/${encodeURIComponent(watch.name)}/cancel`, { method: "POST" }); } catch (e) { toast(e.message, true); } pollJob(); };
-$("b-resume").onclick = async () => { try { await api(`/api/runs/${encodeURIComponent(watch.name)}/resume`, { method: "POST" }); toast(`job resumed: ${watch.name}`); watch.last = "resumed"; } catch (e) { toast(e.message, true); } pollJob(); };
-$("b-open").onclick = () => { openRun(watch.name); $("player").scrollIntoView({ behavior: reduced ? "auto" : "smooth" }); };
+$("b-cancel").onclick = async () => { try { await api(`/api/runs/${encodeURIComponent(watch.name)}/cancel`, { method: "POST" }); } catch (err) { toast(err.message, true); } pollJob(); };
+$("b-resume").onclick = async () => { try { await api(`/api/runs/${encodeURIComponent(watch.name)}/resume`, { method: "POST" }); toast(`job resumed: ${watch.name}`); watch.last = "resumed"; } catch (err) { toast(err.message, true); } pollJob(); };
+$("b-open").onclick = () => openRun(watch.name);
 
 // ---------- boot ----------
 (async () => {
+  showView(location.hash.slice(1) || "demo");
   cfg = await api("/api/config");
   $("preset").innerHTML = Object.keys(cfg.presets).map((k) => `<option>${esc(k)}</option>`).join(""); $("preset").onchange();
   $("p-width").max = cfg.limits.max_width; $("p-width").min = cfg.limits.min_width; $("p-frames").max = cfg.limits.max_frames;
   await Promise.all([loadRuns(), loadVideos()]);
-  const first = runs.find((r) => r.kind === "example");
-  const want = new URLSearchParams(location.search).get("run") || first?.name;
-  if (want) openRun(want);
-})().catch((e) => toast("startup failed: " + e.message, true));
-
-// ---------- engines: NCA (worker frames + frame states) or explicit rules (rule_core, here) ----------
-let eng = null, verCounter = 1;
-const insp = { i: null };
-const B = { name: null, e: null };
-const inflate = async (b) => new Uint8Array(await new Response(new Blob([b]).stream().pipeThrough(new DecompressionStream("deflate"))).arrayBuffer());
-const isNcab = (u8) => u8[0] === 0x4e && u8[1] === 0x43 && u8[2] === 0x41 && u8[3] === 0x42;
-const hex = async (u8) => [...new Uint8Array(await crypto.subtle.digest("SHA-256", u8))].map((x) => x.toString(16).padStart(2, "0")).join("");
-const fmtN = (x) => (x == null ? "·" : x === 0 ? "0" : Math.abs(x) >= 1e4 || Math.abs(x) < 1e-3 ? x.toExponential(3) : x.toPrecision(5));
-
-async function loadEngine(name, key, progress) {
-  const url = `/api/runs/${encodeURIComponent(name)}/export`, r = await fetch(url);
-  if (!r.ok) throw new Error(`HTTP ${r.status}`);
-  const u8 = new Uint8Array(await r.arrayBuffer());
-  if (!isNcab(u8)) { const o = JSON.parse(new TextDecoder().decode(u8)); if (o.format === "ca-universal/dlrule-v1" || (o.format === "ca-universal/rule-v1" && Array.isArray(o.programs))) return ruleEngine(o, u8.length); }
-  let ca = cache.get(key);
-  if (!ca) { ca = await computeCA(url, progress); cache.set(key, ca); }
-  const m = isNcab(u8) ? await parseNcab(u8, inflate) : parseNcaJson(JSON.parse(new TextDecoder().decode(u8)));
-  return { ...ca, kind: "nca", m, hdr: isNcab(u8) ? await ncabHeader(u8, inflate) : null, bytes: u8.length, S: m.S, T: m.T, N: m.H * m.W, memo: null, ver: 1, verNote: "export" };
-}
-
-async function ruleEngine(o, bytes) {
-  const m = parseRules(o), N = m.H * m.W, t0 = performance.now();
-  const e = { kind: "rule", m, base: m, json: o, bytes, S: m.S, T: m.T, N, ver: 1, verNote: "export", hybridFrom: null };
-  e.progAt = (g) => m.programs[programAt(m, Math.floor(g / m.S) + 1)];
-  simulateRule(e, m.programs, 0, null); e.ms = performance.now() - t0;
-  const ref = ruleRun(m).frames; e.runMatch = ref.every((f, t) => f.every((x, i) => x === e.vis[t * N + i])); // the substep cache equals run()
-  e.sha = await hex(e.vis);
-  e.facts = { T: m.T, H: m.H, W: m.W, S: m.S, k: m.k, bytes, meta: m.meta, programs: m.programs.length, rules: m.programs.reduce((a, p) => a + p.rules.length, 0) };
-  return e;
-}
-// seq[g] = full state {v, h} after g substeps. With a prefix, states 0..g0 are kept and later substeps use `programs`.
-function simulateRule(e, programs, g0, prefix) {
-  const m = e.m, S = m.S, G = (m.T - 1) * S, seq = prefix ? prefix.slice(0, g0 + 1) : [{ v: m.first.slice(), h: m.h0.slice() }];
-  for (let g = seq.length - 1; g < G; g++) { const [v, h] = ruleStep(m, programs[programAt(m, Math.floor(g / S) + 1)], seq[g].v, seq[g].h); seq.push({ v, h }); }
-  e.seq = seq; e.vis = new Uint8Array(m.T * e.N); e.cont = null;
-  for (let t = 0; t < m.T; t++) e.vis.set(seq[t * S].v, t * e.N);
-}
-// Full state after g substeps (frame t = after t*S substeps). NCA: from the nearest cached frame state, stepping with substep().
-function stateAt(e, g) {
-  if (e.kind === "rule") return e.seq[g];
-  const S = e.S, t = Math.floor(g / S), t0 = t - (t % e.every);
-  let from = t0 * S, s = e.states[t0];
-  if (e.memo && e.memo.g <= g && e.memo.g >= from) ({ g: from, s } = e.memo);
-  for (let x = from; x < g; x++) s = substep(e.m, ruleAt(e.m, Math.floor(x / S) + 1), s);
-  e.memo = { g, s }; return s;
-}
-function computeLine() {
-  const e = eng; if (!e) return;
-  const what = e.kind === "rule" ? `explicit rules run in this browser with rule_core.mjs (${e.hybridFrom != null ? "hybrid: no single-version run() reference" : e.runMatch ? "identical to run()" : "MISMATCH vs run()"})` : "CA frames computed in this browser from the export";
-  $("compute-line").innerHTML = `${esc(what)}: ${e.T} frames × ${e.S} substeps, ${e.ms.toFixed(0)} ms · sha256 of binary frames ${e.sha.slice(0, 16)}… · <span class="verbadge">version ${e.ver}: ${esc(e.verNote)}</span>` + (player.orig ? "" : " · no original available: CA-only playback");
-}
-
-// ---------- B (second export, synchronized by frame index) ----------
-$("b-sel").onchange = async () => {
-  const name = $("b-sel").value; B.name = name; B.e = null; $("fig-b").hidden = $("fig-berr").hidden = true; $("b-line").textContent = "";
-  if (name) {
-    const r = runs.find((x) => x.name === name); $("b-line").textContent = "computing B from its export…";
-    try { const e = await loadEngine(name, `${name}:${r?.export_bytes}`, (p) => ($("b-line").textContent = `computing B… ${Math.round(p * 100)}%`)); if (B.name !== name) return; B.e = e; }
-    catch (err) { $("b-line").textContent = "B could not be replayed: " + err.message; return; }
-    $("b-cap").innerHTML = `B <span class="cm">${esc(r?.label ?? name)} (export only)</span>`; $("fig-b").hidden = false;
-    $("b-line").textContent = `B: ${B.e.T} frames ${B.e.m.W}×${B.e.m.H}, sha256 ${B.e.sha.slice(0, 16)}…` + (B.e.T !== player.T ? ` · T differs from A (${player.T}); B holds its last frame beyond ${B.e.T - 1}` : "");
-  }
-  setZoom();
-};
-function renderB() {
-  const e = B.e; if (!e) return;
-  const t = Math.min(player.t, e.T - 1), N = e.N, o = t * N, { orig } = player, same = e.m.W === player.W && e.m.H === player.H;
-  paint(ctxs.b, (i) => (e.vis[o + i] ? COL.on : COL.off), e.m.W, e.m.H);
-  const showErr = $("t-err").checked && orig && same && player.t < e.T; $("fig-berr").hidden = !showErr;
-  if (showErr) { const oo = player.t * N; paint(ctxs.berr, (i) => { const a = orig[oo + i], b = e.vis[o + i]; return a && b ? COL.on : !a && !b ? COL.off : a ? COL.fn : COL.fp; }, e.m.W, e.m.H); }
-}
-ctxs.b = $("cv-b").getContext("2d"); ctxs.berr = $("cv-berr").getContext("2d");
-
-// ---------- phase timelines ----------
-function scheduleOf(e) {
-  if (e.kind === "rule") return e.m.schedule.map((p) => ({ start: p.start, end: p.end, rule: p.program, reason: p.reason ?? null }));
-  if (e.m.schedule) return e.m.schedule.map((p) => ({ start: p.start, end: p.end, rule: p.rule, reason: p.reason ?? null }));
-  return [{ start: 1, end: e.T, rule: 0, reason: "single rule (ncab-v1)" }];
-}
-function timelineHTML(tag, e, label) {
-  const sch = scheduleOf(e), T = e.T, fps = player.fps, t = Math.min(player.t, T - 1), word = e.kind === "rule" ? "program" : "rule";
-  const Wd = Math.max(300, ($("timelines").clientWidth / ($("timelines").classList.contains("two") ? 2 : 1)) - 16 || 800), pad = 4, x = (f) => pad + (f / T) * (Wd - 2 * pad);
-  const cur = sch.findIndex((p) => t >= p.start && t < p.end), sec = (f) => (f / fps).toFixed(3);
-  let svg = `<rect class="seg" data-seek="0" x="${x(0)}" y="6" width="${x(1) - x(0)}" height="22"><title>frame 0: given first frame</title></rect>`;
-  sch.forEach((p, k) => {
-    const w = x(p.end) - x(p.start);
-    svg += `<rect class="seg${k === cur ? " cur" : ""}" data-seek="${p.start}" x="${x(p.start)}" y="6" width="${w}" height="22"><title>phase ${k}: frames ${p.start}–${p.end - 1} (${sec(p.start)}–${sec(p.end - 1)} s), ${word} ${p.rule}${p.reason ? ", reason: " + esc(p.reason) : ""}</title></rect>`;
-    if (w > 34) svg += `<text x="${x(p.start) + w / 2}" y="21" class="${k === cur ? "acc" : ""}">${word[0]}${p.rule}</text>`;
-    svg += `<line class="bd" data-seek="${p.start}" x1="${x(p.start)}" x2="${x(p.start)}" y1="2" y2="32"><title>boundary at frame ${p.start} (${sec(p.start)} s)</title></line>`;
-  });
-  const xn = x(t + 0.5 + (tag === "A" ? player.sub / e.S : 0));
-  svg += `<line class="now" x1="${xn}" x2="${xn}" y1="0" y2="34"/><text x="${pad}" y="44" style="text-anchor:start" class="cm">0</text><text x="${Wd - pad}" y="44" style="text-anchor:end" class="cm">${T} frames</text>`;
-  const p = sch[cur], curTxt = t === 0 ? "frame 0: the given first frame (no rule applied)" : p ? `phase ${cur}/${sch.length - 1} · frames ${p.start}–${p.end - 1} · ${sec(p.start)}–${sec(p.end - 1)} s · ${word} ${p.rule}${p.reason ? " · reason: " + p.reason : ""}` : "frame outside the schedule (program/rule 0 by default)";
-  const rows = sch.map((p, k) => `<tr data-seek="${p.start}" class="${k === cur ? "cur" : ""}"><td>${k}</td><td>${p.start}–${p.end - 1}</td><td>${sec(p.start)}–${sec(p.end - 1)} s</td><td>${word} ${p.rule}</td><td>${esc(p.reason ?? "–")}</td></tr>`).join("");
-  return `<div class="tl"><h3 class="minor">${tag} · ${esc(label)} <span class="cm">// ${sch.length} phase${sch.length > 1 ? "s" : ""}; 1 video frame = ${e.S} CA substep${e.S > 1 ? "s" : ""}; seconds = frame / ${fps} fps (${esc(player.fpsSrc)}); click to seek</span></h3>
-    <svg viewBox="0 0 ${Wd} 46" width="${Wd}" height="46" role="img" aria-label="${tag} phase timeline">${svg}</svg>
-    <p class="cur-line">${esc(curTxt)}</p><div class="ptab"><table><thead><tr><th>#</th><th>frames</th><th>seconds</th><th>${word}</th><th>reason</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
-}
-function renderTimelines() {
-  if (!eng) { $("timelines").innerHTML = ""; return; }
-  $("timelines").classList.toggle("two", !!B.e);
-  $("timelines").innerHTML = timelineHTML("A", eng, player.det?.summary.label ?? player.name) + (B.e ? timelineHTML("B", B.e, runs.find((r) => r.name === B.name)?.label ?? B.name) : "");
-}
-$("timelines").addEventListener("click", (ev) => { const el = ev.target.closest("[data-seek]"); if (el) seek(+el.dataset.seek); });
-addEventListener("resize", () => eng && renderTimelines());
-
-// ---------- rule view ----------
-const ruleLine = (r, i, k) => `R${i}: if ${r.if.map(([f, op, c]) => `${f} ${op} ${c}`).join(" and ") || "always"} -> v=${r.then.v}` + (k ? `, h=${r.then.h.toString(2).padStart(k, "0")}` : "");
-function progDiff(a, b) { // b vs a: rules keyed by their condition list
-  const key = (r) => JSON.stringify(r.if), A = new Map(a.rules.map((r) => [key(r), r])), Bm = new Map(b.rules.map((r) => [key(r), r]));
-  const added = b.rules.filter((r) => !A.has(key(r))), removed = a.rules.filter((r) => !Bm.has(key(r))), changed = b.rules.filter((r) => A.has(key(r)) && JSON.stringify(A.get(key(r)).then) !== JSON.stringify(r.then));
-  const order = !added.length && !removed.length && a.rules.map(key).join() !== b.rules.map(key).join();
-  return { added, removed, changed, order, same: !added.length && !removed.length && !changed.length && !order };
-}
-const fmtPrograms = (ps) => "[\n" + ps.map((p) => ' {"rules": [\n' + p.rules.map((r) => "  " + JSON.stringify({ if: r.if, then: r.then })).join(",\n") + "\n ]}").join(",\n") + "\n]";
-
-function renderRules() {
-  const e = eng; if (!e) return;
-  $("rules-kind").textContent = e.kind === "rule" ? "// dlrule-v1: explicit, executable decision lists" : `// ${e.m.version === 2 ? "ncab-v2 phased" : "ncab-v1"} Neural CA: learned weights, not rules`;
-  return e.kind === "rule" ? renderRuleV1(e) : renderNcaPhases(e);
-}
-function renderRuleV1(e) {
-  const m = e.m, sch = scheduleOf(e), k = m.k, cnt = e.counts;
-  const used = (p) => sch.map((s, i) => (s.rule === p ? i : null)).filter((x) => x != null);
-  let h = `<dl class="facts"><dt>state</dt><dd>v + ${k} hidden bit${k === 1 ? "" : "s"} per cell; ${m.S} substep${m.S > 1 ? "s" : ""} per frame; zero boundary; synchronous</dd>
-    <dt>semantics</dt><dd>${esc(m.semantics || "first firing rule wins; default keep")}</dd><dt>features</dt><dd>${esc((m.features || []).join(", "))}</dd>
-    <dt>size</dt><dd>${m.programs.length} programs, ${m.programs.reduce((a, p) => a + p.rules.length, 0)} rules, ${m.programs.reduce((a, p) => a + p.rules.reduce((b, r) => b + r.if.length, 0), 0)} conditions · export file ${fmtInt(e.bytes)} B (JSON with hex first frame)</dd></dl>`;
-  h += `<h3 class="minor">fire counts <span class="cm">// cells × substeps in which each rule fired, from running the engine over frames</span></h3>
-    <label>from frame <input type="number" id="fc-from" min="1" max="${m.T - 1}" value="${cnt?.from ?? 1}"></label><label>to frame <input type="number" id="fc-to" min="1" max="${m.T - 1}" value="${cnt?.to ?? m.T - 1}"></label>
-    <button class="btn" id="b-count">[ count firings ]</button> <span class="cm">${cnt ? `counted frames ${cnt.from}–${cnt.to} (${fmtInt(cnt.cells)} cell-substeps, version ${cnt.ver})${cnt.note}` : "not counted yet"}</span>`;
-  h += `<div class="two-col"><div>`;
-  m.programs.forEach((p, pi) => {
-    const lines = p.rules.map((r, i) => ruleLine(r, i, k) + (cnt ? `   ×${fmtInt(cnt.c[pi][i + 1])}` : "")).concat("default: keep state" + (cnt ? `   ×${fmtInt(cnt.c[pi][0])}` : ""));
-    h += `<div class="prog"><h3 class="minor">program ${pi} <span class="cm">// phases ${used(pi).join(", ") || "none"} · ${p.rules.length} rules in priority order · ${fmtInt(JSON.stringify(p).length)} B JSON</span></h3><pre>${esc(lines.join("\n"))}</pre></div>`;
-  });
-  h += `</div><div><h3 class="minor">what changes at each phase boundary <span class="cm">// vs the previous phase's program; rules matched by their conditions</span></h3><div class="scrollbox"><table class="rtab"><thead><tr><th>phase</th><th>frames</th><th>program</th><th>vs previous</th></tr></thead><tbody>`;
-  sch.forEach((s, i) => {
-    let d = "first phase";
-    if (i) {
-      const a = sch[i - 1].rule, b = s.rule, df = progDiff(m.programs[a], m.programs[b]);
-      d = a === b ? "same program" : df.same ? `program ${a} → ${b}: identical rules` : `program ${a} → ${b}: <span class="diff-add">+${df.added.length} added</span> <span class="diff-del">−${df.removed.length} removed</span> <span class="diff-chg">~${df.changed.length} changed</span>${df.order ? " · order changed" : ""}`
-        + [...df.added.map((r) => `<br><span class="diff-add">+ ${esc(ruleLine(r, m.programs[b].rules.indexOf(r), k))}</span>`), ...df.removed.map((r) => `<br><span class="diff-del">− ${esc(ruleLine(r, m.programs[a].rules.indexOf(r), k))}</span>`), ...df.changed.map((r) => `<br><span class="diff-chg">~ ${esc(ruleLine(r, m.programs[b].rules.indexOf(r), k))}</span>`)].join("");
-    }
-    h += `<tr><td>${i}</td><td>${s.start}–${s.end - 1}</td><td>${s.rule}</td><td style="white-space:normal">${d}</td></tr>`;
-  });
-  h += `</tbody></table></div>
-    <h3 class="minor">edit programs <span class="cm">// JSON list of programs; the schedule is kept</span> <span class="verbadge">version ${e.ver}: ${esc(e.verNote)}</span></h3>
-    <textarea id="rule-edit" spellcheck="false" aria-label="programs JSON">${esc(fmtPrograms(m.programs))}</textarea>
-    <p class="error" id="edit-err" role="alert"></p>
-    <button class="btn" id="b-replay">[ replay from start ]</button> <span class="cm">default: recomputes every frame from frame 0 with the edited programs</span><br>
-    <button class="btn" id="b-continue">[ experimental: continue from current state ]</button> <span class="cm">keeps substeps 0..current from the previous version, runs the edited programs after it (a hybrid, labelled as such)</span><br>
-    <button class="btn" id="b-reset">[ reset to export ]</button></div></div>`;
-  $("rules-body").innerHTML = h;
-  $("b-count").onclick = () => countFires(e); $("b-replay").onclick = () => applyEdit("start"); $("b-continue").onclick = () => applyEdit("continue"); $("b-reset").onclick = () => applyEdit("reset");
-}
-function countFires(e) {
-  const m = e.m, S = m.S, from = Math.max(1, Math.min(+$("fc-from").value || 1, m.T - 1)), to = Math.max(from, Math.min(+$("fc-to").value || m.T - 1, m.T - 1));
-  const g0 = Math.max((from - 1) * S, e.hybridFrom ?? 0), c = m.programs.map((p) => new Array(p.rules.length + 1).fill(0)), fired = new Int32Array(e.N);
-  for (let g = g0; g < to * S; g++) { // re-run each substep with the engine's step() and count the firing rule index per cell
-    const pi = programAt(m, Math.floor(g / S) + 1), st = e.seq[g]; ruleStep(m, m.programs[pi], st.v, st.h, fired);
-    for (let i = 0; i < e.N; i++) c[pi][fired[i] + 1]++;
-  }
-  e.counts = { from, to, c, cells: (to * S - g0) * e.N, ver: e.ver, note: e.hybridFrom != null && e.hybridFrom > (from - 1) * S ? ` · hybrid version: counted from substep ${e.hybridFrom} on (earlier substeps ran the previous programs)` : "" };
-  renderRules();
-}
-const FEATS = (k) => ["v", ...Array.from({ length: k }, (_, b) => "h" + b), "n8", "r2", "N", "S", "E", "W", ...Array.from({ length: k }, (_, b) => "m" + b)];
-function validatePrograms(ps, m) {
-  if (!Array.isArray(ps) || !ps.length) throw new Error("expected a non-empty JSON list of programs");
-  const need = Math.max(...m.schedule.map((s) => s.program)) + 1, names = new Set(FEATS(m.k));
-  if (ps.length < need) throw new Error(`the schedule uses programs 0..${need - 1}; only ${ps.length} given`);
-  return ps.map((p, pi) => {
-    if (!p || !Array.isArray(p.rules)) throw new Error(`program ${pi}: missing "rules" list`);
-    return { rules: p.rules.map((r, ri) => {
-      const where = `program ${pi} rule ${ri}`;
-      if (!Array.isArray(r.if) || !r.then) throw new Error(`${where}: needs "if" (list) and "then"`);
-      for (const c of r.if) if (!Array.isArray(c) || c.length !== 3 || !names.has(c[0]) || !["<=", ">=", "=="].includes(c[1]) || !Number.isInteger(c[2])) throw new Error(`${where}: bad condition ${JSON.stringify(c)} (feature one of ${[...names].join(",")}; op <=, >=, ==; integer constant)`);
-      if (![0, 1].includes(r.then.v) || !Number.isInteger(r.then.h ?? 0) || (r.then.h ?? 0) < 0 || (r.then.h ?? 0) >= 2 ** m.k) throw new Error(`${where}: then.v must be 0|1 and then.h 0..${2 ** m.k - 1}`);
-      return { if: r.if, then: { v: r.then.v, h: r.then.h ?? 0 } };
-    }) };
-  });
-}
-async function applyEdit(mode) {
-  const e = eng; if (!e || e.kind !== "rule") return;
-  let ps;
-  try { ps = mode === "reset" ? e.base.programs : validatePrograms(JSON.parse($("rule-edit").value), e.m); } catch (err) { $("edit-err").textContent = err.message; return; }
-  setPlaying(false); const prevVer = e.ver; e.ver = ++verCounter; e.counts = null; e.memo = null;
-  const t0 = performance.now(), m2 = { ...e.m, programs: ps };
-  if (mode === "continue") {
-    const g0 = player.t * e.S + player.sub, old = e.progAt;
-    e.m = m2; simulateRule(e, ps, g0, e.seq); e.hybridFrom = g0;
-    e.progAt = (g) => (g < g0 ? old(g) : ps[programAt(m2, Math.floor(g / e.S) + 1)]);
-    e.verNote = `EXPERIMENTAL hybrid: substeps 0..${g0} from version ${prevVer}, substeps after ${g0} from the edited programs`;
-  } else {
-    e.m = m2; simulateRule(e, ps, 0, null); e.hybridFrom = null; e.progAt = (g) => ps[programAt(m2, Math.floor(g / e.S) + 1)];
-    e.verNote = mode === "reset" ? "export programs, replayed from frame 0" : "edited programs, replayed from frame 0";
-  }
-  e.ms = performance.now() - t0; e.runMatch = e.hybridFrom == null && ruleRun(e.m).frames.every((f, t) => f.every((x, i) => x === e.vis[t * e.N + i]));
-  e.sha = await hex(e.vis); player.vis = e.vis; player.cont = null;  // every cached frame of the old version is replaced
-  computeLine(); renderRules(); render(); toast(`rules version ${e.ver}: ${mode === "continue" ? "experimental hybrid" : "recomputed from frame 0"}`);
-}
-
-function renderNcaPhases(e) {
-  const m = e.m, { C, Fh } = m, hd = e.hdr?.header || {}, w = m.weight_dtype === "f16" ? 2 : 4, per = Fh * C * 9 + Fh + C * Fh + C, sch = scheduleOf(e);
-  const mode = m.version === 2 ? m.mode : "v1 (one rule)", blobs = Object.fromEntries((hd.blobs || []).map(([n, s]) => [n, s]));
-  const r = blobs.Ap ? blobs.Ap[2] : null, dpar = r ? Fh * r + r * C * 9 + Fh + C * r + r * Fh + C : 0, initVals = blobs.init_g ? blobs.init_g.reduce((a, b) => a * b, 1) : 0;
-  let h = `<p class="note">Neural CA parameters are learned real numbers; they are summarised here and never presented as readable rules.</p>
-    <dl class="facts"><dt>architecture</dt><dd>C=${C} (1 visible + ${C - 1} hidden) · Fh=${Fh} · S=${m.S} substeps/frame · K=${m.K ?? 1} rule${(m.K ?? 1) > 1 ? "s" : ""} · mode ${esc(mode)}${r ? ` · delta rank r=${r}` : ""}</dd>
-    <dt>initial state</dt><dd>${m.init?.kind === "lowres" ? `learned low-res hidden init, factor ${m.init.factor}: ${fmtInt(initVals)} stored values (${fmtInt(initVals * w)} B)` : "visible = first frame, hidden = 0"}</dd>
-    <dt>params per rule</dt><dd>${fmtInt(per)} = Fh·C·9 + Fh + C·Fh + C${r ? ` (shared base ${fmtInt(per)} values = ${fmtInt(per * w)} B; per phase rank-${r} delta ${fmtInt(dpar)} = Fh·r + r·C·9 + Fh + C·r + r·Fh + C)` : ""}</dd>
-    <dt>file</dt><dd>${fmtInt(e.bytes)} B deflated · ${e.hdr ? fmtInt(e.hdr.raw_bytes) + " B raw" : "nca-v1 JSON"} · weights ${esc(m.weight_dtype)}</dd></dl>
-    <div class="scrollbox"><table class="rtab"><thead><tr><th>phase</th><th>frames</th><th>rule</th><th>reason</th><th class="num">effective params</th>${r ? '<th class="num">delta params</th>' : ""}<th class="num">changed vs prev (|Δ|>1e-6)</th><th class="num">L2 of change</th><th class="num">stored bytes</th></tr></thead><tbody>`;
-  const seen = new Map();
-  sch.forEach((s, i) => {
-    const R = m.rules ? m.rules[s.rule] : m, P = i ? (m.rules ? m.rules[sch[i - 1].rule] : m) : null;
-    let ch = 0, l2 = 0;
-    if (P) for (const n of ["Wp", "bp", "Wu", "bu"]) for (let j = 0; j < R[n].length; j++) { const d = R[n][j] - P[n][j]; if (Math.abs(d) > 1e-6) ch++; l2 += d * d; }
-    const bytes = r ? `${fmtInt(dpar * w)} (delta) + shared base` : m.mode === "fixed" || !m.rules ? (i ? "shared (one rule stored)" : fmtInt(per * w)) : seen.has(s.rule) ? `same rule as phase ${seen.get(s.rule)}, stored once` : fmtInt(per * w);
-    if (!seen.has(s.rule)) seen.set(s.rule, i);
-    h += `<tr><td>${i}</td><td>${s.start}–${s.end - 1}</td><td>${s.rule}</td><td>${esc(s.reason ?? "–")}</td><td class="num">${fmtInt(per)}</td>${r ? `<td class="num">${fmtInt(dpar)}</td>` : ""}<td class="num">${P ? fmtInt(ch) + " / " + fmtInt(per) : "–"}</td><td class="num">${P ? l2 ? Math.sqrt(l2).toExponential(3) : "0" : "–"}</td><td class="num">${bytes}</td></tr>`;
-  });
-  $("rules-body").innerHTML = h + `</tbody></table></div><p class="cm">effective params of a phase = the parameters that phase's substeps use (delta mode: base + low-rank update, combined in float64 and rounded to float32 once, as in ca/phase_nca.py). Stored bytes are raw float bytes before deflate.</p>`;
-}
-
-// ---------- cell inspector ----------
-$("cv-ca").addEventListener("click", (ev) => {
-  if (!eng) return; const r = ev.target.getBoundingClientRect(), x = Math.floor((ev.clientX - r.left) / (r.width / player.W)), y = Math.floor((ev.clientY - r.top) / (r.height / player.H));
-  if (x < 0 || y < 0 || x >= player.W || y >= player.H) return; insp.i = y * player.W + x; render();
-});
-function renderInspector() {
-  const e = eng, i = insp.i; if (!e || i == null) { $("insp-where").textContent = "// click a cell of the CA panel"; $("insp-body").innerHTML = '<p class="cm">no cell selected</p>'; return; }
-  const S = e.S, g = player.t * S + player.sub, f = Math.floor(g / S) + 1, last = g >= (e.T - 1) * S, x = i % player.W, y = Math.floor(i / player.W);
-  const sch = scheduleOf(e), ph = sch.findIndex((p) => f >= p.start && f < p.end), word = e.kind === "rule" ? "program" : "rule";
-  const rid = e.kind === "rule" ? programAt(e.m, f) : e.m.sched ? e.m.sched[Math.min(f, e.T - 1)] : 0;
-  $("insp-where").textContent = `// cell (x=${x}, y=${y}), index ${i} · state after substep ${g} = frame ${player.t} + ${player.sub} (frame t = after t·S substeps, S=${S})`;
-  let h = `<dl class="facts"><dt>cell</dt><dd>x=${x}, y=${y} (row-major index ${i})</dd><dt>state shown</dt><dd>after ${g} substeps (frame ${player.t}, substep ${player.sub} of ${S}) · version ${e.ver}</dd>
-    <dt>next substep</dt><dd>${last ? "none: this is the last frame of the export" : `${g} → ${g + 1}, part of producing frame ${f}; ${word} ${rid} in effect (phase ${ph < 0 ? "–" : ph}${e.kind === "rule" && e.hybridFrom != null && g < e.hybridFrom ? ", pre-edit programs of the hybrid" : ""})`}</dd></dl>`;
-  if (e.kind === "rule") {
-    const st = stateAt(e, g), m = e.m, prog = e.progAt(Math.min(g, (e.T - 1) * S - 1)), ex = explainCell(m, prog, st.v, st.h, i);
-    h += `<h3 class="minor">features <span class="cm">// rule_core.features() on the current grid (zero boundary)</span></h3><pre class="codeblock">${esc(Object.entries(ex.features).map(([k, v]) => `${k}=${v}`).join("  "))}</pre>`;
-    if (!last) {
-      const nx = stateAt(e, g + 1), agree = nx.v[i] === ex.next.v && ex.next.h.every((b, j) => b === nx.h[j * e.N + i]);
-      h += `<h3 class="minor">rule evaluation <span class="cm">// rule_core.fire(): first firing rule wins; ✓/✗ per condition; ✗ in amber = first failing condition</span></h3><div class="scrollbox"><pre class="codeblock" style="max-height:none;border:0">`;
-      for (const r of ex.rules) {
-        if (r.skipped) { h += `<span class="skip">R${r.r}..R${prog.rules.length - 1}: not evaluated (R${ex.fired} fired first)</span>\n`; break; }
-        const conds = r.conds.map((c, j) => `<span class="${c.ok ? "ok" : j === r.firstFail ? "fired" : "bad"}">${esc(`${c.n} ${c.op} ${c.c}`)} [${c.n}=${c.val} ${c.ok ? "✓" : "✗"}]</span>`).join(" and ") || "always";
-        h += r.ok ? `<span class="fired">R${r.r} FIRES:</span> if ${conds} -> v=${r.then.v}${m.k ? ", h=" + r.then.h.toString(2).padStart(m.k, "0") : ""}\n`
-          : `<span class="skip">R${r.r} fails at</span> ${esc(`${r.conds[r.firstFail].n} ${r.conds[r.firstFail].op} ${r.conds[r.firstFail].c}`)} (${r.conds[r.firstFail].n}=${r.conds[r.firstFail].val}): ${conds}\n`;
-      }
-      if (ex.fired < 0) h += `<span class="fired">no rule fired → default: keep state</span>\n`;
-      h += `</pre></div><dl class="facts"><dt>current</dt><dd>v=${ex.cur.v}${m.k ? ", h=" + ex.cur.h.join("") + " (h0..)" : ""}</dd><dt>next</dt><dd>v=${ex.next.v}${m.k ? ", h=" + ex.next.h.join("") : ""} · ${agree ? "equals the stepped state at substep " + (g + 1) : "DIFFERS from the stepped state (bug)"}</dd></dl>`;
-    }
-  } else {
-    const m = e.m, s = stateAt(e, g), C = m.C, tr = traceCell(m, ruleAt(m, f), s, i);
-    const nx = last ? null : stateAt(e, g + 1), agree = nx && tr.next.every((v, c) => Object.is(v, nx[c * e.N + i]));
-    h += `<p class="cm">traceCell(): the substep's own arithmetic for this cell (float64 sums, float32 per stored value). Learned weights are not shown as rules.</p>
-      <div><div><h3 class="minor">channels <span class="cm">// 3×3 neighbourhood NW N NE / W · E / SW S SE; · = outside (zero padding)</span></h3><div class="scrollbox"><table class="rtab"><thead><tr><th>c</th><th class="num">now</th><th>3×3 neighbourhood</th>${last ? "" : '<th class="num">Wu·p</th><th class="num">bu</th><th class="num">next</th>'}</tr></thead><tbody>`;
-    for (let c = 0; c < C; c++) h += `<tr><td>${c === 0 ? "0 vis" : c}</td><td class="num">${fmtN(tr.cur[c])}</td><td>${tr.nbr[c].map(fmtN).join(" ")}</td>${last ? "" : `<td class="num">${fmtN(tr.upd[c])}</td><td class="num">${fmtN(tr.bias[c])}</td><td class="num">${fmtN(tr.next[c])}</td>`}</tr>`;
-    h += `</tbody></table></div>${last ? "" : `<p>visible next = ${fmtN(tr.next[0])} → pixel ${tr.next[0] > m.threshold ? "on" : "off"} (threshold ${m.threshold}) · ${agree ? "next state equals the stepped state at substep " + (g + 1) + " (all channels, bit-exact)" : "DIFFERS from the stepped state (bug)"}</p>`}</div>`;
-    h += `<div><h3 class="minor">perception <span class="cm">// pre = bp + Σ Wp·nbr (float64), post = float32(relu(pre))</span></h3><div class="scrollbox"><table class="rtab"><thead><tr><th>f</th><th class="num">pre-activation</th><th class="num">post-ReLU</th></tr></thead><tbody>`;
-    for (let k = 0; k < m.Fh; k++) h += `<tr><td>${k}</td><td class="num">${fmtN(tr.pre[k])}</td><td class="num${tr.post[k] ? "" : " skip"}">${fmtN(tr.post[k])}</td></tr>`;
-    h += `</tbody></table></div><p class="cm">${tr.post.filter((v) => v > 0).length}/${m.Fh} features active</p></div></div>`;
-  }
-  $("insp-body").innerHTML = h;
-}
+  const want = new URLSearchParams(location.search).get("run");
+  if (want) openRun(want); else openFeatured();
+  if (view === "lab" && !LAB.e && !labLoading) openLab($("lab-sel").value || LAB_DEFAULT);
+})().catch((err) => toast("startup failed: " + err.message, true));

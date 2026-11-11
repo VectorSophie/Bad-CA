@@ -1,5 +1,7 @@
 # Export formats
 
+Format names keep the `ca-universal/` prefix: they are technical identifiers written into existing files (the project was called CA-universal before it was named Bad CA!!).
+
 Every export is self-contained: architecture, weights or rules, schedule, first frame and any stored initial state.
 A replay needs the file and nothing else. All bit-packed frames use `numpy.packbits(..., bitorder="little")` over
 the row-major H×W grid (bit i of the stream is cell i; byte i holds cells 8i..8i+7, least significant bit first).

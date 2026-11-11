@@ -10,6 +10,10 @@ ARM:
 usage: exp45_c12.py TARGET OUT ARM [--K 4] [--seeds 0,1] [--steps 15000] [--lr 5e-4] [--Fh 64] [--rank 4]
                     [--init-factor F] [--phases phases.json] [--eval-every 500] [--lmin 8] [--grid 1] [--cold]
   --noise SIGMA (chunked): training-only Gaussian state noise per frame (robustness); replay is unchanged
+  --cpu-carry (chunked): carried state between chunks computed by the numpy reference (= export replay arithmetic);
+          records each chunk's true numpy replay error in chunks.json
+  --trans-weight A (chunked): per-frame loss weight 1 + A * change/mean change (more weight on fast transitions)
+  --max-hours H (chunked): stop cleanly before starting a chunk once H wall hours have passed (resumable; partial export)
   --cold (greedy): each phase starts from the 'hold' initialisation (zero update) instead of the previous phase's rule
           (the warm start exploded when a rule ran past its trained horizon, pilot greedy4 phase 4)."""
 import json, os, sys
@@ -44,8 +48,11 @@ if __name__ == "__main__":
     log = lambda s: print(s, flush=True); a0 = int(spec.split(":")[0])
     meta = dict(source="refs/Bad-Apple-Starter/BadApple!!.mp4", src_start=a0, src_frames=[a0, a0 + T - 1], arm=arm, width=48, threshold=128)
     if arm == "chunked":
-        P, g, phases = chunked(F, phases, out, seed=seeds[0], Fh=Fh, steps=steps, sched=sched, init_factor=fac, eval_every=ev, log=log, noise=opt("--noise", 0.0, float))
+        P, g, phases = chunked(F, phases, out, seed=seeds[0], Fh=Fh, steps=steps, sched=sched, init_factor=fac, eval_every=ev, log=log, noise=opt("--noise", 0.0, float),
+                               cpu_carry="--cpu-carry" in sys.argv, max_hours=opt("--max-hours", None, float), trans_weight=opt("--trans-weight", 0.0, float))
         mode = "indep"; Ps = {seeds[0]: (P, g)}
+        T = phases[-1]["end"]; F = F[:T]   # a time-budget stop exports the finished prefix only (meta.partial)
+        meta = dict(meta, src_frames=[a0, a0 + T - 1], partial=T < len(target(spec)), frames_trained=T)
     elif arm == "greedy":
         rec = greedy(F, phases, out, seed=seeds[0], Fh=Fh, steps_per_phase=steps, sched=sched, init_factor=fac, eval_every=ev, log=log, warm="--cold" not in sys.argv)
         P, g = collect_greedy(out, phases, seeds[0]); mode = "indep"; Ps = {seeds[0]: (P, g)}

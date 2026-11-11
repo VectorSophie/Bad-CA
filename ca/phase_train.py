@@ -168,8 +168,19 @@ def collect_greedy(out, phases, seed=0):
     return P, g
 
 
+def _np_chunk(best, s, n, S, sched_local):
+    """numpy reference (= the export replay arithmetic): advance full state s by n frames with the chunk's rules."""
+    from ca import nca as _nca
+    V = []
+    for t in range(n):
+        p = {k: best[k][sched_local[t]] for k in PNAMES}
+        for _ in range(S): s = _nca.step_np(p, s)
+        V.append(s[0].copy())
+    return s, np.stack(V)
+
+
 def chunked(F, phases, out, seed=0, C=16, Fh=64, S=4, steps=10000, sched=("cos", 5e-4, 5e-6), lamB=2.0, init_factor=None, eval_every=1000,
-            chunk_min=200, chunk_max=280, log=print, noise=0.0):
+            chunk_min=200, chunk_max=280, log=print, noise=0.0, cpu_carry=False, max_hours=None, trans_weight=0.0):
     """Chunked-joint training for long sequences. Consecutive phases are grouped into chunks of ~chunk_min..chunk_max frames.
     Inside a chunk all its phase rules are trained JOINTLY with full BPTT (earlier phases can prepare hidden state for later
     ones); the chunk starts from the ACTUAL carried full state (visible + hidden) produced by the already-trained chunks
@@ -183,8 +194,10 @@ def chunked(F, phases, out, seed=0, C=16, Fh=64, S=4, steps=10000, sched=("cos",
         if cur[-1]["end"] - cur[0]["start"] >= chunk_min or (p is phases[-1]): chunks.append(cur); cur = []
     if cur: chunks.append(cur)
     rec_path = os.path.join(out, "chunks.json"); rec = json.load(open(rec_path)) if os.path.exists(rec_path) else dict(chunks=[])
-    state = None; g_best = None; Pall = []
+    state = None; g_best = None; Pall = []; t_start = time.time(); stopped = False
     for ci, ch in enumerate(chunks):
+        if max_hours and (time.time() - t_start) / 3600 > max_hours and not (ci < len(rec["chunks"]) and os.path.exists(os.path.join(out, f"best_c{ci}_s{seed}.npz"))):
+            log(f"time budget {max_hours} h reached before chunk {ci}: stopping cleanly (resumable)"); stopped = True; break
         a, b = ch[0]["start"], ch[-1]["end"]; Fk = F[a - 1:b]; Kc = len(ch); ck = os.path.join(out, f"best_c{ci}_s{seed}.npz")
         ph = np.zeros(len(Fk), np.int32)
         for k, p in enumerate(ch): ph[p["start"] - a + 1:p["end"] - a + 1] = k
@@ -202,9 +215,12 @@ def chunked(F, phases, out, seed=0, C=16, Fh=64, S=4, steps=10000, sched=("cos",
                     return roll(E, jnp.asarray(Fk[0], jnp.float32), phj, h0, nz)[0]
                 return roll(E, s_in[0], phj, s_in[1:], nz)[0]
 
+            chg = (Fk[1:] != Fk[:-1]).mean((1, 2))   # trans_weight: frame weights 1 + a * change / mean change, renormalised to mean 1
+            fw = 1 + trans_weight * chg / max(chg.mean(), 1e-6); fw = jnp.asarray(fw / fw.mean(), jnp.float32)[:, None, None]
+
             def loss(pp, i=None):
                 nz = (jax.random.fold_in(jax.random.PRNGKey(seed * 1000 + ci), jnp.asarray(i, jnp.uint32)), noise) if (noise and i is not None) else None
-                v = run(pp, nz=nz); L0 = jnp.mean((v - y) ** 2); LB = jnp.sum(bd * jax.nn.relu(0.25 - sg * (v - 0.5)) ** 2) / nb; return L0 + lamB * LB, (L0, LB)
+                v = run(pp, nz=nz); L0 = jnp.mean(fw * (v - y) ** 2); LB = jnp.sum(fw * bd * jax.nn.relu(0.25 - sg * (v - 0.5)) ** 2) / nb; return L0 + lamB * LB, (L0, LB)
             Fb = jnp.asarray(Fk[1:].astype(bool)); roll_bin = jax.jit(jax.vmap(lambda pp: jnp.mean((run(pp) > 0.5) != Fb)))
             _, res = _fit(jax, jnp, P, jax.vmap(jax.value_and_grad(loss, has_aux=True), in_axes=(0, None)), roll_bin, steps, sched, eval_every, out, f"c{ci}", log, [f"s{seed}"])
             rec["chunks"] = rec["chunks"][:ci] + [dict(start=a, end=b, phases=ch, best=res["best"][0], train_s=res["train_s"], compile_s=res["compile_s"], steps=steps)]
@@ -212,14 +228,24 @@ def chunked(F, phases, out, seed=0, C=16, Fh=64, S=4, steps=10000, sched=("cos",
         best = dict(np.load(ck)); g = best.pop("init_g", None)
         if g is not None: g_best = g
         Pall.append(best)
-        E = {n: jnp.asarray(best[n]) for n in PNAMES}
-        if state is None:
-            h0 = upsample(jnp.asarray(g_best), init_factor, H, W, jnp) if (init_factor and g_best is not None) else None
-            _, sT = roll(E, jnp.asarray(Fk[0], jnp.float32), phj, h0)
+        if cpu_carry:   # carried state from the numpy reference: training starts each chunk exactly where the export replay is
+            if state is None:
+                state = np.zeros((C, H, W), np.float32); state[0] = Fk[0]
+                if init_factor and g_best is not None: state[1:] = upsample(np.asarray(g_best), init_factor, H, W)
+            state, Vr = _np_chunk(best, state, len(Fk) - 1, S, ph[1:])
+            rerr = float(((Vr > 0.5) != Fk[1:].astype(bool)).mean()); rec["chunks"][ci]["replay_err_numpy"] = rerr
+            rec["chunks"][ci]["state_max_abs"] = float(np.abs(state).max()); _atomic(rec_path, rec)
+            log(f"chunk {ci} ({a}-{b - 1}): train {rec['chunks'][ci]['best']['err']:.4f} numpy replay {rerr:.4f} state max {np.abs(state).max():.3g}")
         else:
-            _, sT = roll(E, jnp.asarray(state[0]), phj, jnp.asarray(state[1:]))
-        state = np.asarray(sT)
+            E = {n: jnp.asarray(best[n]) for n in PNAMES}
+            if state is None:
+                h0 = upsample(jnp.asarray(g_best), init_factor, H, W, jnp) if (init_factor and g_best is not None) else None
+                _, sT = roll(E, jnp.asarray(Fk[0], jnp.float32), phj, h0)
+            else:
+                _, sT = roll(E, jnp.asarray(state[0]), phj, jnp.asarray(state[1:]))
+            state = np.asarray(sT)
         if not np.isfinite(state).all(): log(f"chunk {ci}: carried state not finite"); break
     P = {n: np.concatenate([p[n] for p in Pall]) for n in PNAMES}
-    rec.update(T=T, C=C, Fh=Fh, S=S, init_factor=init_factor, steps=steps, sched=list(sched), n_chunks=len(chunks), done=len(Pall), noise=noise); _atomic(rec_path, rec)
+    rec.update(T=T, C=C, Fh=Fh, S=S, init_factor=init_factor, steps=steps, sched=list(sched), n_chunks=len(chunks), done=len(Pall), noise=noise,
+               cpu_carry=cpu_carry, stopped_by_time_budget=stopped); _atomic(rec_path, rec)
     return P, g_best, [p for ch in chunks[:len(Pall)] for p in ch]

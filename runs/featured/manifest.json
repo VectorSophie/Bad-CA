@@ -1,0 +1,23 @@
+{
+ "featured": {
+  "display_name": "Bad Apple!! - opening 48.9 s (26 phases)",
+  "export": "runs/featured/interim_0-1467.ncab",
+  "sha256": "676c6251353d98736d5178e935ebdc02e0f947ebb25eac099a191e637b8c5e28",
+  "frames": [
+   0,
+   1467
+  ],
+  "fps": 30,
+  "status": "interim",
+  "reason": "Longest replay that passes every C12 gate and the C13 acceptance criteria except specks/holes at 3x (passes at the calibrated 6x); the user accepted its look. Interim default until a whole-song model passes docs/CAMPAIGN_13.md section 3.",
+  "model": "phased Neural CA, 26 phases x 10,320 float32 params, external schedule, state carried across phases, learned low-res initial hidden",
+  "source": "runs/c12/song/noise_export_0-1467.ncab (C12 noise repair, sigma 0.02, chunked-joint)",
+  "metrics": {
+   "err": 0.0104,
+   "c12_gates": "pass",
+   "c13_criteria": "pass (K at 6x)"
+  }
+ },
+ "candidates": [],
+ "history": "see docs/research/README.md (research timeline)"
+}

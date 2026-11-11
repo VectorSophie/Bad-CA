@@ -1,6 +1,6 @@
 # Architecture
 
-CA-universal has four parts that share nothing but files on disk: preprocessing, training, export, and replay.
+Bad CA!! has four parts that share nothing but files on disk: preprocessing, training, export, and replay.
 Training writes an export. Every replay, evaluation and UI view reads only that export plus, for scoring, the
 preprocessed original. Nothing downstream of training touches the source video.
 

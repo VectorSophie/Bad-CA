@@ -1,10 +1,12 @@
 // Checks the UI cell inspectors against the engines.  node ui/test_inspector.mjs [extra.ncab | extra.rule.json ...]
 // NCA: (1) rolloutStates (used by the UI worker) gives bit-identical visible values to rollout() for every frame;
 //      (2) traceCell's next state equals substep()'s next state for every channel (float32 bit-exact) at sampled cells.
+//      (3) the optimised substep() equals the naive substepRef() (all channels, float32 bit-exact) along a rollout,
+//          for the base exports and the featured model (runs/featured/manifest.json), across phase boundaries.
 // rule-v1: explainCell's firing rule and next state equal step()'s fired index and next state at sampled cells.
 import { readFileSync } from "node:fs";
 import { inflateSync } from "node:zlib";
-import { parseNcab, rollout, rolloutStates, ruleAt, substep, traceCell } from "../player/nca_core.mjs";
+import { parseNcab, rollout, rolloutStates, ruleAt, substep, substepRef, traceCell, initState } from "../player/nca_core.mjs";
 import { parseRules, run, step, programAt, explainCell } from "../player/rule_core.mjs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
@@ -49,6 +51,19 @@ for (const path of [...base, ...files]) {
     if (t + 1 < m.T && !same(s, mine.states[t + 1])) bad++;   // S substeps from frame t reach the stored frame t+1 state
   }
   ok(bad === 0, `${name}: traceCell next == substep next, all ${m.C} channels, ${checked} cell-substeps (float32 bit-exact)`);
+  ok(fastEqualsRef(m, Math.min(m.T - 1, 24)), `${name}: substep() == substepRef() for every substep of frames 1..${Math.min(m.T - 1, 24)} (float32 bit-exact)`);
+}
+function fastEqualsRef(m, upto, start = 1, s0 = initState(m)) {
+  let s = s0;
+  for (let t = start; t <= upto; t++) for (let k = 0; k < m.S; k++) { const r = ruleAt(m, t), a = substep(m, r, s), b = substepRef(m, r, s); if (!same(a, b)) return false; s = a; }
+  return true;
+}
+// featured model: walk to its first phase boundaries with the fast step, checking it against the reference on the way
+const fman = JSON.parse(readFileSync(ROOT + "runs/featured/manifest.json", "utf8")).featured;
+{
+  const m = await parseNcab(new Uint8Array(readFileSync(ROOT + fman.export)), async (b) => new Uint8Array(inflateSync(b)));
+  const b2 = m.schedule[Math.min(2, m.schedule.length - 1)].start;
+  ok(fastEqualsRef(m, Math.min(m.T - 1, b2 + 1)), `${fman.export}: substep() == substepRef() for every substep of frames 1..${Math.min(m.T - 1, b2 + 1)} (crosses boundaries at ${m.schedule.slice(1, 3).map((p) => p.start).join(", ")})`);
 }
 console.log(fail ? `FAIL (${fail})` : "ALL PASS");
 process.exit(fail ? 1 : 0);
