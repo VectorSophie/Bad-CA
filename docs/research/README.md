@@ -2,14 +2,13 @@
 
 > Start with [How we got here](journey.md) (the decisions, in order) or the [timeline](timeline.md); this page lists every original record.
 
+> **Founding brief** (the original goal and claim boundaries): [brief/](brief/README.md).
+
 > **Readable Rules track** (explicit local rules, after C13): [docs/readable-rules/](../readable-rules/README.md).
 
 Every campaign has a plan (`CAMPAIGN_NN.md`, written before its runs; later decisions are appended, never rewritten)
 and a result (`CHECKPOINT_NN.md`). Machine-readable results live under `runs/`. The records are kept unchanged in
 `docs/`; this page only indexes them. One line per file. Where a line gives a result, it comes from that file.
-
-The founding brief is in the repository root: `claude_ca_start_here.md`, `claude_ca_build_prompt.md` (operational
-brief) and `claude_ca_story_and_research_handoff.md` (intent, user corrections, reference papers and repositories).
 
 ## Phase 1: exact Boolean rules (Campaigns 01–06)
 

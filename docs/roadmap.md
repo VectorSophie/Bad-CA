@@ -3,7 +3,7 @@
 Each item starts from a documented failure or gap. No dates or outcomes are promised; each step needs its own plan,
 budget and stopping rule, fixed before its runs (as in the CAMPAIGN files).
 
-The final goal stays as stated in `claude_ca_build_prompt.md` and the story handoff: the whole video replayed
+The final goal, from the [founding brief](research/brief/README.md): the whole video replayed
 autonomously from its start, faithful to the binary original at the chosen resolution, with automatically
 optimised phases and human-readable rules, an interface to inspect cells, rules and phases, and full storage
 accounting. It has not been reached.

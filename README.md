@@ -17,21 +17,13 @@
   <a href="docs/research/journey.md">How we got here</a>
 </p>
 
-> **Status (2026-11-11).** Bad CA!! replays the **whole Bad Apple!! video** (frames 0–6571, 3 min 39 s) from one
-> exported file: a phased Neural CA with 110 phases, one learned local rule per phase, an external schedule, and the
-> cell state carried across every phase change. The same file replays in numpy, Node and the browser. It passes the
-> project's fixed acceptance criteria (`docs/CAMPAIGN_13.md` §3), with the weak spots listed under
-> [Results and limits](#results-and-limits). This is **one trained model (seed 0)**; a second seed is still being
-> trained. The rules are learned float32 networks, not small Boolean rules, and the file is larger than a lossless
-> recording.
-
 ## Demo
 
 <p align="center">
   <a href="assets/demo/whole_song.mp4"><img src="assets/demo/preview.gif" alt="Bad CA!! demo: CA output on the left, the rule in effect on the right, phase timeline below" width="640"></a>
 </p>
 
-<p align="center"><a href="assets/demo/whole_song.mp4">▶ whole song (MP4, 3 min 39 s, 9.1 MB)</a>, rendered from the exported file. GitHub opens it in the file view; there is no external hosting. The preview above is 6 s (frames 1850–2029) cut from it.</p>
+<p align="center"><a href="assets/demo/whole_song.mp4">▶ whole song (MP4, 3 min 39 s, 9.1 MB)</a>, rendered from the exported file. The preview above is 6 s (frames 1850–2029) cut from it.</p>
 
 **What you just watched.** Every frame on the left is computed from one exported file, nothing else:
 
@@ -151,7 +143,3 @@ The full story with evidence and costs: [How we got here](docs/research/journey.
   comparison. The logo is a pixelated frame of the video (`assets/logo/README.md`); its rights stay with their owners.
 - **Licence:** GNU GPL v3.0 (`LICENSE`), for this project's code and documentation. The bundled fonts keep their SIL
   OFL licences (`ui/static/fonts/`).
-- **Former name:** the project was called CA-universal until 2026-11; the campaign records keep that name, and the
-  Python package (`ca`) and format identifiers (`ca-universal/...`) are unchanged.
-
-README layout follows the structure of [VectorSophie/hgit](https://github.com/VectorSophie/hgit).
