@@ -38,14 +38,19 @@ def hparams(C):
 
 
 # ---------------- training ----------------
-def train(data, setting, seed, budget, batch=8, k=K_HIDDEN):
+def train(data, setting, seed, budget, batch=8, k=K_HIDDEN, loss_cfg=None):
+    """loss_cfg (D4-B, optional): dict(a=contour weight, b=change weight, c=temporal-change term). Pixel weight
+    1 + a*[target boundary band] + b*[pixel truly changes]; plus c * squared error between predicted and true frame-to-frame
+    change (penalises missing, spurious and wrong-direction changes). None/zeros = the original visible loss."""
     import jax, jax.numpy as jnp
     from ca import dlca
     from ca.difflogic import adamw
     C = 1 + k; periodic = data["periodic"]; burn = P_BURNIN if setting.startswith("burnin") else 0; ste = setting.endswith("_ste")
     V = jnp.asarray(data["train"], jnp.float32); n, T = V.shape[:2]; lo, hi = data["windows"]["train"]
     params, wires = dlca.init(hparams(C), seed); oi, ou = adamw(0.05); st = oi(params); key = jax.random.PRNGKey(seed)
-    gate = "ste" if ste else False
+    gate = "ste" if ste else False; lc = {k_: v for k_, v in (loss_cfg or {}).items() if v}
+    hs = [h for h in (1, 2, 4, 8, 16) if hi - h > lo - burn]                 # only horizons whose targets exist
+    assert hs and hi - 1 + burn <= T - 1, "window bounds exceed the sequence"   # (round-2 bug: 8-frame clips trained h=16 on clamped indices)
     def rnd(s): return s + jax.lax.stop_gradient(jnp.round(s) - s) if ste else s
 
     def make(h):
@@ -56,7 +61,13 @@ def train(data, setting, seed, budget, batch=8, k=K_HIDDEN):
             def body(g, _):
                 g = rnd(dlca.step(p, wires, g, gate, periodic)); return g, g[..., 0]
             _, seq = jax.lax.scan(jax.checkpoint(body), s, None, length=h)
-            return jnp.square(jnp.moveaxis(seq, 0, 1) - vis[:, burn + 1:]).sum() / h
+            pr = jnp.moveaxis(seq, 0, 1); y = vis[:, burn + 1:]
+            if not lc: return jnp.square(pr - y).sum() / h
+            yp = vis[:, burn:burn + h]; pp = jnp.concatenate([s[None, ..., 0].swapaxes(0, 1), pr[:, :-1]], 1)
+            pool = lambda a, f, init: jax.lax.reduce_window(a, init, f, (1, 1, 3, 3), (1, 1, 1, 1), "SAME")
+            edge = pool(y, jax.lax.max, -jnp.inf) - pool(y, jax.lax.min, jnp.inf); chg = jnp.abs(y - yp)
+            w = 1 + lc.get("a", 0) * edge + lc.get("b", 0) * chg
+            return ((w * jnp.square(pr - y)).sum() + lc.get("c", 0) * jnp.square((pr - pp) - (y - yp)).sum()) / h
         @jax.jit
         def f(p, s_, kk):
             k1, k2 = jax.random.split(kk); w = jax.random.randint(k1, (batch,), 0, n); t = jax.random.randint(k2, (batch,), lo - burn, hi - h)
@@ -65,8 +76,8 @@ def train(data, setting, seed, budget, batch=8, k=K_HIDDEN):
         return f
 
     log = []; t0 = time.time(); done = 0
-    for h in (1, 2, 4, 8, 16):
-        f = make(h); ep = budget // 5 // (batch * h)
+    for h in hs:
+        f = make(h); ep = budget // len(hs) // (batch * h)
         for e in range(ep):
             key, kk = jax.random.split(key); params, st, l = f(params, st, kk); done += h * batch
             if e % max(1, ep // 5) == 0 or e == ep - 1: log.append(dict(h=h, epoch=e, soft=float(l), t=round(time.time() - t0, 1)))

@@ -1,0 +1,4 @@
+G_s1_b144k gates 476 | val err [0.033] hold [0.054] f1 [0.13] iou [0.64]
+G_s0_b144k gates 503 | val err [0.041] hold [0.054] f1 [0.16] iou [0.59]
+G_s1_b144k_L2.0,4.0,1.0 gates 508 | val err [0.041] hold [0.054] f1 [0.14] iou [0.54]
+G_s0_b144k_L2.0,4.0,1.0 gates 513 | val err [0.049] hold [0.054] f1 [0.08] iou [0.5]

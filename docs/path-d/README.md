@@ -4,6 +4,10 @@
 them small enough to read. Experimental track, separate from the featured Neural CA (unchanged) and from Readable
 Rules (closed with NO-GO, D9; nothing there was rerun).
 
+**Status, round 3 (D4, motion fidelity), 2026-11-12: PARTIAL** (§13, log in [D4_LOG.md](D4_LOG.md)).
+- Measurable within-phase transfer (two seeds, untouched test): change F1 0.12–0.18 vs 0.07 for the round-2 circuit.
+- No transfer across motion phases; continuation still collapses into blobs.
+
 **Status, round 2 (D2.5 / D3), 2026-11-12: PARTIAL** (§8–§12).
 - A circuit learned from the visible channel alone reproduces Greenberg–Hastings waves exactly on unseen trajectories
   (simplified to 10 gates).
@@ -389,3 +393,93 @@ are summed allocated GPU time.
 **Next recommended experiment (not run):** multi-clip training on 3998-like scenes. One circuit is fitted on several
 short windows of the same silhouette (still a fixed circuit, still visible-only), to test whether the motion that is
 missing on unseen frames is a data problem (one 8-frame window) or a capacity / objective problem. Estimate: ≤ 1 GPU-h.
+
+
+---
+# Round 3: motion fidelity and shape preservation (D4)
+Full hypothesis / result / decision log: [D4_LOG.md](D4_LOG.md).
+- **Code:** `experiments/pd_vis.py` (metrics, renders), `pd_d4.py` (frozen benchmark, training, pruning),
+  `pd_d4_select.py` (val-only selection), `pd_d4_harden.py`, `pd_d4_report.py`.
+- **Results:** `runs/path_d/d4/`; renders in `runs/path_d/d4/renders/`.
+
+## 13. Results
+**Benchmark**, frozen before training (`pd_d4.py::BENCH`):
+- Scene 3998 checked continuous (3996–4182) but with six motion phases.
+- Train pool 3998 / 4014 / 4066 / 4150; val 4038 / 4078 / 4162; test 4022 / 4090 / 4170 + 16-frame test 4106–4122.
+- Clips 1221 / 4500 / 1499.
+
+**Metrics:** foreground IoU, boundary F1 (1 px), thin recall, components, area and centroid drift; exact-pixel lag-1/4
+change precision, recall, F1, mass and on/off balance; constant frames, terminal period, 2×2 spatial entropy, first
+IoU < 0.5.
+
+| step | hypothesis | outcome | decision |
+|---|---|---|---|
+| diagnosis | why the 64-gate circuit looked like geometry | it converges to its own fixed-point wedge silhouette (terminal period 1, IoU < 0.5 from step 12, IoU 0.17, entropy 0.55 vs 0.76); plus a round-2 bug where 8-frame runs trained the last curriculum stage on clamped indices ("repeat the last frame") | bug fixed; old results kept as recorded |
+| D4-A multi-window | one window is too little data | val change F1 0.02–0.08 for 1, 2, 4 windows, 24 contiguous frames and ¼ budget; more windows only worsen the fit (train F1 0.75 → 0.12) | rejected |
+| D4-B objectives | pixel loss rewards under-changing | contour / change / both: val change F1 0.03–0.07; the change loss adds flicker (IoU down to 0.45) | rejected (original loss kept) |
+| D4-C hardening | soft-to-hard gap causes the failure | middle layers 40–72 % ambiguous, hard error 1.7–3× soft by step 7 on fitted frames, **but the soft circuit fails on val identically** (F1 0.02–0.10) | not the cause; no GPU spent |
+| locality check | could any local rule transfer? | exact 3×3, 3×3 + previous frame, and 5×5 tables fitted on 4 training windows are worse than hold one step ahead on every val window | transfer across phases is not locally lawful here |
+| D4-E capacity | 24-frame fits fail for capacity | k = 4 or 3× budget: train change F1 still 0.15–0.19 | rejected |
+| G within-phase | motion transfers within one phase | val (same phase) beats hold / readable in 4/4 runs, change F1 0.08–0.16 | selected (G_s0) |
+| D4-D compactness | prune without losing behaviour | pixel-only pruning gives a 1-gate degenerate circuit (IoU 0); shape-aware pruning gives 503 → 30 gates but val F1 0.16 → 0.10 and a frozen continuation | the unpruned circuit stays primary |
+
+**Untouched test**, scored once after selection; same metrics for the round-2 64-gate circuit:
+
+| circuit | gates | test 4022–4030 (same phase): err (hold 0.046, readable 0.061, table 0.027) / change F1 / IoU / bF1 | test 4106–4122 (other phase, 16 f): err (hold 0.055) / F1 | continuous 3998–4030: err (hold 0.119) / F1 / IoU / first IoU < 0.5 |
+|---|---|---|---|---|
+| round-2 64-gate | 64 | 0.036 / 0.07 / 0.69 / 0.89 | 0.073 / 0.08 | 0.076 / 0.17 / 0.32 / step 10, frozen |
+| **G_s0 (selected)** | 503 | **0.032 / 0.18 / 0.72 / 0.91** | 0.075 / 0.05 | 0.092 / 0.10 / 0.18 / step 5 |
+| G_s1 (2nd seed) | 476 | **0.024 / 0.12 / 0.80 / 0.97** | 0.098 / 0.07 | 0.084 / 0.21 / 0.38 / step 9 |
+| G_s0 shape-pruned | 30 | 0.056 / 0.05 / 0.55 / 0.69 | 0.076 / 0.05 | 0.065 / 0.12 / 0.14 / step 1, frozen |
+| B_s1 (cross-phase pick) | 432 | 0.048 / 0.07 / 0.64 / 0.77 | 0.052 / 0.08 | 64 steps: 0.158 / 0.09 / 0.09 |
+
+**Visual check** (renders `runs/path_d/d4/renders/G_s*__*.png`):
+- **On 4022–4030** the figure stays recognisable for 8 steps, with holes forming at the head. The true motion there is
+  small.
+- **In the continuous run** the thin, growing figure becomes a widening triangular blob. A small object that the
+  video drops is kept and grows.
+- **On 4106–4122** both figures dissolve into speckle within about 8 steps.
+- The geometric collapse is slower and noisier than before, **not fixed**.
+
+**Strong-progress bar:** not met. The 16-frame test is worse than hold, with change F1 0.05–0.07. Minimum progress is
+met only within one motion phase.
+
+## 14. Answers (round 3)
+1. **Why geometry?** The circuit has an attractor: it pulls silhouettes into a wedge and freezes (period 1). Round-2
+   training (8-frame clips with a clamped horizon-16 stage) reinforced "stop changing".
+2. **Multi-window learning:** no. It produced a compromise circuit; transfer did not improve.
+3. **Contour / change objectives:** no. The change term adds flicker; contour weighting is neutral.
+4. **Soft-to-hard gap:** real (costs fitted accuracy, middle layers undecided) but **not** the cause: soft circuits
+   fail to transfer identically.
+5. **Best configuration:** k = 2 latent channels, 2-frame prefix, one contiguous 16-frame same-phase window, 3×
+   budget, original loss. About 480–500 gates after exact simplification; 30 gates after shape-aware pruning, at a
+   clear cost.
+6. **Recognisable motion outside the fitted frames:** only within the same motion phase and only for about 8 frames
+   (change F1 0.12–0.18, IoU 0.72–0.80, 2 seeds). Not across phases, not in continuation.
+7. **Largest measurable effect:** restricting training and evaluation to one motion phase (change F1 2–3× on val).
+   That is a statement about the data, not a better learner.
+8. **32–64 frames:** not justified. Continuation collapses by step 5–10 in every run.
+9. **Path E:** no evidence for it. There are no reusable motion subcircuits; the obstacle is that motion is not one
+   local law across phases. Composing phases would be a schedule of fitted rules, which the project has already
+   characterised as compression, not dynamics.
+10. **Next, based on evidence:** stop treating "one fixed local circuit for a scene" as the target.
+    - The measured limit holds for every local table (radius 1–2, with memory), not just learned circuits.
+    - A worthwhile continuation is a phase-local circuit with an honest, explicit phase count: Readable Rules showed
+      cut-aligned phases help when a cut exists.
+    - Or accept fitted short segments as demos, labelled as fitted.
+
+**Classification: PARTIAL.**
+
+**Cost of round 3:**
+
+| | used | ceiling |
+|---|---|---|
+| GPU | 136.9 min = **2.28 GPU-h** (one run stopped after ~10 s because it started before a fix, rerun) | 8 GPU-h |
+| CPU | 0.19 core-h metered (one launch failed at the 16 GB address-space limit and was rerun at 64 GB) + about 0.3 unmetered (estimate) | 16 core-h |
+
+Stopped early: five controlled attempts gave no path to cross-phase transfer.
+
+**Cumulative Path D:** GPU 5.65 GPU-h; CPU about 1.4 core-h.
+
+**Inspector:** example *Bad Apple 3998–4030, D4 selected circuit*. Segment labels (prefix, train, val, test), live
+pixel error, foreground IoU and running change F1 are shown, and the first IoU < 0.5 is flagged (step 7, frame 4003).

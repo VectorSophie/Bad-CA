@@ -64,6 +64,16 @@ def main():
         f = f"{R}/d3/{run}__pruned.logic.json"; d = dlca.load(f); a = int(clip)
         dlca.export(os.path.join(OUT, f"badapple_{clip}.logic.json"), d["net"], 3, False, init_state=d["init_state"], steps=d["steps"], prefix=d["prefix_frames"], meta=d["meta"])
         target(f"badapple_{clip}.target.json", a - 2, X[a - 2:a - 2 + d["steps"] + 1]); idx.append(dict(file=f"badapple_{clip}.logic.json", target=f"badapple_{clip}.target.json", label=label))
+    # ---- D4 (motion fidelity): the val-selected within-phase circuit, continuous 3996 -> 4030, segments labelled ----
+    for run, label in (("G_s0_b144k", "Bad Apple 3998-4030, D4 selected circuit (503 gates; fitted 3998-4014, val 4014-4022, test 4022-4030)"),):
+        d = dlca.load(f"{R}/d4/{run}/circuit.logic.json"); steps = 34
+        dlca.export(os.path.join(OUT, f"d4_{run}.logic.json"), d["net"], d["channels"], False, init_state=d["init_state"], steps=steps, prefix=d["prefix_frames"],
+                    meta=dict(d["meta"], note="continuous run, no re-initialisation: frame 3996 + 2 observed prefix frames, then 32 free steps (3999-4030). "
+                              "Within-phase test 4022-4030 was scored once after selection; see docs/path-d/README.md section 13."))
+        json.dump(dict(start=3996, note="original frames for comparison only; the circuit never reads this file",
+                       segments=[[0, 2, "prefix"], [3, 18, "train"], [19, 26, "val"], [27, 34, "test"]],
+                       frames=[np.packbits(X[f].ravel()).tobytes().hex() for f in range(3996, 3996 + steps + 1)]), open(os.path.join(OUT, f"d4_{run}.target.json"), "w"))
+        idx.append(dict(file=f"d4_{run}.logic.json", target=f"d4_{run}.target.json", label=label))
     json.dump(idx, open(os.path.join(OUT, "index.json"), "w"), indent=1); print(json.dumps(idx, indent=1))
 
 

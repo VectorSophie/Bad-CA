@@ -67,7 +67,12 @@ function draw() {
     const f = TG.frames[Math.min(t, TG.frames.length - 1)], ox = $("ov").getContext("2d"), oi = ox.createImageData(M.W, M.H); let d = 0;
     for (let i = 0; i < M.H * M.W; i++) { oi.data.set([...(f[i] ? on : off), 255], i * 4); d += f[i] !== S[i * M.channels]; }
     $("ov").width = M.W; $("ov").height = M.H; ox.putImageData(oi, 0, 0);
-    $("odiff").textContent = t < TG.frames.length ? `frame ${TG.start + t}: ${d} of ${M.H * M.W} visible pixels differ (${(100 * d / (M.H * M.W)).toFixed(1)} %)` : "past the end of the comparison frames";
+    const seg = (TG.segments || []).find(([a, b]) => t >= a && t <= b), st = TG.stats[Math.min(t, TG.stats.length - 1)];
+    $("odiff").innerHTML = t < TG.frames.length
+      ? `frame ${TG.start + t}${seg ? ` · <b style="color:${SEGC[seg[2]] || "inherit"}">${seg[2]}</b>` : ""}: ${d} of ${M.H * M.W} visible pixels differ (${(100 * d / (M.H * M.W)).toFixed(1)} %) · foreground IoU ${st.iou.toFixed(2)}`
+        + (t > 0 ? ` · change F1 so far ${st.f1 === null ? "–" : st.f1.toFixed(2)} (precision ${st.prec === null ? "–" : st.prec.toFixed(2)}, recall ${st.rec === null ? "–" : st.rec.toFixed(2)})` : "")
+        + `<br>${TG.collapse === null ? "foreground IoU never drops below 0.5 in the compared frames" : `first step with foreground IoU < 0.5: step ${TG.collapse} (frame ${TG.start + TG.collapse})`}`
+      : "past the end of the comparison frames";
   }
   if (sel) inspect();
 }
@@ -91,10 +96,25 @@ $("cv").onclick = (e) => { const r = $("cv").getBoundingClientRect(); sel = [Mat
 $("file").onchange = async (e) => { const f = e.target.files[0]; if (f) load(JSON.parse(await f.text()), f.name); };
 const idx = await (await fetch("/static/logic_examples/index.json")).json();
 $("ex").innerHTML = idx.map((e, i) => `<option value="${i}">${e.label}</option>`).join("");
+const SEGC = { prefix: "#6b7280", train: "#15803d", fitted: "#15803d", val: "#b45309", test: "#b91c1c" };
+// precompute the whole rollout once: per-step foreground IoU and running lag-1 change precision/recall/F1 vs the original
+function stats(o, tg) {
+  const m = parseLogic(o), n = m.H * m.W, C = m.channels, out = []; let s = m.init.slice(), prv = null, hit = 0, np_ = 0, nt = 0, collapse = null, first = (m.prefixFrames || []).length;
+  for (let t = 0; t < tg.frames.length; t++) {
+    const f = tg.frames[t], bgc = (() => { let b = 0, c = 0; for (let x = 0; x < m.W; x++) { b += f[x] + f[(m.H - 1) * m.W + x]; c += 2; } for (let y = 0; y < m.H; y++) { b += f[y * m.W] + f[y * m.W + m.W - 1]; c += 2; } return b * 2 >= c ? 1 : 0; })();
+    let I = 0, U = 0; for (let i = 0; i < n; i++) { const a = s[i * C] !== bgc, b = f[i] !== bgc; I += a && b; U += a || b; }
+    const iou = U ? I / U : 1;
+    if (t > first && prv) for (let i = 0; i < n; i++) { const pc = s[i * C] - prv.s[i * C], tc = f[i] - prv.f[i]; np_ += pc !== 0; nt += tc !== 0; hit += pc !== 0 && pc === tc; }
+    const prec = np_ ? hit / np_ : null, rec = nt ? hit / nt : null, f1 = prec !== null && rec !== null && prec + rec ? (2 * prec * rec) / (prec + rec) : null;
+    if (collapse === null && t > first && iou < 0.5) collapse = t;
+    out.push({ iou, prec, rec, f1 }); prv = { s, f }; s = applyPrefix(m, step(m, s), t);
+  }
+  return { stats: out, collapse };
+}
 const unpack = (h, n) => { const u8 = Uint8Array.from(h.match(/../g), (b) => parseInt(b, 16)), a = new Uint8Array(n); for (let i = 0; i < n; i++) a[i] = (u8[i >> 3] >> (7 - (i & 7))) & 1; return a; };
 $("ex").onchange = async () => {
   const e = idx[+$("ex").value], o = await (await fetch(`/static/logic_examples/${e.file}`)).json();
-  let tg = null; if (e.target) { const j = await (await fetch(`/static/logic_examples/${e.target}`)).json(); tg = { start: j.start, frames: j.frames.map((h) => unpack(h, o.H * o.W)) }; }
+  let tg = null; if (e.target) { const j = await (await fetch(`/static/logic_examples/${e.target}`)).json(); tg = { start: j.start, segments: j.segments, frames: j.frames.map((h) => unpack(h, o.H * o.W)) }; Object.assign(tg, stats(o, tg)); }
   load(o, e.label, tg);
 };
 const q = new URLSearchParams(location.search);   // ?ex=N&steps=T&cell=y,x opens a given example, state and cell (links, headless checks)

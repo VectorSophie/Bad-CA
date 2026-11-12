@@ -37,5 +37,10 @@
   "file": "badapple_4500.logic.json",
   "target": "badapple_4500.target.json",
   "label": "Bad Apple frames 4500-4524: 38 gates, fits but does not transfer"
+ },
+ {
+  "file": "d4_G_s0_b144k.logic.json",
+  "target": "d4_G_s0_b144k.target.json",
+  "label": "Bad Apple 3998-4030, D4 selected circuit (503 gates; fitted 3998-4014, val 4014-4022, test 4022-4030)"
  }
 ]

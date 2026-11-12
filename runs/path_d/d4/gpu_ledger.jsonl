@@ -1,0 +1,10 @@
+{"job": 25, "label": "pd-d4a-1 (A,B,C,D s0; Aq s0)", "gpus": 1, "minutes": 21.28}
+{"job": 26, "label": "pd-d4a-2 (A,B,C,D s1; Aq s1)", "gpus": 1, "minutes": 20.90}
+{"job": 27, "label": "pd-d4b-1 (B s0: contour, change, both)", "gpus": 1, "minutes": 13.78}
+{"job": 28, "label": "pd-d4b-2 (B s1: contour, change, both)", "gpus": 1, "minutes": 13.49}
+{"note": "job 29: run D s0 k4 stopped by me after ~10 s (started before the channel-count fix); rerun appended to job 31"}
+{"job": 29, "label": "pd-d4e-1 (D k4 s1 [s0 stopped after 10 s, see note], clip 1221, clip 4500)", "gpus": 1, "minutes": 14.56}
+{"job": 30, "label": "pd-d4e-2 (D 288k s0/s1, clip 1499)", "gpus": 1, "minutes": 23.71}
+{"job": 31, "label": "pd-d4e-rerun (D k4 s0)", "gpus": 1, "minutes": 5.23}
+{"job": 32, "label": "pd-d4g-1 (G s0: base, both)", "gpus": 1, "minutes": 12.08}
+{"job": 33, "label": "pd-d4g-2 (G s1: base, both)", "gpus": 1, "minutes": 11.85}
