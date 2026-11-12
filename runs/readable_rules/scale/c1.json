@@ -1,0 +1,4442 @@
+[
+ {
+  "task": "1221:120",
+  "K": 1,
+  "mode": "indep",
+  "seed": 0,
+  "err": 0.16607823685029569,
+  "hold": 0.5523702536570184,
+  "worst16": 0.5266565393518519,
+  "lag4_f1": 0.13473478171760542,
+  "mass": 0.3864138069436083,
+  "blips": 5,
+  "programs": 1,
+  "distinct_used": 1,
+  "rules": 5,
+  "conditions": 2,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 35,
+  "file_bytes": 214,
+  "cpu_s": 167.0,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.16607823685029569,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 1,
+  "mode": "indep",
+  "seed": 1,
+  "err": 0.16607823685029569,
+  "hold": 0.5523702536570184,
+  "worst16": 0.5266565393518519,
+  "lag4_f1": 0.13473478171760542,
+  "mass": 0.3864138069436083,
+  "blips": 5,
+  "programs": 1,
+  "distinct_used": 1,
+  "rules": 2,
+  "conditions": 2,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 35,
+  "file_bytes": 213,
+  "cpu_s": 164.9,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.16607823685029569,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 4,
+  "mode": "indep",
+  "seed": 0,
+  "err": 0.10065067693744165,
+  "hold": 0.5523702536570184,
+  "worst16": 0.2929325810185185,
+  "lag4_f1": 0.24585084371539548,
+  "mass": 0.39434075857916917,
+  "blips": 0,
+  "programs": 4,
+  "distinct_used": 4,
+  "rules": 5,
+  "conditions": 5,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 137,
+  "file_bytes": 278,
+  "cpu_s": 199.0,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.09479166666666666,
+    "program": 0,
+    "edits": 5
+   },
+   {
+    "phase": 1,
+    "err": 0.21026899744572158,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 2,
+    "err": 0.06903935185185185,
+    "program": 2,
+    "edits": 5
+   },
+   {
+    "phase": 3,
+    "err": 0.032156635802469136,
+    "program": 3,
+    "edits": 5
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 4,
+  "mode": "indep",
+  "seed": 1,
+  "err": 0.10705532212885153,
+  "hold": 0.5523702536570184,
+  "worst16": 0.3243272569444444,
+  "lag4_f1": 0.1969015985148615,
+  "mass": 0.4029700983343367,
+  "blips": 0,
+  "programs": 3,
+  "distinct_used": 3,
+  "rules": 3,
+  "conditions": 3,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 137,
+  "file_bytes": 259,
+  "cpu_s": 242.1,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.09519675925925926,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.23613106641123882,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.06903935185185185,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.032156635802469136,
+    "program": 2,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 4,
+  "mode": "shared",
+  "seed": 0,
+  "err": 0.10806683784624961,
+  "hold": 0.5523702536570184,
+  "worst16": 0.3243272569444444,
+  "lag4_f1": 0.1696689941753708,
+  "mass": 0.38355408388520973,
+  "blips": 0,
+  "programs": 4,
+  "distinct_used": 3,
+  "rules": 7,
+  "conditions": 4,
+  "edits": 2,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 137,
+  "file_bytes": 294,
+  "cpu_s": 203.7,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.0992091049382716,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 1,
+    "err": 0.23613106641123882,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 2,
+    "err": 0.06903935185185185,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.032156635802469136,
+    "program": 2,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 4,
+  "mode": "shared",
+  "seed": 1,
+  "err": 0.1072255291005291,
+  "hold": 0.5523702536570184,
+  "worst16": 0.3243272569444444,
+  "lag4_f1": 0.1965272760230902,
+  "mass": 0.4044752157334939,
+  "blips": 0,
+  "programs": 4,
+  "distinct_used": 3,
+  "rules": 5,
+  "conditions": 5,
+  "edits": 3,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 137,
+  "file_bytes": 308,
+  "cpu_s": 197.9,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.09587191358024691,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.23613106641123882,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 2,
+    "err": 0.06903935185185185,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.032156635802469136,
+    "program": 2,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 4,
+  "mode": "reuse",
+  "seed": 0,
+  "err": 0.10806683784624961,
+  "hold": 0.5523702536570184,
+  "worst16": 0.3243272569444444,
+  "lag4_f1": 0.1696689941753708,
+  "mass": 0.38355408388520973,
+  "blips": 0,
+  "programs": 3,
+  "distinct_used": 2,
+  "rules": 7,
+  "conditions": 4,
+  "edits": 2,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 137,
+  "file_bytes": 291,
+  "cpu_s": 203.5,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.0992091049382716,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 1,
+    "err": 0.23613106641123882,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 2,
+    "err": 0.06903935185185185,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 3,
+    "err": 0.032156635802469136,
+    "program": 0,
+    "edits": 1
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 4,
+  "mode": "reuse",
+  "seed": 1,
+  "err": 0.1072255291005291,
+  "hold": 0.5523702536570184,
+  "worst16": 0.3243272569444444,
+  "lag4_f1": 0.1965272760230902,
+  "mass": 0.4044752157334939,
+  "blips": 0,
+  "programs": 3,
+  "distinct_used": 2,
+  "rules": 5,
+  "conditions": 5,
+  "edits": 3,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 137,
+  "file_bytes": 305,
+  "cpu_s": 199.3,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.09587191358024691,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.23613106641123882,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 2,
+    "err": 0.06903935185185185,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.032156635802469136,
+    "program": 0,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 8,
+  "mode": "indep",
+  "seed": 0,
+  "err": 0.09950299564270153,
+  "hold": 0.5523702536570184,
+  "worst16": 0.2744140625,
+  "lag4_f1": 0.23761007415392194,
+  "mass": 0.4026189042745334,
+  "blips": 0,
+  "programs": 4,
+  "distinct_used": 4,
+  "rules": 5,
+  "conditions": 6,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 275,
+  "file_bytes": 309,
+  "cpu_s": 198.2,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.10690586419753087,
+    "program": 0,
+    "edits": 5
+   },
+   {
+    "phase": 1,
+    "err": 0.08182870370370371,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 2,
+    "err": 0.27827932098765434,
+    "program": 2,
+    "edits": 5
+   },
+   {
+    "phase": 3,
+    "err": 0.12855489417989419,
+    "program": 3,
+    "edits": 5
+   },
+   {
+    "phase": 4,
+    "err": 0.12156635802469136,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 5,
+    "err": 0.016512345679012344,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 6,
+    "err": 0.02627314814814815,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 7,
+    "err": 0.03804012345679012,
+    "program": 1,
+    "edits": 5
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 8,
+  "mode": "indep",
+  "seed": 1,
+  "err": 0.09964402427637722,
+  "hold": 0.5523702536570184,
+  "worst16": 0.2744140625,
+  "lag4_f1": 0.23721282293410909,
+  "mass": 0.4021673690547863,
+  "blips": 0,
+  "programs": 4,
+  "distinct_used": 4,
+  "rules": 5,
+  "conditions": 5,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 275,
+  "file_bytes": 305,
+  "cpu_s": 197.2,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.10802469135802469,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 1,
+    "err": 0.08182870370370371,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.27827932098765434,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.12855489417989419,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 4,
+    "err": 0.12156635802469136,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 5,
+    "err": 0.016512345679012344,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 6,
+    "err": 0.02627314814814815,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 7,
+    "err": 0.03804012345679012,
+    "program": 1,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 8,
+  "mode": "shared",
+  "seed": 0,
+  "err": 0.10125855897914722,
+  "hold": 0.5523702536570184,
+  "worst16": 0.28255208333333337,
+  "lag4_f1": 0.14098501883596648,
+  "mass": 0.38355408388520973,
+  "blips": 0,
+  "programs": 6,
+  "distinct_used": 5,
+  "rules": 9,
+  "conditions": 5,
+  "edits": 4,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 275,
+  "file_bytes": 334,
+  "cpu_s": 203.4,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.1165895061728395,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 1,
+    "err": 0.08182870370370371,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 2,
+    "err": 0.28252314814814816,
+    "program": 2,
+    "edits": 1
+   },
+   {
+    "phase": 3,
+    "err": 0.12855489417989419,
+    "program": 3,
+    "edits": 1
+   },
+   {
+    "phase": 4,
+    "err": 0.12156635802469136,
+    "program": 4,
+    "edits": 0
+   },
+   {
+    "phase": 5,
+    "err": 0.016512345679012344,
+    "program": 4,
+    "edits": 0
+   },
+   {
+    "phase": 6,
+    "err": 0.02627314814814815,
+    "program": 4,
+    "edits": 0
+   },
+   {
+    "phase": 7,
+    "err": 0.03804012345679012,
+    "program": 4,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 8,
+  "mode": "shared",
+  "seed": 1,
+  "err": 0.10041725023342671,
+  "hold": 0.5523702536570184,
+  "worst16": 0.28255208333333337,
+  "lag4_f1": 0.16792833267598373,
+  "mass": 0.4044752157334939,
+  "blips": 0,
+  "programs": 6,
+  "distinct_used": 5,
+  "rules": 7,
+  "conditions": 6,
+  "edits": 5,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 275,
+  "file_bytes": 347,
+  "cpu_s": 199.4,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.10991512345679012,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.08182870370370371,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 2,
+    "err": 0.28252314814814816,
+    "program": 2,
+    "edits": 1
+   },
+   {
+    "phase": 3,
+    "err": 0.12855489417989419,
+    "program": 3,
+    "edits": 1
+   },
+   {
+    "phase": 4,
+    "err": 0.12156635802469136,
+    "program": 4,
+    "edits": 0
+   },
+   {
+    "phase": 5,
+    "err": 0.016512345679012344,
+    "program": 4,
+    "edits": 0
+   },
+   {
+    "phase": 6,
+    "err": 0.02627314814814815,
+    "program": 4,
+    "edits": 0
+   },
+   {
+    "phase": 7,
+    "err": 0.03804012345679012,
+    "program": 4,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 8,
+  "mode": "reuse",
+  "seed": 0,
+  "err": 0.10125855897914722,
+  "hold": 0.5523702536570184,
+  "worst16": 0.28255208333333337,
+  "lag4_f1": 0.14098501883596648,
+  "mass": 0.38355408388520973,
+  "blips": 0,
+  "programs": 4,
+  "distinct_used": 3,
+  "rules": 8,
+  "conditions": 5,
+  "edits": 3,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 275,
+  "file_bytes": 323,
+  "cpu_s": 204.5,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.1165895061728395,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 1,
+    "err": 0.08182870370370371,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 2,
+    "err": 0.28252314814814816,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 3,
+    "err": 0.12855489417989419,
+    "program": 2,
+    "edits": 1
+   },
+   {
+    "phase": 4,
+    "err": 0.12156635802469136,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 5,
+    "err": 0.016512345679012344,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 6,
+    "err": 0.02627314814814815,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 7,
+    "err": 0.03804012345679012,
+    "program": 0,
+    "edits": 1
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 8,
+  "mode": "reuse",
+  "seed": 1,
+  "err": 0.10041725023342671,
+  "hold": 0.5523702536570184,
+  "worst16": 0.28255208333333337,
+  "lag4_f1": 0.16792833267598373,
+  "mass": 0.4044752157334939,
+  "blips": 0,
+  "programs": 4,
+  "distinct_used": 3,
+  "rules": 6,
+  "conditions": 6,
+  "edits": 4,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 275,
+  "file_bytes": 336,
+  "cpu_s": 198.4,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.10991512345679012,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.08182870370370371,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.28252314814814816,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 3,
+    "err": 0.12855489417989419,
+    "program": 2,
+    "edits": 1
+   },
+   {
+    "phase": 4,
+    "err": 0.12156635802469136,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 5,
+    "err": 0.016512345679012344,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 6,
+    "err": 0.02627314814814815,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 7,
+    "err": 0.03804012345679012,
+    "program": 0,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 16,
+  "mode": "indep",
+  "seed": 0,
+  "err": 0.07990001556178027,
+  "hold": 0.5523702536570184,
+  "worst16": 0.19252748842592593,
+  "lag4_f1": 0.36496144260501406,
+  "mass": 0.4476720850893036,
+  "blips": 23,
+  "programs": 8,
+  "distinct_used": 8,
+  "rules": 12,
+  "conditions": 17,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 547,
+  "file_bytes": 424,
+  "cpu_s": 199.5,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.15120701058201058,
+    "program": 0,
+    "edits": 5
+   },
+   {
+    "phase": 1,
+    "err": 0.0681423611111111,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 2,
+    "err": 0.08159722222222222,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 3,
+    "err": 0.08203125,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 4,
+    "err": 0.08688822751322751,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 5,
+    "err": 0.2986111111111111,
+    "program": 2,
+    "edits": 5
+   },
+   {
+    "phase": 6,
+    "err": 0.0775462962962963,
+    "program": 3,
+    "edits": 5
+   },
+   {
+    "phase": 7,
+    "err": 0.08126653439153439,
+    "program": 4,
+    "edits": 5
+   },
+   {
+    "phase": 8,
+    "err": 0.09440104166666667,
+    "program": 5,
+    "edits": 5
+   },
+   {
+    "phase": 9,
+    "err": 0.08581349206349206,
+    "program": 6,
+    "edits": 5
+   },
+   {
+    "phase": 10,
+    "err": 0.022569444444444444,
+    "program": 7,
+    "edits": 5
+   },
+   {
+    "phase": 11,
+    "err": 0.00958994708994709,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 12,
+    "err": 0.021339699074074073,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 13,
+    "err": 0.03191137566137566,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 14,
+    "err": 0.03537326388888889,
+    "program": 1,
+    "edits": 5
+   },
+   {
+    "phase": 15,
+    "err": 0.041087962962962965,
+    "program": 1,
+    "edits": 5
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 16,
+  "mode": "indep",
+  "seed": 1,
+  "err": 0.07958391690009337,
+  "hold": 0.5523702536570184,
+  "worst16": 0.19252748842592593,
+  "lag4_f1": 0.3859861589319775,
+  "mass": 0.4519867549668874,
+  "blips": 51,
+  "programs": 8,
+  "distinct_used": 8,
+  "rules": 12,
+  "conditions": 18,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 547,
+  "file_bytes": 428,
+  "cpu_s": 197.6,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.13293650793650794,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 1,
+    "err": 0.0681423611111111,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.08159722222222222,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.08203125,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 4,
+    "err": 0.08688822751322751,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 5,
+    "err": 0.2986111111111111,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 6,
+    "err": 0.0775462962962963,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 7,
+    "err": 0.08961640211640212,
+    "program": 4,
+    "edits": 2
+   },
+   {
+    "phase": 8,
+    "err": 0.09975405092592593,
+    "program": 5,
+    "edits": 2
+   },
+   {
+    "phase": 9,
+    "err": 0.08424272486772487,
+    "program": 6,
+    "edits": 3
+   },
+   {
+    "phase": 10,
+    "err": 0.022569444444444444,
+    "program": 7,
+    "edits": 2
+   },
+   {
+    "phase": 11,
+    "err": 0.00958994708994709,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 12,
+    "err": 0.021339699074074073,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 13,
+    "err": 0.03191137566137566,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 14,
+    "err": 0.03537326388888889,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 15,
+    "err": 0.041087962962962965,
+    "program": 1,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 16,
+  "mode": "shared",
+  "seed": 0,
+  "err": 0.0835375816993464,
+  "hold": 0.5523702536570184,
+  "worst16": 0.19252748842592593,
+  "lag4_f1": 0.3159817014209851,
+  "mass": 0.40382299819385914,
+  "blips": 24,
+  "programs": 9,
+  "distinct_used": 8,
+  "rules": 12,
+  "conditions": 10,
+  "edits": 7,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 547,
+  "file_bytes": 415,
+  "cpu_s": 204.5,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.17195767195767195,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 1,
+    "err": 0.0681423611111111,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 2,
+    "err": 0.08159722222222222,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 3,
+    "err": 0.08203125,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 4,
+    "err": 0.08688822751322751,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 5,
+    "err": 0.2986111111111111,
+    "program": 2,
+    "edits": 1
+   },
+   {
+    "phase": 6,
+    "err": 0.0775462962962963,
+    "program": 3,
+    "edits": 1
+   },
+   {
+    "phase": 7,
+    "err": 0.09176587301587301,
+    "program": 4,
+    "edits": 1
+   },
+   {
+    "phase": 8,
+    "err": 0.10944733796296297,
+    "program": 5,
+    "edits": 1
+   },
+   {
+    "phase": 9,
+    "err": 0.0992063492063492,
+    "program": 6,
+    "edits": 1
+   },
+   {
+    "phase": 10,
+    "err": 0.022569444444444444,
+    "program": 7,
+    "edits": 0
+   },
+   {
+    "phase": 11,
+    "err": 0.00958994708994709,
+    "program": 7,
+    "edits": 0
+   },
+   {
+    "phase": 12,
+    "err": 0.021339699074074073,
+    "program": 7,
+    "edits": 0
+   },
+   {
+    "phase": 13,
+    "err": 0.03191137566137566,
+    "program": 7,
+    "edits": 0
+   },
+   {
+    "phase": 14,
+    "err": 0.03537326388888889,
+    "program": 7,
+    "edits": 0
+   },
+   {
+    "phase": 15,
+    "err": 0.041087962962962965,
+    "program": 7,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 16,
+  "mode": "shared",
+  "seed": 1,
+  "err": 0.08034255368814193,
+  "hold": 0.5523702536570184,
+  "worst16": 0.19252748842592593,
+  "lag4_f1": 0.3727146556188503,
+  "mass": 0.4381396748946418,
+  "blips": 27,
+  "programs": 10,
+  "distinct_used": 9,
+  "rules": 12,
+  "conditions": 13,
+  "edits": 14,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 547,
+  "file_bytes": 469,
+  "cpu_s": 198.1,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.13293650793650794,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 1,
+    "err": 0.0681423611111111,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 2,
+    "err": 0.08159722222222222,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 3,
+    "err": 0.08203125,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 4,
+    "err": 0.08688822751322751,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 5,
+    "err": 0.2986111111111111,
+    "program": 2,
+    "edits": 1
+   },
+   {
+    "phase": 6,
+    "err": 0.0775462962962963,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 7,
+    "err": 0.09308862433862433,
+    "program": 4,
+    "edits": 2
+   },
+   {
+    "phase": 8,
+    "err": 0.10337094907407407,
+    "program": 5,
+    "edits": 2
+   },
+   {
+    "phase": 9,
+    "err": 0.08953373015873016,
+    "program": 6,
+    "edits": 2
+   },
+   {
+    "phase": 10,
+    "err": 0.022569444444444444,
+    "program": 7,
+    "edits": 1
+   },
+   {
+    "phase": 11,
+    "err": 0.00958994708994709,
+    "program": 8,
+    "edits": 0
+   },
+   {
+    "phase": 12,
+    "err": 0.021339699074074073,
+    "program": 8,
+    "edits": 0
+   },
+   {
+    "phase": 13,
+    "err": 0.03191137566137566,
+    "program": 8,
+    "edits": 0
+   },
+   {
+    "phase": 14,
+    "err": 0.03537326388888889,
+    "program": 8,
+    "edits": 0
+   },
+   {
+    "phase": 15,
+    "err": 0.041087962962962965,
+    "program": 8,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 16,
+  "mode": "reuse",
+  "seed": 0,
+  "err": 0.083625116713352,
+  "hold": 0.5523702536570184,
+  "worst16": 0.19252748842592593,
+  "lag4_f1": 0.31603289857152383,
+  "mass": 0.40442504515352196,
+  "blips": 24,
+  "programs": 6,
+  "distinct_used": 5,
+  "rules": 10,
+  "conditions": 8,
+  "edits": 5,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 547,
+  "file_bytes": 390,
+  "cpu_s": 203.9,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.17195767195767195,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 1,
+    "err": 0.0681423611111111,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 2,
+    "err": 0.08159722222222222,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 3,
+    "err": 0.08203125,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 4,
+    "err": 0.08688822751322751,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 5,
+    "err": 0.2986111111111111,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 6,
+    "err": 0.0775462962962963,
+    "program": 2,
+    "edits": 1
+   },
+   {
+    "phase": 7,
+    "err": 0.09176587301587301,
+    "program": 3,
+    "edits": 1
+   },
+   {
+    "phase": 8,
+    "err": 0.11017071759259259,
+    "program": 3,
+    "edits": 1
+   },
+   {
+    "phase": 9,
+    "err": 0.09986772486772487,
+    "program": 4,
+    "edits": 1
+   },
+   {
+    "phase": 10,
+    "err": 0.022569444444444444,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 11,
+    "err": 0.00958994708994709,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 12,
+    "err": 0.021339699074074073,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 13,
+    "err": 0.03191137566137566,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 14,
+    "err": 0.03537326388888889,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 15,
+    "err": 0.041087962962962965,
+    "program": 0,
+    "edits": 1
+   }
+  ]
+ },
+ {
+  "task": "1221:120",
+  "K": 16,
+  "mode": "reuse",
+  "seed": 1,
+  "err": 0.08025988173046997,
+  "hold": 0.5523702536570184,
+  "worst16": 0.19252748842592593,
+  "lag4_f1": 0.37885626116516374,
+  "mass": 0.45018061408789883,
+  "blips": 32,
+  "programs": 7,
+  "distinct_used": 6,
+  "rules": 10,
+  "conditions": 12,
+  "edits": 11,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 547,
+  "file_bytes": 450,
+  "cpu_s": 198.8,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.13293650793650794,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 1,
+    "err": 0.0681423611111111,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.08159722222222222,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 3,
+    "err": 0.08203125,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 4,
+    "err": 0.08688822751322751,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 5,
+    "err": 0.2986111111111111,
+    "program": 1,
+    "edits": 1
+   },
+   {
+    "phase": 6,
+    "err": 0.0775462962962963,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 7,
+    "err": 0.09308862433862433,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 8,
+    "err": 0.10337094907407407,
+    "program": 4,
+    "edits": 2
+   },
+   {
+    "phase": 9,
+    "err": 0.08812830687830688,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 10,
+    "err": 0.022569444444444444,
+    "program": 5,
+    "edits": 1
+   },
+   {
+    "phase": 11,
+    "err": 0.00958994708994709,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 12,
+    "err": 0.021339699074074073,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 13,
+    "err": 0.03191137566137566,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 14,
+    "err": 0.03537326388888889,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 15,
+    "err": 0.041087962962962965,
+    "program": 0,
+    "edits": 3
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 1,
+  "mode": "indep",
+  "seed": 0,
+  "err": 0.1457214830376595,
+  "hold": 0.1880787037037037,
+  "worst16": 0.25473813657407407,
+  "lag4_f1": 0.01250318585771646,
+  "mass": 0.02041973908111174,
+  "blips": 4,
+  "programs": 1,
+  "distinct_used": 1,
+  "rules": 2,
+  "conditions": 5,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 35,
+  "file_bytes": 218,
+  "cpu_s": 161.0,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.1457214830376595,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 1,
+  "mode": "indep",
+  "seed": 1,
+  "err": 0.14085356364768128,
+  "hold": 0.1880787037037037,
+  "worst16": 0.22855179398148148,
+  "lag4_f1": 0.02063067637764022,
+  "mass": 0.03625449045188126,
+  "blips": 0,
+  "programs": 1,
+  "distinct_used": 1,
+  "rules": 3,
+  "conditions": 6,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 35,
+  "file_bytes": 225,
+  "cpu_s": 167.1,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.14085356364768128,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 4,
+  "mode": "indep",
+  "seed": 0,
+  "err": 0.12846735916588858,
+  "hold": 0.1880787037037037,
+  "worst16": 0.22348813657407404,
+  "lag4_f1": 0.03997998314707175,
+  "mass": 0.04613348459065986,
+  "blips": 40,
+  "programs": 4,
+  "distinct_used": 4,
+  "rules": 7,
+  "conditions": 10,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 137,
+  "file_bytes": 283,
+  "cpu_s": 206.3,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.0876736111111111,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 1,
+    "err": 0.11967193486590039,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.15424382716049384,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.15198688271604938,
+    "program": 3,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 4,
+  "mode": "indep",
+  "seed": 1,
+  "err": 0.13458508403361344,
+  "hold": 0.1880787037037037,
+  "worst16": 0.22392216435185183,
+  "lag4_f1": 0.022670130858058583,
+  "mass": 0.03894876158063906,
+  "blips": 1,
+  "programs": 4,
+  "distinct_used": 4,
+  "rules": 6,
+  "conditions": 11,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 137,
+  "file_bytes": 287,
+  "cpu_s": 198.9,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.10625,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 1,
+    "err": 0.12529932950191572,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.15395447530864198,
+    "program": 2,
+    "edits": 3
+   },
+   {
+    "phase": 3,
+    "err": 0.1525270061728395,
+    "program": 3,
+    "edits": 3
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 4,
+  "mode": "shared",
+  "seed": 0,
+  "err": 0.12935243541861188,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2201605902777778,
+  "lag4_f1": 0.027291463974381473,
+  "mass": 0.040224995273208546,
+  "blips": 7,
+  "programs": 5,
+  "distinct_used": 4,
+  "rules": 7,
+  "conditions": 14,
+  "edits": 6,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 137,
+  "file_bytes": 338,
+  "cpu_s": 187.1,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.08655478395061729,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.1209889846743295,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.1525077160493827,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.15707947530864197,
+    "program": 3,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 4,
+  "mode": "shared",
+  "seed": 1,
+  "err": 0.13813025210084034,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2537977430555555,
+  "lag4_f1": 0.037769917025888736,
+  "mass": 0.06177916430327094,
+  "blips": 0,
+  "programs": 5,
+  "distinct_used": 4,
+  "rules": 6,
+  "conditions": 10,
+  "edits": 7,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 137,
+  "file_bytes": 340,
+  "cpu_s": 192.2,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.10314429012345679,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 1,
+    "err": 0.12753432311621968,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.16354166666666667,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.15794753086419752,
+    "program": 3,
+    "edits": 3
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 4,
+  "mode": "reuse",
+  "seed": 0,
+  "err": 0.12935243541861188,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2201605902777778,
+  "lag4_f1": 0.027291463974381473,
+  "mass": 0.040224995273208546,
+  "blips": 7,
+  "programs": 4,
+  "distinct_used": 3,
+  "rules": 7,
+  "conditions": 14,
+  "edits": 6,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 137,
+  "file_bytes": 334,
+  "cpu_s": 188.4,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.08655478395061729,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.1209889846743295,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.1525077160493827,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.15707947530864197,
+    "program": 0,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 4,
+  "mode": "reuse",
+  "seed": 1,
+  "err": 0.13993930905695612,
+  "hold": 0.1880787037037037,
+  "worst16": 0.25459346064814814,
+  "lag4_f1": 0.04736541021761769,
+  "mass": 0.0615900926451125,
+  "blips": 0,
+  "programs": 4,
+  "distinct_used": 3,
+  "rules": 6,
+  "conditions": 9,
+  "edits": 5,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 137,
+  "file_bytes": 327,
+  "cpu_s": 191.1,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.10314429012345679,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 1,
+    "err": 0.12753432311621968,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.16419753086419753,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.16446759259259258,
+    "program": 2,
+    "edits": 3
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 8,
+  "mode": "indep",
+  "seed": 0,
+  "err": 0.1562256847183318,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2761140046296296,
+  "lag4_f1": 0.1684200906461621,
+  "mass": 0.1380695783702023,
+  "blips": 77,
+  "programs": 5,
+  "distinct_used": 5,
+  "rules": 6,
+  "conditions": 9,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 275,
+  "file_bytes": 315,
+  "cpu_s": 184.4,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.04868827160493827,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 1,
+    "err": 0.09888117283950618,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.1216820987654321,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.1630704365079365,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 4,
+    "err": 0.10887345679012346,
+    "program": 4,
+    "edits": 2
+   },
+   {
+    "phase": 5,
+    "err": 0.2767746913580247,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 6,
+    "err": 0.16161265432098765,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 7,
+    "err": 0.27067901234567904,
+    "program": 3,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 8,
+  "mode": "indep",
+  "seed": 1,
+  "err": 0.1654703548085901,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2761140046296296,
+  "lag4_f1": 0.16456642592849147,
+  "mass": 0.18628285120060503,
+  "blips": 136,
+  "programs": 6,
+  "distinct_used": 6,
+  "rules": 13,
+  "conditions": 15,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 275,
+  "file_bytes": 344,
+  "cpu_s": 190.2,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.0728395061728395,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 1,
+    "err": 0.1318287037037037,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.13861882716049384,
+    "program": 2,
+    "edits": 3
+   },
+   {
+    "phase": 3,
+    "err": 0.15765542328042328,
+    "program": 3,
+    "edits": 4
+   },
+   {
+    "phase": 4,
+    "err": 0.11323302469135803,
+    "program": 4,
+    "edits": 3
+   },
+   {
+    "phase": 5,
+    "err": 0.2767746913580247,
+    "program": 5,
+    "edits": 3
+   },
+   {
+    "phase": 6,
+    "err": 0.16161265432098765,
+    "program": 5,
+    "edits": 3
+   },
+   {
+    "phase": 7,
+    "err": 0.27067901234567904,
+    "program": 5,
+    "edits": 3
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 8,
+  "mode": "shared",
+  "seed": 0,
+  "err": 0.15209694989106753,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2761140046296296,
+  "lag4_f1": 0.12002485819526248,
+  "mass": 0.11675174891283796,
+  "blips": 0,
+  "programs": 5,
+  "distinct_used": 4,
+  "rules": 8,
+  "conditions": 17,
+  "edits": 6,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 275,
+  "file_bytes": 385,
+  "cpu_s": 188.5,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.06747685185185186,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 1,
+    "err": 0.09263117283950617,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.10833333333333334,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.1236359126984127,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 4,
+    "err": 0.11373456790123457,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 5,
+    "err": 0.2767746913580247,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 6,
+    "err": 0.16161265432098765,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 7,
+    "err": 0.27067901234567904,
+    "program": 2,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 8,
+  "mode": "shared",
+  "seed": 1,
+  "err": 0.15259784469343293,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2761140046296296,
+  "lag4_f1": 0.12801743268629256,
+  "mass": 0.1475231612781244,
+  "blips": 19,
+  "programs": 7,
+  "distinct_used": 6,
+  "rules": 11,
+  "conditions": 18,
+  "edits": 11,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 275,
+  "file_bytes": 418,
+  "cpu_s": 190.7,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.0783179012345679,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 1,
+    "err": 0.09054783950617284,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.10659722222222222,
+    "program": 2,
+    "edits": 3
+   },
+   {
+    "phase": 3,
+    "err": 0.11904761904761904,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 4,
+    "err": 0.11496913580246913,
+    "program": 4,
+    "edits": 3
+   },
+   {
+    "phase": 5,
+    "err": 0.2767746913580247,
+    "program": 5,
+    "edits": 0
+   },
+   {
+    "phase": 6,
+    "err": 0.16161265432098765,
+    "program": 5,
+    "edits": 0
+   },
+   {
+    "phase": 7,
+    "err": 0.27067901234567904,
+    "program": 5,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 8,
+  "mode": "reuse",
+  "seed": 0,
+  "err": 0.15209694989106753,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2761140046296296,
+  "lag4_f1": 0.12002485819526248,
+  "mass": 0.11675174891283796,
+  "blips": 0,
+  "programs": 4,
+  "distinct_used": 3,
+  "rules": 8,
+  "conditions": 17,
+  "edits": 6,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 275,
+  "file_bytes": 382,
+  "cpu_s": 186.7,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.06747685185185186,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 1,
+    "err": 0.09263117283950617,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.10833333333333334,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 3,
+    "err": 0.1236359126984127,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 4,
+    "err": 0.11373456790123457,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 5,
+    "err": 0.2767746913580247,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 6,
+    "err": 0.16161265432098765,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 7,
+    "err": 0.27067901234567904,
+    "program": 0,
+    "edits": 1
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 8,
+  "mode": "reuse",
+  "seed": 1,
+  "err": 0.1534245642701525,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2761140046296296,
+  "lag4_f1": 0.11704067199629803,
+  "mass": 0.13107392701833995,
+  "blips": 5,
+  "programs": 4,
+  "distinct_used": 3,
+  "rules": 9,
+  "conditions": 16,
+  "edits": 6,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 275,
+  "file_bytes": 381,
+  "cpu_s": 191.5,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.0783179012345679,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 1,
+    "err": 0.09054783950617284,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.10833333333333334,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.1236359126984127,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 4,
+    "err": 0.11550925925925926,
+    "program": 2,
+    "edits": 3
+   },
+   {
+    "phase": 5,
+    "err": 0.2767746913580247,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 6,
+    "err": 0.16161265432098765,
+    "program": 0,
+    "edits": 1
+   },
+   {
+    "phase": 7,
+    "err": 0.27067901234567904,
+    "program": 0,
+    "edits": 1
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 16,
+  "mode": "indep",
+  "seed": 0,
+  "err": 0.14010951602863367,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2761140046296296,
+  "lag4_f1": 0.24329201129251168,
+  "mass": 0.2585554925316695,
+  "blips": 53,
+  "programs": 11,
+  "distinct_used": 11,
+  "rules": 17,
+  "conditions": 28,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 553,
+  "file_bytes": 443,
+  "cpu_s": 185.5,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.04927248677248677,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.04788773148148148,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.0646494708994709,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.0627170138888889,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 4,
+    "err": 0.0667989417989418,
+    "program": 4,
+    "edits": 2
+   },
+   {
+    "phase": 5,
+    "err": 0.08217592592592593,
+    "program": 5,
+    "edits": 2
+   },
+   {
+    "phase": 6,
+    "err": 0.12483465608465609,
+    "program": 6,
+    "edits": 2
+   },
+   {
+    "phase": 7,
+    "err": 0.12367724867724868,
+    "program": 7,
+    "edits": 2
+   },
+   {
+    "phase": 8,
+    "err": 0.16919849537037038,
+    "program": 8,
+    "edits": 3
+   },
+   {
+    "phase": 9,
+    "err": 0.01951058201058201,
+    "program": 9,
+    "edits": 2
+   },
+   {
+    "phase": 10,
+    "err": 0.2858072916666667,
+    "program": 10,
+    "edits": 2
+   },
+   {
+    "phase": 11,
+    "err": 0.2664517195767196,
+    "program": 10,
+    "edits": 2
+   },
+   {
+    "phase": 12,
+    "err": 0.13664641203703703,
+    "program": 10,
+    "edits": 2
+   },
+   {
+    "phase": 13,
+    "err": 0.19014550264550265,
+    "program": 10,
+    "edits": 2
+   },
+   {
+    "phase": 14,
+    "err": 0.26359953703703703,
+    "program": 10,
+    "edits": 2
+   },
+   {
+    "phase": 15,
+    "err": 0.2787698412698413,
+    "program": 10,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 16,
+  "mode": "indep",
+  "seed": 1,
+  "err": 0.14898945689386867,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2761140046296296,
+  "lag4_f1": 0.2064070668169865,
+  "mass": 0.223908111174135,
+  "blips": 51,
+  "programs": 11,
+  "distinct_used": 11,
+  "rules": 15,
+  "conditions": 23,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 553,
+  "file_bytes": 434,
+  "cpu_s": 187.8,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.055638227513227514,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 1,
+    "err": 0.054108796296296294,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.062417328042328045,
+    "program": 2,
+    "edits": 3
+   },
+   {
+    "phase": 3,
+    "err": 0.08933738425925926,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 4,
+    "err": 0.08540013227513228,
+    "program": 4,
+    "edits": 3
+   },
+   {
+    "phase": 5,
+    "err": 0.09288194444444445,
+    "program": 5,
+    "edits": 3
+   },
+   {
+    "phase": 6,
+    "err": 0.16666666666666666,
+    "program": 6,
+    "edits": 3
+   },
+   {
+    "phase": 7,
+    "err": 0.14914021164021163,
+    "program": 7,
+    "edits": 3
+   },
+   {
+    "phase": 8,
+    "err": 0.17896412037037038,
+    "program": 8,
+    "edits": 3
+   },
+   {
+    "phase": 9,
+    "err": 0.01951058201058201,
+    "program": 9,
+    "edits": 3
+   },
+   {
+    "phase": 10,
+    "err": 0.2858072916666667,
+    "program": 10,
+    "edits": 3
+   },
+   {
+    "phase": 11,
+    "err": 0.2664517195767196,
+    "program": 10,
+    "edits": 3
+   },
+   {
+    "phase": 12,
+    "err": 0.13664641203703703,
+    "program": 10,
+    "edits": 3
+   },
+   {
+    "phase": 13,
+    "err": 0.19014550264550265,
+    "program": 10,
+    "edits": 3
+   },
+   {
+    "phase": 14,
+    "err": 0.26359953703703703,
+    "program": 10,
+    "edits": 3
+   },
+   {
+    "phase": 15,
+    "err": 0.2787698412698413,
+    "program": 10,
+    "edits": 3
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 16,
+  "mode": "shared",
+  "seed": 0,
+  "err": 0.14055691721132899,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2761140046296296,
+  "lag4_f1": 0.17874923230503262,
+  "mass": 0.16917186613726604,
+  "blips": 1,
+  "programs": 10,
+  "distinct_used": 9,
+  "rules": 13,
+  "conditions": 23,
+  "edits": 14,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 547,
+  "file_bytes": 484,
+  "cpu_s": 188.2,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.045717592592592594,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.04709201388888889,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.05952380952380952,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.06163194444444445,
+    "program": 3,
+    "edits": 1
+   },
+   {
+    "phase": 4,
+    "err": 0.057539682539682536,
+    "program": 4,
+    "edits": 2
+   },
+   {
+    "phase": 5,
+    "err": 0.07537615740740741,
+    "program": 5,
+    "edits": 1
+   },
+   {
+    "phase": 6,
+    "err": 0.1440972222222222,
+    "program": 6,
+    "edits": 1
+   },
+   {
+    "phase": 7,
+    "err": 0.1271494708994709,
+    "program": 6,
+    "edits": 1
+   },
+   {
+    "phase": 8,
+    "err": 0.18033854166666666,
+    "program": 7,
+    "edits": 2
+   },
+   {
+    "phase": 9,
+    "err": 0.01951058201058201,
+    "program": 8,
+    "edits": 2
+   },
+   {
+    "phase": 10,
+    "err": 0.2858072916666667,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 11,
+    "err": 0.2664517195767196,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 12,
+    "err": 0.13664641203703703,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 13,
+    "err": 0.19014550264550265,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 14,
+    "err": 0.26359953703703703,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 15,
+    "err": 0.2787698412698413,
+    "program": 2,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 16,
+  "mode": "shared",
+  "seed": 1,
+  "err": 0.14968001089324617,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2761140046296296,
+  "lag4_f1": 0.2123230054057074,
+  "mass": 0.21573076195878238,
+  "blips": 19,
+  "programs": 10,
+  "distinct_used": 9,
+  "rules": 13,
+  "conditions": 22,
+  "edits": 13,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 547,
+  "file_bytes": 484,
+  "cpu_s": 195.6,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.040674603174603176,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.06633391203703703,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.07845568783068783,
+    "program": 2,
+    "edits": 1
+   },
+   {
+    "phase": 3,
+    "err": 0.10105613425925926,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 4,
+    "err": 0.09656084656084656,
+    "program": 2,
+    "edits": 1
+   },
+   {
+    "phase": 5,
+    "err": 0.08195891203703703,
+    "program": 4,
+    "edits": 1
+   },
+   {
+    "phase": 6,
+    "err": 0.13268849206349206,
+    "program": 5,
+    "edits": 2
+   },
+   {
+    "phase": 7,
+    "err": 0.1493882275132275,
+    "program": 2,
+    "edits": 1
+   },
+   {
+    "phase": 8,
+    "err": 0.19502314814814814,
+    "program": 6,
+    "edits": 2
+   },
+   {
+    "phase": 9,
+    "err": 0.01951058201058201,
+    "program": 7,
+    "edits": 1
+   },
+   {
+    "phase": 10,
+    "err": 0.2858072916666667,
+    "program": 8,
+    "edits": 0
+   },
+   {
+    "phase": 11,
+    "err": 0.2664517195767196,
+    "program": 8,
+    "edits": 0
+   },
+   {
+    "phase": 12,
+    "err": 0.13664641203703703,
+    "program": 8,
+    "edits": 0
+   },
+   {
+    "phase": 13,
+    "err": 0.19014550264550265,
+    "program": 8,
+    "edits": 0
+   },
+   {
+    "phase": 14,
+    "err": 0.26359953703703703,
+    "program": 8,
+    "edits": 0
+   },
+   {
+    "phase": 15,
+    "err": 0.2787698412698413,
+    "program": 8,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 16,
+  "mode": "reuse",
+  "seed": 0,
+  "err": 0.137765522875817,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2761140046296296,
+  "lag4_f1": 0.2598747438473116,
+  "mass": 0.24224806201550386,
+  "blips": 53,
+  "programs": 8,
+  "distinct_used": 7,
+  "rules": 14,
+  "conditions": 24,
+  "edits": 13,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 547,
+  "file_bytes": 488,
+  "cpu_s": 188.1,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.045717592592592594,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.04709201388888889,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.05952380952380952,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.06380208333333333,
+    "program": 2,
+    "edits": 0
+   },
+   {
+    "phase": 4,
+    "err": 0.05828373015873016,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 5,
+    "err": 0.07219328703703703,
+    "program": 4,
+    "edits": 1
+   },
+   {
+    "phase": 6,
+    "err": 0.1283068783068783,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 7,
+    "err": 0.12210648148148148,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 8,
+    "err": 0.1574074074074074,
+    "program": 5,
+    "edits": 3
+   },
+   {
+    "phase": 9,
+    "err": 0.01951058201058201,
+    "program": 6,
+    "edits": 2
+   },
+   {
+    "phase": 10,
+    "err": 0.2858072916666667,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 11,
+    "err": 0.2664517195767196,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 12,
+    "err": 0.13664641203703703,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 13,
+    "err": 0.19014550264550265,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 14,
+    "err": 0.26359953703703703,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 15,
+    "err": 0.2787698412698413,
+    "program": 0,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "4500:120",
+  "K": 16,
+  "mode": "reuse",
+  "seed": 1,
+  "err": 0.14897973078120136,
+  "hold": 0.1880787037037037,
+  "worst16": 0.2761140046296296,
+  "lag4_f1": 0.20229263221698124,
+  "mass": 0.21327283040272263,
+  "blips": 24,
+  "programs": 9,
+  "distinct_used": 8,
+  "rules": 12,
+  "conditions": 21,
+  "edits": 13,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 547,
+  "file_bytes": 472,
+  "cpu_s": 194.6,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.040674603174603176,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.06633391203703703,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.07845568783068783,
+    "program": 2,
+    "edits": 1
+   },
+   {
+    "phase": 3,
+    "err": 0.1037326388888889,
+    "program": 2,
+    "edits": 1
+   },
+   {
+    "phase": 4,
+    "err": 0.0953207671957672,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 5,
+    "err": 0.08195891203703703,
+    "program": 4,
+    "edits": 1
+   },
+   {
+    "phase": 6,
+    "err": 0.13268849206349206,
+    "program": 5,
+    "edits": 2
+   },
+   {
+    "phase": 7,
+    "err": 0.13814484126984128,
+    "program": 4,
+    "edits": 1
+   },
+   {
+    "phase": 8,
+    "err": 0.19285300925925927,
+    "program": 6,
+    "edits": 2
+   },
+   {
+    "phase": 9,
+    "err": 0.01951058201058201,
+    "program": 7,
+    "edits": 1
+   },
+   {
+    "phase": 10,
+    "err": 0.2858072916666667,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 11,
+    "err": 0.2664517195767196,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 12,
+    "err": 0.13664641203703703,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 13,
+    "err": 0.19014550264550265,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 14,
+    "err": 0.26359953703703703,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 15,
+    "err": 0.2787698412698413,
+    "program": 0,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 1,
+  "mode": "indep",
+  "seed": 0,
+  "err": 0.2815357198202387,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.031755817355854074,
+  "mass": 0.021492630778520788,
+  "blips": 0,
+  "programs": 1,
+  "distinct_used": 1,
+  "rules": 2,
+  "conditions": 2,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 35,
+  "file_bytes": 201,
+  "cpu_s": 307.7,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.2815357198202387,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 1,
+  "mode": "indep",
+  "seed": 1,
+  "err": 0.2815357198202387,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.04008161808010651,
+  "mass": 0.03374857424015387,
+  "blips": 5,
+  "programs": 1,
+  "distinct_used": 1,
+  "rules": 3,
+  "conditions": 4,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 35,
+  "file_bytes": 213,
+  "cpu_s": 314.5,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.2815357198202387,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 4,
+  "mode": "indep",
+  "seed": 0,
+  "err": 0.2817948047419805,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.023405054634497175,
+  "mass": 0.017623509941180417,
+  "blips": 3,
+  "programs": 2,
+  "distinct_used": 2,
+  "rules": 2,
+  "conditions": 2,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 141,
+  "file_bytes": 223,
+  "cpu_s": 370.2,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.16391782407407407,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.22695974576271186,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.3725212191358025,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.362866512345679,
+    "program": 1,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 4,
+  "mode": "indep",
+  "seed": 1,
+  "err": 0.2812766348984968,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.039394169809993655,
+  "mass": 0.042493234629749736,
+  "blips": 48,
+  "programs": 2,
+  "distinct_used": 2,
+  "rules": 3,
+  "conditions": 4,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 141,
+  "file_bytes": 242,
+  "cpu_s": 378.3,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.16185378086419752,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 1,
+    "err": 0.22695974576271186,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.3725212191358025,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 3,
+    "err": 0.362866512345679,
+    "program": 1,
+    "edits": 3
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 4,
+  "mode": "shared",
+  "seed": 0,
+  "err": 0.2815357198202387,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.031755817355854074,
+  "mass": 0.021492630778520788,
+  "blips": 0,
+  "programs": 2,
+  "distinct_used": 1,
+  "rules": 2,
+  "conditions": 2,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 141,
+  "file_bytes": 238,
+  "cpu_s": 376.4,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.1628858024691358,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 1,
+    "err": 0.22695974576271186,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 2,
+    "err": 0.3725212191358025,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.362866512345679,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 4,
+  "mode": "shared",
+  "seed": 1,
+  "err": 0.2815357198202387,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.04008161808010651,
+  "mass": 0.03374857424015387,
+  "blips": 5,
+  "programs": 2,
+  "distinct_used": 1,
+  "rules": 3,
+  "conditions": 4,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 141,
+  "file_bytes": 249,
+  "cpu_s": 387.5,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.1628858024691358,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 1,
+    "err": 0.22695974576271186,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 2,
+    "err": 0.3725212191358025,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.362866512345679,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 4,
+  "mode": "reuse",
+  "seed": 0,
+  "err": 0.2815357198202387,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.031755817355854074,
+  "mass": 0.021492630778520788,
+  "blips": 0,
+  "programs": 2,
+  "distinct_used": 1,
+  "rules": 2,
+  "conditions": 2,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 141,
+  "file_bytes": 238,
+  "cpu_s": 374.5,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.1628858024691358,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 1,
+    "err": 0.22695974576271186,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 2,
+    "err": 0.3725212191358025,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.362866512345679,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 4,
+  "mode": "reuse",
+  "seed": 1,
+  "err": 0.2815357198202387,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.04008161808010651,
+  "mass": 0.03374857424015387,
+  "blips": 5,
+  "programs": 2,
+  "distinct_used": 1,
+  "rules": 3,
+  "conditions": 4,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 141,
+  "file_bytes": 249,
+  "cpu_s": 385.7,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.1628858024691358,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 1,
+    "err": 0.22695974576271186,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 2,
+    "err": 0.3725212191358025,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.362866512345679,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 8,
+  "mode": "indep",
+  "seed": 0,
+  "err": 0.28161804587013795,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.02402033013896486,
+  "mass": 0.018518104354438306,
+  "blips": 0,
+  "programs": 3,
+  "distinct_used": 3,
+  "rules": 2,
+  "conditions": 3,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 281,
+  "file_bytes": 257,
+  "cpu_s": 369.9,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.15675154320987655,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.16967592592592592,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.17916666666666667,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.2764008620689655,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 4,
+    "err": 0.41024305555555557,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 5,
+    "err": 0.33479938271604937,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 6,
+    "err": 0.3302083333333333,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 7,
+    "err": 0.3955246913580247,
+    "program": 2,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 8,
+  "mode": "indep",
+  "seed": 1,
+  "err": 0.28127179218967924,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.030292274997337987,
+  "mass": 0.023796211392659854,
+  "blips": 10,
+  "programs": 3,
+  "distinct_used": 3,
+  "rules": 4,
+  "conditions": 5,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 281,
+  "file_bytes": 274,
+  "cpu_s": 383.2,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.15399305555555556,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 1,
+    "err": 0.16967592592592592,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.17916666666666667,
+    "program": 2,
+    "edits": 3
+   },
+   {
+    "phase": 3,
+    "err": 0.2764008620689655,
+    "program": 2,
+    "edits": 3
+   },
+   {
+    "phase": 4,
+    "err": 0.41024305555555557,
+    "program": 2,
+    "edits": 3
+   },
+   {
+    "phase": 5,
+    "err": 0.33479938271604937,
+    "program": 2,
+    "edits": 3
+   },
+   {
+    "phase": 6,
+    "err": 0.3302083333333333,
+    "program": 2,
+    "edits": 3
+   },
+   {
+    "phase": 7,
+    "err": 0.3955246913580247,
+    "program": 2,
+    "edits": 3
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 8,
+  "mode": "shared",
+  "seed": 0,
+  "err": 0.2815357198202387,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.031755817355854074,
+  "mass": 0.021492630778520788,
+  "blips": 0,
+  "programs": 2,
+  "distinct_used": 1,
+  "rules": 2,
+  "conditions": 2,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 281,
+  "file_bytes": 258,
+  "cpu_s": 376.6,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.15609567901234567,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 1,
+    "err": 0.16967592592592592,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 2,
+    "err": 0.17916666666666667,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.2764008620689655,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 4,
+    "err": 0.41024305555555557,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 5,
+    "err": 0.33479938271604937,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 6,
+    "err": 0.3302083333333333,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 7,
+    "err": 0.3955246913580247,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 8,
+  "mode": "shared",
+  "seed": 1,
+  "err": 0.2815357198202387,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.04008161808010651,
+  "mass": 0.03374857424015387,
+  "blips": 5,
+  "programs": 2,
+  "distinct_used": 1,
+  "rules": 3,
+  "conditions": 4,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 281,
+  "file_bytes": 269,
+  "cpu_s": 388.1,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.15609567901234567,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 1,
+    "err": 0.16967592592592592,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 2,
+    "err": 0.17916666666666667,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.2764008620689655,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 4,
+    "err": 0.41024305555555557,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 5,
+    "err": 0.33479938271604937,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 6,
+    "err": 0.3302083333333333,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 7,
+    "err": 0.3955246913580247,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 8,
+  "mode": "reuse",
+  "seed": 0,
+  "err": 0.2815357198202387,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.031755817355854074,
+  "mass": 0.021492630778520788,
+  "blips": 0,
+  "programs": 2,
+  "distinct_used": 1,
+  "rules": 2,
+  "conditions": 2,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 281,
+  "file_bytes": 258,
+  "cpu_s": 375.1,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.15609567901234567,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 1,
+    "err": 0.16967592592592592,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 2,
+    "err": 0.17916666666666667,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.2764008620689655,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 4,
+    "err": 0.41024305555555557,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 5,
+    "err": 0.33479938271604937,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 6,
+    "err": 0.3302083333333333,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 7,
+    "err": 0.3955246913580247,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 8,
+  "mode": "reuse",
+  "seed": 1,
+  "err": 0.2815357198202387,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.04008161808010651,
+  "mass": 0.03374857424015387,
+  "blips": 5,
+  "programs": 2,
+  "distinct_used": 1,
+  "rules": 3,
+  "conditions": 4,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 281,
+  "file_bytes": 269,
+  "cpu_s": 387.1,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.15609567901234567,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 1,
+    "err": 0.16967592592592592,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 2,
+    "err": 0.17916666666666667,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.2764008620689655,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 4,
+    "err": 0.41024305555555557,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 5,
+    "err": 0.33479938271604937,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 6,
+    "err": 0.3302083333333333,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 7,
+    "err": 0.3955246913580247,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 16,
+  "mode": "indep",
+  "seed": 0,
+  "err": 0.2815938323260499,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.02359001917963067,
+  "mass": 0.018518104354438306,
+  "blips": 0,
+  "programs": 4,
+  "distinct_used": 4,
+  "rules": 3,
+  "conditions": 4,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 563,
+  "file_bytes": 313,
+  "cpu_s": 369.0,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.1423611111111111,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.17075617283950617,
+    "program": 1,
+    "edits": 2
+   },
+   {
+    "phase": 2,
+    "err": 0.16712962962962963,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.17222222222222222,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 4,
+    "err": 0.1734567901234568,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 5,
+    "err": 0.18487654320987654,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 6,
+    "err": 0.2671682098765432,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 7,
+    "err": 0.2862929894179894,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 8,
+    "err": 0.4427854938271605,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 9,
+    "err": 0.3777006172839506,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 10,
+    "err": 0.3277391975308642,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 11,
+    "err": 0.34185956790123456,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 12,
+    "err": 0.32492283950617284,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 13,
+    "err": 0.3354938271604938,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 14,
+    "err": 0.41292438271604937,
+    "program": 3,
+    "edits": 2
+   },
+   {
+    "phase": 15,
+    "err": 0.378125,
+    "program": 3,
+    "edits": 2
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 16,
+  "mode": "indep",
+  "seed": 1,
+  "err": 0.280748779637378,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.02966743747632229,
+  "mass": 0.020776955247914477,
+  "blips": 1,
+  "programs": 4,
+  "distinct_used": 4,
+  "rules": 5,
+  "conditions": 8,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 563,
+  "file_bytes": 330,
+  "cpu_s": 374.2,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.13815586419753087,
+    "program": 0,
+    "edits": 3
+   },
+   {
+    "phase": 1,
+    "err": 0.1648148148148148,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.16381172839506172,
+    "program": 2,
+    "edits": 3
+   },
+   {
+    "phase": 3,
+    "err": 0.17222222222222222,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 4,
+    "err": 0.1734567901234568,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 5,
+    "err": 0.18487654320987654,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 6,
+    "err": 0.2671682098765432,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 7,
+    "err": 0.2862929894179894,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 8,
+    "err": 0.4427854938271605,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 9,
+    "err": 0.3777006172839506,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 10,
+    "err": 0.3277391975308642,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 11,
+    "err": 0.34185956790123456,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 12,
+    "err": 0.32492283950617284,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 13,
+    "err": 0.3354938271604938,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 14,
+    "err": 0.41292438271604937,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 15,
+    "err": 0.378125,
+    "program": 3,
+    "edits": 3
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 16,
+  "mode": "shared",
+  "seed": 0,
+  "err": 0.2815357198202387,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.031755817355854074,
+  "mass": 0.021492630778520788,
+  "blips": 0,
+  "programs": 2,
+  "distinct_used": 1,
+  "rules": 2,
+  "conditions": 2,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 563,
+  "file_bytes": 302,
+  "cpu_s": 373.7,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.14039351851851853,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 1,
+    "err": 0.17179783950617283,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 2,
+    "err": 0.16712962962962963,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.17222222222222222,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 4,
+    "err": 0.1734567901234568,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 5,
+    "err": 0.18487654320987654,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 6,
+    "err": 0.2671682098765432,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 7,
+    "err": 0.2862929894179894,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 8,
+    "err": 0.4427854938271605,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 9,
+    "err": 0.3777006172839506,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 10,
+    "err": 0.3277391975308642,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 11,
+    "err": 0.34185956790123456,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 12,
+    "err": 0.32492283950617284,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 13,
+    "err": 0.3354938271604938,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 14,
+    "err": 0.41292438271604937,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 15,
+    "err": 0.378125,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 16,
+  "mode": "shared",
+  "seed": 1,
+  "err": 0.14724498295366495,
+  "hold": 0.4012692739810941,
+  "worst16": 0.2848307291666667,
+  "lag4_f1": 0.19425169050702135,
+  "mass": 0.30653277570281573,
+  "blips": 349,
+  "programs": 17,
+  "distinct_used": 16,
+  "rules": 40,
+  "conditions": 67,
+  "edits": 47,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 570,
+  "file_bytes": 714,
+  "cpu_s": 388.7,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.130054012345679,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.1525077160493827,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.1498070987654321,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.14054783950617283,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 4,
+    "err": 0.1136574074074074,
+    "program": 4,
+    "edits": 3
+   },
+   {
+    "phase": 5,
+    "err": 0.11577932098765432,
+    "program": 5,
+    "edits": 2
+   },
+   {
+    "phase": 6,
+    "err": 0.1802854938271605,
+    "program": 6,
+    "edits": 3
+   },
+   {
+    "phase": 7,
+    "err": 0.17724867724867724,
+    "program": 7,
+    "edits": 3
+   },
+   {
+    "phase": 8,
+    "err": 0.29085648148148147,
+    "program": 8,
+    "edits": 3
+   },
+   {
+    "phase": 9,
+    "err": 0.16454475308641975,
+    "program": 9,
+    "edits": 4
+   },
+   {
+    "phase": 10,
+    "err": 0.20848765432098765,
+    "program": 10,
+    "edits": 4
+   },
+   {
+    "phase": 11,
+    "err": 0.08993055555555556,
+    "program": 11,
+    "edits": 3
+   },
+   {
+    "phase": 12,
+    "err": 0.11531635802469135,
+    "program": 12,
+    "edits": 3
+   },
+   {
+    "phase": 13,
+    "err": 0.09251543209876543,
+    "program": 13,
+    "edits": 3
+   },
+   {
+    "phase": 14,
+    "err": 0.11743827160493828,
+    "program": 14,
+    "edits": 3
+   },
+   {
+    "phase": 15,
+    "err": 0.1189429012345679,
+    "program": 15,
+    "edits": 3
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 16,
+  "mode": "reuse",
+  "seed": 0,
+  "err": 0.2815357198202387,
+  "hold": 0.4012692739810941,
+  "worst16": 0.4359085648148148,
+  "lag4_f1": 0.031755817355854074,
+  "mass": 0.021492630778520788,
+  "blips": 0,
+  "programs": 2,
+  "distinct_used": 1,
+  "rules": 2,
+  "conditions": 2,
+  "edits": 0,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 563,
+  "file_bytes": 302,
+  "cpu_s": 376.9,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.14039351851851853,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 1,
+    "err": 0.17179783950617283,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 2,
+    "err": 0.16712962962962963,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 3,
+    "err": 0.17222222222222222,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 4,
+    "err": 0.1734567901234568,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 5,
+    "err": 0.18487654320987654,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 6,
+    "err": 0.2671682098765432,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 7,
+    "err": 0.2862929894179894,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 8,
+    "err": 0.4427854938271605,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 9,
+    "err": 0.3777006172839506,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 10,
+    "err": 0.3277391975308642,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 11,
+    "err": 0.34185956790123456,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 12,
+    "err": 0.32492283950617284,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 13,
+    "err": 0.3354938271604938,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 14,
+    "err": 0.41292438271604937,
+    "program": 0,
+    "edits": 0
+   },
+   {
+    "phase": 15,
+    "err": 0.378125,
+    "program": 0,
+    "edits": 0
+   }
+  ]
+ },
+ {
+  "task": "1760:240",
+  "K": 16,
+  "mode": "reuse",
+  "seed": 1,
+  "err": 0.14881402061056873,
+  "hold": 0.4012692739810941,
+  "worst16": 0.2472511574074074,
+  "lag4_f1": 0.25287376108147896,
+  "mass": 0.417261199203811,
+  "blips": 1241,
+  "programs": 16,
+  "distinct_used": 15,
+  "rules": 40,
+  "conditions": 65,
+  "edits": 42,
+  "h0_bytes_zlib": 0,
+  "schedule_bytes": 569,
+  "file_bytes": 704,
+  "cpu_s": 387.6,
+  "phases": [
+   {
+    "phase": 0,
+    "err": 0.130054012345679,
+    "program": 0,
+    "edits": 2
+   },
+   {
+    "phase": 1,
+    "err": 0.1525077160493827,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 2,
+    "err": 0.1498070987654321,
+    "program": 2,
+    "edits": 2
+   },
+   {
+    "phase": 3,
+    "err": 0.14054783950617283,
+    "program": 3,
+    "edits": 3
+   },
+   {
+    "phase": 4,
+    "err": 0.1136574074074074,
+    "program": 4,
+    "edits": 3
+   },
+   {
+    "phase": 5,
+    "err": 0.11751543209876543,
+    "program": 1,
+    "edits": 3
+   },
+   {
+    "phase": 6,
+    "err": 0.18032407407407408,
+    "program": 5,
+    "edits": 3
+   },
+   {
+    "phase": 7,
+    "err": 0.17881944444444445,
+    "program": 6,
+    "edits": 2
+   },
+   {
+    "phase": 8,
+    "err": 0.252391975308642,
+    "program": 7,
+    "edits": 3
+   },
+   {
+    "phase": 9,
+    "err": 0.16319444444444445,
+    "program": 8,
+    "edits": 3
+   },
+   {
+    "phase": 10,
+    "err": 0.18013117283950617,
+    "program": 9,
+    "edits": 3
+   },
+   {
+    "phase": 11,
+    "err": 0.09124228395061729,
+    "program": 10,
+    "edits": 3
+   },
+   {
+    "phase": 12,
+    "err": 0.15100308641975307,
+    "program": 11,
+    "edits": 3
+   },
+   {
+    "phase": 13,
+    "err": 0.11234567901234568,
+    "program": 12,
+    "edits": 3
+   },
+   {
+    "phase": 14,
+    "err": 0.1443672839506173,
+    "program": 13,
+    "edits": 3
+   },
+   {
+    "phase": 15,
+    "err": 0.12511574074074075,
+    "program": 14,
+    "edits": 3
+   }
+  ]
+ }
+]

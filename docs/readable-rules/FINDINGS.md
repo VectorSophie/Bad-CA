@@ -260,3 +260,179 @@ window only; next-clip numbers are reported, never used for selection.
 Still the blind 16-frame rule on 4500–4515 (§3a): `R0: if u == 1 and n8 >= 4 -> v=1; R1: if n8 <= 3 and E <= 1 ->
 v=0; R2: if E >= 3 -> v=0` (5 conditions, error 0.047 vs hold 0.090), replayable in the UI rule lab. Nothing in this
 round beat it.
+
+## 9. Synthesis and scaling (third round, 2026-11-12)
+Script: `experiments/rr_scale.py`; results in `runs/readable_rules/scale/` (`a1_controls.json`, `a1_badapple.json`,
+`a2.json`, `c1.json`, `c1/`, `ac.json`, `ac/`); logs `runs/readable_rules/scale_*.log`. All CPU, no GPU.
+"Seed" below always means the **learned initial hidden state** (k bits per cell at frame 0), stored in the export
+and counted in bits; it never contains frames. Errors are pixel error over the replayed window; hold = repeat frame 0.
+
+### 9a. A1: learned initial hidden state (SAT)
+**Controls (Gate 1).** Generators `sprout` (k = 1: `h0 == 1 -> on; v == 0 and n8 >= 3 -> on`) and `timer` (k = 2).
+Trained jointly on 4 runs (32×32, T = 12), tested held-out on 3 new runs (16×16, T = 10) with the whole rule pinned
+and only the seed free.
+- Coarse seeds (const, tiles, blocks) are UNSAT on both generators: they need a per-cell seed, as generated.
+- `sprout`, `tot` family: held-out 3/3 exact, with and without Occam MaxSAT. Occam (minimise non-keep entries and
+  seed ones) raises table agreement with the generator from 0.57 to 0.87 and cuts seed ones from 264 to 160.
+- `sprout`, `full` family: fails held-out (unseen entries default to keep and are wrong).
+- `timer`: fails held-out in every setting. A1 recovers a seed-driven rule only when its family is small.
+
+**Bad Apple ladder.** translate 1221 and contour 4500; crops 8×8, 16×16 (most-changing area) and the full 48×36 frame;
+`tot`/`full`; k = 1–3; S = 1, 2, 4; T = 2, 3, 4, 6, 8, 12, 16; seed representations from 1 bit (const) through
+tiles and blocks to one value per cell; the smallest SAT representation is kept per T; Occam 20 s.
+
+| status | count | meaning |
+|---|---|---|
+| SAT | 230 | exact on all T frames |
+| UNSAT | 342 | proof: no rule of this family and seed representation exists |
+| SIZE | 369 | encoding above the 6 M clause cap (mostly S ≥ 2 on 16×16 and the full frame) |
+| TIMEOUT | 13 ladders | see the defect below; no row recorded |
+
+**Defect (recorded, not hidden).** The 30 s SAT limit never fired: pysat's CaDiCaL 1.9.5 does not support
+interrupts (46 `NotImplementedError` in the log). One solve ran 14,545 s. The meter killed the parent at 2 h, and the
+pool workers ran on unmetered for about 4.4 h until stopped by hand. Thirteen of 108 ladders (mostly 8×8 at S = 4)
+never finished. They are counted as TIMEOUT. The other 95 ladders finished; their UNSAT and SAT results are unaffected,
+since SAT/UNSAT does not depend on the solver. Fixes:
+- `solve` now uses Glucose4, which honours the timeout (checked: 5 s → TIMEOUT).
+- `c9_meter.py` now kills the whole process group.
+
+**What a learned seed buys:**
+- **Feasibility:**
+  - every zero-hidden setting was UNSAT (§8b);
+  - with a seed, all three crop sizes reach SAT;
+  - 8×8 and 16×16 contour are exact to T = 16;
+  - 8×8 translate is exact to T = 16; 16×16 translate to T = 8; the full frame to T = 12 (contour) and T = 4 (translate).
+- **Smallest seed per length:**
+  - 8×8 crops: 1 bit (const, S = 4) up to T = 12. At T = 16: contour 4 bits (tile2, k1 S2), translate 9 bits (block3).
+  - Full frame: one value per cell (3,456–5,184 bits) from T = 3; T = 2 needs 12 bits (block12).
+- **But the information moves into the table:**
+
+  | fit | seed bits | table bits | total | clip size |
+  |---|---|---|---|---|
+  | 8×8 contour, T = 16 | 4 | 545 entries × 2 bits = 1,090 | ≈ 1,094 | 960 raw |
+  | full-frame contour, T = 12 | 5,184 | 630 × 4 = 2,520 | ≈ 7,700 | 19,008 raw; 3,056 zlib |
+
+  The table bits are `entries_used × (k+1)`. Every exact fit costs as much information as the clip or more. These are
+  look-up tables, not readable rules.
+- **Out of window:**
+  - only 46 of 224 SAT fits beat hold on the frames after their training window;
+  - example: full-frame T = 12, 0.083 vs hold 0.035;
+  - zeroing the seed breaks most fits (e.g. 0.143 for full-frame T = 12; 0.44–0.50 for the 8×8 T = 16 fits).
+
+  The seed carries the replay, not the rule.
+
+### 9b. A2: two-stage search vs rollout-only
+- **Methods:**
+  - `rollout_only`;
+  - two-stage: 4 one-step climbs, pick by a short rollout, then refine with one of:
+    - `full`: rollout error;
+    - `staged`: short then full;
+    - `mixed`.
+- **Setup:** 4,000 evaluations; 3 seeds.
+- **Windows:** separate search / select / final windows, no overlap. The final window is never used for selection.
+  No library rules enter blind results.
+
+| task | result |
+|---|---|
+| Life (B3/S23 from empty) | `staged` exact in 3/3 seeds and exact held-out; `rollout_only`, `full`, `mixed` stay at 0.233 (the §8a plateau) |
+| shift | all methods exact |
+| Bad Apple, 6 starts × 16/32 frames, training | err/hold 0.44–0.65 for every method; no clear winner |
+| Bad Apple, final unseen window, 16 frames | beats hold: `rollout_only` 0/6, `full` 1/6, `staged` 0/6, `mixed` 0/6; mean err 0.126–0.141 vs hold 0.107; lag-4 F1 ≤ 0.28 |
+| Bad Apple, final unseen window, 32 frames | 0–1 of 6 beat hold for every method; err 0.20–0.25 vs hold 0.111 |
+
+- **Life:** the Life problem is the deceptive rollout objective, and `staged` (one-step first) fixes it.
+- **Bad Apple:** a different problem shows up. Training fits are similar for every method, and none transfers to
+  the next unseen window. Search is not the bottleneck there; generalisation is.
+- **Adopted for C1/AC:** `staged`.
+
+### 9c. C1: shared phased rules (training window, state carried across phases, no resets)
+- **Phases:** K equal-length phases with an external schedule.
+- **Modes:**
+  - `indep`: one program per phase;
+  - `shared`: base + edits, 0.002 penalty per edit;
+  - `reuse`: a phase may reuse an earlier program if within 0.003.
+- **Setup:** 2 seeds.
+- **Table columns:** error (seed 0 / seed 1); distinct programs; conditions; file bytes including the schedule.
+- **Schedule bytes:** 35 (K = 1), 137–141 (K = 4), 275–281 (K = 8), 547–563 (K = 16).
+
+| task (hold) | K = 1 | K = 4 | K = 8 | K = 16 |
+|---|---|---|---|---|
+| 1221:120 (0.552) | 0.166, 1 prog, 2 cond | indep 0.101/0.107 | 0.100 | indep 0.080, 8 progs, 17–18 cond, 424–428 B; **reuse 0.084/0.080, 5–6 progs, 8–12 cond, 390–450 B** |
+| 4500:120 (0.188) | 0.146/0.141 | 0.128–0.140 | 0.152–0.165 (worse than K = 4) | 0.138–0.150, 7–11 progs, 21–28 cond |
+| 1760:240 (0.401) | 0.282 | 0.282 | 0.282 | 0.282 in 5 of 6 runs; seed 1 shared/reuse 0.147/0.149 with 15–16 progs, 65–67 cond, 704–714 B |
+
+- **Worst 16-frame window:**
+  - 1221:120 K = 16: 0.193;
+  - 1760:240 at 0.282: 0.436, a collapse with lag-4 F1 0.03 (the rule kills motion and the phases cannot recover it).
+- **Lag-4 F1:** best 0.37–0.39 (1221:120 K = 16); 4500:120 ≤ 0.26.
+- **Shared/reuse vs independent:**
+  - same error;
+  - fewer distinct programs and conditions on 1221;
+  - no gain on 4500.
+- **Simplification:** where claimed, it is net of the schedule. 1221:120 K = 16 reuse is 390 B in total against 424 B
+  independent.
+- **Caveats:**
+  - all C1 numbers are training-window numbers;
+  - a phased rule with an external schedule has no meaning on an unseen clip, so none is reported;
+  - one of the two 1760:240 runs found a working solution and the other collapsed (search variance).
+
+### 9d. AC: joint rule + seed (training window)
+- **Seed:** learned, 6×6 blocks, k = 1 (48 bits).
+- **Order:** fixed + zero; fixed + learned; phased K = 8 + zero; phased K = 8 + learned.
+- **Setup:** 2 seeds.
+- **"zeroed":** the same export replayed with the seed set to 0.
+
+| task (hold) | fixed, zero | fixed, learned (zeroed) | K = 8, zero | K = 8, learned (zeroed) |
+|---|---|---|---|---|
+| 1221:60 (0.381) | 0.331/0.330 | 0.330/0.242 (0.331/0.245) | 0.118/0.119, F1 0.42–0.44 | 0.118/0.115 (0.125/0.115) |
+| 4500:56 (0.183) | 0.133/**0.091** | 0.097/0.129 (0.159/0.183) | 0.072/0.072 | 0.065/0.074 (0.098/0.101) |
+| 1760:120 (0.319) | 0.194/0.195 | 0.195/0.191 (0.195/0.195) | 0.194/0.140 | 0.195/0.132 (0.195/0.145) |
+
+- **Phasing:** K = 8 cuts error by 0.06–0.21 on 1221 and 4500.
+- **The 48-bit seed:**
+  - changes error by ≤ 0.01 when phased;
+  - on 4500 it matters: zeroing it costs 0.03–0.06;
+  - but there it does not beat the best zero-seed fixed rule.
+- **Simplicity:** phased rules cost 7–40 conditions and 270 B of schedule.
+- **No result beats its zero-seed counterpart by more than seed-run variance**, except 1221:60 fixed seed 1
+  (0.242 vs 0.33). There the seed-zeroed replay is still 0.245, so the gain came from the different rule search,
+  not the seed.
+
+### 9e. Gates
+| gate | status |
+|---|---|
+| 1. synthetic discovery, held-out | partly: Life (`staged`), shift, `sprout` pass; `timer` fails |
+| 2. 16–32 frames, beating baselines with real motion | training windows yes; **unseen windows no** (A2: 0–1 of 6 beat hold) |
+| 3. 60–120 frames | 1221:60/120 and 4500:56 phased beat hold clearly (training); 4500:120 barely |
+| 4. 240+ frames, one export | 1 of 2 seeds (0.147 vs hold 0.401, 16 programs, 67 conditions) |
+| 5. whole song | not started: Gate 2 fails on unseen windows and Gate 4 is one seed |
+
+For comparison: the Neural CA replays the whole song at 0.0152.
+
+### 9f. Best readable rules from this round
+- **One fixed rule, no seed, no schedule:** 4500:56, 56 frames, error 0.091 vs hold 0.183, lag-4 F1 0.15
+  (`runs/readable_rules/scale/ac/4500_56_K1_zero_s1.rule.json`). Five rules, 8 conditions, k = 1, S = 2:
+
+  ```
+  R0: if S >= 2 and m0 == 4 -> v=1, h=1
+  R1: if W >= 3 and d >= 1  -> v=1, h=0
+  R2: if N == 1             -> v=0, h=1
+  R3: if n8 <= 2            -> v=0, h=0
+  R4: if S <= 2 and W >= 2  -> v=1, h=1
+  ```
+
+  It covers 3.5× the frames of the §8e rule at about double the error. Training window only.
+- **Phased:** 1221:120 K = 16 reuse, 0.080–0.084 vs hold 0.552, 5–6 distinct programs, 8–12 conditions, 547 B
+  schedule. It is in the UI as `shared_rules_reused_frames_1221-1340`.
+
+### 9g. Cost of this round
+| method | CPU core-h |
+|---|---|
+| A1 controls | 0.12 |
+| A2 | 0.86 |
+| C1 | 4.22 |
+| AC | 1.11 |
+| A1 Bad Apple | 48.4–59.4 (59.4 booked; see the defect in 9a) |
+| **this round** | **≤ 65.7** |
+
+GPU: 0.

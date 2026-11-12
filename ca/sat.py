@@ -12,7 +12,9 @@ import numpy as np
 
 
 def encode(frames, taps, channels, steps_per_frame=1, boundary=0, hidden_init=0, sink=None):
-    """Returns (clauses, L, nvars). With sink=callable, each clause is passed to it instead of
+    """hidden_init: a constant bit, or a function (y, x) -> key making the initial hidden bits free variables shared by
+    every cell with the same key (per channel), e.g. lambda y, x: (y // 4, x // 4) for a 4x4-block seed. Read the
+    chosen bits back from X[("h0", c, key)]. Returns (clauses, L, nvars). With sink=callable, each clause is passed to it instead of
     being stored (clauses is then the clause count) -- long clips do not fit as Python lists."""
     e = Encoder(taps, channels, steps_per_frame, boundary, hidden_init, sink)
     e.extend(frames)
@@ -45,7 +47,11 @@ class Encoder:
             if self.boundary == "wrap": y, x = y % H, x % W
             else: return ("c", self.boundary)
         if c == 0 and g % S == 0: return ("c", int(frames[g // S, y, x]))
-        if c > 0 and g == 0: return ("c", self.hidden_init)
+        if c > 0 and g == 0:
+            if not callable(self.hidden_init): return ("c", self.hidden_init)
+            key = ("h0", c, self.hidden_init(y, x))   # learned start: cells mapped to the same key share one free bit
+            if key not in self.X: self.X[key] = self._new()
+            return ("v", self.X[key])
         if (g, c, y, x) not in self.X: self.X[g, c, y, x] = self._new()
         return ("v", self.X[g, c, y, x])
 

@@ -1,0 +1,498 @@
+[
+ {
+  "control": "sprout",
+  "k": 1,
+  "family": "tot",
+  "occam_s": 0,
+  "rep": "zero",
+  "train_runs": 4,
+  "seed_bits": 0,
+  "status": "UNSAT",
+  "clauses": 259840,
+  "encode_cpu_s": 0.6,
+  "solve_wall_s": 0.07
+ },
+ {
+  "control": "sprout",
+  "k": 1,
+  "family": "tot",
+  "occam_s": 0,
+  "rep": "const",
+  "train_runs": 4,
+  "seed_bits": 4,
+  "status": "UNSAT",
+  "clauses": 272128,
+  "encode_cpu_s": 0.6,
+  "solve_wall_s": 0.12
+ },
+ {
+  "control": "sprout",
+  "k": 1,
+  "family": "tot",
+  "occam_s": 0,
+  "rep": "cell",
+  "train_runs": 4,
+  "seed_bits": 4096,
+  "status": "SAT",
+  "clauses": 272128,
+  "encode_cpu_s": 0.6,
+  "solve_wall_s": 0.11,
+  "exact": true,
+  "entries_used": 251,
+  "entries_not_keep": 102,
+  "seed_ones": 264,
+  "occam": null,
+  "tot_entries_used": 42,
+  "agrees_with_generator_on_used_entries": 0.5737051792828686,
+  "seed_bytes_zlib": 252,
+  "held_out": [
+   {
+    "seed": 1,
+    "status": "SAT"
+   },
+   {
+    "seed": 2,
+    "status": "SAT"
+   },
+   {
+    "seed": 3,
+    "status": "SAT"
+   }
+  ]
+ },
+ {
+  "control": "sprout",
+  "k": 1,
+  "family": "full",
+  "occam_s": 0,
+  "rep": "zero",
+  "train_runs": 4,
+  "seed_bits": 0,
+  "status": "UNSAT",
+  "clauses": 258048,
+  "encode_cpu_s": 0.6,
+  "solve_wall_s": 0.07
+ },
+ {
+  "control": "sprout",
+  "k": 1,
+  "family": "full",
+  "occam_s": 0,
+  "rep": "const",
+  "train_runs": 4,
+  "seed_bits": 4,
+  "status": "UNSAT",
+  "clauses": 270336,
+  "encode_cpu_s": 0.6,
+  "solve_wall_s": 0.1
+ },
+ {
+  "control": "sprout",
+  "k": 1,
+  "family": "full",
+  "occam_s": 0,
+  "rep": "cell",
+  "train_runs": 4,
+  "seed_bits": 4096,
+  "status": "SAT",
+  "clauses": 270336,
+  "encode_cpu_s": 0.6,
+  "solve_wall_s": 0.11,
+  "exact": true,
+  "entries_used": 304,
+  "entries_not_keep": 154,
+  "seed_ones": 323,
+  "occam": null,
+  "agrees_with_generator_on_used_entries": 0.46381578947368424,
+  "seed_bytes_zlib": 259,
+  "held_out": [
+   {
+    "seed": 1,
+    "status": "UNSAT"
+   },
+   {
+    "seed": 2,
+    "status": "UNSAT"
+   },
+   {
+    "seed": 3,
+    "status": "UNSAT"
+   }
+  ]
+ },
+ {
+  "control": "sprout",
+  "k": 1,
+  "family": "tot",
+  "occam_s": 120,
+  "rep": "zero",
+  "train_runs": 4,
+  "seed_bits": 0,
+  "status": "UNSAT",
+  "clauses": 259840,
+  "encode_cpu_s": 0.6,
+  "solve_wall_s": 0.07
+ },
+ {
+  "control": "sprout",
+  "k": 1,
+  "family": "tot",
+  "occam_s": 120,
+  "rep": "const",
+  "train_runs": 4,
+  "seed_bits": 4,
+  "status": "UNSAT",
+  "clauses": 272128,
+  "encode_cpu_s": 0.6,
+  "solve_wall_s": 0.1
+ },
+ {
+  "control": "sprout",
+  "k": 1,
+  "family": "tot",
+  "occam_s": 120,
+  "rep": "cell",
+  "train_runs": 4,
+  "seed_bits": 4096,
+  "status": "SAT",
+  "clauses": 272128,
+  "encode_cpu_s": 0.6,
+  "solve_wall_s": 1.29,
+  "exact": true,
+  "entries_used": 285,
+  "entries_not_keep": 96,
+  "seed_ones": 160,
+  "occam": {
+   "cost": 288,
+   "optimal": true
+  },
+  "tot_entries_used": 50,
+  "agrees_with_generator_on_used_entries": 0.868421052631579,
+  "seed_bytes_zlib": 205,
+  "held_out": [
+   {
+    "seed": 1,
+    "status": "SAT"
+   },
+   {
+    "seed": 2,
+    "status": "SAT"
+   },
+   {
+    "seed": 3,
+    "status": "SAT"
+   }
+  ]
+ },
+ {
+  "control": "sprout",
+  "k": 1,
+  "family": "full",
+  "occam_s": 120,
+  "rep": "zero",
+  "train_runs": 4,
+  "seed_bits": 0,
+  "status": "UNSAT",
+  "clauses": 258048,
+  "encode_cpu_s": 0.6,
+  "solve_wall_s": 0.07
+ },
+ {
+  "control": "sprout",
+  "k": 1,
+  "family": "full",
+  "occam_s": 120,
+  "rep": "const",
+  "train_runs": 4,
+  "seed_bits": 4,
+  "status": "UNSAT",
+  "clauses": 270336,
+  "encode_cpu_s": 0.6,
+  "solve_wall_s": 0.1
+ },
+ {
+  "control": "sprout",
+  "k": 1,
+  "family": "full",
+  "occam_s": 120,
+  "rep": "cell",
+  "train_runs": 4,
+  "seed_bits": 4096,
+  "status": "SAT",
+  "clauses": 270336,
+  "encode_cpu_s": 0.6,
+  "solve_wall_s": 1.22,
+  "exact": true,
+  "entries_used": 285,
+  "entries_not_keep": 96,
+  "seed_ones": 160,
+  "occam": {
+   "cost": 256,
+   "optimal": true
+  },
+  "agrees_with_generator_on_used_entries": 0.868421052631579,
+  "seed_bytes_zlib": 205,
+  "held_out": [
+   {
+    "seed": 1,
+    "status": "UNSAT"
+   },
+   {
+    "seed": 2,
+    "status": "UNSAT"
+   },
+   {
+    "seed": 3,
+    "status": "UNSAT"
+   }
+  ]
+ },
+ {
+  "control": "timer",
+  "k": 2,
+  "family": "tot",
+  "occam_s": 0,
+  "rep": "zero",
+  "train_runs": 4,
+  "seed_bits": 0,
+  "status": "UNSAT",
+  "clauses": 842068,
+  "encode_cpu_s": 1.1,
+  "solve_wall_s": 0.22
+ },
+ {
+  "control": "timer",
+  "k": 2,
+  "family": "tot",
+  "occam_s": 0,
+  "rep": "const",
+  "train_runs": 4,
+  "seed_bits": 8,
+  "status": "UNSAT",
+  "clauses": 903544,
+  "encode_cpu_s": 1.1,
+  "solve_wall_s": 0.37
+ },
+ {
+  "control": "timer",
+  "k": 2,
+  "family": "tot",
+  "occam_s": 0,
+  "rep": "cell",
+  "train_runs": 4,
+  "seed_bits": 8192,
+  "status": "SAT",
+  "clauses": 903544,
+  "encode_cpu_s": 1.1,
+  "solve_wall_s": 0.46,
+  "exact": true,
+  "entries_used": 151,
+  "entries_not_keep": 51,
+  "seed_ones": 7859,
+  "occam": null,
+  "tot_entries_used": 96,
+  "agrees_with_generator_on_used_entries": 0.5033112582781457,
+  "seed_bytes_zlib": 377,
+  "held_out": [
+   {
+    "seed": 1,
+    "status": "UNSAT"
+   },
+   {
+    "seed": 2,
+    "status": "UNSAT"
+   },
+   {
+    "seed": 3,
+    "status": "SAT"
+   }
+  ]
+ },
+ {
+  "control": "timer",
+  "k": 2,
+  "family": "full",
+  "occam_s": 0,
+  "rep": "zero",
+  "train_runs": 4,
+  "seed_bits": 0,
+  "status": "UNSAT",
+  "clauses": 839680,
+  "encode_cpu_s": 1.1,
+  "solve_wall_s": 0.22
+ },
+ {
+  "control": "timer",
+  "k": 2,
+  "family": "full",
+  "occam_s": 0,
+  "rep": "const",
+  "train_runs": 4,
+  "seed_bits": 8,
+  "status": "UNSAT",
+  "clauses": 901120,
+  "encode_cpu_s": 1.1,
+  "solve_wall_s": 0.37
+ },
+ {
+  "control": "timer",
+  "k": 2,
+  "family": "full",
+  "occam_s": 0,
+  "rep": "cell",
+  "train_runs": 4,
+  "seed_bits": 8192,
+  "status": "SAT",
+  "clauses": 901120,
+  "encode_cpu_s": 1.1,
+  "solve_wall_s": 2.5,
+  "exact": true,
+  "entries_used": 151,
+  "entries_not_keep": 49,
+  "seed_ones": 346,
+  "occam": null,
+  "agrees_with_generator_on_used_entries": 0.8653421633554084,
+  "seed_bytes_zlib": 383,
+  "held_out": [
+   {
+    "seed": 1,
+    "status": "UNSAT"
+   },
+   {
+    "seed": 2,
+    "status": "UNSAT"
+   },
+   {
+    "seed": 3,
+    "status": "UNSAT"
+   }
+  ]
+ },
+ {
+  "control": "timer",
+  "k": 2,
+  "family": "tot",
+  "occam_s": 120,
+  "rep": "zero",
+  "train_runs": 4,
+  "seed_bits": 0,
+  "status": "UNSAT",
+  "clauses": 842068,
+  "encode_cpu_s": 1.1,
+  "solve_wall_s": 0.23
+ },
+ {
+  "control": "timer",
+  "k": 2,
+  "family": "tot",
+  "occam_s": 120,
+  "rep": "const",
+  "train_runs": 4,
+  "seed_bits": 8,
+  "status": "UNSAT",
+  "clauses": 903544,
+  "encode_cpu_s": 1.2,
+  "solve_wall_s": 0.37
+ },
+ {
+  "control": "timer",
+  "k": 2,
+  "family": "tot",
+  "occam_s": 120,
+  "rep": "cell",
+  "train_runs": 4,
+  "seed_bits": 8192,
+  "status": "SAT",
+  "clauses": 903544,
+  "encode_cpu_s": 1.1,
+  "solve_wall_s": 37.62,
+  "exact": true,
+  "entries_used": 153,
+  "entries_not_keep": 49,
+  "seed_ones": 340,
+  "occam": {
+   "cost": 513,
+   "optimal": true
+  },
+  "tot_entries_used": 108,
+  "agrees_with_generator_on_used_entries": 0.8322440087145969,
+  "seed_bytes_zlib": 379,
+  "held_out": [
+   {
+    "seed": 1,
+    "status": "UNSAT"
+   },
+   {
+    "seed": 2,
+    "status": "UNSAT"
+   },
+   {
+    "seed": 3,
+    "status": "UNSAT"
+   }
+  ]
+ },
+ {
+  "control": "timer",
+  "k": 2,
+  "family": "full",
+  "occam_s": 120,
+  "rep": "zero",
+  "train_runs": 4,
+  "seed_bits": 0,
+  "status": "UNSAT",
+  "clauses": 839680,
+  "encode_cpu_s": 1.1,
+  "solve_wall_s": 0.22
+ },
+ {
+  "control": "timer",
+  "k": 2,
+  "family": "full",
+  "occam_s": 120,
+  "rep": "const",
+  "train_runs": 4,
+  "seed_bits": 8,
+  "status": "UNSAT",
+  "clauses": 901120,
+  "encode_cpu_s": 1.1,
+  "solve_wall_s": 0.37
+ },
+ {
+  "control": "timer",
+  "k": 2,
+  "family": "full",
+  "occam_s": 120,
+  "rep": "cell",
+  "train_runs": 4,
+  "seed_bits": 8192,
+  "status": "SAT",
+  "clauses": 901120,
+  "encode_cpu_s": 1.2,
+  "solve_wall_s": 38.8,
+  "exact": true,
+  "entries_used": 155,
+  "entries_not_keep": 43,
+  "seed_ones": 323,
+  "occam": {
+   "cost": 382,
+   "optimal": true
+  },
+  "agrees_with_generator_on_used_entries": 0.8172043010752689,
+  "seed_bytes_zlib": 374,
+  "held_out": [
+   {
+    "seed": 1,
+    "status": "UNSAT"
+   },
+   {
+    "seed": 2,
+    "status": "UNSAT"
+   },
+   {
+    "seed": 3,
+    "status": "UNSAT"
+   }
+  ]
+ }
+]

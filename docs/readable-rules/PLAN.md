@@ -58,3 +58,16 @@ This re-scoped the track without starting a new campaign. The changes:
 |---|---|---|---|
 | GPU | 24 GPU-h | 3 GPU-h | **0** (everything ran on CPU) |
 | CPU | 64 core-h | 8 core-h | **1.92 core-h** (`runs/readable_rules/cpu_ledger.jsonl`, per-process CPU time) |
+
+### Budget, third round (caps set by the 2026-11-12 brief; Campaign 13 is separate)
+| | cap | first allotment (A1/A2/C1) | used |
+|---|---|---|---|
+| CPU | 128 core-h (includes the 1.92 above) | 24 core-h | **≤ 67.6 core-h** (1.92 earlier + ≤ 65.7 this round) |
+| GPU | 12 GPU-h | – | **0** |
+
+- **A1 overrun:**
+  - A1 alone used 48.4–59.4 core-h, above the 24 core-h first allotment;
+  - cause: the solver timeout did not work, and the meter left pool workers running (FINDINGS §9a);
+  - the ledger keeps the original `rs_a1` line (0.1 s, wrong) and adds a correction line with the measured orphan time;
+  - the upper bound is booked.
+- **Remaining:** ≥ 60 CPU core-h and 12 GPU-h. Nothing more is spent until the next step is chosen (DECISIONS D8).

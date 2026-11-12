@@ -64,3 +64,32 @@ A state-driven CA (mode switches from cell state instead of a timeline) stays a 
   - H3: Bad Apple's motion is locally lawful only within scenes, so a per-scene rule list is the smallest honest
     readable model.
 
+
+**D8. Third round (2026-11-12): next algorithm, and why the whole song waits** (FINDINGS §9).
+- **Adopted:** one executor and one export (`dlrule-v2`, base + edits, `h0` in the file).
+  - **Search:** staged two-stage search. One-step candidates are chosen by a short rollout, then refined short → full.
+    It is the only search method that recovers Life, and it is no worse elsewhere.
+  - **Phasing:** shared/reused phased rules, preferred over independent phases when error is equal, since they cost
+    fewer distinct programs at the same error.
+  - **Applies to:** C1, AC and any later long run.
+- **Learned seeds (A1):** kept as a measured option, not the main lever.
+  - They turn zero-hidden UNSAT into SAT, but exact fits store about as many bits (seed + table) as the clip itself,
+    and replay worse than hold out of window.
+  - A 48-bit block seed changes phased error by ≤ 0.01.
+  - Every future result reports seed bits and the seed-zeroed error.
+- **Path B:** stays on hold, as the brief says.
+- **Not started, by the gates (§9e):** no 240+-frame push beyond the single C1 seed, no whole song.
+  - Gate 2 fails on unseen windows: no method beats hold on the next clip.
+  - Gate 4 was reached by 1 of 2 seeds, with 16 programs.
+  - A whole-song readable export would be about 110 phases of fitted programs, i.e. a compressed schedule of local
+    patches. The brief's promotion bar ("replaces the Neural CA on top") is not close. The best phased error is
+    0.080 on 120 frames; the Neural CA reaches 0.0152 on the whole song.
+- **Remaining hypotheses (open):**
+  - **H2 (D7):** radius 2 with S = 2 is not excluded by the light cone. Still untested; it needs a radius-2 SAT encoder.
+  - **H4:** generalisation, not search, limits Bad Apple. Rules fitted on one window fail the next because motion
+    there is a different local law (scene content), not because the search is weak. Test: fit on window A and
+    evaluate on window B within the same scene and across a cut.
+  - **H5:** phase boundaries at detected cuts and wipes (instead of equal splits) cut the number of phases needed for
+    240 frames. Cheap to test with `fit_clip`.
+- **Budget rule:** after the A1 overrun, every pool run sets a per-solve timeout that works, and the meter kills the
+  process group. No new budget was added.

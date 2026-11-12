@@ -17,11 +17,11 @@ if __name__ == "__main__":
     env = dict(os.environ, OMP_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1", MKL_NUM_THREADS="1", XLA_FLAGS="--xla_cpu_multi_thread_eigen=false intra_op_parallelism_threads=1")
     if cmd[0] != "prlimit":
         cmd = ["prlimit", f"--as={16 * 2 ** 30}"] + cmd
-    w0 = time.time(); p = subprocess.Popen(cmd, env=env); killed = False
+    w0 = time.time(); p = subprocess.Popen(cmd, env=env, start_new_session=True); killed = False
     while True:
         pid, st, ru = os.wait4(p.pid, os.WNOHANG)
         if pid: break
-        if time.time() - w0 > wall and not killed: os.kill(p.pid, signal.SIGKILL); killed = True
+        if time.time() - w0 > wall and not killed: os.killpg(p.pid, signal.SIGKILL); killed = True   # whole group: pool workers would otherwise run on, unmetered
         time.sleep(0.5)
     p.returncode = st
     log(dict(kind=kind, cmd=" ".join(cmd)[:300], cpu_s=round(ru.ru_utime + ru.ru_stime, 1), wall_s=round(time.time() - w0, 1),

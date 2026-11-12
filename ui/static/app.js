@@ -559,7 +559,9 @@ function renderRules() {
   const used = (p) => sch.map((s, i) => (s.rule === p ? i : null)).filter((x) => x != null);
   let h = `<dl class="facts"><dt>state</dt><dd>v + ${k} hidden bit${k === 1 ? "" : "s"} per cell; ${m.S} substep${m.S > 1 ? "s" : ""} per frame; zero boundary; synchronous</dd>
     <dt>semantics</dt><dd>${esc(m.semantics || "first firing rule wins; default keep")}</dd><dt>features</dt><dd>${esc((m.features || []).join(", "))}</dd>
-    <dt>size</dt><dd>${m.programs.length} programs, ${m.programs.reduce((a, p) => a + p.rules.length, 0)} rules, ${m.programs.reduce((a, p) => a + p.rules.reduce((b, r) => b + r.if.length, 0), 0)} conditions · file ${fmtInt(e.bytes)} B (JSON with hex first frame)</dd></dl>`;
+    <dt>size</dt><dd>${m.programs.length} programs, ${m.programs.reduce((a, p) => a + p.rules.length, 0)} rules, ${m.programs.reduce((a, p) => a + p.rules.reduce((b, r) => b + r.if.length, 0), 0)} conditions · file ${fmtInt(e.bytes)} B (JSON with hex first frame)</dd>
+    <dt>stored as</dt><dd>${(m.programsStored || m.programs).map((p, i) => "base" in p ? `program ${i} = program ${p.base} + ${p.edits.length} edit${p.edits.length === 1 ? "" : "s"}` : `program ${i} written out`).join(" · ")}</dd>
+    <dt>initial hidden</dt><dd>${k ? (() => { const on = m.h0.reduce((a, b) => a + b, 0); return on ? `learned: ${fmtInt(on)} of ${fmtInt(m.h0.length)} bits set (${k} bit${k > 1 ? "s" : ""} × ${m.W}×${m.H} cells); part of the stored information, counted in the file size` : "all zero (nothing stored)"; })() : "none (no hidden bits)"}</dd></dl>`;
   h += `<h3 class="minor">fire counts <span class="cm">// cells × substeps in which each rule fired, from running the engine over frames</span></h3>
     <label>from frame <input type="number" id="fc-from" min="1" max="${m.T - 1}" value="${cnt?.from ?? 1}"></label><label>to frame <input type="number" id="fc-to" min="1" max="${m.T - 1}" value="${cnt?.to ?? m.T - 1}"></label>
     <button class="btn" id="b-count">[ count firings ]</button> <span class="cm">${cnt ? `counted frames ${cnt.from}–${cnt.to} (${fmtInt(cnt.cells)} cell-substeps, version ${cnt.ver})${cnt.note}` : "not counted yet"}</span>`;
@@ -621,7 +623,7 @@ async function applyEdit(mode) {
   let ps;
   try { ps = mode === "reset" ? e.base.programs : validatePrograms(JSON.parse($("rule-edit").value), e.m); } catch (err) { $("edit-err").textContent = err.message; return; }
   LAB.setPlaying(false); const prevVer = e.ver; e.ver = ++verCounter; e.counts = null;
-  const t0 = performance.now(), m2 = { ...e.m, programs: ps };
+  const t0 = performance.now(), m2 = { ...e.m, programs: ps, programsStored: mode === "reset" ? e.base.programsStored : null }; // edited programs are written out in full
   if (mode === "continue") {
     const g0 = LAB.t * e.S + LAB.sub, old = e.progAt;
     e.m = m2; simulateRule(e, ps, g0, e.seq); e.hybridFrom = g0;
