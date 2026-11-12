@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logic CA Inspector</title>
+<style>
+  :root { --bg: #f6f5f2; --fg: #1d1d1f; --muted: #6b6b70; --line: #d8d6d0; --on: #1d1d1f; --off: #fbfaf7; --hi: #c2410c; --one: #166534; --zero: #9a3412; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #151517; --fg: #ececee; --muted: #9a9aa2; --line: #2e2e33; --on: #ececee; --off: #1d1d21; --hi: #fb923c; --one: #4ade80; --zero: #fca5a5; } }
+  :root[data-theme="dark"] { --bg: #151517; --fg: #ececee; --muted: #9a9aa2; --line: #2e2e33; --on: #ececee; --off: #1d1d21; --hi: #fb923c; --one: #4ade80; --zero: #fca5a5; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.5 ui-monospace, "DM Mono", Menlo, monospace; }
+  main { max-width: 1100px; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 18px; margin: 0 0 4px; } .muted { color: var(--muted); }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0; }
+  select, button, input { font: inherit; color: var(--fg); background: var(--off); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; }
+  .cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; } @media (max-width: 760px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+  canvas { width: 100%; max-width: 520px; image-rendering: pixelated; border: 1px solid var(--line); cursor: crosshair; display: block; }
+  .card { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; overflow-x: auto; }
+  table.nb { border-collapse: collapse; } table.nb td { border: 1px solid var(--line); padding: 2px 6px; text-align: center; }
+  .g { white-space: pre; } .v1 { color: var(--one); font-weight: 600; } .v0 { color: var(--zero); }
+  .stat { display: inline-block; margin-right: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Logic CA Inspector</h1>
+  <div class="muted">A fixed Boolean circuit applied to every cell's 3×3 neighbourhood (badca/logic-ca-v1). Click a cell to see the gates it actually computes. Path D, experimental.</div>
+  <div class="bar">
+    <select id="ex"></select> <input type="file" id="file" accept=".json">
+    <button id="step">step</button> <button id="play">run</button> <button id="reset">reset</button>
+    <label>channel <select id="ch"></select></label> <span id="t" class="muted"></span>
+  </div>
+  <div id="facts" class="card"></div>
+  <div class="cols">
+    <div><canvas id="cv" width="256" height="256"></canvas><div class="muted" id="hint">click a cell</div></div>
+    <div id="insp"></div>
+  </div>
+</main>
+<script type="module">
+import { parseLogic, step, evalCell } from "/player/logic_core.mjs";
+const $ = (id) => document.getElementById(id), POS = ["NW", "N", "NE", "W", "c", "E", "SW", "S", "SE"];
+let M = null, S = null, t = 0, sel = null, timer = null;
+const name = (i) => i < M.net.n_in ? `${POS[Math.floor(i / M.channels)]}.ch${i % M.channels}` : `g${i - M.net.n_in}`;
+const expr = (op, a, b) => ({ 0: "0", 15: "1", 3: a, 5: b, 12: `~${a}`, 10: `~${b}` })[op] ?? M.ops[op].replace(/\ba\b/g, a).replace(/\bb\b/g, b);
+function depth() { const d = new Array(M.net.n_in).fill(0); for (const [op, a, b] of M.net.gates) d.push(1 + Math.max(d[a], d[b])); return Math.max(0, ...M.net.outputs.map((o) => d[o])); }
+function load(o, label) {
+  M = parseLogic(o); S = M.init.slice(); t = 0; sel = null; stop();
+  $("ch").innerHTML = Array.from({ length: M.channels }, (_, c) => `<option value="${c}">${c}${c ? "" : " (visible)"}</option>`).join("");
+  const m = M.meta || {}, sem = m.semantics ? `<div><b>exact statement</b>: ${m.semantics.text} <span class="muted">(${m.semantics.verified})</span></div>` : `<div class="muted">no semantic statement: none has been verified for this circuit, so it is shown as the gates it is.</div>`;
+  $("facts").innerHTML = `<div><b>${label}</b></div><div><span class="stat">${M.net.gates.length} gates</span><span class="stat">depth ${depth()}</span><span class="stat">${M.channels} channel(s)</span><span class="stat">${M.boundary} boundary</span><span class="stat">${M.H}×${M.W}</span></div>${sem}<div class="muted">${m.note || ""}</div>`;
+  $("cv").width = M.W; $("cv").height = M.H; draw(); $("insp").innerHTML = "";
+}
+function draw() {
+  const c = +$("ch").value || 0, cx = $("cv").getContext("2d"), im = cx.createImageData(M.W, M.H), st = getComputedStyle(document.documentElement);
+  const rgb = (v) => { const e = document.createElement("i"); e.style.color = v; document.body.appendChild(e); const r = getComputedStyle(e).color.match(/\d+/g).map(Number); e.remove(); return r; };
+  const on = rgb(st.getPropertyValue("--on")), off = rgb(st.getPropertyValue("--off")), hi = rgb(st.getPropertyValue("--hi"));
+  for (let i = 0; i < M.H * M.W; i++) { const p = sel && i === sel[0] * M.W + sel[1] ? hi : S[i * M.channels + c] ? on : off; im.data.set([...p, 255], i * 4); }
+  cx.putImageData(im, 0, 0); $("t").textContent = `step ${t}`;
+  if (sel) inspect();
+}
+function inspect() {
+  const [y, x] = sel, v = evalCell(M, S, y, x), C = M.channels, n = M.net.n_in;
+  const need = new Set(); const stack = [...M.net.outputs];
+  while (stack.length) { const i = stack.pop(); if (need.has(i) || i < n) continue; need.add(i); const [op, a, b] = M.net.gates[i - n]; if (![0, 15, 5, 10].includes(op)) stack.push(a); if (![0, 15, 3, 12].includes(op)) stack.push(b); }
+  let nb = "<table class='nb'>"; for (let r = 0; r < 3; r++) { nb += "<tr>"; for (let q = 0; q < 3; q++) { const p = r * 3 + q; nb += `<td>${POS[p]}<br>${Array.from({ length: C }, (_, c) => v[p * C + c]).join("")}</td>`; } nb += "</tr>"; } nb += "</table>";
+  const rows = [...need].sort((a, b) => a - b).map((i) => { const [op, a, b] = M.net.gates[i - n]; return `<div class="g">${name(i)} = ${expr(op, name(a), name(b))}  → <span class="v${v[i]}">${v[i]}</span></div>`; }).join("");
+  const outs = M.net.outputs.map((o, c) => `<div class="g">ch${c}' = ${name(o)} = <span class="v${v[o]}">${v[o]}</span></div>`).join("");
+  $("insp").innerHTML = `<div class="card"><b>cell (${y}, ${x}) at step ${t}</b><div class="muted">inputs: channel values (ch0..ch${C - 1}) of the 3×3 neighbourhood</div>${nb}</div><div class="card"><b>gates feeding the outputs (${need.size})</b>${rows || "<div class='muted'>none: outputs are wires or constants</div>"}</div><div class="card"><b>next state</b>${outs}</div>`;
+}
+const stop = () => { clearInterval(timer); timer = null; $("play").textContent = "run"; };
+$("step").onclick = () => { S = step(M, S); t++; draw(); };
+$("play").onclick = () => { if (timer) return stop(); timer = setInterval(() => { S = step(M, S); t++; draw(); }, 80); $("play").textContent = "pause"; };
+$("reset").onclick = () => { S = M.init.slice(); t = 0; draw(); };
+$("ch").onchange = draw;
+$("cv").onclick = (e) => { const r = $("cv").getBoundingClientRect(); sel = [Math.floor((e.clientY - r.top) / r.height * M.H), Math.floor((e.clientX - r.left) / r.width * M.W)]; draw(); };
+$("file").onchange = async (e) => { const f = e.target.files[0]; if (f) load(JSON.parse(await f.text()), f.name); };
+const idx = await (await fetch("/static/logic_examples/index.json")).json();
+$("ex").innerHTML = idx.map((e, i) => `<option value="${i}">${e.label}</option>`).join("");
+$("ex").onchange = async () => { const e = idx[+$("ex").value]; load(await (await fetch(`/static/logic_examples/${e.file}`)).json(), e.label); };
+const q = new URLSearchParams(location.search);   // ?ex=N&steps=T&cell=y,x opens a given example, state and cell (links, headless checks)
+$("ex").value = q.get("ex") || "0"; await $("ex").onchange();
+for (let i = 0; i < +(q.get("steps") || 0); i++) { S = step(M, S); t++; }
+if (q.get("cell")) sel = q.get("cell").split(",").map(Number);
+draw();
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+[
+ {
+  "file": "life_B3S23.logic.json",
+  "label": "Game of Life, learned then simplified (57 gates)"
+ },
+ {
+  "file": "checkerboard_exact.logic.json",
+  "label": "Checkerboard from noise, exact simplification (22 gates)"
+ },
+ {
+  "file": "checkerboard_pruned.logic.json",
+  "label": "Checkerboard, behaviour-aware pruning (6 gates, approximate)"
+ },
+ {
+  "file": "greenberg_hastings.logic.json",
+  "label": "Excitable waves, recovered by pruning (9 gates)"
+ },
+ {
+  "file": "waves_family_limited.logic.json",
+  "label": "Excitable waves, pruned one-step circuit (11 gates): fails outside its family"
+ },
+ {
+  "file": "translate_wire.logic.json",
+  "label": "Translation: 0 gates (the output is a wire to the west neighbour)"
+ }
+]

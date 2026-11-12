@@ -27,3 +27,6 @@ runs/c13/**/best_c*.npz
 runs/c13/**/export_s*.ncab
 runs/c13/song_noise_s1/
 runs/c13/pilot_wipe_tw2/
+
+# Path D trained soft logits: kept locally for fine-tuning, not committed (hard circuits are in *.logic.json)
+runs/path_d/**/params.npz

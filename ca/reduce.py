@@ -9,7 +9,7 @@ from pyeda.inter import exprvars, truthtable
 from pyeda.boolalg.minimization import espresso_tts
 from pyeda.boolalg import expr as E
 
-YOSYS = os.path.join(os.path.dirname(sys.executable), "yowasp-yosys")
+YOSYS = os.path.join(os.path.dirname(sys.executable), "yowasp-yosys")   # run as [sys.executable, YOSYS]: its shebang names the pre-rename venv path
 GATES = "AND,NAND,OR,NOR,XOR,XNOR,ANDNOT,ORNOT"
 FLOWS = {  # yosys `abc` runs ABC's default strash/synthesis script before mapping
     "abc_default": f"abc -g {GATES}",
@@ -87,6 +87,6 @@ def synth(exprs, n, flow):
     with tempfile.TemporaryDirectory() as d:
         open(os.path.join(d, "r.v"), "w").write(verilog(exprs, n))
         cmd = f"read_verilog r.v; synth -flatten -top rule; {FLOWS[flow]}; opt_clean -purge; write_blif r.blif"
-        p = subprocess.run([YOSYS, "-q", "-p", cmd], cwd=d, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=1800)
+        p = subprocess.run([sys.executable, YOSYS, "-q", "-p", cmd], cwd=d, stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=1800)
         if p.returncode: raise RuntimeError((p.stdout + p.stderr)[-2000:])
         return _blif_gates(os.path.join(d, "r.blif"), n, len(exprs))

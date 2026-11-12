@@ -1,0 +1,8 @@
+{"job": 10, "label": "pd-d0-life (5 seeds x 3000 ep)", "gpus": 1, "minutes": 7.20}
+{"job": 11, "label": "pd-d0-checker (5 seeds x 500 ep)", "gpus": 1, "minutes": 10.18}
+{"job": 12, "label": "pd-d0-checker-e2000 (5 seeds)", "gpus": 1, "minutes": 14.48}
+{"job": 13, "label": "pd-d0-life-e6000 (4 seeds)", "gpus": 1, "minutes": 6.63}
+{"job": 14, "label": "pd-d1-pilot (failed: layer taper bug)", "gpus": 1, "minutes": 0.32}
+{"job": 15, "label": "pd-d1-pilot gh x 3 objectives, seed 0", "gpus": 1, "minutes": 5.83}
+{"job": 16, "label": "pd-d1-a (D1 campaign, half)", "gpus": 1, "minutes": 33.26}
+{"job": 17, "label": "pd-d1-b (D1 campaign, half)", "gpus": 1, "minutes": 30.21}

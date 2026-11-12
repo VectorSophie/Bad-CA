@@ -1,0 +1,45 @@
+{
+ "task": "life",
+ "seed": 0,
+ "epochs": 6000,
+ "train_seconds": 42.4,
+ "backend": "gpu",
+ "final": {
+  "epoch": 5999,
+  "soft": 1.3220650316725369e-06,
+  "hard": 27.0,
+  "t": 42.4
+ },
+ "gates": {
+  "active": 405,
+  "total": 2543
+ },
+ "truth_table_exact": 460,
+ "truth_table_wrong_entries": [
+  15,
+  26,
+  28,
+  31,
+  39,
+  50,
+  52,
+  55,
+  75,
+  77,
+  78,
+  91,
+  93,
+  94,
+  99,
+  101,
+  102,
+  115,
+  117,
+  118
+ ],
+ "rollout_128x128_300": {
+  "mismatched_cells_total": 1900365,
+  "first_mismatch_step": 1
+ },
+ "jax_hard_vs_numpy_50_steps_equal": true
+}

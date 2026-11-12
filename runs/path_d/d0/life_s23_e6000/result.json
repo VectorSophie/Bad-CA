@@ -1,0 +1,24 @@
+{
+ "task": "life",
+ "seed": 23,
+ "epochs": 6000,
+ "train_seconds": 40.6,
+ "backend": "gpu",
+ "final": {
+  "epoch": 5999,
+  "soft": 4.988761475033243e-07,
+  "hard": 0.0,
+  "t": 40.6
+ },
+ "gates": {
+  "active": 323,
+  "total": 2543
+ },
+ "truth_table_exact": 512,
+ "truth_table_wrong_entries": [],
+ "rollout_128x128_300": {
+  "mismatched_cells_total": 0,
+  "first_mismatch_step": null
+ },
+ "jax_hard_vs_numpy_50_steps_equal": true
+}

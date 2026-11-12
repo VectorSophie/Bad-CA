@@ -1,0 +1,32 @@
+{
+ "task": "checker",
+ "seed": 1,
+ "epochs": 500,
+ "train_seconds": 27.5,
+ "backend": "gpu",
+ "final": {
+  "epoch": 499,
+  "soft": 10.792844772338867,
+  "hard": 37.0,
+  "t": 27.5
+ },
+ "gates": {
+  "active": 133,
+  "total": 3040
+ },
+ "unseen_16x16_exact_at_step20": "3/100",
+ "unseen_64x64_step80_pixel_err": [
+  0.07763671875,
+  0.050537109375,
+  0.021728515625,
+  0.04541015625,
+  0.136962890625,
+  0.032470703125,
+  0.064697265625,
+  0.00048828125,
+  0.123291015625,
+  0.0595703125
+ ],
+ "stays_exact_steps_20_to_100": false,
+ "jax_hard_vs_numpy_30_steps_equal": true
+}
