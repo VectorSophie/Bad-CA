@@ -1,0 +1,7 @@
+{"job": 18, "label": "pd25-pilot gh x {zero, burnin, burnin_ste, zero_ste} seed 0", "gpus": 1, "minutes": 15.75}
+{"job": 19, "label": "pd25-seed1 (burnin, zero)", "gpus": 1, "minutes": 7.53}
+{"job": 20, "label": "pd25-seed2 (burnin, zero)", "gpus": 1, "minutes": 7.49}
+{"job": 21, "label": "pd-d3-L8 (4 clips, burnin s0)", "gpus": 1, "minutes": 14.00}
+{"job": 22, "label": "pd-d3-L16 (4 clips, burnin s0)", "gpus": 1, "minutes": 14.18}
+{"job": 23, "label": "pd-d3-L8-more (4500/3998: burnin s1, burnin_ste s0/s1)", "gpus": 1, "minutes": 22.75}
+{"job": 24, "label": "pd-d3-L16-big (4500/3998 burnin s0, 144k budget)", "gpus": 1, "minutes": 12.13}

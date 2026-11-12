@@ -4,7 +4,13 @@
 them small enough to read. Experimental track, separate from the featured Neural CA (unchanged) and from Readable
 Rules (closed with NO-GO, D9; nothing there was rerun).
 
-**Status, 2026-11-12:**
+**Status, round 2 (D2.5 / D3), 2026-11-12: PARTIAL** (§8–§12).
+- A circuit learned from the visible channel alone reproduces Greenberg–Hastings waves exactly on unseen trajectories
+  (simplified to 10 gates).
+- On real Bad Apple, a 64-gate circuit reproduces frames 3998–4006 by itself (error 0.016 vs hold 0.057) and beats
+  every baseline on the next 16 unseen frames, but captures only 4–9 % of their true changes.
+
+**Status, round 1, 2026-11-12:**
 
 | gate | result |
 |---|---|
@@ -211,3 +217,175 @@ Separate from the closed Readable Rules campaigns. No paid APIs.
 can come out *as* the generating rule: 1,598 learned gates → 9 gates equal to Greenberg–Hastings. The honest limit
 is that this works on synthetic worlds with full supervision, and approximate pruning only certifies the starting
 family it was scored on.
+
+
+---
+# Round 2: from visible motion to readable logic (D2.5 / D3)
+
+## 8. Setup
+**Script and outputs:**
+- Script: `experiments/pd25.py` (visible-only trainer and evaluator), also used by `experiments/pd_d3.py`.
+- Results: `runs/path_d/d25/`, `runs/path_d/d3/`; pruning in `runs/path_d/d2/gh_burnin_s0*`.
+- Ledgers: `runs/path_d/d25/{gpu,cpu}_ledger.jsonl`.
+
+**What the learner sees:**
+- **Only the visible channel.** k = 2 latent Boolean channels must be invented by training.
+- **Hidden initialisation**, never from the generator's hidden state:
+  - **zero:** hidden = 0 at the window start.
+  - **burnin (observation prefix, P = 2):** start 2 frames earlier with hidden 0. For 2 steps the circuit runs with
+    its visible channel overwritten by the observed frames, then runs free. It is one shared rule, nothing is learned
+    per sequence, and its cost is 2 extra visible frames.
+  - A per-sequence learned seed was **not** used: it cannot be applied to a new sequence.
+- **Objectives:**
+  - soft rollout;
+  - `ste`: hard-forward, i.e. argmax gates and rounded states in the forward pass, straight-through gradients.
+  - Both use the horizon curriculum 1→16 and the same budget (48 k step-evaluations).
+
+**Export extension:** `prefix` in `badca/logic-ca-v1`. After step i < P, channel 0 is set to the stored observed frame
+i. Both executors implement it, and Python and Node match bit for bit (`tests/test_path_d.py`).
+
+**Data, Greenberg–Hastings (fixed before any fit):**
+- 48×48 periodic grid, sparse starts (excited 0.004, refractory 0.004): fronts expand, then spirals persist with about
+  0.12 of cells changing per step.
+- The first regime tried (the D1 starts) dies out by step 20. It was discarded **before** training, because hold would
+  have been trivially perfect.
+- Splits: 16 train / 8 val / 16 test sequences of 160 steps; fresh-start windows at t0 = 4, 40, 100.
+- Windows with no motion at all are skipped and counted: 18 of 48 test windows (sequences that die out).
+- **Out of family:** a dense refractory-rich regime (starts 0.08 / 0.2), where every cell cycles with period 3.
+
+**Baselines:**
+- hold;
+- the best memoryless 3×3 rule (a majority table fitted on training transitions; it cannot represent refractoriness);
+- a **cycle rule** `e' = ~e & ~e_prev`: two frames of memory and **no neighbours**. This is the trivial way to fake
+  the waves.
+
+## 9. D2.5-A: visible-only synthetic learning (GH)
+Test split, 30 windows with motion, 128 free-running steps. Hold 0.217, memoryless table 0.376, cycle rule 0.199
+(at 16 steps).
+
+| setting | seed 0 | seed 1 | seed 2 | dense regime (s0 / s1 / s2), err128 |
+|---|---|---|---|---|
+| A full state (D1, one-step) | exact | exact | exact | – |
+| B zero hidden | err128 0.305, 0/30 exact | 0.352 | 0.328 | 0.41–0.42 |
+| C burnin, soft | **exact 30/30**, F1 1.00 | 6/30; err16 0.048, err128 0.212 | 22/30; err128 0.030 | **0.007** / 0.371 / 0.322 |
+| D burnin + ste | err128 0.137, F1 0.06, change mass 0.03 (frozen) | – | – | 0.333 |
+| D' zero + ste | same as D (collapse) | – | – | 0.333 |
+
+- **Gate D2.5-A: passed** with C, the observation prefix. This is non-trivial motion on unseen trajectories, beating
+  hold, the memoryless table and the cycle rule.
+- **Prefix:** without it (B) nothing generalises. With it, 1 of 3 seeds is exact everywhere, 1 nearly, 1 only short-term.
+- **Straight-through training collapses** to near-static output in every case here and on Bad Apple (§11). It is not
+  the fix for the soft-to-hard gap at this scale.
+- **Soft vs hard at 16 steps (error):** C s0 0.000 / 0.000, s1 0.079 / 0.065, s2 0.011 / 0.009, ste 0.37 / 0.12.
+- **Information cost:** 2 latent bits per cell, initial hidden all 0, plus 2 observed frames (2 × 2,304 bits). No
+  per-sequence parameters.
+
+## 10. D2.5-B: stability and simplification
+Seed 0 of C:
+- 1,823 hardened gates → **65** (exact passes) → **14** (ABC). SAT-equivalent.
+- B ε=0 stays at 14.
+- **C ε=0 reaches 10 gates.** Visible rollouts are identical on 64/64 unseen starts. 2 % of one-step outputs on visited
+  states change, but only in latent values that never reach the visible channel. One-step scoring cannot see that.
+- **Re-scored on the untouched test split:** exact 30/30 for 128 steps. Dense regime: 0.0065.
+- B ε ≥ 0.001 breaks it (change mass 37, divergence 0.10–0.16).
+
+**The 10 gates** (v = excited; h1, h2 = learned latents):
+```
+g0 = ~(N.v | W.v)    g1 = ~(NE.v | E.v)   g2 = g0 & g1    g3 = c.h2 | g2
+g4 = ~(SW.v | SE.v)  g5 = ~(NW.v ^ S.v)   g6 = g4 & g5    g7 = ~(g3 & g6)
+g8 = ~(NW.h1 | c.v)  g9 = g7 & g8
+v' = g9      h1' = SE.v      h2' = c.v
+```
+Readable from the gates alone:
+- **The circuit stores its memory in a neighbour.** `h2' = c.v` stores "I was excited". `h1' = SE.v` stores the
+  south-east neighbour's excitation, so next step `NW.h1` (the north-west neighbour's copy of *its* south-east cell)
+  is **this cell's own previous excitation**.
+- `g8` = resting (neither excited now nor last step).
+- `g7` = some neighbour among N, W, NE, E, SW, SE is excited, or exactly one of NW and S is.
+- **The flaw:** it misses the case "only NW and S are both excited", so it is **not** equal to Greenberg–Hastings on
+  every input. That configuration never occurs in the test family; the dense regime shows it (0.0065).
+- Inspector: *Waves learned from the visible channel only*.
+
+## 11. D3: real Bad Apple clips (visible only, one fixed circuit, no schedule, no injection after the 2-frame prefix)
+**Clips**, fixed before training (`experiments/pd_d3.py::CLIPS`):
+
+| clip | case |
+|---|---|
+| 1221 | translate |
+| 4500 | contour |
+| 3998 | growing silhouette |
+| 1499 | wipe |
+
+- **Windows:** train = [a, a+L], val = [a+L, a+2L] (model selection), final = [a+2L, a+3L] (untouched).
+- **Baselines**, all fitted on train only: hold, shift, memoryless 3×3 table, and a Readable Rules staged `dlrule`.
+- **Fresh-start transfer:** the window's visible frame plus its 2-frame prefix.
+- **Continuous continuation:** from a, with no re-initialisation.
+
+**Fresh-start errors:**
+
+| run | gates (simplified) | train err / hold / best baseline | val err / hold / best baseline | final err / hold / best baseline |
+|---|---|---|---|---|
+| 1221 L16 | 430 | 0.156 / 0.299 / readable 0.097 | 0.202 / 0.132 / 0.065 | 0.420 / 0.416 / 0.416 |
+| 1221 L8 | 482 | 0.308 / 0.316 / 0.125 | 0.240 / 0.089 / 0.089 | 0.256 / 0.105 / 0.073 |
+| 4500 L16 | 252 | 0.123 / 0.094 / 0.076 | 0.163 / 0.073 / 0.061 | 0.187 / 0.060 / 0.060 |
+| 4500 L16 ×3 budget | 640 | 0.099 / 0.094 / 0.076 | 0.115 / 0.073 / 0.061 | 0.161 / 0.060 / 0.060 |
+| 4500 L8 s0 / s1 | 347 / 265 | 0.045, 0.049 / 0.067 / 0.057 | 0.048, 0.051 / 0.057 / 0.057 | 0.061, 0.058 / 0.056 / 0.055 |
+| 3998 L16 | 263 | 0.069 / 0.078 / 0.040 | 0.076 / 0.093 / 0.078 | 0.029 / 0.013 / 0.013 |
+| **3998 L16 ×3 budget** | 461 | 0.037 / 0.078 / 0.040 | **0.055 / 0.093 / 0.078, F1 0.62** | 0.041 / 0.013 / 0.013 |
+| **3998 L8 s0 / s1** | 334 / 273 | **0.019, 0.013** / 0.057 / 0.027 | **0.027, 0.028** / 0.035 / 0.034 | 0.053, **0.044** / 0.054 / 0.051 |
+| 1499 L16 / L8 (wipe) | 407 / 273 | ≈ hold | ≈ hold | worse |
+| ste (4500, 3998; L8; 2 seeds) | 1–73 | collapse or flood (0.83–0.96), or near-static | – | – |
+
+- **Continuous continuation fails everywhere.** After the training window the rollout is worse than hold (e.g. the pruned
+  3998 L8 s1 circuit: val 0.041 vs 0.035, final 0.098 vs 0.054).
+- **Anti-cheat on 3998 L8 s0:** births and deaths are balanced (pred / true: births 98/116, deaths 61/63 in train), and
+  the silhouette centroid tracks the original. It is neither erosion, filling, nor a frozen frame.
+- 4500 L8 over-erodes: 304 predicted deaths vs 185 true.
+
+**Optional extension chosen:** reduce the circuit while keeping motion. Unit tying is scored on the **training window
+only** (error may rise ≤ 0.003); val and final are re-scored afterwards. This is approximate, fitted-trajectory
+pruning, not an equivalence.
+
+| circuit | gates | train | val | final |
+|---|---|---|---|---|
+| **3998 L8 s1** | 271 → **64** (depth 9) | **0.016** (hold 0.057), F1 0.82 | **0.025** (hold 0.035, table 0.034, readable 0.039), F1 0.63 | **0.041** (hold 0.054, table 0.051, readable 0.068), F1 0.68 |
+| 3998 L16 ×3 | 456 → 4 | 0.037 | 0.084 (hold 0.093) | 0.057 (hold 0.013) |
+| 4500 L8 s0 | 346 → 38 | 0.048 | 0.058 (≈ hold) | 0.073 (worse) |
+
+- **The 64-gate circuit** is the smallest successful one. It generates frames **3998–4006** by itself from frame 3996
+  plus 2 observed frames. Started fresh on the following unseen frames 4006–4022, it beats every baseline.
+- **But it captures only 9 % (val) and 4 % (final) of the true changes there.** It wins by changing little and mostly
+  correctly, not by reproducing the motion.
+- Its 64 gates are inspectable gate by gate in the inspector (*Bad Apple frames 3998–4022*). No sentence-level
+  description has been verified, so none is given.
+- **The 3998 L16 collapse to 4 gates** at the same training error shows the large L16 circuit was not using its gates
+  on its own training frames.
+
+## 12. Decision, cost, next
+**Classification: PARTIAL.**
+- Visible-only synthetic learning works: exact GH waves on unseen trajectories from the visible channel and a 2-frame
+  prefix, 10 gates.
+- On Bad Apple, a compact fixed circuit reconstructs an 8-frame fitted window with real, balanced motion (F1 0.82).
+  Its numerical wins on unseen frames come with very little reproduced motion, and continuous continuation fails.
+- **Not GO:** there is no reliable motion generalisation beyond the fitted frames.
+
+**What remains unsolved:**
+- generalising motion past the fitted window on video;
+- continuous continuation;
+- 16+ fitted frames with small circuits (the 1221 / 4500 L16 fits do not even beat baselines on their own frames);
+- the soft-to-hard gap (straight-through training collapsed).
+
+**Compute, this campaign:**
+
+| | used | ceiling |
+|---|---|---|
+| GPU | 93.8 min = **1.56 GPU-h** (D2.5-A 30.8 min, D3 63.1 min; no failed GPU runs) | 6 GPU-h |
+| CPU, metered | 0.03 core-h (pruning) | 8 core-h |
+| CPU, unmetered | about 0.3 core-h (estimate): CPU smoke tests, evaluations, examples | |
+
+**Cumulative Path D:** GPU 201.9 min = **3.37 GPU-h**; CPU about 0.9 core-h. Each GPU job held one GPU, so the totals
+are summed allocated GPU time.
+
+**Next recommended experiment (not run):** multi-clip training on 3998-like scenes. One circuit is fitted on several
+short windows of the same silhouette (still a fixed circuit, still visible-only), to test whether the motion that is
+missing on unseen frames is a data problem (one 8-frame window) or a capacity / objective problem. Estimate: ≤ 1 GPU-h.

@@ -1,0 +1,145 @@
+{
+ "clip": "3998",
+ "description": "growing silhouette on white (Readable Rules G1 scene 16 train window)",
+ "setting": "burnin_ste",
+ "seed": 0,
+ "L": 8,
+ "budget": 48000,
+ "k_hidden": 2,
+ "burnin_frames": 2,
+ "train_seconds": 222.8,
+ "backend": "gpu",
+ "final_loss": {
+  "h": 16,
+  "epoch": 74,
+  "soft": 10054.0,
+  "t": 222.8
+ },
+ "gates_raw": 1823,
+ "simplified": {
+  "gates": 2,
+  "not_gates": 0,
+  "depth": 1,
+  "json_bytes": 59,
+  "zlib_bytes": 59
+ },
+ "simplified_equivalent": true,
+ "baselines_info": {
+  "shift": [
+   0,
+   0
+  ],
+  "readable_program": {
+   "rules": [
+    {
+     "if": [
+      [
+       "W",
+       "==",
+       2
+      ]
+     ],
+     "then": {
+      "v": 1,
+      "h": 0
+     }
+    },
+    {
+     "if": [
+      [
+       "r2",
+       "<=",
+       6
+      ],
+      [
+       "n8",
+       "<=",
+       0
+      ]
+     ],
+     "then": {
+      "v": 1,
+      "h": 0
+     }
+    }
+   ]
+  }
+ },
+ "train": {
+  "window": [
+   3998,
+   4006
+  ],
+  "err": 0.03747106481481481,
+  "hold": 0.056712962962962965,
+  "f1": 0.4115226337448559,
+  "mass": 0.427536231884058,
+  "diverge": null,
+  "black": 0.0,
+  "white": 1.0,
+  "shift_err": 0.056712962962962965,
+  "lut_err": 0.03530092592592592,
+  "readable_err": 0.027488425925925927
+ },
+ "val": {
+  "window": [
+   4006,
+   4014
+  ],
+  "err": 0.04615162037037037,
+  "hold": 0.034577546296296294,
+  "f1": 0.12000000000000001,
+  "mass": 0.21666666666666667,
+  "diverge": null,
+  "black": 0.0,
+  "white": 1.0,
+  "shift_err": 0.034577546296296294,
+  "lut_err": 0.03370949074074074,
+  "readable_err": 0.03927951388888889
+ },
+ "final": {
+  "window": [
+   4014,
+   4022
+  ],
+  "err": 0.07826967592592593,
+  "hold": 0.05396412037037037,
+  "f1": 0.09329277125887296,
+  "mass": 0.24444444444444444,
+  "diverge": null,
+  "black": 0.0,
+  "white": 1.0,
+  "shift_err": 0.05396412037037037,
+  "lut_err": 0.05107060185185185,
+  "readable_err": 0.06799768518518519
+ },
+ "continuous": {
+  "train": {
+   "err": 0.03747106481481481,
+   "hold": 0.056712962962962965,
+   "f1": 0.4115226337448559,
+   "mass": 0.427536231884058,
+   "diverge": null,
+   "black": 0.0,
+   "white": 1.0
+  },
+  "val": {
+   "err": 0.04615162037037037,
+   "hold": 0.034577546296296294,
+   "f1": 0.12000000000000001,
+   "mass": 0.21666666666666667,
+   "diverge": null,
+   "black": 0.0,
+   "white": 1.0
+  },
+  "final": {
+   "err": 0.07826967592592593,
+   "hold": 0.05396412037037037,
+   "f1": 0.09329277125887296,
+   "mass": 0.24444444444444444,
+   "diverge": null,
+   "black": 0.0,
+   "white": 1.0
+  }
+ }
+}

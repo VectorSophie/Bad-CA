@@ -91,8 +91,11 @@ def _ops(a, b):
 
 
 def _run_layer(logits, w, x, hard):
+    """hard: False (softmax mixture), True (argmax gate), or "ste" (argmax forward, softmax gradient)."""
     jax, jnp = _jax()
-    wts = jax.nn.one_hot(jnp.argmax(logits, -1), N_OPS) if hard else jax.nn.softmax(logits, -1)
+    if hard == "ste":
+        sm = jax.nn.softmax(logits, -1); wts = sm + jax.lax.stop_gradient(jax.nn.one_hot(jnp.argmax(logits, -1), N_OPS) - sm)
+    else: wts = jax.nn.one_hot(jnp.argmax(logits, -1), N_OPS) if hard else jax.nn.softmax(logits, -1)
     return (_ops(x[..., w[0]], x[..., w[1]]) * wts).sum(-1)
 
 
@@ -181,9 +184,11 @@ def net_rollout(net, g, n, periodic):
     return np.stack(out)
 
 
-def export(path, net, channels, periodic, init_state=None, steps=None, meta=None):
+def export(path, net, channels, periodic, init_state=None, steps=None, meta=None, prefix=None):
     """badca/logic-ca-v1 (synchronous). Replays from the file alone: no training code, no target frames.
-    init: hex of numpy.packbits (big-endian bit order) of the (H, W, C) uint8 state in C order."""
+    init: hex of numpy.packbits (big-endian bit order) of the (H, W, C) uint8 state in C order.
+    prefix (optional extension): list of P visible frames (H, W); after each of the first P steps, channel 0 is
+    overwritten with prefix[i] (an observation prefix that lets the circuit fill its hidden channels). Counted as input."""
     d = dict(format="badca/logic-ca-v1", channels=channels, boundary="periodic" if periodic else "zero", update="sync",
              neighbourhood="3x3 Moore incl. centre; node p*C + c = patch position p (row-major, centre 4), channel c",
              ops=OP_NAMES, op_truth_tables=OP_TT, op_index="truth table bit (a << 1) | b",
@@ -191,6 +196,9 @@ def export(path, net, channels, periodic, init_state=None, steps=None, meta=None
     if init_state is not None:
         s = np.asarray(init_state, np.uint8); d["H"], d["W"] = int(s.shape[0]), int(s.shape[1]); d["init"] = np.packbits(s.ravel()).tobytes().hex()
     if steps is not None: d["steps"] = int(steps)
+    if prefix is not None and len(prefix):
+        d["prefix"] = dict(frames=len(prefix), semantics="after step i < frames, channel 0 := visible[i]",
+                           visible=[np.packbits(np.asarray(f, np.uint8).ravel()).tobytes().hex() for f in prefix])
     json.dump(d, open(path, "w"), separators=(",", ":"))
     return d
 
@@ -199,7 +207,19 @@ def load(path):
     d = json.load(open(path)); assert d["format"] == "badca/logic-ca-v1", d["format"]
     if "init" in d:
         n = d["H"] * d["W"] * d["channels"]; d["init_state"] = np.unpackbits(np.frombuffer(bytes.fromhex(d["init"]), np.uint8))[:n].reshape(d["H"], d["W"], d["channels"])
+    if "prefix" in d:
+        d["prefix_frames"] = [np.unpackbits(np.frombuffer(bytes.fromhex(h), np.uint8))[:d["H"] * d["W"]].reshape(d["H"], d["W"]) for h in d["prefix"]["visible"]]
     return d
+
+
+def replay(d, n=None):
+    """Replay a loaded export exactly as the format defines it (including the optional prefix). Returns (n+1, H, W, C)."""
+    n = d.get("steps", 0) if n is None else n; out = [d["init_state"].astype(np.uint8)]; pre = d.get("prefix_frames", [])
+    for t in range(n):
+        s = net_eval(d["net"], np_patches(out[-1], d["boundary"] == "periodic"))
+        if t < len(pre): s[..., 0] = pre[t]
+        out.append(s)
+    return np.stack(out)
 
 
 def _gate(op, a, b):

@@ -1,0 +1,132 @@
+{
+ "clip": "4500",
+ "description": "smooth contour deformation (the 'contour' clip, A2 start)",
+ "setting": "burnin_ste",
+ "seed": 1,
+ "L": 8,
+ "budget": 48000,
+ "k_hidden": 2,
+ "burnin_frames": 2,
+ "train_seconds": 221.1,
+ "backend": "gpu",
+ "final_loss": {
+  "h": 16,
+  "epoch": 74,
+  "soft": 11575.0,
+  "t": 221.1
+ },
+ "gates_raw": 1823,
+ "simplified": {
+  "gates": 1,
+  "not_gates": 0,
+  "depth": 1,
+  "json_bytes": 51,
+  "zlib_bytes": 52
+ },
+ "simplified_equivalent": true,
+ "baselines_info": {
+  "shift": [
+   0,
+   0
+  ],
+  "readable_program": {
+   "rules": [
+    {
+     "if": [
+      [
+       "N",
+       ">=",
+       3
+      ],
+      [
+       "l",
+       "==",
+       1
+      ]
+     ],
+     "then": {
+      "v": 1,
+      "h": 0
+     }
+    }
+   ]
+  }
+ },
+ "train": {
+  "window": [
+   4500,
+   4508
+  ],
+  "err": 0.8291377314814814,
+  "hold": 0.06727430555555555,
+  "f1": 0.04880100967606226,
+  "mass": 2.697628458498024,
+  "diverge": 1,
+  "black": 0.0,
+  "white": 1.0,
+  "shift_err": 0.06727430555555555,
+  "lut_err": 0.056640625,
+  "readable_err": 0.06336805555555555
+ },
+ "val": {
+  "window": [
+   4508,
+   4516
+  ],
+  "err": 0.8203125,
+  "hold": 0.05700231481481482,
+  "f1": 0.09366884179742913,
+  "mass": 3.0757894736842104,
+  "diverge": 1,
+  "black": 0.0,
+  "white": 1.0,
+  "shift_err": 0.05700231481481482,
+  "lut_err": 0.05895543981481482,
+  "readable_err": 0.05700231481481482
+ },
+ "final": {
+  "window": [
+   4516,
+   4524
+  ],
+  "err": 0.7463831018518519,
+  "hold": 0.055989583333333336,
+  "f1": 0.1517248727473496,
+  "mass": 2.757142857142857,
+  "diverge": 1,
+  "black": 0.0,
+  "white": 1.0,
+  "shift_err": 0.055989583333333336,
+  "lut_err": 0.07877604166666667,
+  "readable_err": 0.05541087962962963
+ },
+ "continuous": {
+  "train": {
+   "err": 0.8291377314814814,
+   "hold": 0.06727430555555555,
+   "f1": 0.04880100967606226,
+   "mass": 2.697628458498024,
+   "diverge": 1,
+   "black": 0.0,
+   "white": 1.0
+  },
+  "val": {
+   "err": 0.8203125,
+   "hold": 0.05700231481481482,
+   "f1": 0.09366884179742913,
+   "mass": 3.0757894736842104,
+   "diverge": 1,
+   "black": 0.0,
+   "white": 1.0
+  },
+  "final": {
+   "err": 0.7463831018518519,
+   "hold": 0.055989583333333336,
+   "f1": 0.1517248727473496,
+   "mass": 2.757142857142857,
+   "diverge": 1,
+   "black": 0.0,
+   "white": 1.0
+  }
+ }
+}

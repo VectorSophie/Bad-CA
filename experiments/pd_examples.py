@@ -47,6 +47,23 @@ def main():
     tr = dlca.load(f"{R}/d2/translate_onestep_s1__C_eps0.0.logic.json")["net"]
     put("translate_wire.logic.json", tr, 1, True, (rng.random((32, 32, 1)) < 0.3).astype(np.uint8), 64, "Translation: 0 gates (the output is a wire to the west neighbour)",
         "Learned (D1 translate, one-step, seed 1: 1,375 gates); exact simplification leaves a wire. Equal to the generator on all 512 neighbourhoods.")
+    # ---- D2.5 / D3 (visible-only) ----
+    def target(fname, start, frames):
+        json.dump(dict(start=int(start), note="original frames for side-by-side comparison only; the circuit never reads this file",
+                       frames=[np.packbits(np.asarray(f, np.uint8).ravel()).tobytes().hex() for f in frames]), open(os.path.join(OUT, fname), "w"))
+    vo = dlca.load(f"{R}/d2/gh_burnin_s0__C_eps0.0.logic.json")["net"]
+    seq = pd_d1.trajectories("gh", pd_d1.init_states("gh", 1, np.random.default_rng(31), size=48, density=(0.004, 0.004)), 140)[0, ..., 0]
+    init = np.zeros((48, 48, 3), np.uint8); init[..., 0] = seq[6]
+    dlca.export(os.path.join(OUT, "waves_visible_only.logic.json"), vo, 3, True, init_state=init, steps=130, prefix=[seq[7], seq[8]],
+                meta=dict(gates_raw=1823, note="Learned from the EXCITED channel only (D2.5, 2-frame observation prefix, seed 0), exact simplification (14 gates) then multi-step pruning: 10 gates. Hidden channels h1, h2 were invented by training. Exact on all 30 untouched test windows for 128 steps; not equal to Greenberg-Hastings on every input (it misses 'only NW and S excited')."))
+    target("waves_visible_only.target.json", 6, seq[6:137]); idx.append(dict(file="waves_visible_only.logic.json", target="waves_visible_only.target.json", label="Waves learned from the visible channel only (10 gates, 2 latent channels)"))
+    from pd_d3 import video
+    X = video()
+    for clip, run, label in (("3998", "3998_L8_burnin_s1", "Bad Apple frames 3998-4022: 64-gate circuit (fitted on 3998-4006)"),
+                             ("4500", "4500_L8_burnin_s0", "Bad Apple frames 4500-4524: 38 gates, fits but does not transfer")):
+        f = f"{R}/d3/{run}__pruned.logic.json"; d = dlca.load(f); a = int(clip)
+        dlca.export(os.path.join(OUT, f"badapple_{clip}.logic.json"), d["net"], 3, False, init_state=d["init_state"], steps=d["steps"], prefix=d["prefix_frames"], meta=d["meta"])
+        target(f"badapple_{clip}.target.json", a - 2, X[a - 2:a - 2 + d["steps"] + 1]); idx.append(dict(file=f"badapple_{clip}.logic.json", target=f"badapple_{clip}.target.json", label=label))
     json.dump(idx, open(os.path.join(OUT, "index.json"), "w"), indent=1); print(json.dumps(idx, indent=1))
 
 

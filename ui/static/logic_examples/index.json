@@ -22,5 +22,20 @@
  {
   "file": "translate_wire.logic.json",
   "label": "Translation: 0 gates (the output is a wire to the west neighbour)"
+ },
+ {
+  "file": "waves_visible_only.logic.json",
+  "target": "waves_visible_only.target.json",
+  "label": "Waves learned from the visible channel only (10 gates, 2 latent channels)"
+ },
+ {
+  "file": "badapple_3998.logic.json",
+  "target": "badapple_3998.target.json",
+  "label": "Bad Apple frames 3998-4022: 64-gate circuit (fitted on 3998-4006)"
+ },
+ {
+  "file": "badapple_4500.logic.json",
+  "target": "badapple_4500.target.json",
+  "label": "Bad Apple frames 4500-4524: 38 gates, fits but does not transfer"
  }
 ]

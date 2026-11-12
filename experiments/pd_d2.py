@@ -26,6 +26,16 @@ def subject(d):
         ok = lambda tr: bool((tr[:, 20:, ..., 0] == tgt).all())
     elif task == "life":
         starts = lambda rng, n: (rng.random((n, 32, 32, 1)) < 0.5).astype(np.uint8)
+    elif m.get("setting", "").startswith("burnin"):   # D2.5 visible-only circuit: full start states come from its own 2-frame prefix
+        import pd_d1
+        def starts(rng, n, dens=(0.004, 0.004)):
+            out = []
+            for i in range(n):
+                seq = pd_d1.trajectories("gh", pd_d1.init_states("gh", 1, rng, size=48, density=dens), 64)[0, :, :, :, 0]; t0 = int(rng.integers(4, 60))
+                st = np.zeros(seq.shape[1:] + (C,), np.uint8); st[..., 0] = seq[t0 - 2]
+                for j in range(2): st = dlca.net_eval(L["net"], dlca.np_patches(st, periodic)); st[..., 0] = seq[t0 - 1 + j]
+                out.append(st)
+            return np.stack(out)
     else:
         import pd_d1
         starts = lambda rng, n: pd_d1.init_states(task, n, rng)

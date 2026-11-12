@@ -4,7 +4,8 @@
 3. The committed exact Life circuit (D0, seed 1) equals B3/S23 on all 512 neighbourhoods, before and after exact
    simplification, and describe_totalistic() returns 'B3/S23'.
 4. JAX hard circuit == NumPy layered circuit == flat netlist (random init, CPU).
-5. Python and Node replays of a badca/logic-ca-v1 export are bit-identical."""
+5. Python and Node replays of a badca/logic-ca-v1 export are bit-identical, including the optional observation prefix
+   (D2.5/D3 exports), and the prefix really overwrites the visible channel during the first P steps only."""
 import hashlib, json, os, subprocess, sys
 import numpy as np
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, ROOT)
@@ -41,5 +42,9 @@ assert (J == dlca.hard_circuit(circ, P)).all() and (J == dlca.net_eval(net, P)).
 f = os.path.join(ROOT, "runs/path_d/d0/checker_s2_e2000/circuit.logic.json"); d = dlca.load(f)
 B = dlca.net_rollout(d["net"], d["init_state"], 30, d["boundary"] == "periodic")
 out = subprocess.run(["node", os.path.join(ROOT, "player/logic_replay.mjs"), f, "30"], capture_output=True, text=True, check=True).stdout
+assert json.loads(out)["sha256"] == hashlib.sha256(B.tobytes()).hexdigest()
+f = os.path.join(ROOT, "ui/static/logic_examples/badapple_3998.logic.json"); d = dlca.load(f); B = dlca.replay(d)
+assert len(d["prefix_frames"]) == 2 and all((B[i + 1, ..., 0] == d["prefix_frames"][i]).all() for i in range(2))
+out = subprocess.run(["node", os.path.join(ROOT, "player/logic_replay.mjs"), f], capture_output=True, text=True, check=True).stdout
 assert json.loads(out)["sha256"] == hashlib.sha256(B.tobytes()).hexdigest()
 print("ALL OK")
