@@ -57,4 +57,4 @@ This re-scoped the track without starting a new campaign. The changes:
 | | cap | pilot cap | used so far |
 |---|---|---|---|
 | GPU | 24 GPU-h | 3 GPU-h | **0** (everything ran on CPU) |
-| CPU | 64 core-h | 8 core-h | **1.32 core-h** (`runs/readable_rules/cpu_ledger.jsonl`, per-process CPU time) |
+| CPU | 64 core-h | 8 core-h | **1.92 core-h** (`runs/readable_rules/cpu_ledger.jsonl`, per-process CPU time) |

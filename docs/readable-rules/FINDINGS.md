@@ -167,10 +167,96 @@ proof above.
 No novelty is claimed. This track only tests feasibility and simplicity.
 
 ## 7. Cost
-- **CPU (`runs/readable_rules/cpu_ledger.jsonl`):** 1.32 core-h in total.
+- **CPU (`runs/readable_rules/cpu_ledger.jsonl`):** 1.92 core-h in total.
   - Rollout search pilots: 0.61 (library start) + 0.18 ("tree" start) + 0.19 (short clips).
-  - Extraction: 0.18.
-  - Diagnostics: 0.08.
-  - Controls: 0.08.
+  - Extraction: 0.18. Diagnostics: 0.08. Controls: 0.08.
+  - Second round (§8): stability 0.43, Life landscape 0.12, SAT ladder 0.05, light cone < 0.01.
 - **GPU:** 0.
-- **Remaining:** 24 GPU-h and 62.7 CPU core-h.
+- **Remaining:** 24 GPU-h and 62.1 CPU core-h.
+
+## 8. Why search fails, and what SAT can prove (second round, 2026-11-12)
+Script: `experiments/rr_next.py`; results in `runs/readable_rules/next/`.
+
+### 8a. Life: the rollout objective is deceptive, not just under-budgeted
+Reference: exact B3/S23 (error 0). Objective `h23` = full 23-step rollout error from seed 0; `h1` = one-step error.
+- **Landscape:** hold 0.395; random programs mean 0.504 (10th percentile 0.237).
+  Single edits of the exact rule: 9 are equivalent (error 0); the others score mostly 0.23–0.26 on `h23`
+  (some 0.39–0.56) but 0.006–0.66 on `h1`.
+- **Paths from hold to exact** (adding the three Life rules in each of the 6 orders): on `h23`, 4 of 6 orders get
+  *worse* at an intermediate step (e.g. 0.395 → 0.578 → 0.56 → 0). On `h1` all 6 decrease monotonically.
+- **Search from neighbours:** only 11 of 33 single-edit neighbours (9 of them equivalent) return to exact within
+  2,000 evaluations.
+- **Search from empty:** 2k evals 0.233 and 8k evals 0.231 (3 of 3 seeds); 32k evals reach exact in 2 of 3 seeds
+  (75 CPU-s each).
+- **Conclusion:** both. Near-miss rules sit on the same ~0.23 plateau as wrong rules, so the rollout objective gives
+  no gradient toward the answer (structural). A large enough budget sometimes crosses it (budget). The one-step
+  objective has no such plateau, which is why the one-step fit and SAT recover Life directly (§2).
+
+### 8b. SAT ladder on Bad Apple crops
+Setup: translate (1221) and contour (4500); crops 8×8 and 16×16 centred on the most-changing area, and the full
+48×36 frame; families `tot` (own v, number of on Moore neighbours, own hidden: at most 2·9·2^k entries per output)
+and `full` (any 3×3 + own hidden); k = 0, 1, 2 hidden bits; S = 1, 2 substeps; T = 2, 3, 4, 6, 8, 12, 16 frames,
+stopping at the first non-SAT; 60 s per solve, 6 M clause cap. Hidden bits start at 0; the boundary is zero
+(artificial at crop edges).
+
+| | result |
+|---|---|
+| full frame, both tasks, all families, k, S | UNSAT at T = 2 (3 cases SIZE: over the clause cap) |
+| 16×16 crops, all settings | UNSAT at T = 2 |
+| 8×8 translate, all settings | UNSAT at T = 2 |
+| 8×8 contour, S = 1 | UNSAT at T = 2 |
+| 8×8 contour, S = 2 | `full` k=0: SAT to T = 3; k=1, 2: SAT to T = 4; `tot` k=2: SAT to T = 4 (186 entries), UNSAT at 6 |
+| 16-frame replay of the longest SAT rules | 0.27–0.41 vs hold 0.36 |
+
+- **No TIMEOUTs.** Every stop is a proof (or the size cap), not a solver limit.
+- **Scope of every UNSAT:** impossible *for this rule family, radius 1 per substep, this S, hidden bits starting at
+  zero, a zero boundary at the crop edge, and this crop*. It says nothing about a learned hidden start or a wider
+  neighbourhood.
+- **Why T = 2 already fails:** with hidden bits starting at 0 the first transition depends on the visible patch only,
+  so k cannot help, and the light cone (8c) gives a direct witness. At crop edges, content entering from outside is
+  a second cause.
+- **Short exact rules do not generalise:** the T = 4 solutions replay 16 frames at or below hold quality.
+
+### 8c. Light cone: premises, scope, witnesses
+**Statement.** For any homogeneous, deterministic, synchronous CA with radius r per substep and S substeps per frame
+(reach R = r·S per frame), any number of hidden channels **whose initial value is the same in every cell**, and a
+zero boundary: the state of a cell at frame t is a function of the frame-0 patch of radius t·R around it. So if two
+cells have identical radius-R patches at frame 0 but different values at frame 1, **no** such rule replays the clip
+exactly.
+
+- **Proof:** induction on substeps; nothing beyond the premises is used.
+- **Not covered:** a learned or otherwise non-constant hidden start (the Neural CA has one: 1,620 values), a
+  non-zero or data-driven boundary, non-homogeneous or stochastic rules.
+- **R for `dlrule`:** `r2` reads radius 2, so R = 2·S (R = 2 at S = 1, R = 4 at S = 2). The SAT families read 3×3,
+  so R = S.
+
+| task | R = 1 witness (cell off / cell on, same patch) | R = 2 witness | R = 3 | R = 4 |
+|---|---|---|---|---|
+| translate 1221:60 | (3,18) / (7,11), all-zero patch | (5,19) / (8,14), all-zero 5×5 | (8,15) / (10,18) | none |
+| contour 4500:56 | (18,12) / (7,17) | (27,7) / (7,17) | none | none |
+| wipe 1499:32 | (14,44) / (17,47) | (19,28) / (19,30) | (19,29) / (19,30) | none |
+| cut 1678:32 | (0,24) / (29,7) | none | none | none |
+
+- **Empirical check (not part of the proof):** 0 of 300 random radius-2, S = 1 `dlrule` programs separate the R = 2
+  witness pair, as the proof requires.
+- **Consequence:** radius 2 with S = 1 (R = 2) is provably inexact on translate, contour and wipe; with S = 2 (R = 4)
+  no witness exists, so the proof does not rule it out (nor does it show it possible).
+
+### 8d. Autonomous-replay stability
+One fixed rule (k = 0, S = 2, empty start, 4,000 evaluations, 3 seeds) fitted on 16, 32 and 64 frames of 1221 and
+4500. Objectives: `full` (rollout error) and `mixed` (rollout plus one-step error). Rules are chosen on the training
+window only; next-clip numbers are reported, never used for selection.
+
+- **Where the gap opens:** the rollout error exceeds the one-step error by 0.05 from frame 2 on 1221 and from frames
+  4–19 on 4500.
+- **Training-window error by length** (hold in brackets):
+  - 1221: 16 frames 0.092–0.106; 32 frames 0.087–0.094; 64 frames 0.28–0.36 (0.40), lag-4 F1 ≤ 0.29.
+  - 4500: 16 frames 0.056–0.08; 32 frames 0.08–0.105; 64 frames 0.09–0.14 (0.187), lag-4 F1 ≤ 0.25.
+- **Mixed objective:** slightly lower one-step error, no consistent gain on rollout error or F1
+  (1221:16 mixed 0.092–0.101 vs full 0.096–0.106; worse on 4500:32).
+- **Next clip (reported only):** mostly at or worse than hold; 1221:16 seed 0 is the exception (0.077 vs 0.131).
+
+### 8e. Most Conway-like result so far
+Still the blind 16-frame rule on 4500–4515 (§3a): `R0: if u == 1 and n8 >= 4 -> v=1; R1: if n8 <= 3 and E <= 1 ->
+v=0; R2: if E >= 3 -> v=0` (5 conditions, error 0.047 vs hold 0.090), replayable in the UI rule lab. Nothing in this
+round beat it.

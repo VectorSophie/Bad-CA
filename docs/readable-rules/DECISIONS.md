@@ -16,6 +16,9 @@
 - **Result:** K = 8 schedules roughly halve the error and are the only explicit models that move on 32–60 frames.
 - **Cost:** they need an external timeline (≈ 270 schedule bytes) and 5–7× the conditions.
 - **Labelling:** they are reported with that cost and never called a fixed-rule or Conway-style CA.
+- **Update (2026-11-12, user decision):** a phased readable-rule export that replays the whole song autonomously
+  becomes the featured demo, with the Neural CA moved to a comparison view. Labelled "K rules + schedule" with the
+  schedule bytes and its error next to the Neural CA's. The quality bar for that switch is fixed before any such run.
 
 **D4. Reach per frame must be at least 4 cells for exact replay of these tasks** (proof, FINDINGS §5).
 - Runs at S = 1 with `r2` (reach 2) are provably inexact from a zero hidden start on translate, contour and wipe.
@@ -40,3 +43,24 @@
      variant (minimum wrong pixels) and short clips.
 
 A state-driven CA (mode switches from cell state instead of a timeline) stays a long-term candidate. It is not started.
+
+**D7. Second round (2026-11-12): what failed, and where to look next** (FINDINGS §8).
+- **Rollout search:** its objective is deceptive (near-miss rules score like wrong ones, §8a). Use it only to polish;
+  fit with one-step or SAT objectives first (confirms D5).
+- **Exact SAT from a zero hidden start:** closed for Bad Apple at radius 1 per substep. Every crop and the full frame
+  is UNSAT at 2–6 frames, no timeouts (§8b), as the light cone predicts (§8c). Not repeated with more seeds, k or S.
+- **Longer training windows:** one fixed rule loses most of its motion beyond 32 frames (§8d). A mixed short/long
+  objective did not help. Not pursued further.
+- **Next, in order (CPU only, inside the remaining budget):**
+  1. **Free hidden start in SAT, counted as seed bytes.** Every UNSAT so far depends on the hidden bits starting at
+     zero; the Neural CA succeeds with a learned start. Letting the solver choose the hidden start (k bits per cell)
+     tests that premise directly. Its cost is visible: k × 1,728 bits for the full frame.
+  2. **Phased readable rules toward the whole song** (D3 update), one short rule per phase with phase boundaries at
+     cuts and wipes, fitted with one-step/SAT objectives and polished by rollout.
+- **Remaining hypotheses (open, not tested):**
+  - H1: exact short replay needs a non-constant hidden start (tests with direction 1).
+  - H2: with R ≥ 4 (radius 2, S = 2) a fixed rule exists for translate/contour that the searches missed; the light cone
+    no longer rules it out, and no SAT encoding for radius 2 exists yet.
+  - H3: Bad Apple's motion is locally lawful only within scenes, so a per-scene rule list is the smallest honest
+    readable model.
+
