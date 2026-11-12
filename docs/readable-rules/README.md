@@ -17,6 +17,13 @@ teacher. It is not reinterpreted as a failure.
 | [DECISIONS.md](DECISIONS.md) | what was stopped, what continues, and why |
 
 ## Status
+**State as of 2026-11-12, round 4 (generalisation): NO-GO.** Rules fitted on one 16-frame window do not transfer to
+the next window of the same scene. The best patch table of radius 1–4 doesn't either, even one step ahead. Large-scale
+search is stopped and Readable Rules stays an experimental Rule Lab feature (FINDINGS §10, DECISIONS D9). Rounds 2–3:
+FINDINGS §8–9.
+
+The pilot status below is kept as recorded.
+
 **State as of 2026-11-11: the pilot and the mid-course review are complete.**
 
 - **Execution** (the right rule given): exact in Python, Node and the browser, on 4 positive controls and on random programs.

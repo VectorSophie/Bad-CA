@@ -71,3 +71,11 @@ This re-scoped the track without starting a new campaign. The changes:
   - the ledger keeps the original `rs_a1` line (0.1 s, wrong) and adds a correction line with the measured orphan time;
   - the upper bound is booked.
 - **Remaining:** ≥ 60 CPU core-h and 12 GPU-h. Nothing more is spent until the next step is chosen (DECISIONS D8).
+
+### Budget, fourth round (allotment 24 core-h inside the 128 cap)
+| | used | remaining |
+|---|---|---|
+| CPU | about 6.4 core-h this round (G1 0.78, G3 5.30, G4 0.19, others < 0.2); ≤ 74.0 cumulative | ≥ 54 of 128 |
+| GPU | 0 | 12 GPU-h |
+
+Decision D9 (NO-GO): no further readable-rule search is planned, so the remaining budget is not used.

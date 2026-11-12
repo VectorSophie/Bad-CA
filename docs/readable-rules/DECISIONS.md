@@ -93,3 +93,22 @@ A state-driven CA (mode switches from cell state instead of a timeline) stays a 
     240 frames. Cheap to test with `fit_clip`.
 - **Budget rule:** after the A1 overrun, every pool run sets a per-solve timeout that works, and the meter kills the
   process group. No new budget was added.
+
+**D9. Fourth round (2026-11-12): NO-GO on generalisation** (FINDINGS §10).
+- **Decision:** stop large-scale readable-rule search. Readable Rules stays an experimental Rule Lab feature. The
+  Neural CA stays featured, unchanged.
+- **Why:**
+  - rules fitted on a 16-frame window do not transfer to the next window of the same scene;
+  - even the best patch tables of radius 1–4 do not, one step ahead (§10a);
+  - the failure is a window-specific local law, not search, radius or one bit of hidden state.
+- **Kept:**
+  - the meter fix and its integration test;
+  - the radius-2 counter encoder (`tot2`) and its test;
+  - cut-aligned phases as the default placement *when a hard cut lies inside the clip* (§10d), since it costs nothing;
+  - pre-registered windows with visual scene labels for any later generalisation test.
+- **Not started:** 120–240-frame extension, whole song, GPU work, learned hidden starts (D8).
+- **Open, if revisited:**
+  - H6: a rule conditioned on a small *per-window* motion parameter (a direction or speed carried in hidden state
+    and set once per window) might transfer where fixed laws do not. This is equivalent to a schedule with
+    parameters, and must be counted as one.
+  - H2 (direction-aware radius 2) is still untested; §10a suggests it would not fix transfer.

@@ -1,0 +1,630 @@
+{
+ "rule": "scenes: maximal runs between cut frames (segment.signals) and wipe runs (>=3 consecutive frames with change>=0.08), length>=80; windows fixed relative to scene start a and end e",
+ "windows": [
+  {
+   "scene": [
+    43,
+    355
+   ],
+   "train": [
+    45,
+    61
+   ],
+   "adjacent": [
+    61,
+    77
+   ],
+   "distant": [
+    93,
+    109
+   ],
+   "cross": [
+    347,
+    363
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    485,
+    796
+   ],
+   "train": [
+    487,
+    503
+   ],
+   "adjacent": [
+    503,
+    519
+   ],
+   "distant": [
+    535,
+    551
+   ],
+   "cross": [
+    788,
+    804
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "morph",
+   "visual_distant": "different"
+  },
+  {
+   "scene": [
+    846,
+    1058
+   ],
+   "train": [
+    848,
+    864
+   ],
+   "adjacent": [
+    864,
+    880
+   ],
+   "distant": [
+    896,
+    912
+   ],
+   "cross": [
+    1050,
+    1066
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "morph",
+   "visual_distant": "different"
+  },
+  {
+   "scene": [
+    1095,
+    1218
+   ],
+   "train": [
+    1097,
+    1113
+   ],
+   "adjacent": [
+    1113,
+    1129
+   ],
+   "distant": [
+    1145,
+    1161
+   ],
+   "cross": [
+    1210,
+    1226
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    1263,
+    1362
+   ],
+   "train": [
+    1265,
+    1281
+   ],
+   "adjacent": [
+    1281,
+    1297
+   ],
+   "distant": [
+    1313,
+    1329
+   ],
+   "cross": [
+    1354,
+    1370
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "morph",
+   "visual_distant": "different"
+  },
+  {
+   "scene": [
+    1368,
+    1471
+   ],
+   "train": [
+    1370,
+    1386
+   ],
+   "adjacent": [
+    1386,
+    1402
+   ],
+   "distant": [
+    1418,
+    1434
+   ],
+   "cross": [
+    1463,
+    1479
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    1585,
+    1686
+   ],
+   "train": [
+    1587,
+    1603
+   ],
+   "adjacent": [
+    1603,
+    1619
+   ],
+   "distant": [
+    1635,
+    1651
+   ],
+   "cross": [
+    1678,
+    1694
+   ],
+   "cross_kind": "cut",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    1686,
+    1797
+   ],
+   "train": [
+    1688,
+    1704
+   ],
+   "adjacent": [
+    1704,
+    1720
+   ],
+   "distant": [
+    1736,
+    1752
+   ],
+   "cross": [
+    1789,
+    1805
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "morph",
+   "visual_distant": "different"
+  },
+  {
+   "scene": [
+    1799,
+    1879
+   ],
+   "train": [
+    1801,
+    1817
+   ],
+   "adjacent": [
+    1817,
+    1833
+   ],
+   "distant": [
+    1849,
+    1865
+   ],
+   "cross": [
+    1871,
+    1887
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    1912,
+    2242
+   ],
+   "train": [
+    1914,
+    1930
+   ],
+   "adjacent": [
+    1930,
+    1946
+   ],
+   "distant": [
+    1962,
+    1978
+   ],
+   "cross": [
+    2234,
+    2250
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    2252,
+    2496
+   ],
+   "train": [
+    2254,
+    2270
+   ],
+   "adjacent": [
+    2270,
+    2286
+   ],
+   "distant": [
+    2302,
+    2318
+   ],
+   "cross": [
+    2488,
+    2504
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    2507,
+    2731
+   ],
+   "train": [
+    2509,
+    2525
+   ],
+   "adjacent": [
+    2525,
+    2541
+   ],
+   "distant": [
+    2557,
+    2573
+   ],
+   "cross": [
+    2723,
+    2739
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "morph",
+   "visual_distant": "different"
+  },
+  {
+   "scene": [
+    2779,
+    2861
+   ],
+   "train": [
+    2781,
+    2797
+   ],
+   "adjacent": [
+    2797,
+    2813
+   ],
+   "distant": [
+    2829,
+    2845
+   ],
+   "cross": [
+    2853,
+    2869
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    2863,
+    3272
+   ],
+   "train": [
+    2865,
+    2881
+   ],
+   "adjacent": [
+    2881,
+    2897
+   ],
+   "distant": [
+    2913,
+    2929
+   ],
+   "cross": [
+    3264,
+    3280
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "different"
+  },
+  {
+   "scene": [
+    3352,
+    3459
+   ],
+   "train": [
+    3354,
+    3370
+   ],
+   "adjacent": [
+    3370,
+    3386
+   ],
+   "distant": [
+    3402,
+    3418
+   ],
+   "cross": [
+    3451,
+    3467
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    3756,
+    3993
+   ],
+   "train": [
+    3758,
+    3774
+   ],
+   "adjacent": [
+    3774,
+    3790
+   ],
+   "distant": [
+    3806,
+    3822
+   ],
+   "cross": [
+    3985,
+    4001
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "morph",
+   "visual_distant": "different"
+  },
+  {
+   "scene": [
+    3996,
+    4183
+   ],
+   "train": [
+    3998,
+    4014
+   ],
+   "adjacent": [
+    4014,
+    4030
+   ],
+   "distant": [
+    4046,
+    4062
+   ],
+   "cross": [
+    4175,
+    4191
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    4208,
+    4393
+   ],
+   "train": [
+    4210,
+    4226
+   ],
+   "adjacent": [
+    4226,
+    4242
+   ],
+   "distant": [
+    4258,
+    4274
+   ],
+   "cross": [
+    4385,
+    4401
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "different"
+  },
+  {
+   "scene": [
+    4420,
+    4565
+   ],
+   "train": [
+    4422,
+    4438
+   ],
+   "adjacent": [
+    4438,
+    4454
+   ],
+   "distant": [
+    4470,
+    4486
+   ],
+   "cross": [
+    4557,
+    4573
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    4675,
+    4791
+   ],
+   "train": [
+    4677,
+    4693
+   ],
+   "adjacent": [
+    4693,
+    4709
+   ],
+   "distant": [
+    4725,
+    4741
+   ],
+   "cross": [
+    4783,
+    4799
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    4793,
+    5023
+   ],
+   "train": [
+    4795,
+    4811
+   ],
+   "adjacent": [
+    4811,
+    4827
+   ],
+   "distant": [
+    4843,
+    4859
+   ],
+   "cross": [
+    5015,
+    5031
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "morph",
+   "visual_distant": "different"
+  },
+  {
+   "scene": [
+    5026,
+    5319
+   ],
+   "train": [
+    5028,
+    5044
+   ],
+   "adjacent": [
+    5044,
+    5060
+   ],
+   "distant": [
+    5076,
+    5092
+   ],
+   "cross": [
+    5311,
+    5327
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "same"
+  },
+  {
+   "scene": [
+    5438,
+    5892
+   ],
+   "train": [
+    5440,
+    5456
+   ],
+   "adjacent": [
+    5456,
+    5472
+   ],
+   "distant": [
+    5488,
+    5504
+   ],
+   "cross": [
+    5884,
+    5900
+   ],
+   "cross_kind": "cut",
+   "visual_adjacent": "same",
+   "visual_distant": "different"
+  },
+  {
+   "scene": [
+    5893,
+    6275
+   ],
+   "train": [
+    5895,
+    5911
+   ],
+   "adjacent": [
+    5911,
+    5927
+   ],
+   "distant": [
+    5943,
+    5959
+   ],
+   "cross": [
+    6267,
+    6283
+   ],
+   "cross_kind": "wipe",
+   "visual_adjacent": "same",
+   "visual_distant": "different"
+  }
+ ],
+ "visual_check": "Labels set by viewing contact sheets of frames train0/15, adjacent0/15, distant0/15 and the cross boundary for every scene, BEFORE any rule was fitted. 'same' = same subject and composition; 'morph' = no cut but the subject changes shape/identity; 'different' = distant window shows other content although no cut/wipe was detected.",
+ "protocol": {
+  "train_len": 16,
+  "methods": [
+   "staged k=0",
+   "staged k=1",
+   "rollout_only k=0"
+  ],
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "evals": 4000,
+  "S": 2,
+  "transfer": "rule unchanged, restart from the window's true first frame, hidden 0, 15 steps",
+  "continuous": "rule runs from train[0] (hidden 0) without injection to the end of the cross window; each window scored on its frames",
+  "baselines": [
+   "hold (window first frame for transfer; train[0] for continuous)",
+   "shift: best constant integer (dy,dx) in [-3,3]^2 per frame fitted one-step on the train window"
+  ],
+  "sharp_increase": "first frame where rollout error minus one-step (teacher-forced) error exceeds 0.05 (as FINDINGS 8d)",
+  "selection": "rules chosen on the training window only; no window here is used for selection; no reruns after viewing results"
+ },
+ "fixed_at": "2026-11-12 15:05:46"
+}

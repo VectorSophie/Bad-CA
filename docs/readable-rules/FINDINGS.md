@@ -436,3 +436,299 @@ For comparison: the Neural CA replays the whole song at 0.0152.
 | **this round** | **≤ 65.7** |
 
 GPU: 0.
+
+## 10. Generalisation and dynamics (fourth round, 2026-11-12)
+Script: `experiments/rr_gen.py`; results in `runs/readable_rules/gen/` (`prereg_windows.json`, `lut.jsonl`,
+`g1.jsonl`, `g2.jsonl`, `g3.jsonl`, `g3/`, `g4.jsonl`); logs `runs/readable_rules/gen_*.log`. CPU only.
+
+**Pre-flight (before any fit).** `tests/test_meter.py` checks three things:
+- SAT wall-time limit: a 3 s limit gives TIMEOUT after 4.5 s, encoding included;
+- a wall-killed `Pool` run leaves no worker alive and books its CPU;
+- SIGTERM to the meter does the same, and rows written before the kill are kept.
+
+The meter now samples the CPU of every process in the run's session from `/proc`. The old `wait4` count would have
+booked 0 CPU-s for the killed run; the sampled count is 16 CPU-s.
+
+**Windows (fixed before fitting, `prereg_windows.json`).**
+- **Scenes:** 24 scenes ≥ 80 frames between cut frames and wipe runs (`segment.signals`; a wipe run is ≥ 3 frames
+  with change ≥ 0.08).
+- **Windows per scene** (a = scene start, e = scene end):
+
+  | window | frames |
+  |---|---|
+  | train | [a+2, a+18) |
+  | adjacent | [a+18, a+34) |
+  | distant | [a+50, a+66) |
+  | cross | [e−8, e+8), straddling the cut or wipe |
+
+- **Visual check.** Every scene was inspected on a contact sheet before any fit:
+  - adjacent window: 17 same subject, 7 morph (no cut, but the subject changes shape or identity);
+  - distant window: 13 same, 11 show different content although no cut or wipe was detected.
+
+  The cut/wipe signals alone are not a reliable scene detector for Bad Apple, so groups below use the visual labels.
+- **Methods:**
+  - staged two-stage search, k = 0 and k = 1;
+  - rollout-only, k = 0;
+  - 3 seeds each, 4,000 evaluations, S = 2;
+  - hidden state starts at 0.
+- **Baselines:**
+  - hold;
+  - a shift baseline: the best constant integer shift (dy, dx) ∈ [−3, 3]² per frame, fitted one-step on the train window.
+
+### 10a. Search-free bound: exact patch tables (`lut.jsonl`)
+For radius R, the train window's majority table "radius-R patch at t → pixel at t+1" is the best any memoryless rule
+with per-frame reach R can do on that window (S substeps of radius r give R = r·S). It is applied one step on each
+unseen window; unseen patches keep their state. Errors are one-step errors, averaged over windows.
+
+| R | train in-sample | adjacent (same): transfer / hold | distant (same): transfer / hold | cross: transfer / hold | patches unseen (adj.) |
+|---|---|---|---|---|---|
+| 1 | 0.0198 | 0.0207 / 0.0172 (3/17 beat hold) | 0.0308 / 0.0203 (1/13) | 0.0786 / 0.0721 (4/24) | 0.4 % |
+| 2 | 0.0120 | 0.0220 / 0.0172 (4/17) | 0.0304 / 0.0203 (0/13) | 0.0779 / 0.0721 (2/24) | 7 % |
+| 3 | 0.0062 | 0.0198 / 0.0172 (4/17) | 0.0244 / 0.0203 (1/13) | 0.0746 / 0.0721 (4/24) | 19 % |
+| 4 | 0.0031 | 0.0185 / 0.0172 (5/17) | 0.0220 / 0.0203 (0/13) | 0.0725 / 0.0721 (6/24) | 32 % |
+
+- **Each window has its own local law.** The in-window optimum on the unseen window is well below hold at every R
+  (e.g. 0.0128 at R = 1, adjacent), but the training window's optimum does not carry over one step, even within the
+  same scene.
+- **Radius doesn't help.** A larger R fits the training window better but sees more unseen patches. It never turns
+  transfer into a win.
+
+  This bounds every memoryless search result below. Hidden state is the one thing the table does not cover.
+
+### 10b. G1: window-to-window generalisation (`g1.jsonl`, 216 fits + 24 shift baselines)
+**Training window.** Rollout error 0.086–0.092 vs hold 0.125; 69/72 runs per method beat hold. But the one-step
+error (0.029–0.034) is *worse* than one-step hold (0.026) in 52–55 of 72 runs. The training win comes from matching
+the net drift (e.g. a shape shrinking overall), not from predicting local motion.
+
+**A. Transfer** (the rule unchanged, restarted from the unseen window's true first frame). The table gives mean error
+vs hold, then runs beating hold (and runs beating it by more than 5 %), then lag-4 F1 and change mass.
+
+| window group | staged k=0 | staged k=1 | rollout-only | shift |
+|---|---|---|---|---|
+| adjacent, same | 0.107 vs 0.085; 21/51 (12); F1 0.10, mass 0.42 | 0.103; 17/51 (9) | 0.123; 14/51 (11) | 0.100; 3/17 |
+| adjacent, morph | 0.123 vs 0.127; 17/21 (13); F1 0.12, mass 0.14 | 15/21 | 16/21 | 0/7 |
+| distant, same | 0.159 vs 0.101; **1/39** (0); F1 0.08 | 5/39 (1) | 2/39 (0) | 0/13 |
+| distant, different | 0.209 vs 0.171; 11/33 (6) | 10/33 | 12/33 | 0/11 |
+| cross | 0.275 vs 0.218; 17/72 (10); F1 0.11 | 19/72 | 17/72 | 0/24 |
+
+- **Wins with real motion are rare:**
+  - criterion: > 5 % better than hold, lag-4 F1 ≥ 0.2, change mass 0.3–3;
+  - adjacent same-scene: 8 of 153 runs, from 3 windows (9, 16, 19), 5 of which also beat the shift baseline;
+  - distant same-scene: **0 of 117**.
+- **Trivial wins:**
+  - most other "wins" are `if always -> v=0` (erase everything) on sparse scenes (starfield, a dot), F1 0.06, or
+    erosion while a shape shrinks (the morph windows, change mass 0.14);
+  - the all-erase rule on window 22 beats hold on the adjacent window (0.013 vs 0.023) and loses badly on the
+    distant one (0.228 vs 0.155).
+- **Same scene vs cut:**
+  - per-window median improvement (seeds averaged), staged k = 0: adjacent same −8 %, distant same −22 %, cross −6 %;
+  - permutation test same vs cross: p = 0.91 (adjacent) and 0.10 (distant);
+  - rollout-only: distant same is significantly *worse* than cross (p = 0.006).
+
+  **Same-scene windows are not easier.**
+
+**B. Continuous** (from train[0], no injection, through all windows). The baseline is train[0] held, i.e. the same
+information the rule has.
+- **Adjacent same:** beats it in 36/51 (staged) and 40/51 (rollout-only), mean improvement 12–16 %.
+- **Distant same:** 30/39 and 33/39, 13–20 %.
+- **Cross:** 33–36 of 72, about 0 %.
+- **But no motion survives:**
+  - lag-4 F1 is 0.05–0.08 everywhere, and change mass 0.08–0.61;
+  - the rollout beats a frozen frame by drifting toward the scene's average (shrinking or filling), not by moving
+    with it;
+  - the shift baseline is worse than the frozen frame (−2 % to −9 %).
+- **Error take-off:** rollout error exceeds one-step error by 0.05 at a median of frame 4 (staged), 4.5 (k = 1) and
+  5 (rollout-only); in 44–47 of 72 runs inside the 16 training frames; never in 6/72.
+
+**Hidden state (k = 1, zero start):**
+- adjacent transfer error −0.002 on average vs k = 0, better in 15/72;
+- distant −0.007, better in 24/72;
+- cross +0.009.
+
+No consistent gain.
+
+### 10c. G2: what the rules do (`g2.jsonl`, all 216 programs)
+- **Rule kinds** (from the text):
+  - other 201, grow (→ on when counts are high) 65, erode (→ off when counts are low) 63;
+  - `always` 47, fill 7, kill 2.
+- **Precision:** the share of a rule's changed pixels that match the video.
+  - Every kind is mostly right on the training window: always 0.87, erode 0.66, grow 0.56, other 0.54.
+  - On unseen windows, precision drops for every kind:
+    - adjacent: always 0.40, erode 0.33, grow 0.31, other 0.25;
+    - distant: 0.14–0.34.
+- **The 32 adjacent same-scene wins (> 5 %):**
+  - 25 contain an `always` rule;
+  - they leave only 10 % of cells to the default "keep";
+  - adjacent-window precision 0.60 (median), but distant 0.05.
+- **The 121 failures:**
+  - precision falls from 0.53 (train) to 0.14 (adjacent);
+  - which rules fire barely changes between train and unseen windows (total-variation distance 0.075 adjacent,
+    0.12 distant).
+
+  The same rules fire in the same proportions but now make wrong changes. The local situations look alike; what
+  follows them differs.
+- **Ablation:**
+  - in failures, removing a rule hurts the training window in 181/222 cases but *helps* the adjacent window in
+    114/222;
+  - in wins, removal helps adjacent in only 4/62.
+- **Pruning:**
+  - greedy condition removal (train error +0.001 allowed) drops 2.44 → 2.17 conditions on average and simplifies
+    49/216 programs;
+  - adjacent transfer is unchanged (0.1156 vs 0.1147).
+
+  The rules are already near-minimal; their size is not what overfits.
+- **Local statistics drift:**
+  - measured as the total-variation distance between the (v, n8) histograms of rollout and video;
+  - the rollout drifts slightly faster than holding the first frame: 0.030 vs 0.021 at frame 1, 0.102 vs 0.104 at
+    frame 16, 0.308 vs 0.296 at frame 63;
+  - the rollout is closer than hold in only 54–79 of 216 runs.
+
+  The rules do not keep the video's local texture any better than a frozen frame.
+
+### 10d. G3: phase placement (`g3.jsonl`, `g3/`)
+**Setup:**
+- Shared executor, export and `fit_clip` (staged base, `reuse` mode, edit penalty 0.002), S = 2, k = 0.
+- K = 8 and 16; 3 seeds; the same search budget per phase for every placement.
+- **Placements:**
+  - **uniform:** equal lengths;
+  - **cut-aligned:** boundaries at the clip's cut frames and wipe-run starts (`segment.signals`), strongest first;
+    the longest phases are halved if there are fewer events than K − 1;
+  - **optimized:** from cut-aligned, at most 4 greedy moves (±1/2/4/8 frames) or merges, each accepted only if it
+    lowers the clip's MDL code length.
+- **Data access:** every placement uses only the clip being fitted, which is also the scored clip. **These are fit
+  (compression) results, not blind generalisation.**
+
+Errors for seeds 0/1/2 (hold in brackets). "Progs" = distinct programs used; cond = conditions; file = total export
+bytes including the schedule (275–283 B at K = 8, 547–567 B at K = 16).
+
+| task | K | uniform | cut-aligned | optimized |
+|---|---|---|---|---|
+| 1221:120 (0.552), 1 hard cut | 8 | 0.101/0.100/0.097; F1 0.14–0.28; worst16 0.26–0.28; 3 progs; 5–11 cond; 323–385 B | **0.078/0.077/0.076; F1 0.47–0.52; worst16 0.130; 2 progs; 3–5 cond; 308–343 B** | same as cut |
+| | 16 | 0.084/0.080/0.080; F1 0.32–0.42; 5–6 progs; 8–16 cond | 0.076 ×3; F1 0.51–0.52; 3 progs; 5 cond | same |
+| 4500:120 (0.188), wipes only | 8 | 0.152/0.153/0.149 | 0.151/0.152/0.150 | 0.151/0.152/0.155 |
+| | 16 | 0.138/0.149/0.145 | 0.145/0.143/0.144 | 0.145 ×3 |
+| 2700:180 (0.555), cuts + wipes | 8 | **0.188/0.174/0.170** | 0.197/0.203/0.197 | 0.183/0.194/0.190 |
+| | 16 | 0.155/0.181/0.180 | 0.173/0.180/0.175 | 0.180/0.181/0.184 |
+| 1760:240 (0.401) | 8 | 0.282/0.282/0.280 (collapse) | same | same |
+| | 16 | 0.282/**0.149/0.149** (15/12 progs, 65/51 cond) | 0.282/0.281/0.274 (collapse) | same |
+
+- **Where cut alignment wins:** only where a single hard cut sits inside the clip (1221:120, cut at frame 42).
+  - It wins on every axis there: error, F1, worst window, programs, conditions and bytes.
+  - Cut-aligned K = 8 beats uniform K = 16: 0.077 with 2 programs and 3–5 conditions, vs 0.080–0.084 with 5–6
+    programs and 8–16 conditions. **Fewer phases and rules for better motion.**
+- **Elsewhere:**
+  - with wipes only (4500) it is a tie;
+  - on 2700 uniform is better by 0.01–0.03;
+  - on 1760:240 cut alignment does not prevent the collapse, while 2 of 3 uniform K = 16 seeds escape it, at a cost
+    of 51–65 conditions.
+- **Paired over all 24 (task, K, seed):**
+  - cut − uniform error: median −0.0005, mean +0.010, cut better in 12/24;
+  - optimized: better in 10/24.
+  - Both use fewer distinct programs (−1.5) and conditions (−5 to −6) on average, mostly because collapsed
+    1760 runs use one program.
+- **Optimized ≈ cut-aligned:** the MDL moves shift boundaries by a few frames and never merge (MDL always prefers
+  more phases). The proxy does not track the fitted error.
+
+### 10e. G4: radius-2 feasibility (`g4.jsonl`)
+**Size estimate first.** The existing encoder enumerates unknown inputs: 2^(unknown bits) clauses per cell and
+substep.
+- A full radius-2 table at S = 2 has 25 unknown inputs at the intermediate substep, 2^25 ≈ 3.4·10^7 clauses per cell:
+  **SIZE before encoding**, so it was not run.
+- Two families are encodable:
+  - **`full2`, S = 1:** any 5×5 pattern; every input is known, so one clause per cell. Reach R = 2.
+  - **`tot2`:** a table over (v, n8, r2), 306 entries. Neighbour counts of unknown cells use exact unary counters,
+    about 10^3 clauses per cell and frame; at most 3.1 M clauses here (cap 4 M).
+- `tot1` (v, n8; radius 1) is the radius-1 comparison.
+- Glucose4, 120 s per solve, zero boundary, k = 0, frame 0 given; T = 2, 3, 4, 6, 8, stopping at the first non-SAT.
+
+**Rule-language match:**
+- `tot1` and `tot2` are exactly `dlrule` restricted to {v, n8} and {v, n8, r2}, with no limit on the number of rules.
+  All 35 such SAT models were exported as `dlrule` programs and replay exactly in the shared executor.
+- `full2` has no `dlrule` equivalent: `dlrule` cannot name arbitrary 5×5 patterns.
+- `dlrule` itself also has the directional counts (N, S, E, W, u, d, l, r), which these families lack. So a `tot2`
+  UNSAT does **not** exclude `dlrule` programs that use direction.
+- `tests/test_g4_sat.py` checks three properties:
+  - soundness: a SAT model replays exactly;
+  - completeness: the generator's table satisfies the encoding;
+  - separation: radius 1 is UNSAT on a radius-2 generator.
+
+**Status by family:**
+
+| status | count |
+|---|---|
+| SAT | 47 |
+| UNSAT | 47 |
+| TIMEOUT | 4 (control1 T=2; 1678 and 4500 16×16 T=2; 4500 8×8 T=4) |
+| SIZE | 0 run (full radius 2 at S = 2 is SIZE by estimate) |
+
+**Last SAT T per family** (– = UNSAT at T = 2):
+
+| task | crop | `tot1` S=2 | `tot2` S=1 | `full2` S=1 | **`tot2` S=2** |
+|---|---|---|---|---|---|
+| synthetic radius-2 rule (control0) | 16×16 | – | | | 8 (held-out error 0.19/0.13: table not unique, no Occam) |
+| translate 1221 | 8 | – | – | – | **2** (137 rules), UNSAT at 3 |
+| | 16 / full | – | – | – | – |
+| contour 4500 | 8 | – | – | – | **3** (143 rules), TIMEOUT at 4 |
+| | 16 | – | – | 2 | TIMEOUT at 2 |
+| | full | – | – | – | – |
+| cut 1678 | 8 | – | – | 2 | **3** (166 rules), UNSAT at 4 |
+| | 16 | – | – | 2 | TIMEOUT |
+| | full | – | – | 2 | – |
+| wipe 1499 | 8 / 16 | 6 | 6 | 6 | 6 (all UNSAT at 8; the crop is a uniform fill) |
+| | full | – | – | – | **2** (149 rules), UNSAT at 3 |
+
+- **What radius 2 changes.** Radius 2 at S = 2 turns radius-1 UNSAT into SAT on 4 Bad Apple cases (8×8 translate,
+  contour and cut; full-frame wipe). It gets no further than T = 3, and every solution is a 137–174-entry table, not
+  a readable rule.
+- **Light cone, cross-checked:** `full2` at S = 1 (R = 2) is UNSAT on the full frame for translate, contour and wipe,
+  and SAT for the cut, exactly as the R = 2 witnesses of §8c predict.
+- **Scope of the UNSAT results:** each holds for its grid (crop and zero boundary), hidden state starting at zero,
+  k = 0, the given S, and the isotropic count family. It says nothing about direction-aware radius-2 rules or
+  learned hidden starts.
+- **Answer to "does radius 2 change the expressibility limit?":** only at T ≤ 3, on small crops, with tables. It does
+  not change the generalisation picture: the R = 2–4 patch tables of §10a already fail to transfer.
+
+### 10f. Answers and decision
+1. **Do rules generalise within a scene?** No.
+   - Transfer to the adjacent same-scene window: 21/51 staged runs beat hold; only 8/153 runs across all methods do
+     so with real motion (F1 ≥ 0.2), from 3 windows.
+   - Distant same-scene window: 1/39 and 0/117 with motion.
+   - Same-scene windows are not easier than windows across a cut (p = 0.91, p = 0.10).
+2. **Is failure due to error accumulation, overfitting or missing state?** Mostly overfitting to a window-specific
+   local law; accumulation is the second effect.
+   - On unseen windows the rules' one-step error is worse than one-step hold in 60/72 (staged), so they fail before
+     any accumulation.
+   - Even the best possible patch table at R = 1–4 does not transfer one step (§10a). No search method or radius can
+     fix that.
+   - Accumulation is also present: rollout leaves one-step behaviour at a median of frame 4.
+   - One hidden bit gives no consistent gain. A learned hidden start was not re-tested (D8).
+3. **Cut-aligned vs uniform phases?** Better only when a hard cut lies inside the clip (1221:120: error 0.077 vs
+   0.099 at K = 8 with 2 programs instead of 3, F1 0.49 vs 0.20). Equal with wipes (4500), worse on 2700:180, no help
+   against the 1760:240 collapse. Overall, cut better in 12/24 paired runs.
+4. **Can a few shared rules explain several windows?**
+   - Within one fitted clip, yes: 2–3 programs cover 1221:120 at K = 8–16 when phases follow the cut.
+   - Across unseen windows, no: G1 rules do not carry over, and only 8 of 153 do with real motion.
+5. **Does radius 2 change the limit?** Only for T ≤ 3 with large tables (§10e). No readable radius-2 rule was found.
+6. **Grounds to extend to 120–240 frames?** None.
+
+**Decision: NO-GO** under the brief's criteria (§8 of the 2026-11-12 brief).
+- **GO is not met:** same-scene unseen windows are not beaten reliably, and motion F1 stays ≤ 0.10 on average.
+- **PARTIAL is met on 1 of 4 tasks only:** cut alignment improves quality and size at equal K on 1221:120, but not on
+  4500, 2700 or 1760, so it is not a general phase-placement effect.
+- **What follows:** large-scale search stops. Readable Rules stays an experimental feature (Rule Lab) next to the
+  Neural CA, which remains the featured demo.
+- **Interpretation:** what the searches find are small programs that fit a particular window, mostly by matching its
+  net drift. They are not reusable local laws of the video's motion.
+
+### 10g. Cost of this round
+| item | CPU core-h |
+|---|---|
+| LUT diagnostic | 0.003 |
+| G1 | 0.78 |
+| G2 | 0.006 |
+| G3 (incl. one failed launch, 0.2 s) | 5.30 |
+| G4 | 0.19 |
+| unmetered pilots and tests | about 0.1 (estimate) |
+| **this round** | **about 6.4** of the 24 allotted |
+
+GPU: 0. Readable Rules cumulative: ≤ 74.0 of 128 core-h.

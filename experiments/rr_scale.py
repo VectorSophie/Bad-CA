@@ -301,9 +301,12 @@ def a2():
 def edits_n(base, p): return len(rr_search.diff(base, p))
 
 
-def fit_clip(F, K, mode, S, rng, k=0, seed_block=None, E_base=4000, E_phase=1500, lam=0.002, eps=0.003):
-    """Returns (model, info). mode: indep | shared | reuse. seed_block: learn a k-bit seed at this block size (else zero)."""
-    T, H, W = F.shape; phases = [dict(start=1, end=T)] if K == 1 else __import__("ca.segment", fromlist=["x"]).uniform_k(T, K)
+def fit_clip(F, K, mode, S, rng, k=0, seed_block=None, E_base=4000, E_phase=1500, lam=0.002, eps=0.003, phases=None):
+    """Returns (model, info). mode: indep | shared | reuse. seed_block: learn a k-bit seed at this block size (else zero).
+    phases: explicit [{start, end}] boundaries (round 4, G3); default uniform K."""
+    T, H, W = F.shape
+    if phases is None: phases = [dict(start=1, end=T)] if K == 1 else __import__("ca.segment", fromlist=["x"]).uniform_k(T, K)
+    K = len(phases)
     seed = None if seed_block is None else np.zeros((k, -(-H // seed_block), -(-W // seed_block)), np.uint8)
     up = lambda sd: np.zeros((k, H, W), np.uint8) if sd is None else sd.repeat(seed_block, 1).repeat(seed_block, 2)[:, :H, :W]
     def climb_seed(p, f):   # joint search over program and seed bits (seed flips are 20 % of the moves)
