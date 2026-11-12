@@ -7,8 +7,7 @@
 - `runs/c13/eval/wipe_pilot.json`.
 
 **Status of this page:**
-- Written when the seed-0 whole-song run finished.
-- The seed-1 run and the transition-weighted run (`s0-tw2`) were still training; §5 is filled in when they finish.
+- Written when the seed-0 whole-song run finished; §5 added on 2026-11-12 when the seed-1 and `s0-tw2` runs finished.
 
 ## 1. Whole song: complete for seed 0
 **Export:** `runs/featured/whole_song_s0.ncab`, a copy of `runs/c13/song_noise_s0/export_s0.ncab`.
@@ -74,4 +73,30 @@ were carried with the numpy reference arithmetic, so each chunk's **true replay 
   LICENSE commit, no force push.
 
 ## 5. Seed and recipe checks
-*(filled in when the runs finish)*
+Both runs finished all 28 chunks inside their time limits. All three exports were checked the same way: C13 criteria
+on the numpy replay (`exp52_accept13.py --node`), and a full replay in headless Chromium with the UI engine compared
+by SHA-256 with Node.
+
+| | seed 0 (featured) | seed 1 | s0-tw2 |
+|---|---|---|---|
+| recipe | noise 0.02, resumed from 9 C12 chunks | same, seed 1, from scratch | seed 0, `--trans-weight 2`, resumed from the 7 wipe-pilot chunks |
+| mean error | **0.0152** | 0.0156 | 0.0158 |
+| worst 240-frame window | 0.041 | 0.046 | 0.040 |
+| frames in failing 16-frame windows | 1.5 % (3 runs) | 2.0 % (4 runs) | **0.8 %** (2 runs) |
+| peak 16-frame error at the 1499 wipe | 0.159 | 0.164 | **0.120** |
+| thin parts / gaps recall | 0.83 / 0.78 | 0.83 / 0.78 | 0.82 / 0.78 |
+| specks / holes vs original | 2.0× / 2.7× | 2.0× / 2.9× | 2.1× / 2.9× |
+| spurious flips per frame | 0.39 | 0.39 | 0.37 |
+| fade frames reproduced | 100 % | 100 % | 97.9 % |
+| Node vs numpy mismatched pixels | 92 | 208 | 61 |
+| Node vs browser | bit-identical `277fff0f…` | bit-identical `13d1f67b…` | bit-identical `09b96cd4…` |
+| all C13 criteria | pass | pass | pass |
+
+- **Reproducibility of the procedure:** an independent seed trained from scratch passes every criterion with nearly the
+  same numbers (error +0.0004). The weak spots are the same frames (1499, 2849, 3641) in both seeds, so they belong to
+  the video and the recipe, not to one run.
+- **Transition weight:** halves the frames in failing windows and lowers the worst wipe peak (0.159 → 0.120), at
+  +0.0006 mean error and 4 of 192 fade frames missed. It is a trade-off, not a strict improvement.
+- **Featured model (rule fixed before the results: lowest whole-song error among exports passing every criterion):**
+  seed 0 stays featured. No file changed.
+- **Cost:** C13 GPU total 17.4 GPU-h of 48 (`runs/c13/gpu_ledger.jsonl`); CPU 0.9 core-h of 64.

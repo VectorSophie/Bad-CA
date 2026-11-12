@@ -3,3 +3,5 @@
 {"job": 32, "label": "c13-wipe-shift", "gpus": 1, "minutes": 14.30}
 {"job": 33, "label": "c13-wipe-shift-tw2", "gpus": 1, "minutes": 14.36}
 {"job": 30, "label": "c13-song-noise-s0 (resume from 9 C12 chunks, 19 new)", "gpus": 1, "minutes": 276.6}
+{"job": 34, "label": "c13-song-noise-s1 (seed 1, 28 chunks from scratch)", "gpus": 1, "minutes": 421.8}
+{"job": 36, "label": "c13-song-s0-tw2 (resume from 7 pilot chunks, 21 new)", "gpus": 1, "minutes": 300.6}

@@ -105,8 +105,8 @@ Details: [architecture](docs/architecture.md), [rule models](docs/rule-models.md
   1499–1530, 2849–2874 and 3641–3682 (1.5 % of the song). Single frames at cuts reach ~0.3.
 - **Speckle:** the replay has about 2× the small specks and 2.7× the small holes of the original, and some
   single-frame flicker (0.39 spurious flips per frame).
-- **One seed.** A second, independent training run is in progress; until it finishes, reproducibility of the
-  *procedure* is not shown, only of this *file*.
+- **Seeds:** two independent training runs (seed 0, featured, and seed 1) both pass every criterion with nearly the
+  same numbers (0.0152 / 0.0156), and fail at the same frames.
 - **Automatic segmentation** of phases was never better than equal spacing.
 - **Not compression:** the whole-song model is 4.2 MB; the same frames stored losslessly (1 bit/px + zlib) take 231 kB.
 - **Readable rules:** explicit condition rules run exactly (UI "Rule lab"), but on Bad Apple they reach only about 0.10
