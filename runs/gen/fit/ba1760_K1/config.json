@@ -1,0 +1,16 @@
+{
+ "cmd": "fit",
+ "ds": "bad_apple",
+ "rep": null,
+ "start": 1760,
+ "frames": 240,
+ "stride": 1,
+ "phases": "uniform:1",
+ "steps": 4000,
+ "out": "runs/gen/fit/ba1760_K1",
+ "C": 16,
+ "Fh": 64,
+ "noise": 0.02,
+ "seed": 0,
+ "max_hours": null
+}

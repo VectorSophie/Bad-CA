@@ -1,0 +1,21 @@
+{
+ "cmd": "win",
+ "ds": "fantasmagorie",
+ "rep": null,
+ "frac": 0.25,
+ "mode": "contig",
+ "stride": 1,
+ "steps": 6000,
+ "batch": 16,
+ "seed": 0,
+ "C": 16,
+ "Fh": 64,
+ "out": "runs/gen/win/fantasmagorie_contig_f0.25",
+ "n_train_windows": 16,
+ "n_train_frames": 180,
+ "shape": [
+  1687,
+  36,
+  48
+ ]
+}

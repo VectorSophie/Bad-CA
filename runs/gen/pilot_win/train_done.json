@@ -1,0 +1,18 @@
+{
+ "log": [
+  {
+   "step": 0,
+   "loss": 0.4768454432487488,
+   "t": 3.4
+  },
+  {
+   "step": 199,
+   "loss": 0.2370809018611908,
+   "t": 6.2
+  }
+ ],
+ "compile_s": 3.4,
+ "train_s_excl_compile": 2.8,
+ "peak_bytes": 297133056,
+ "backend": "gpu"
+}

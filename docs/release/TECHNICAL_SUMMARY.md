@@ -37,8 +37,9 @@ The model is a **generator that replays one video**, not a compressor.
 
 ## What generalises (measured in this campaign, `runs/gen/summary.json`)
 **Same recipe, retrained on another video** (*Fantasmagorie*, 1908, public domain):
-- fits a 240-frame clip;
-- full-film result: see the campaign report;
+- replays all 1,687 animation frames from the first frame with 28 phases;
+- mean error 0.066 vs 0.015 for Bad Apple; boundary F1 0.93; no learned film flicker;
+- the C13 learning rate diverged once and was lowered to 2e-4;
 - this is portability of the method, not of a learned model.
 
 **Phase count** (Bad Apple 1760–1999, 240 frames, 4,000 steps):

@@ -1,0 +1,1 @@
+{"status": "running", "tag": "c0", "step": 200, "steps": 200, "train_s": 11.2, "best": [{"err": 0.07460901141166687, "step": 200}], "names": ["s0"]}

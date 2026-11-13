@@ -58,7 +58,8 @@ determined by what a cell can see, so the information has to live somewhere: in 
 outside control. I ended up measuring how much of each is needed instead of hunting for one magic rule.
 
 **Bonus:** the same training recipe, retrained from scratch on *Fantasmagorie* (Émile Cohl, 1908, public domain).
-- *[insert the measured result from the campaign report]*
+- 28 scheduled rules replay the whole 67-second animation from its first frame.
+- Recognisable, but about 4× less accurate than Bad Apple: line drawings and cuts are hard at 48×36.
 - One model does **not** transfer between the two videos.
 
 Code, replay players and all the negative results: *[repository link]*

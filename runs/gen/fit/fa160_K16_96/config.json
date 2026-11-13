@@ -1,0 +1,16 @@
+{
+ "cmd": "fit",
+ "ds": "fantasmagorie",
+ "rep": "binary_96x72_lines_tm3_v1",
+ "start": 160,
+ "frames": 240,
+ "stride": 1,
+ "phases": "uniform:16",
+ "steps": 4000,
+ "out": "runs/gen/fit/fa160_K16_96",
+ "C": 16,
+ "Fh": 64,
+ "noise": 0.02,
+ "seed": 0,
+ "max_hours": null
+}

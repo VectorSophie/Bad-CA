@@ -1,0 +1,21 @@
+{
+ "cmd": "win",
+ "ds": "bad_apple",
+ "rep": null,
+ "frac": 0.5,
+ "mode": "contig",
+ "stride": 1,
+ "steps": 6000,
+ "batch": 16,
+ "seed": 0,
+ "C": 16,
+ "Fh": 64,
+ "out": "runs/gen/win/bad_apple_contig_f0.5",
+ "n_train_windows": 136,
+ "n_train_frames": 1530,
+ "shape": [
+  6572,
+  36,
+  48
+ ]
+}

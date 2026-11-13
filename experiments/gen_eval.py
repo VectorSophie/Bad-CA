@@ -42,6 +42,20 @@ if __name__ == "__main__":
         S["fit"][os.path.basename(os.path.dirname(d))] = dict(ds=cfg["ds"], phases=cfg["phases"], Fh=cfg["Fh"], steps=cfg["steps"], frames=e["T"],
                                                               recon={k: e["recon"][k] for k in ("err", "hold", "f1", "iou", "bf1", "collapse", "blip_pred", "blip_true")},
                                                               cont={k: e["cont"][k] for k in ("err", "hold", "f1", "iou")} if "cont" in e else None, fresh=e["fresh"], sizes=e["sizes"])
+    # failure-aware view of the full-film fit: per atlas window (Path V rules applied to the film, runs/shape/atlas_fantasmagorie.json)
+    fz = os.path.join(OUT, "fit", "fa_full", "replay_bits.npz")
+    if os.path.exists(fz):
+        from ca import datasets
+        z = np.load(fz); B = np.unpackbits(z["bits"])[:int(np.prod(z["shape"]))].reshape(tuple(z["shape"])); Fv = datasets.frames("fantasmagorie")[:len(B)]
+        A = json.load(open(os.path.join(ROOT, "runs", "shape", "atlas_fantasmagorie.json")))["windows"]; per = {}
+        for w in A:
+            if w["end"] > len(B): continue
+            e = float((B[w["start"] + 1:w["end"]] != Fv[w["start"] + 1:w["end"]]).mean()); h = float((Fv[w["start"]:w["end"] - 1] != Fv[w["start"] + 1:w["end"]]).mean())
+            per.setdefault(w["tag"], []).append((e, h, w["start"]))
+        S["fa_full_by_tag"] = {t: dict(n=len(v), err=float(np.mean([x[0] for x in v])), err_p90=float(np.quantile([x[0] for x in v], 0.9)), change=float(np.mean([x[1] for x in v])),
+                                       worst=sorted(v)[-3:]) for t, v in per.items()}
+        S["fa_full_frame_err"] = float((B[1:] != Fv[1:len(B)]).mean())
+        print("\n== fa_full by atlas tag:", {t: (v["n"], round(v["err"], 4), round(v["change"], 4)) for t, v in S["fa_full_by_tag"].items()})
     json.dump(S, open(os.path.join(OUT, "summary.json"), "w"), indent=1, default=float)
     print("\n== window runs (test; novel-scene subset in brackets)")
     for k, v in sorted(S["win"].items()):

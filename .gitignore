@@ -37,3 +37,7 @@ data/derived/*/gray_*.npy
 data/derived/*/pts_s.npy
 data/derived/bad_apple/
 data/derived/fantasmagorie/contact_every60.png
+# Track G: training checkpoints / resume states are regenerable; exports (model.ncab) and evaluations are committed
+runs/gen/**/state_*.npz
+runs/gen/**/best_c*.npz
+runs/gen/fit/fa_full_c1_lr5e-4_DIVERGED/*.npz

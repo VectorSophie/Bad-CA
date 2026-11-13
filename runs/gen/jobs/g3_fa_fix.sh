@@ -1,0 +1,1 @@
+set -e; cd /home/jackb/workspace/BadCA; [ -e runs/gen/fit/fa160_K1_Fh256_lr2e-4/train_done.json ] || XLA_PYTHON_CLIENT_PREALLOCATE=false .venv/bin/python experiments/gen_train.py fit --out runs/gen/fit/fa160_K1_Fh256_lr2e-4 --ds fantasmagorie --start 160 --frames 240 --phases uniform:1 --steps 4000 --Fh 256 --lr 2e-4
