@@ -1,0 +1,16 @@
+{
+ "cmd": "fit",
+ "ds": "fantasmagorie",
+ "rep": null,
+ "start": 0,
+ "frames": 120,
+ "stride": 1,
+ "phases": "uniform:2",
+ "steps": 200,
+ "out": "runs/gen/pilot_fit",
+ "C": 16,
+ "Fh": 64,
+ "noise": 0.02,
+ "seed": 0,
+ "max_hours": null
+}

@@ -1,0 +1,17 @@
+{
+ "cmd": "fit",
+ "ds": "fantasmagorie",
+ "rep": null,
+ "start": 0,
+ "frames": 1687,
+ "stride": 1,
+ "phases": "auto:28",
+ "steps": 8000,
+ "out": "runs/gen/fit/fa_full",
+ "C": 16,
+ "Fh": 64,
+ "noise": 0.02,
+ "seed": 0,
+ "max_hours": 2.0,
+ "lr": 0.0002
+}

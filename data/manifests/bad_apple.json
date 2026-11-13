@@ -1,0 +1,105 @@
+{
+ "id": "bad_apple",
+ "title": "Bad Apple!! (shadow-art PV)",
+ "source": {
+  "local_path": "refs/Bad-Apple-Starter/BadApple!!.mp4",
+  "sha256": "d8f21232313506da4f8d631ca289793bcf2f0a33440d68ccb02f4ac52e963cd0",
+  "codec": "h264",
+  "width": 480,
+  "height": 360,
+  "time_base": "1/15360",
+  "rate": "30/1",
+  "decoded_frames": 6572,
+  "origin": "local clone of C-mykk/Bad-Apple-Starter; upstream identity not verified (README)"
+ },
+ "rights": {
+  "note": "not redistributed; derived 48x36 frames are used for research comparison (README 'Data and licence')"
+ },
+ "derived": {
+  "binary_48x36_v1": {
+   "loader": "experiments/exp45_c12.target('0:6572') (= ca.pipeline prep width 48, threshold 128)",
+   "polarity": "1 = white"
+  },
+  "binary_96x72_v1": {
+   "file": "data/derived/bad_apple/binary_96x72_v1.npz",
+   "preprocessing": "ca.video.gray_frames(width 96, PIL BOX) then gray >= 128 (same recipe as 48x36)",
+   "polarity": "1 = white",
+   "note": "derived from the copyrighted source: git-ignored, regenerate locally"
+  }
+ },
+ "redundancy_48x36_30fps": {
+  "frames": 6572,
+  "fps": 30.0,
+  "seconds": 219.07,
+  "identical_consecutive": 0.042307106985238166,
+  "near_dup_le_0p2pct": 0.09815857555927561,
+  "distinct_frames": 6280,
+  "mean_change": 0.029888095560177436,
+  "median_change": 0.017361111111111112,
+  "hold_length_hist": {
+   "1": 6228,
+   "2": 39,
+   "3": 10,
+   "4": 4,
+   "5": 2,
+   "6": 4,
+   "7": 1,
+   "12": 1,
+   "14": 1,
+   "23": 1,
+   "30": 1,
+   "43": 1
+  },
+  "fg_fraction": 0.45586459671783774,
+  "empty_frames": 119
+ },
+ "redundancy_48x36_15fps": {
+  "frames": 3286,
+  "fps": 15.0,
+  "seconds": 219.07,
+  "identical_consecutive": 0.03257229832572298,
+  "near_dup_le_0p2pct": 0.05570776255707763,
+  "distinct_frames": 3168,
+  "mean_change": 0.05309064772535092,
+  "median_change": 0.032407407407407406,
+  "hold_length_hist": {
+   "1": 3156,
+   "2": 11,
+   "3": 5,
+   "4": 1,
+   "6": 1,
+   "7": 1,
+   "11": 1,
+   "15": 1,
+   "22": 1,
+   "28": 1
+  },
+  "fg_fraction": 0.45587393064854265,
+  "empty_frames": 59
+ },
+ "redundancy_96x72_30fps": {
+  "frames": 6572,
+  "fps": 30.0,
+  "seconds": 219.07,
+  "identical_consecutive": 0.03074113529143205,
+  "near_dup_le_0p2pct": 0.08126616953279561,
+  "distinct_frames": 6361,
+  "mean_change": 0.03087478053117796,
+  "median_change": 0.018518518518518517,
+  "hold_length_hist": {
+   "1": 6349,
+   "2": 9,
+   "3": 2,
+   "6": 3,
+   "7": 1,
+   "11": 1,
+   "14": 1,
+   "19": 1,
+   "30": 1,
+   "43": 1,
+   "57": 1
+  },
+  "fg_fraction": 0.4558287139181939,
+  "empty_frames": 112
+ }
+}

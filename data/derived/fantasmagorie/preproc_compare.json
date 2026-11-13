@@ -1,0 +1,45 @@
+{
+ "interval": [
+  742,
+  2429
+ ],
+ "quality": {
+  "simple": {
+   "fg_fraction": 0.022841815956442513,
+   "empty_frames": 42,
+   "mean_change": 0.01702233260840912,
+   "blip_rate": 0.005566545774260908
+  },
+  "otsu": {
+   "fg_fraction": 0.12752784089661684,
+   "empty_frames": 0,
+   "mean_change": 0.06499604586793199,
+   "blip_rate": 0.019720917133750963
+  },
+  "lines": {
+   "fg_fraction": 0.17536437408066038,
+   "empty_frames": 0,
+   "mean_change": 0.06408268254909714,
+   "blip_rate": 0.017490246180899
+  },
+  "lines96": {
+   "fg_fraction": 0.10501396847351205,
+   "empty_frames": 0,
+   "mean_change": 0.05869800934163701,
+   "blip_rate": 0.01851808921310034
+  },
+  "lines_tm3": {
+   "fg_fraction": 0.17195527069749061,
+   "empty_frames": 0,
+   "mean_change": 0.03871033511269276,
+   "blip_rate": 0.001626552368392131
+  },
+  "lines96_tm3": {
+   "fg_fraction": 0.09887283131901908,
+   "empty_frames": 0,
+   "mean_change": 0.03230469264860946,
+   "blip_rate": 0.002014215161006704
+  }
+ },
+ "seconds": 78.3
+}

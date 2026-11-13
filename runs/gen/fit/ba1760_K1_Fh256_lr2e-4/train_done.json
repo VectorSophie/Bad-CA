@@ -1,0 +1,14 @@
+{
+ "train_s": 682.1,
+ "sizes": {
+  "weights": 171408,
+  "first_frame": 216,
+  "header": 686,
+  "raw_total": 172310,
+  "file": 159988,
+  "n_params": 41232,
+  "init_values": 1620
+ },
+ "frames": 240,
+ "phases": 1
+}

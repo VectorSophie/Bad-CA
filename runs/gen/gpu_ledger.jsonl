@@ -1,0 +1,10 @@
+{"job": 34, "label": "gen-pilot-fit", "start": "Fri Nov 13 13:21:18 2026", "end": "Fri Nov 13 13:21:36 2026", "wall_s": 18.0, "gpus": 1, "gpu_h": 0.005, "exit": "died with exit code 0", "cmd": "Time run: 17.669256s"}
+{"job": 35, "label": "gen-pilot-win", "start": "Fri Nov 13 13:21:18 2026", "end": "Fri Nov 13 13:21:27 2026", "wall_s": 9.0, "gpus": 1, "gpu_h": 0.0025, "exit": "died with exit code 0", "cmd": "Time run: 8.124492s"}
+{"job": 36, "label": "gen-win", "start": "Fri Nov 13 13:24:26 2026", "end": "Fri Nov 13 14:01:50 2026", "wall_s": 2244.0, "gpus": 1, "gpu_h": 0.6233, "exit": "died with exit code 0", "cmd": "Time run: 37.406837m"}
+{"job": 37, "label": "gen-g3_ba", "start": "Fri Nov 13 13:24:26 2026", "end": "Fri Nov 13 13:59:32 2026", "wall_s": 2106.0, "gpus": 1, "gpu_h": 0.585, "exit": "died with exit code 0", "cmd": "Time run: 35.105385m"}
+{"job": 38, "label": "gen-g3_fa", "start": "Fri Nov 13 13:59:32 2026", "end": "Fri Nov 13 14:34:52 2026", "wall_s": 2120.0, "gpus": 1, "gpu_h": 0.5889, "exit": "died with exit code 0", "cmd": "Time run: 35.334373m"}
+{"job": 39, "label": "gen-g4_res", "start": "Fri Nov 13 14:02:16 2026", "end": "Fri Nov 13 14:19:37 2026", "wall_s": 1041.0, "gpus": 1, "gpu_h": 0.2892, "exit": "died with exit code 0", "cmd": "Time run: 17.350641m"}
+{"job": 40, "label": "gen-g3_ba_fix", "start": "Fri Nov 13 14:19:37 2026", "end": "Fri Nov 13 14:31:00 2026", "wall_s": 683.0, "gpus": 1, "gpu_h": 0.1897, "exit": "died with exit code 0", "cmd": "Time run: 11.384015m"}
+{"job": 41, "label": "gen-g2_fa", "start": "Fri Nov 13 14:31:00 2026", "end": "Fri Nov 13 15:08:36 2026", "wall_s": 2256.0, "gpus": 1, "gpu_h": 0.6267, "exit": "killed by signal 15", "cmd": "Time run: 37.593887m"}
+{"job": 42, "label": "gen-g3_fa_fix", "start": "Fri Nov 13 14:36:00 2026", "end": "Fri Nov 13 14:47:25 2026", "wall_s": 685.0, "gpus": 1, "gpu_h": 0.1903, "exit": "died with exit code 0", "cmd": "Time run: 11.416907m"}
+{"job": 43, "label": "gen-g2_fa_resume", "start": "Fri Nov 13 15:08:49 2026", "end": "Fri Nov 13 16:45:10 2026", "wall_s": 5781.0, "gpus": 1, "gpu_h": 1.6058, "exit": "died with exit code 0", "cmd": "Time run: 1.605792h"}

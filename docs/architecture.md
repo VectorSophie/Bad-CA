@@ -25,7 +25,7 @@ video ──prep──> binary grid (T,H,W) ──train──> checkpoint ──
 - Output fps: frame k is the source frame nearest to start + k / fps. No blending.
 - Cache: `cache/pipe/<key>/` with `gray.npy`, `bin.npy`, `manifest.json`. The key is the sha256 of the source
   sha256 and the preprocessing settings, so width, threshold and fps each get their own entry.
-- Limits (local tool, not a service): ≤ 2 GB file, ≤ 4096 px side, ≤ 600 frames per interval, width 8–256.
+- Limits (local tool, not a service): ≤ 2 GB file, ≤ 4096 px side, ≤ 8,000 frames per interval, width 8–256.
 - The campaign experiments use `ca/video.py` (`gray_frames`, `binarize`) at width 48, threshold 128.
   `tests/test_pipeline.py` checks that `prep` produces the same Bad Apple target bit for bit.
 
@@ -90,6 +90,20 @@ experiment scripts (`experiments/exp45_c12.py`, `experiments/exp47_rules.py`).
 
 Endpoints and limits: `ui/README.md`. Design sources: `ui/DESIGN.md`.
 
+## Datasets (`ca/datasets.py`, `data/manifests/`)
+
+- One JSON manifest per video records:
+  - the source (URL or local path, SHA-256, codec, frame rate, frame count);
+  - rights notes;
+  - every preprocessed version (file, method, polarity);
+  - redundancy statistics.
+- `datasets.frames(id, rep)` returns the binary frames of one version. Bad Apple's 48×36 frames still come from
+  `ca/video.py`, so older results are unchanged.
+- `python -m ca.datasets` lists what is available locally. Paths resolve against `$BADCA_DATA` if it is set, so large
+  files can live outside the checkout.
+- *Fantasmagorie* uses a different preprocessing (line extraction plus a 3-frame temporal majority, from
+  `experiments/gen_data.py`). The Bad Apple threshold erases its thin pen lines.
+
 ## Run artefacts
 
 - `runs/c<N>/`: per-campaign configs, ledgers (`gpu_ledger.jsonl`, `cpu_ledger.jsonl`), exports, evaluations
@@ -98,4 +112,6 @@ Endpoints and limits: `ui/README.md`. Design sources: `ui/DESIGN.md`.
   `ui/make_examples.sh` rebuilds their comparison frames after a fresh clone (needs the Bad Apple file).
 - `runs/c12/samples/`: small format samples (a v2 file holding the C10 rule as two phases; a Life-then-grow
   dlrule-v1 program).
-- `cache/` and `refs/` are git-ignored.
+- `runs/gen/`, `runs/shape/`, `runs/path_v/`, `runs/context_s0/`, `runs/path_d/`: the later experiments (one README
+  each under `docs/`). The Fantasmagorie model is `runs/gen/fit/fa_full/model.ncab`.
+- `cache/`, `refs/`, `data/source/` and large intermediate arrays are git-ignored.

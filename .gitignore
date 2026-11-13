@@ -30,3 +30,17 @@ runs/c13/pilot_wipe_tw2/
 
 # Path D trained soft logits: kept locally for fine-tuning, not committed (hard circuits are in *.logic.json)
 runs/path_d/**/params.npz
+
+# Path G data: sources (incl. the public-domain film, 33 MB) and large intermediate arrays stay local; manifests and packed binary films are committed
+data/source/
+data/derived/*/gray_*.npy
+data/derived/*/pts_s.npy
+data/derived/bad_apple/
+data/derived/fantasmagorie/contact_every60.png
+# Track G: training checkpoints / resume states are regenerable; exports (model.ncab) and evaluations are committed
+runs/gen/**/state_*.npz
+runs/gen/**/best_c*.npz
+runs/gen/fit/fa_full_c1_lr5e-4_DIVERGED/*.npz
+
+# personal working notes (e.g. the Reddit draft); not part of the published tree
+.private/

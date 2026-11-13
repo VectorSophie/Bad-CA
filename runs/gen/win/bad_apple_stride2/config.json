@@ -1,0 +1,21 @@
+{
+ "cmd": "win",
+ "ds": "bad_apple",
+ "rep": null,
+ "frac": 1.0,
+ "mode": "spread",
+ "stride": 2,
+ "steps": 6000,
+ "batch": 16,
+ "seed": 0,
+ "C": 16,
+ "Fh": 64,
+ "out": "runs/gen/win/bad_apple_stride2",
+ "n_train_windows": 68,
+ "n_train_frames": 1224,
+ "shape": [
+  3286,
+  36,
+  48
+ ]
+}

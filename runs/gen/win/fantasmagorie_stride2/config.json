@@ -1,0 +1,21 @@
+{
+ "cmd": "win",
+ "ds": "fantasmagorie",
+ "rep": null,
+ "frac": 1.0,
+ "mode": "spread",
+ "stride": 2,
+ "steps": 6000,
+ "batch": 16,
+ "seed": 0,
+ "C": 16,
+ "Fh": 64,
+ "out": "runs/gen/win/fantasmagorie_stride2",
+ "n_train_windows": 18,
+ "n_train_frames": 324,
+ "shape": [
+  844,
+  36,
+  48
+ ]
+}
