@@ -293,6 +293,8 @@ def main(argv=None):
                 S.update(status="failed", error=f"{type(e).__name__}: {e}"); _atomic_json(st, S); raise
     except ValueError as e:
         print(f"error: {e}", file=sys.stderr); sys.exit(2)
+    except FileNotFoundError as e:
+        print(f"error: file not found: {e.filename}", file=sys.stderr); sys.exit(2)
 
 
 if __name__ == "__main__":
