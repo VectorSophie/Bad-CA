@@ -271,6 +271,14 @@ def eval_regional(e, V, Ts, mode, g):
     return dict(codes=codes, one=m_onestep(p, V, s), roll=m_roll(roll(Ts, V[s - 1], V[s], L - 1, mode, cm), V, s))
 
 
+class KNN:
+    """5-NN code vote on standardized prefix motion features (picklable for worker processes); tie -> nearest."""
+    def __init__(self, Fz, mu, sd, asg): self.Fz, self.mu, self.sd, self.asg = Fz, mu, sd, asg
+    def __call__(self, x):
+        d = np.linalg.norm(self.Fz - (x - self.mu) / self.sd, axis=1); nn = np.argsort(d, kind="stable")[:5]; v = np.bincount(self.asg[nn])
+        top = np.flatnonzero(v == v.max()); return int(next(self.asg[i] for i in nn if self.asg[i] in top))
+
+
 def run():
     global UNITS
     man = json.load(open(MAN)); V = video(); pool = man["pool"]; EV = man["eval_windows"]; t0 = time.time()
@@ -307,12 +315,7 @@ def run():
     # prior order (by pool cluster size) and kNN classifier per K
     priors = {m: {K: list(np.argsort(-np.bincount(best[(m, K, "global")][2], minlength=K), kind="stable")) for K in KS} for m in NBITS}
     feats = np.stack([motion_feats(V[s - 3:s + 1]) for s in pool]); mu, sd = feats.mean(0), feats.std(0) + 1e-9; Fz = (feats - mu) / sd
-    def mk(asg):
-        def f(x):
-            d = np.linalg.norm(Fz - (x - mu) / sd, axis=1); nn = np.argsort(d, kind="stable")[:5]; v = np.bincount(asg[nn])
-            top = np.flatnonzero(v == v.max()); return int(next(asg[i] for i in nn if asg[i] in top))
-        return f
-    knns = {m: {K: mk(best[(m, K, "global")][2]) for K in KS if K > 1} for m in NBITS}
+    knns = {m: {K: KNN(Fz, mu, sd, best[(m, K, "global")][2]) for K in KS if K > 1} for m in NBITS}
     books = {m: {K: best[(m, K, "global")][1] for K in KS} for m in NBITS}
     with Pool(32) as p:
         rows = p.starmap(eval_window, [(e, V, books[m], m, priors[m], knns[m]) for m in NBITS for e in EV])
