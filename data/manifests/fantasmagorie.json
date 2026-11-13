@@ -1,0 +1,170 @@
+{
+ "id": "fantasmagorie",
+ "title": "Fantasmagorie (1908), Emile Cohl",
+ "source": {
+  "page": "https://commons.wikimedia.org/wiki/File:Fantasmagorie_(1908).webm",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Fantasmagorie_%281908%29.webm",
+  "commons_sha1": "7ba4199a67aeb4ae8547a8fbb3d9e2bec3e44aa7",
+  "local_path": "data/source/fantasmagorie/Fantasmagorie_(1908).webm",
+  "sha256": "262d0fb913355b5617b949dd2b6f9da445d690cf2ffbe433d56f81b2e7f1b127",
+  "bytes": 33761285,
+  "retrieved": "2026-11-13",
+  "codec": "vp9",
+  "width": 720,
+  "height": 540,
+  "time_base": "1/1000",
+  "rate": "25/1",
+  "decoded_frames": 2455,
+  "duration_s": 98.2,
+  "pts_step_s": 0.04,
+  "decode_errors": 0,
+  "aspect": "4:3",
+  "audio_streams": 0,
+  "edition": "Commons file credited 'Du Praxinoscope au Cellulo PAL DVD' (25 fps PAL transfer; frames 0..~740 are the DVD's modern title cards)"
+ },
+ "rights": {
+  "commons_license": "Public domain (LicenseShortName 'Public domain', Copyrighted False, AttributionRequired false; checked via the Commons API 2026-11-13)",
+  "attribution": "Fantasmagorie (1908) by Emile Cohl, Gaumont; file via Wikimedia Commons (from a PAL DVD edition)",
+  "note": "the DVD's added title cards are excluded from all derived data"
+ },
+ "animation_interval": {
+  "source_frames": [
+   742,
+   2429
+  ],
+  "rule": "first/last frame with mean luma > 5 (192x144) after frame 700"
+ },
+ "derived": {
+  "binary_48x36_lines_tm3_v1": {
+   "file": "data/derived/fantasmagorie/binary_48x36_lines_tm3_v1.npz",
+   "preprocessing": "lines + centred 3-frame temporal majority (SELECTED training target)",
+   "polarity": "1 = drawn line",
+   "version": 1
+  },
+  "binary_96x72_lines_tm3_v1": {
+   "file": "data/derived/fantasmagorie/binary_96x72_lines_tm3_v1.npz",
+   "preprocessing": "96x72 lines + 3-frame temporal majority",
+   "polarity": "1 = drawn line",
+   "version": 1
+  },
+  "binary_48x36_lines_v1": {
+   "file": "data/derived/fantasmagorie/binary_48x36_lines_v1.npz",
+   "preprocessing": "box resize to 192x144 (x3.75); remove the slowly varying background (flicker, vignetting, grain level)\n           by subtracting a 15x15 median; line pixel = residual >= 24; then a cell of the target grid is 1 if\n           >= 2 of its 16 (48x36) / 4 (96x72) line pixels are set (area-fraction pooling keeps 1-2 px lines that a\n           box average + global threshold erases).\n  lines_tm3  lines + a centred 3-frame temporal majority (first/last frame kept): removes isolated one-frame flips.\n           SELECTED as the training target. Reason (measured, prep): 27-32 % of all binary changes in every\n           variant are one-frame blips (pixel differs from both neighbours, which agree) - film grain, flicker and gate\n           weave on a ~16 fps film in a 25 fps transfer - and a model must not be rewarded for reproducing them.\n           The unfiltered `lines` film is kept and reported.\nAnimation interval: the title cards added by the DVD edition (frames 0..~740) and the trailing black are excluded by a\nfixed rule: first / last frame whose mean luma at 192x144 exceeds 5 after frame 700.\nusage: gen_data.py probe | prep | stats",
+   "polarity": "1 = drawn line (bright), 0 = background",
+   "version": 1
+  },
+  "binary_96x72_lines_v1": {
+   "file": "data/derived/fantasmagorie/binary_96x72_lines_v1.npz",
+   "preprocessing": "same line mask, 2x2 pooling, >= 2 of 4",
+   "polarity": "1 = line",
+   "version": 1
+  },
+  "binary_48x36_simple_v1": {
+   "file": "data/derived/fantasmagorie/binary_48x36_simple_v1.npz",
+   "preprocessing": "box resize, gray >= 128 (Bad Apple recipe), kept as the rejected baseline",
+   "polarity": "1 = bright"
+  }
+ },
+ "preprocessing_comparison": {
+  "simple": {
+   "fg_fraction": 0.022841815956442513,
+   "empty_frames": 42,
+   "mean_change": 0.01702233260840912,
+   "blip_rate": 0.005566545774260908
+  },
+  "otsu": {
+   "fg_fraction": 0.12752784089661684,
+   "empty_frames": 0,
+   "mean_change": 0.06499604586793199,
+   "blip_rate": 0.019720917133750963
+  },
+  "lines": {
+   "fg_fraction": 0.17536437408066038,
+   "empty_frames": 0,
+   "mean_change": 0.06408268254909714,
+   "blip_rate": 0.017490246180899
+  },
+  "lines96": {
+   "fg_fraction": 0.10501396847351205,
+   "empty_frames": 0,
+   "mean_change": 0.05869800934163701,
+   "blip_rate": 0.01851808921310034
+  },
+  "lines_tm3": {
+   "fg_fraction": 0.17195527069749061,
+   "empty_frames": 0,
+   "mean_change": 0.03871033511269276,
+   "blip_rate": 0.001626552368392131
+  },
+  "lines96_tm3": {
+   "fg_fraction": 0.09887283131901908,
+   "empty_frames": 0,
+   "mean_change": 0.03230469264860946,
+   "blip_rate": 0.002014215161006704
+  }
+ },
+ "redundancy_48x36_25fps": {
+  "frames": 1687,
+  "fps": 25.0,
+  "seconds": 67.48,
+  "identical_consecutive": 0.00771055753262159,
+  "near_dup_le_0p2pct": 0.07176749703440095,
+  "distinct_frames": 1674,
+  "mean_change": 0.03871033511269276,
+  "median_change": 0.028356481481481483,
+  "hold_length_hist": {
+   "1": 1662,
+   "2": 11,
+   "3": 1
+  },
+  "fg_fraction": 0.17195527069749061,
+  "empty_frames": 0
+ },
+ "redundancy_48x36_12p5fps": {
+  "frames": 844,
+  "fps": 12.5,
+  "seconds": 67.52,
+  "identical_consecutive": 0.0011862396204033216,
+  "near_dup_le_0p2pct": 0.00830367734282325,
+  "distinct_frames": 843,
+  "mean_change": 0.07418459755722508,
+  "median_change": 0.06481481481481481,
+  "hold_length_hist": {
+   "1": 842,
+   "2": 1
+  },
+  "fg_fraction": 0.17186471498156924,
+  "empty_frames": 0
+ },
+ "redundancy_96x72_25fps": {
+  "frames": 1687,
+  "fps": 25.0,
+  "seconds": 67.48,
+  "identical_consecutive": 0.0,
+  "near_dup_le_0p2pct": 0.046263345195729534,
+  "distinct_frames": 1687,
+  "mean_change": 0.03230469264860947,
+  "median_change": 0.024305555555555556,
+  "hold_length_hist": {
+   "1": 1687
+  },
+  "fg_fraction": 0.09887283131901908,
+  "empty_frames": 0
+ },
+ "redundancy_48x36_unfiltered_25fps": {
+  "frames": 1687,
+  "fps": 25.0,
+  "seconds": 67.48,
+  "identical_consecutive": 0.0005931198102016608,
+  "near_dup_le_0p2pct": 0.005338078291814947,
+  "distinct_frames": 1686,
+  "mean_change": 0.06408268254909714,
+  "median_change": 0.05555555555555555,
+  "hold_length_hist": {
+   "1": 1685,
+   "2": 1
+  },
+  "fg_fraction": 0.17536437408066038,
+  "empty_frames": 0
+ }
+}

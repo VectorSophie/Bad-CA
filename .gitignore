@@ -30,3 +30,10 @@ runs/c13/pilot_wipe_tw2/
 
 # Path D trained soft logits: kept locally for fine-tuning, not committed (hard circuits are in *.logic.json)
 runs/path_d/**/params.npz
+
+# Path G data: sources (incl. the public-domain film, 33 MB) and large intermediate arrays stay local; manifests and packed binary films are committed
+data/source/
+data/derived/*/gray_*.npy
+data/derived/*/pts_s.npy
+data/derived/bad_apple/
+data/derived/fantasmagorie/contact_every60.png
