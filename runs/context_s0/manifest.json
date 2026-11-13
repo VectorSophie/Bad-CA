@@ -1,0 +1,1360 @@
+{
+ "fixed_at": "2026-11-13 11:26:35",
+ "source": "runs/readable_rules/gen/prereg_windows.json (24 scenes, windows of 16 frames, fixed 2026-11-12)",
+ "scene_split_seed": 20261113,
+ "scene_roles": {
+  "0": "fit",
+  "1": "fit",
+  "2": "test",
+  "3": "test",
+  "4": "val",
+  "5": "fit",
+  "6": "val",
+  "7": "test",
+  "8": "val",
+  "9": "val",
+  "10": "fit",
+  "11": "fit",
+  "12": "fit",
+  "13": "test",
+  "14": "fit",
+  "15": "val",
+  "16": "test",
+  "17": "fit",
+  "18": "fit",
+  "19": "val",
+  "20": "test",
+  "21": "fit",
+  "22": "fit",
+  "23": "fit"
+ },
+ "rules": {
+  "window_frames": 16,
+  "transitions_per_window": 15,
+  "observation_prefix_frames": 2,
+  "margin": 2,
+  "pool": "16-frame tiles at stride 16 whose frames [s-3, s+16) avoid every val/test scene (+-2) and every eval window with its prefix (+-2)",
+  "moving": "mean true change per transition >= 0.005",
+  "strata": [
+   [
+    0.005,
+    0.015
+   ],
+   [
+    0.015,
+    0.04
+   ],
+   [
+    0.04,
+    1.01
+   ]
+  ],
+  "near_duplicate": "frame within 9 px of a pool frame; a window is near-dup if >= 8 of its 16 frames are",
+  "K": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32
+  ],
+  "restarts": 8,
+  "codebook_choice": "restart with the lowest TRAINING loss",
+  "grids": [
+   [
+    1,
+    2
+   ],
+   [
+    2,
+    2
+   ],
+   [
+    3,
+    3
+   ]
+  ],
+  "K_selection": "smallest K whose VAL oracle-1step gap recovery (moving windows) >= 0.9 x the maximum over K (m0); test is read once after",
+  "observation_only": "code = argmin one-step mismatches on the P_OBS transitions before s (frames s-2..s; m1 uses 1 transition, its prev frame s-2); ties -> most frequent pool code",
+  "knn": "5-NN on prefix motion features (area change, centroid shift, births, deaths of frames s-2..s) against pool windows labelled by their assigned code",
+  "provisional_thresholds": {
+   "K_max": 16,
+   "beats_hold_onestep_oracle": ">70% of moving windows",
+   "gap_recovery": ">=0.5",
+   "autonomous": "rollout (15 steps) error < hold on >=50% of moving windows and lag-1 change F1 >= 0.2",
+   "observation_only": "obs assignment keeps >=50% of the oracle's one-step gain over K=1 (GO), 20-50% PARTIAL"
+  },
+  "groups": "same_scene = adjacent/distant windows of fit scenes (their train windows are pool-eligible); cross_scene = train/adjacent/distant of val/test scenes; cut = cross windows straddling a wipe/cut"
+ },
+ "eval_windows": [
+  {
+   "scene": 0,
+   "scene_range": [
+    43,
+    355
+   ],
+   "name": "adjacent",
+   "start": 61,
+   "end": 77,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 0,
+   "scene_range": [
+    43,
+    355
+   ],
+   "name": "distant",
+   "start": 93,
+   "end": 109,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 0,
+   "scene_range": [
+    43,
+    355
+   ],
+   "name": "cross",
+   "start": 347,
+   "end": 363,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 1,
+   "scene_range": [
+    485,
+    796
+   ],
+   "name": "adjacent",
+   "start": 503,
+   "end": 519,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "morph"
+  },
+  {
+   "scene": 1,
+   "scene_range": [
+    485,
+    796
+   ],
+   "name": "distant",
+   "start": 535,
+   "end": 551,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "different"
+  },
+  {
+   "scene": 1,
+   "scene_range": [
+    485,
+    796
+   ],
+   "name": "cross",
+   "start": 788,
+   "end": 804,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 2,
+   "scene_range": [
+    846,
+    1058
+   ],
+   "name": "train",
+   "start": 848,
+   "end": 864,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 2,
+   "scene_range": [
+    846,
+    1058
+   ],
+   "name": "adjacent",
+   "start": 864,
+   "end": 880,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "morph"
+  },
+  {
+   "scene": 2,
+   "scene_range": [
+    846,
+    1058
+   ],
+   "name": "distant",
+   "start": 896,
+   "end": 912,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "different"
+  },
+  {
+   "scene": 2,
+   "scene_range": [
+    846,
+    1058
+   ],
+   "name": "cross",
+   "start": 1050,
+   "end": 1066,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 3,
+   "scene_range": [
+    1095,
+    1218
+   ],
+   "name": "train",
+   "start": 1097,
+   "end": 1113,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 3,
+   "scene_range": [
+    1095,
+    1218
+   ],
+   "name": "adjacent",
+   "start": 1113,
+   "end": 1129,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 3,
+   "scene_range": [
+    1095,
+    1218
+   ],
+   "name": "distant",
+   "start": 1145,
+   "end": 1161,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 3,
+   "scene_range": [
+    1095,
+    1218
+   ],
+   "name": "cross",
+   "start": 1210,
+   "end": 1226,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 4,
+   "scene_range": [
+    1263,
+    1362
+   ],
+   "name": "train",
+   "start": 1265,
+   "end": 1281,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 4,
+   "scene_range": [
+    1263,
+    1362
+   ],
+   "name": "adjacent",
+   "start": 1281,
+   "end": 1297,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "morph"
+  },
+  {
+   "scene": 4,
+   "scene_range": [
+    1263,
+    1362
+   ],
+   "name": "distant",
+   "start": 1313,
+   "end": 1329,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "different"
+  },
+  {
+   "scene": 4,
+   "scene_range": [
+    1263,
+    1362
+   ],
+   "name": "cross",
+   "start": 1354,
+   "end": 1370,
+   "split": "val",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 5,
+   "scene_range": [
+    1368,
+    1471
+   ],
+   "name": "adjacent",
+   "start": 1386,
+   "end": 1402,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 5,
+   "scene_range": [
+    1368,
+    1471
+   ],
+   "name": "distant",
+   "start": 1418,
+   "end": 1434,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 5,
+   "scene_range": [
+    1368,
+    1471
+   ],
+   "name": "cross",
+   "start": 1463,
+   "end": 1479,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 6,
+   "scene_range": [
+    1585,
+    1686
+   ],
+   "name": "train",
+   "start": 1587,
+   "end": 1603,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 6,
+   "scene_range": [
+    1585,
+    1686
+   ],
+   "name": "adjacent",
+   "start": 1603,
+   "end": 1619,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 6,
+   "scene_range": [
+    1585,
+    1686
+   ],
+   "name": "distant",
+   "start": 1635,
+   "end": 1651,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 6,
+   "scene_range": [
+    1585,
+    1686
+   ],
+   "name": "cross",
+   "start": 1678,
+   "end": 1694,
+   "split": "val",
+   "group": "cut",
+   "visual": "cut"
+  },
+  {
+   "scene": 7,
+   "scene_range": [
+    1686,
+    1797
+   ],
+   "name": "train",
+   "start": 1688,
+   "end": 1704,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 7,
+   "scene_range": [
+    1686,
+    1797
+   ],
+   "name": "adjacent",
+   "start": 1704,
+   "end": 1720,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "morph"
+  },
+  {
+   "scene": 7,
+   "scene_range": [
+    1686,
+    1797
+   ],
+   "name": "distant",
+   "start": 1736,
+   "end": 1752,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "different"
+  },
+  {
+   "scene": 7,
+   "scene_range": [
+    1686,
+    1797
+   ],
+   "name": "cross",
+   "start": 1789,
+   "end": 1805,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 8,
+   "scene_range": [
+    1799,
+    1879
+   ],
+   "name": "train",
+   "start": 1801,
+   "end": 1817,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 8,
+   "scene_range": [
+    1799,
+    1879
+   ],
+   "name": "adjacent",
+   "start": 1817,
+   "end": 1833,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 8,
+   "scene_range": [
+    1799,
+    1879
+   ],
+   "name": "distant",
+   "start": 1849,
+   "end": 1865,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 8,
+   "scene_range": [
+    1799,
+    1879
+   ],
+   "name": "cross",
+   "start": 1871,
+   "end": 1887,
+   "split": "val",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 9,
+   "scene_range": [
+    1912,
+    2242
+   ],
+   "name": "train",
+   "start": 1914,
+   "end": 1930,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 9,
+   "scene_range": [
+    1912,
+    2242
+   ],
+   "name": "adjacent",
+   "start": 1930,
+   "end": 1946,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 9,
+   "scene_range": [
+    1912,
+    2242
+   ],
+   "name": "distant",
+   "start": 1962,
+   "end": 1978,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 9,
+   "scene_range": [
+    1912,
+    2242
+   ],
+   "name": "cross",
+   "start": 2234,
+   "end": 2250,
+   "split": "val",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 10,
+   "scene_range": [
+    2252,
+    2496
+   ],
+   "name": "adjacent",
+   "start": 2270,
+   "end": 2286,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 10,
+   "scene_range": [
+    2252,
+    2496
+   ],
+   "name": "distant",
+   "start": 2302,
+   "end": 2318,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 10,
+   "scene_range": [
+    2252,
+    2496
+   ],
+   "name": "cross",
+   "start": 2488,
+   "end": 2504,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 11,
+   "scene_range": [
+    2507,
+    2731
+   ],
+   "name": "adjacent",
+   "start": 2525,
+   "end": 2541,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "morph"
+  },
+  {
+   "scene": 11,
+   "scene_range": [
+    2507,
+    2731
+   ],
+   "name": "distant",
+   "start": 2557,
+   "end": 2573,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "different"
+  },
+  {
+   "scene": 11,
+   "scene_range": [
+    2507,
+    2731
+   ],
+   "name": "cross",
+   "start": 2723,
+   "end": 2739,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 12,
+   "scene_range": [
+    2779,
+    2861
+   ],
+   "name": "adjacent",
+   "start": 2797,
+   "end": 2813,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 12,
+   "scene_range": [
+    2779,
+    2861
+   ],
+   "name": "distant",
+   "start": 2829,
+   "end": 2845,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 12,
+   "scene_range": [
+    2779,
+    2861
+   ],
+   "name": "cross",
+   "start": 2853,
+   "end": 2869,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 13,
+   "scene_range": [
+    2863,
+    3272
+   ],
+   "name": "train",
+   "start": 2865,
+   "end": 2881,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 13,
+   "scene_range": [
+    2863,
+    3272
+   ],
+   "name": "adjacent",
+   "start": 2881,
+   "end": 2897,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 13,
+   "scene_range": [
+    2863,
+    3272
+   ],
+   "name": "distant",
+   "start": 2913,
+   "end": 2929,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "different"
+  },
+  {
+   "scene": 13,
+   "scene_range": [
+    2863,
+    3272
+   ],
+   "name": "cross",
+   "start": 3264,
+   "end": 3280,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 14,
+   "scene_range": [
+    3352,
+    3459
+   ],
+   "name": "adjacent",
+   "start": 3370,
+   "end": 3386,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 14,
+   "scene_range": [
+    3352,
+    3459
+   ],
+   "name": "distant",
+   "start": 3402,
+   "end": 3418,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 14,
+   "scene_range": [
+    3352,
+    3459
+   ],
+   "name": "cross",
+   "start": 3451,
+   "end": 3467,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 15,
+   "scene_range": [
+    3756,
+    3993
+   ],
+   "name": "train",
+   "start": 3758,
+   "end": 3774,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 15,
+   "scene_range": [
+    3756,
+    3993
+   ],
+   "name": "adjacent",
+   "start": 3774,
+   "end": 3790,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "morph"
+  },
+  {
+   "scene": 15,
+   "scene_range": [
+    3756,
+    3993
+   ],
+   "name": "distant",
+   "start": 3806,
+   "end": 3822,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "different"
+  },
+  {
+   "scene": 15,
+   "scene_range": [
+    3756,
+    3993
+   ],
+   "name": "cross",
+   "start": 3985,
+   "end": 4001,
+   "split": "val",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 16,
+   "scene_range": [
+    3996,
+    4183
+   ],
+   "name": "train",
+   "start": 3998,
+   "end": 4014,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 16,
+   "scene_range": [
+    3996,
+    4183
+   ],
+   "name": "adjacent",
+   "start": 4014,
+   "end": 4030,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 16,
+   "scene_range": [
+    3996,
+    4183
+   ],
+   "name": "distant",
+   "start": 4046,
+   "end": 4062,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 16,
+   "scene_range": [
+    3996,
+    4183
+   ],
+   "name": "cross",
+   "start": 4175,
+   "end": 4191,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 17,
+   "scene_range": [
+    4208,
+    4393
+   ],
+   "name": "adjacent",
+   "start": 4226,
+   "end": 4242,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 17,
+   "scene_range": [
+    4208,
+    4393
+   ],
+   "name": "distant",
+   "start": 4258,
+   "end": 4274,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "different"
+  },
+  {
+   "scene": 17,
+   "scene_range": [
+    4208,
+    4393
+   ],
+   "name": "cross",
+   "start": 4385,
+   "end": 4401,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 18,
+   "scene_range": [
+    4420,
+    4565
+   ],
+   "name": "adjacent",
+   "start": 4438,
+   "end": 4454,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 18,
+   "scene_range": [
+    4420,
+    4565
+   ],
+   "name": "distant",
+   "start": 4470,
+   "end": 4486,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 18,
+   "scene_range": [
+    4420,
+    4565
+   ],
+   "name": "cross",
+   "start": 4557,
+   "end": 4573,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 19,
+   "scene_range": [
+    4675,
+    4791
+   ],
+   "name": "train",
+   "start": 4677,
+   "end": 4693,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 19,
+   "scene_range": [
+    4675,
+    4791
+   ],
+   "name": "adjacent",
+   "start": 4693,
+   "end": 4709,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 19,
+   "scene_range": [
+    4675,
+    4791
+   ],
+   "name": "distant",
+   "start": 4725,
+   "end": 4741,
+   "split": "val",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 19,
+   "scene_range": [
+    4675,
+    4791
+   ],
+   "name": "cross",
+   "start": 4783,
+   "end": 4799,
+   "split": "val",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 20,
+   "scene_range": [
+    4793,
+    5023
+   ],
+   "name": "train",
+   "start": 4795,
+   "end": 4811,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 20,
+   "scene_range": [
+    4793,
+    5023
+   ],
+   "name": "adjacent",
+   "start": 4811,
+   "end": 4827,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "morph"
+  },
+  {
+   "scene": 20,
+   "scene_range": [
+    4793,
+    5023
+   ],
+   "name": "distant",
+   "start": 4843,
+   "end": 4859,
+   "split": "test",
+   "group": "cross_scene",
+   "visual": "different"
+  },
+  {
+   "scene": 20,
+   "scene_range": [
+    4793,
+    5023
+   ],
+   "name": "cross",
+   "start": 5015,
+   "end": 5031,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 21,
+   "scene_range": [
+    5026,
+    5319
+   ],
+   "name": "adjacent",
+   "start": 5044,
+   "end": 5060,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 21,
+   "scene_range": [
+    5026,
+    5319
+   ],
+   "name": "distant",
+   "start": 5076,
+   "end": 5092,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 21,
+   "scene_range": [
+    5026,
+    5319
+   ],
+   "name": "cross",
+   "start": 5311,
+   "end": 5327,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  },
+  {
+   "scene": 22,
+   "scene_range": [
+    5438,
+    5892
+   ],
+   "name": "adjacent",
+   "start": 5456,
+   "end": 5472,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 22,
+   "scene_range": [
+    5438,
+    5892
+   ],
+   "name": "distant",
+   "start": 5488,
+   "end": 5504,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "different"
+  },
+  {
+   "scene": 22,
+   "scene_range": [
+    5438,
+    5892
+   ],
+   "name": "cross",
+   "start": 5884,
+   "end": 5900,
+   "split": "test",
+   "group": "cut",
+   "visual": "cut"
+  },
+  {
+   "scene": 23,
+   "scene_range": [
+    5893,
+    6275
+   ],
+   "name": "adjacent",
+   "start": 5911,
+   "end": 5927,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "same"
+  },
+  {
+   "scene": 23,
+   "scene_range": [
+    5893,
+    6275
+   ],
+   "name": "distant",
+   "start": 5943,
+   "end": 5959,
+   "split": "test",
+   "group": "same_scene",
+   "visual": "different"
+  },
+  {
+   "scene": 23,
+   "scene_range": [
+    5893,
+    6275
+   ],
+   "name": "cross",
+   "start": 6267,
+   "end": 6283,
+   "split": "test",
+   "group": "cut",
+   "visual": "wipe"
+  }
+ ],
+ "pool": [
+  3,
+  19,
+  35,
+  115,
+  131,
+  147,
+  163,
+  179,
+  195,
+  211,
+  227,
+  243,
+  259,
+  275,
+  291,
+  307,
+  323,
+  371,
+  387,
+  403,
+  419,
+  435,
+  451,
+  467,
+  563,
+  579,
+  595,
+  611,
+  627,
+  643,
+  659,
+  675,
+  691,
+  707,
+  723,
+  739,
+  755,
+  819,
+  1075,
+  1235,
+  1491,
+  1507,
+  1523,
+  1539,
+  1555,
+  2323,
+  2339,
+  2355,
+  2371,
+  2387,
+  2403,
+  2419,
+  2435,
+  2451,
+  2467,
+  2579,
+  2595,
+  2611,
+  2627,
+  2643,
+  2659,
+  2675,
+  2691,
+  2755,
+  2771,
+  3299,
+  3315,
+  3331,
+  3347,
+  3427,
+  3475,
+  3491,
+  3507,
+  3523,
+  3539,
+  3555,
+  3571,
+  3587,
+  3603,
+  3619,
+  3635,
+  3651,
+  3667,
+  3683,
+  3699,
+  3715,
+  3731,
+  4291,
+  4307,
+  4323,
+  4339,
+  4355,
+  4499,
+  4515,
+  4531,
+  4579,
+  4595,
+  4611,
+  4627,
+  4643,
+  5107,
+  5123,
+  5139,
+  5155,
+  5171,
+  5187,
+  5203,
+  5219,
+  5235,
+  5251,
+  5267,
+  5283,
+  5347,
+  5363,
+  5379,
+  5395,
+  5411,
+  5427,
+  5523,
+  5539,
+  5555,
+  5571,
+  5587,
+  5603,
+  5619,
+  5635,
+  5651,
+  5667,
+  5683,
+  5699,
+  5715,
+  5731,
+  5747,
+  5763,
+  5779,
+  5795,
+  5811,
+  5827,
+  5843,
+  5859,
+  5971,
+  5987,
+  6003,
+  6019,
+  6035,
+  6051,
+  6067,
+  6083,
+  6099,
+  6115,
+  6131,
+  6147,
+  6163,
+  6179,
+  6195,
+  6211,
+  6227,
+  6243,
+  6291,
+  6307,
+  6323,
+  6339,
+  6355,
+  6371,
+  6387,
+  6403,
+  6419,
+  6435,
+  6451,
+  6467,
+  6483,
+  6499,
+  6515,
+  6531,
+  6547
+ ]
+}
