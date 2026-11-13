@@ -8,6 +8,12 @@
 
 > **Path D: Differentiable Logic CA** (learned Boolean circuits, then simplified; experimental): [docs/path-d/](../path-d/README.md).
 
+> **Later experiments** (after the full-song model, summarised in [How we got here §7](journey.md#7-after-the-full-song-smaller-rules-other-videos-other-mechanisms)):
+> [context codebook](../context-s0/README.md) (shared local rules + a mode switch),
+> [velocity-carrying CA and difficulty atlas](../path-v/README.md),
+> [another film, data and phase ablations](../generalization/README.md),
+> [shape-aware CA](../shape/README.md).
+
 Every campaign has a plan (`CAMPAIGN_NN.md`, written before its runs; later decisions are appended, never rewritten)
 and a result (`CHECKPOINT_NN.md`). Machine-readable results live under `runs/`. The records are kept unchanged in
 `docs/`; this page only indexes them. One line per file. Where a line gives a result, it comes from that file.
@@ -72,7 +78,8 @@ no text was copied). Borrowed elements:
   licence notes.
 - **Status callout** as a blockquote near the top.
 - **Doc split** into separate architecture, status/results and format documents (`docs/architecture.md`,
-  `docs/format.md`, `docs/evaluation.md`, `docs/rule-models.md`, `docs/roadmap.md`).
+  `docs/format.md`, `docs/evaluation.md`, `docs/rule-models.md`; a `docs/roadmap.md` existed until the 2026-11-13
+  cleanup and is in the Git history).
 - **Research index:** this page, modelled on hgit's `docs/research/` index.
 
 Not borrowed: badges, release and install sections. This project has no CI, releases or packages.
